@@ -1,0 +1,1679 @@
+{
+  "phase": 1,
+  "name": "Discovery",
+  "schema_version": "P1.discovery.v3.0",
+  "source_workbook": "Discovery_Phase1_Agent_Swarm_Tuned.xlsx",
+  "freeze_recommendation": "READY FOR DESIGN REVIEW",
+  "agents": [
+    {
+      "id": "P1.A1",
+      "local_id": "A1",
+      "name": "Repo Intelligence Agent",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0 | Foundation Hard: G0",
+      "activities": "Inventory modules and dependencies; run approved static tools; assess code quality, build reproducibility, test coverage and documentation. Generate SBOM with license evidence; flag licensing questions for review.",
+      "inputs": "Authorized repository snapshot, commit ID, build/CI configuration, dependency manifests, existing tests and documentation.",
+      "outputs": "Repository inventory; module/dependency map; SBOM; measured or unavailable coverage; technical-debt findings; build and documentation gaps.",
+      "origin": "Merged: Repo Analyzer + Code Analysis",
+      "contract_rule": "No code execution beyond approved sandbox tools. Do not infer passing tests or measured coverage from source inspection. Unknown dependencies remain gaps.",
+      "merge_tuning": "No code execution beyond approved sandbox tools. Do not infer passing tests or measured coverage from source inspection. Unknown dependencies remain gaps.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A2",
+      "local_id": "A2",
+      "name": "Architecture Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A1",
+        "A4"
+      ],
+      "execution_raw": "Tier 1 | Evidence-dependent Hard: A1, A4",
+      "activities": "Reconstruct as-is C4 views and static/runtime relationships. Separate observed, documented and inferred connections; identify coupling and architectural hypotheses.",
+      "inputs": "A1 repository/module evidence and A4 infrastructure/runtime evidence; source references and existing architecture records.",
+      "outputs": "As-is architecture; versioned dependency graph; coupling findings; observed service boundaries; inferred-design register with evidence gaps.",
+      "origin": "Merged: Architecture Analysis + Dependency Discovery",
+      "contract_rule": "Missing runtime telemetry permits a labelled static-only view. An inferred ADR is a hypothesis, not an approved historical decision.",
+      "merge_tuning": "Missing runtime telemetry permits a labelled static-only view. An inferred ADR is a hypothesis, not an approved historical decision.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A3",
+      "local_id": "A3",
+      "name": "Data Intelligence Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A1",
+        "A4"
+      ],
+      "execution_raw": "Tier 1 | Evidence-dependent Hard: A1, A4",
+      "activities": "Inventory databases, schemas, volumes and integration interfaces. Record API contracts, producers/consumers, versions and observed data flows without exposing credentials or raw sensitive records.",
+      "inputs": "A1 component/configuration references; A4 hosting and service observations; approved read-only database metadata, API catalogues and gateway exports.",
+      "outputs": "Data-estate inventory; integration/API catalogue; source lineage observations; version/deprecation evidence; volume measurements or explicit gaps.",
+      "origin": "Merged: Data Estate Discovery + Integration Discovery",
+      "contract_rule": "Use metadata and approved profiles. Connection strings are redacted. Do not classify absent telemetry as absence of a dependency.",
+      "merge_tuning": "Use metadata and approved profiles. Connection strings are redacted. Do not classify absent telemetry as absence of a dependency.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A4",
+      "local_id": "A4",
+      "name": "Infrastructure & Runtime Profiler Agent",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0 | Foundation Hard: G0",
+      "activities": "Inventory hosts and platforms; profile utilization and interactions over stated observation windows; assess portability, network dependencies, backup and recovery evidence.",
+      "inputs": "Authorized infrastructure inventories, cloud/VM exports, monitoring windows, network metadata and backup/DR records.",
+      "outputs": "Infrastructure inventory; time-bounded utilization baseline; runtime/network relationships; documented RTO/RPO and restore-test evidence; portability blockers.",
+      "origin": "Merged: Infrastructure Data Collector + Runtime Profiler",
+      "contract_rule": "Documented recovery objectives are not tested recovery performance. Missing telemetry or restore evidence is NOT_ASSESSED, never healthy by default.",
+      "merge_tuning": "Documented recovery objectives are not tested recovery performance. Missing telemetry or restore evidence is NOT_ASSESSED, never healthy by default.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A5",
+      "local_id": "A5",
+      "name": "Journey Intelligence Agent",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0 | Conditional foundation Hard: G0",
+      "activities": "For UI workloads, map user journeys and observed friction. For API-only workloads, map service-consumer journeys. For headless/batch workloads without applicable journeys, emit an approved skip record.",
+      "inputs": "G0 workload capability classification; authorized analytics, feedback, business context and UI/API documentation.",
+      "outputs": "Evidence-backed journey maps and friction inventory; personas explicitly tagged observed/inferred; analytics limitations; approved skip or not-assessed record where appropriate.",
+      "origin": "Merged: Experience Research + Customer Journey + Persona Generator",
+      "contract_rule": "UI and API-only are separate routes. Unknown capability or missing analytics is not proof of inapplicability. Do not invent behavioral measurements.",
+      "merge_tuning": "UI and API-only are separate routes. Unknown capability or missing analytics is not proof of inapplicability. Do not invent behavioral measurements.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A6",
+      "local_id": "A6",
+      "name": "Compliance Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A1",
+        "A4"
+      ],
+      "execution_raw": "Tier 1 | Evidence-dependent Hard: A1, A4",
+      "activities": "Assess supported security and compliance controls using approved scanners and evidence. Correlate repository and infrastructure findings; record applicability, severity, limitations and review requirements.",
+      "inputs": "A1 SBOM/dependency/source findings; A4 infrastructure/configuration and recovery evidence; engagement-specific security, privacy and license scope.",
+      "outputs": "Security baseline; vulnerability/control-gap register; license-review flags; applicability matrix; findings with evidence and confidence basis.",
+      "origin": "Retained: Security & Compliance Scanner",
+      "contract_rule": "Start only after A1/A4 publish versioned outputs. Unknown controls remain unknown. UX observations alone cannot establish a security defect; legal/compliance conclusions require accountable review.",
+      "merge_tuning": "Start only after A1/A4 publish versioned outputs. Unknown controls remain unknown. UX observations alone cannot establish a security defect; legal/compliance conclusions require accountable review.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A7",
+      "local_id": "A7",
+      "name": "UX Evaluator Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A5"
+      ],
+      "execution_raw": "Tier 1 | Conditional evidence-dependent Hard: A5",
+      "activities": "Evaluate UI usability and accessible journeys, or API developer experience. Record tested criteria, observed issues and untested areas. For approved inapplicable routes, emit a skip record.",
+      "inputs": "A5 journey package and capability route; authorized UI screens or API documentation; applicable heuristic/accessibility criteria.",
+      "outputs": "Criterion-level UX/accessibility or DX findings; scope and test-method record; evidence references; no universal compliance score without full defined coverage.",
+      "origin": "Retained: Heuristic Evaluation",
+      "contract_rule": "A5 PARTIAL may support a limited review with gaps. A5 approved skip propagates a reasoned skip, not a zero score. A missing password-strength indicator is not proof of weak server policy.",
+      "merge_tuning": "A5 PARTIAL may support a limited review with gaps. A5 approved skip propagates a reasoned skip, not a zero score. A missing password-strength indicator is not proof of weak server policy.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A8",
+      "local_id": "A8",
+      "name": "Stakeholder Elicitation Agent",
+      "tier": null,
+      "tier_label": "Async",
+      "lane": "async",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Async | Asynchronous; optional snapshot Hard: G0",
+      "activities": "Prepare interview prompts and capture attributable human responses. Separate confirmed requirements from inferred needs, hypotheses and simulated interview examples. Track unanswered questions and conflicts.",
+      "inputs": "Authorized stakeholder register, engagement objectives and existing approved requirements; optional context from A2/A5/A6/A9 as published.",
+      "outputs": "Interview guide; confirmed-response register with respondent/date; requirements and ownership evidence; unresolved questions. Simulated examples stored separately as HYPOTHETICAL.",
+      "origin": "Retained: Interview Protocol",
+      "contract_rule": "Does not block technical discovery. G1 takes the available snapshot at its configured cutoff. Missing business-critical evidence restricts downstream decision scope at G2. Later responses create a new revision.",
+      "merge_tuning": "Does not block technical discovery. G1 takes the available snapshot at its configured cutoff. Missing business-critical evidence restricts downstream decision scope at G2. Later responses create a new revision.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A9",
+      "local_id": "A9",
+      "name": "Business Process Agent",
+      "tier": 2,
+      "tier_label": "Tier 2",
+      "lane": "normal",
+      "prerequisites": [
+        "A1",
+        "A2"
+      ],
+      "execution_raw": "Tier 2 | Evidence-dependent Hard: A1, A2",
+      "activities": "Reconstruct business workflows, decision tables, exceptions and process/component links. Distinguish observed behavior from inferred rules; identify owners and questions requiring human confirmation.",
+      "inputs": "A1 code/module evidence; A2 architecture and dependency evidence; authorized transaction logs, workflow configuration and existing confirmed business documentation.",
+      "outputs": "As-is BPMN/process maps; business-rule catalogue; exception paths; component mapping; evidence-qualified business criticality and open confirmation items.",
+      "origin": "New relative to original baseline",
+      "contract_rule": "Runs after Architecture rather than alongside it. Unconfirmed business criticality remains provisional. Does not consume late A8 updates during an in-flight run; synthesis reconciles the frozen stakeholder snapshot.",
+      "merge_tuning": "Runs after Architecture rather than alongside it. Unconfirmed business criticality remains provisional. Does not consume late A8 updates during an in-flight run; synthesis reconciles the frozen stakeholder snapshot.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A10",
+      "local_id": "A10",
+      "name": "Synthesis Discovery Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "G1"
+      ],
+      "execution_raw": "Tier 3 | Frozen-snapshot synthesis Hard: G1",
+      "activities": "Run three domain synthesis tasks: technical (A1/A2/A3/A4), experience (A5/A7), business/control (A6/A8 snapshot/A9). Meta-synthesis preserves source links, contradictions, exclusions and unknowns.",
+      "inputs": "G1 immutable evidence manifest containing A1–A7 and A9 outcome records plus an available A8 snapshot or explicit PENDING marker; optional annotations tied to that snapshot.",
+      "outputs": "Versioned discovery report; three domain summaries; evidence index; contradiction and gap registers; workload-level completeness and confidence basis.",
+      "origin": "Retained: Discovery Report Generator",
+      "contract_rule": "Four internal tasks remain one top-level agent. Retrieve/chunk evidence to fit measured model budgets; summaries retain provenance. Do not silently resolve factual conflicts or overwrite upstream reports.",
+      "merge_tuning": "Four internal tasks remain one top-level agent. Retrieve/chunk evidence to fit measured model budgets; summaries retain provenance. Do not silently resolve factual conflicts or overwrite upstream reports.",
+      "responsibility": ""
+    },
+    {
+      "id": "P1.A11",
+      "local_id": "A11",
+      "name": "Risk Scoring Agent",
+      "tier": 4,
+      "tier_label": "Tier 4",
+      "lane": "normal",
+      "prerequisites": [
+        "A10"
+      ],
+      "execution_raw": "Tier 4 | Capstone assessment Hard: A10",
+      "activities": "Assess applicable technical, security, data, operational and organizational risk dimensions. Use configured scoring with evidence references; mark unknowns and unconfirmed requirements; recommend permitted next-step scope.",
+      "inputs": "A10 discovery report and evidence manifest; G0 approved, versioned risk taxonomy, rubric, applicability and threshold policy.",
+      "outputs": "Risk register/heatmap; scoring and evidence trace; residual risks; blockers; recommendations; Phase 1 handoff candidate with explicit decision restrictions.",
+      "origin": "Retained: Risk Assessment",
+      "contract_rule": "Does not grant its own release authority. No invented weights or defaults; missing scoring policy blocks final scoring. Unknown high-impact evidence cannot be averaged away. G2 authorizes handoff scope.",
+      "merge_tuning": "Does not grant its own release authority. No invented weights or defaults; missing scoring policy blocks final scoring. Unknown high-impact evidence cannot be averaged away. G2 authorizes handoff scope.",
+      "responsibility": ""
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "kind": "intake",
+      "node_type": "gate",
+      "entry": "",
+      "output": "",
+      "blocking_rule": "Unauthorized work cannot start.",
+      "meaning": "Not an agent"
+    },
+    {
+      "id": "G1",
+      "kind": "snapshot",
+      "node_type": "gate",
+      "entry": "",
+      "output": "",
+      "blocking_rule": "FAILED blocks; allowed partials remain explicit.",
+      "meaning": "Not an agent"
+    },
+    {
+      "id": "G2",
+      "kind": "release",
+      "node_type": "gate",
+      "entry": "",
+      "output": "",
+      "blocking_rule": "Mandatory blockers and business unknowns restrict release.",
+      "meaning": "Not an agent"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "G0",
+      "nodes": [
+        "Intake",
+        "authorization"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Unauthorized work cannot start.",
+      "meaning": "Not an agent"
+    },
+    {
+      "stage": "Tier 0",
+      "nodes": [
+        "A1",
+        "A4",
+        "A5"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "A1/A4 records required by dependent analyses.",
+      "meaning": "3 top-level agents"
+    },
+    {
+      "stage": "Tier 1",
+      "nodes": [
+        "A2",
+        "A3",
+        "A6",
+        "A7"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "No phase-wide barrier beyond each listed dependency.",
+      "meaning": "4 top-level agents"
+    },
+    {
+      "stage": "Tier 2",
+      "nodes": [
+        "A9"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Unconfirmed ownership/criticality remain gaps.",
+      "meaning": "1 top-level agent"
+    },
+    {
+      "stage": "Async",
+      "nodes": [
+        "A8"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Does not block technical fan-in.",
+      "meaning": "1 top-level agent"
+    },
+    {
+      "stage": "G1",
+      "nodes": [
+        "Evidence snapshot"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "FAILED blocks; allowed partials remain explicit.",
+      "meaning": "Not an agent"
+    },
+    {
+      "stage": "Tier 3",
+      "nodes": [
+        "A10"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "No unpublished or late evidence injected mid-run.",
+      "meaning": "1 agent; 4 internal tasks"
+    },
+    {
+      "stage": "Tier 4",
+      "nodes": [
+        "A11"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Missing rubric blocks final risk scoring.",
+      "meaning": "1 top-level agent"
+    },
+    {
+      "stage": "G2",
+      "nodes": [
+        "Handoff authorization"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Mandatory blockers and business unknowns restrict release.",
+      "meaning": "Not an agent"
+    },
+    {
+      "stage": "External",
+      "nodes": [
+        "Phase 2"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "No Phase 2 implementation changed.",
+      "meaning": "Outside this deliverable"
+    },
+    {
+      "stage": "From",
+      "nodes": [
+        "To"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Version rule",
+      "meaning": "Notes"
+    },
+    {
+      "stage": "A3",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A6",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A7",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A9",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A11",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "G2",
+      "nodes": [
+        "P2"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "G0",
+      "nodes": [
+        "A1"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A1",
+      "nodes": [
+        "A2"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "A2"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A1",
+      "nodes": [
+        "A3"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "A3"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "G0",
+      "nodes": [
+        "A4"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "G0",
+      "nodes": [
+        "A5"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A1",
+      "nodes": [
+        "A6"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "A6"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A5",
+      "nodes": [
+        "A7"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "G0",
+      "nodes": [
+        "A8"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Start authorization only; A8 completion never gates technical fan-in."
+    },
+    {
+      "stage": "A1",
+      "nodes": [
+        "A9"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A2",
+      "nodes": [
+        "A9"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "G1",
+      "nodes": [
+        "A10"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    },
+    {
+      "stage": "A10",
+      "nodes": [
+        "A11"
+      ],
+      "prerequisites": "",
+      "activity": "",
+      "blocking": "Exact artifact version in input manifest",
+      "meaning": "Optional enrichment is recorded separately."
+    }
+  ],
+  "hard_edges": [
+    {
+      "from": "A3",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A3 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A6",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A6 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A7",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A7 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A9",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A9 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A11",
+      "to": "G2",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A11 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "G2",
+      "to": "P2",
+      "from_kind": "gate",
+      "to_kind": "external",
+      "type": "HARD",
+      "required_artifact": "Authorized handoff",
+      "failure_behavior": "Do not consume an unauthorized package",
+      "external": true
+    },
+    {
+      "from": "G0",
+      "to": "A1",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "Authorized intake",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A2",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A1 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A2",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A4 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A3",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A1 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A3",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A4 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "G0",
+      "to": "A4",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "Authorized intake",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "G0",
+      "to": "A5",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "Authorized intake",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A1 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A4 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A5 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "G0",
+      "to": "A8",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "Authorized intake",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A9",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A1 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A2",
+      "to": "A9",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A2 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "G1",
+      "to": "A10",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "Sealed evidence manifest",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    },
+    {
+      "from": "A10",
+      "to": "A11",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A10 versioned outcome",
+      "failure_behavior": "Block on missing/failed prerequisite",
+      "external": false
+    }
+  ],
+  "cross_feeds": [
+    {
+      "id": "CF-01",
+      "sources": "A6 + A7",
+      "consumer": "G1 → A10 experience summary",
+      "purpose": "Security findings may contextualize UX trust observations; retain separate evidence and control identifiers.",
+      "protocol": "No rescore of sealed A7 output; join only within the frozen evidence manifest.",
+      "consequence": "Optional annotation; never substitutes for security evidence."
+    },
+    {
+      "id": "CF-02",
+      "sources": "A4 + A5",
+      "consumer": "G1 → A10 experience summary",
+      "purpose": "Correlate observed API/runtime latency with journey friction by endpoint, workload and observation window.",
+      "protocol": "Use only matching measurements; otherwise retain an explicit correlation gap.",
+      "consequence": "Optional annotation; no assumed causation or invented measurements."
+    },
+    {
+      "id": "CF-03",
+      "sources": "A7 + A6",
+      "consumer": "G1 → A10 business/control summary",
+      "purpose": "Carry UX observations that warrant security investigation as unverified cross-domain questions.",
+      "protocol": "Do not append an asserted vulnerability to A6 after completion. Security confirmation belongs in a versioned revision.",
+      "consequence": "Optional investigation flag; eliminates the old A7→A6 mutation loop."
+    },
+    {
+      "id": "CF-04",
+      "sources": "A8 available snapshot",
+      "consumer": "G1 → A10 business/control summary",
+      "purpose": "Include confirmed stakeholder evidence available at the snapshot cutoff; preserve pending questions and hypotheses.",
+      "protocol": "No wait for completion. Record snapshot ID/cutoff or PENDING. Later answers initiate impact-assessed revision.",
+      "consequence": "Optional for technical synthesis; business-critical unknowns restrict G2 handoff."
+    },
+    {
+      "id": "CF-05",
+      "sources": "A2 + A5 + A6 + A9",
+      "consumer": "A8 interview context",
+      "purpose": "Use published findings to improve questions and identify appropriate respondents.",
+      "protocol": "Read available versions only; no requirement for A8 to complete before technical agents.",
+      "consequence": "Optional enrichment; no reverse hard dependency."
+    }
+  ],
+  "artifact_contracts": {
+    "envelope_fields": [
+      {
+        "field": "schema_version",
+        "type": "string",
+        "required": "Yes",
+        "definition": "P1.discovery.v3.0; compatibility checked on intake.",
+        "producer_consumer": "All agents / validators",
+        "failure": "Reject unsupported major version."
+      },
+      {
+        "field": "artifact_id + artifact_version",
+        "type": "string + integer",
+        "required": "Yes",
+        "definition": "Unique immutable artifact identity and revision.",
+        "producer_consumer": "All producers / consumers",
+        "failure": "Reject duplicate identity with changed content."
+      },
+      {
+        "field": "run_id + application_id + phase_id",
+        "type": "string + string + integer",
+        "required": "Yes",
+        "definition": "Bind each artifact to a workload, execution and Phase 1.",
+        "producer_consumer": "Orchestrator / all agents",
+        "failure": "Reject cross-workload or cross-run substitution."
+      },
+      {
+        "field": "producer_id",
+        "type": "enum A1–A11 / G0 / G1 / G2",
+        "required": "Yes",
+        "definition": "Must match canonical registry and authorized writer.",
+        "producer_consumer": "Producer / artifact store",
+        "failure": "Reject unknown or impersonated producer."
+      },
+      {
+        "field": "input_manifest_ref + input_hash",
+        "type": "string + string",
+        "required": "Yes",
+        "definition": "Identify exact upstream versions and source snapshots.",
+        "producer_consumer": "All producers / validator",
+        "failure": "Reject unresolved or mismatched hash."
+      },
+      {
+        "field": "policy_version",
+        "type": "string",
+        "required": "Yes",
+        "definition": "Approved scope, scoring, permissions and exception policy.",
+        "producer_consumer": "G0 / all stages",
+        "failure": "Missing policy blocks decisions dependent on it."
+      },
+      {
+        "field": "status",
+        "type": "enum",
+        "required": "Yes",
+        "definition": "COMPLETE / PARTIAL / NOT_ASSESSED / SKIPPED_APPROVED / FAILED.",
+        "producer_consumer": "All agents / orchestrator",
+        "failure": "Reject unknown status; FAILED blocks consumers."
+      },
+      {
+        "field": "scope + applicability",
+        "type": "object",
+        "required": "Yes",
+        "definition": "Assessed boundary, route, exclusions and skip justification with policy reference.",
+        "producer_consumer": "All agents / G1",
+        "failure": "Blank output cannot be interpreted as an approved skip."
+      },
+      {
+        "field": "evidence_refs",
+        "type": "array<object>",
+        "required": "Yes",
+        "definition": "Source ID/ref, content hash where available, method, captured_at, observation window and access classification.",
+        "producer_consumer": "All agents / synthesis",
+        "failure": "Unresolved evidence refs become validation errors."
+      },
+      {
+        "field": "findings",
+        "type": "array<object>",
+        "required": "Yes; may be empty",
+        "definition": "Each finding has stable ID, evidence class, statement, supporting refs, scope and limitations.",
+        "producer_consumer": "All agents / A10/A11",
+        "failure": "Empty means no findings within assessed scope only."
+      },
+      {
+        "field": "evidence_class",
+        "type": "enum per finding",
+        "required": "Yes",
+        "definition": "OBSERVED / DOCUMENTED / HUMAN_CONFIRMED / INFERRED / HYPOTHETICAL / UNKNOWN.",
+        "producer_consumer": "All agents / A10/A11",
+        "failure": "No automatic promotion of inferred/hypothetical to confirmed."
+      },
+      {
+        "field": "gaps + contradictions",
+        "type": "array<object>",
+        "required": "Yes; may be empty",
+        "definition": "Affected requirement, missing/conflicting evidence, impact, owner and resolution state.",
+        "producer_consumer": "All agents / A10/A11/G2",
+        "failure": "Required evidence cannot be replaced by a neutral score."
+      },
+      {
+        "field": "payload",
+        "type": "object",
+        "required": "Yes",
+        "definition": "Agent-specific typed fields listed below, plus external artifact refs where applicable.",
+        "producer_consumer": "All agents / validator",
+        "failure": "Validate required keys and types before publication."
+      },
+      {
+        "field": "created_at + execution_metadata",
+        "type": "timestamp + object",
+        "required": "Yes",
+        "definition": "Tool/model/prompt versions, timings, attempts and validator results; exclude secrets.",
+        "producer_consumer": "Execution service / audit",
+        "failure": "Unattributed output cannot authorize release."
+      },
+      {
+        "field": "content_hash + access_classification",
+        "type": "string + enum",
+        "required": "Yes",
+        "definition": "Integrity and permitted visibility of the published object.",
+        "producer_consumer": "Artifact store / consumers",
+        "failure": "Reject modified content; enforce access policy."
+      }
+    ],
+    "agent_payloads": {
+      "A1": {
+        "fields": [
+          {
+            "name": "repositories",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "components",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "dependencies",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "sbom_ref",
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "coverage",
+            "type": "object",
+            "nullable": false
+          },
+          {
+            "name": "build_status",
+            "type": "enum",
+            "nullable": false
+          },
+          {
+            "name": "findings",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "repositories:array; components:array; dependencies:array; sbom_ref:string|null; coverage:object; build_status:enum; findings:array",
+        "producer_consumer": "A1 / A2, A3, A6, A9",
+        "rule": "No code execution beyond approved sandbox tools. Do not infer passing tests or measured coverage from source inspection. Unknown dependencies remain gaps."
+      },
+      "A2": {
+        "fields": [
+          {
+            "name": "components",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "relations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "c4_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "coupling_findings",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "inferred_decisions",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "components:array; relations:array; c4_refs:array; coupling_findings:array; inferred_decisions:array",
+        "producer_consumer": "A2 / A9",
+        "rule": "Missing runtime telemetry permits a labelled static-only view. An inferred ADR is a hypothesis, not an approved historical decision."
+      },
+      "A3": {
+        "fields": [
+          {
+            "name": "datasets",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "integrations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "api_contract_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "lineage_observations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "volume_evidence",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "datasets:array; integrations:array; api_contract_refs:array; lineage_observations:array; volume_evidence:array",
+        "producer_consumer": "A3 / G1",
+        "rule": "Use metadata and approved profiles. Connection strings are redacted. Do not classify absent telemetry as absence of a dependency."
+      },
+      "A4": {
+        "fields": [
+          {
+            "name": "resources",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "observation_window",
+            "type": "object",
+            "nullable": false
+          },
+          {
+            "name": "utilization",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "runtime_relations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "recovery_evidence",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "portability_findings",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "resources:array; observation_window:object; utilization:array; runtime_relations:array; recovery_evidence:array; portability_findings:array",
+        "producer_consumer": "A4 / A2, A3, A6",
+        "rule": "Documented recovery objectives are not tested recovery performance. Missing telemetry or restore evidence is NOT_ASSESSED, never healthy by default."
+      },
+      "A5": {
+        "fields": [
+          {
+            "name": "capability_route",
+            "type": "enum",
+            "nullable": false
+          },
+          {
+            "name": "journeys",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "personas",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "friction_findings",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "analytics_window",
+            "type": "object",
+            "nullable": true
+          }
+        ],
+        "raw": "capability_route:enum; journeys:array; personas:array; friction_findings:array; analytics_window:object|null",
+        "producer_consumer": "A5 / A7",
+        "rule": "UI and API-only are separate routes. Unknown capability or missing analytics is not proof of inapplicability. Do not invent behavioral measurements."
+      },
+      "A6": {
+        "fields": [
+          {
+            "name": "applicable_controls",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "vulnerabilities",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "control_findings",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "license_review_flags",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "assessment_coverage",
+            "type": "object",
+            "nullable": false
+          }
+        ],
+        "raw": "applicable_controls:array; vulnerabilities:array; control_findings:array; license_review_flags:array; assessment_coverage:object",
+        "producer_consumer": "A6 / G1",
+        "rule": "Start only after A1/A4 publish versioned outputs. Unknown controls remain unknown. UX observations alone cannot establish a security defect; legal/compliance conclusions require accountable review."
+      },
+      "A7": {
+        "fields": [
+          {
+            "name": "evaluation_route",
+            "type": "enum",
+            "nullable": false
+          },
+          {
+            "name": "criteria",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "observations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "coverage",
+            "type": "object",
+            "nullable": false
+          },
+          {
+            "name": "evidence_refs",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "evaluation_route:enum; criteria:array; observations:array; coverage:object; evidence_refs:array",
+        "producer_consumer": "A7 / G1",
+        "rule": "A5 PARTIAL may support a limited review with gaps. A5 approved skip propagates a reasoned skip, not a zero score. A missing password-strength indicator is not proof of weak server policy."
+      },
+      "A8": {
+        "fields": [
+          {
+            "name": "questions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "confirmed_responses",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "requirements",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "unresolved_items",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "hypothetical_examples",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "questions:array; confirmed_responses:array; requirements:array; unresolved_items:array; hypothetical_examples:array",
+        "producer_consumer": "A8 / G1 snapshot",
+        "rule": "Does not block technical discovery. G1 takes the available snapshot at its configured cutoff. Missing business-critical evidence restricts downstream decision scope at G2. Later responses create a new revision."
+      },
+      "A9": {
+        "fields": [
+          {
+            "name": "processes",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "business_rules",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "exception_paths",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "component_links",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "owner_confirmations",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "processes:array; business_rules:array; exception_paths:array; component_links:array; owner_confirmations:array",
+        "producer_consumer": "A9 / G1",
+        "rule": "Runs after Architecture rather than alongside it. Unconfirmed business criticality remains provisional. Does not consume late A8 updates during an in-flight run; synthesis reconciles the frozen stakeholder snapshot."
+      },
+      "A10": {
+        "fields": [
+          {
+            "name": "domain_summaries",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "report_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "evidence_index",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "contradictions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "gaps",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "confidence_basis",
+            "type": "object",
+            "nullable": false
+          }
+        ],
+        "raw": "domain_summaries:array; report_ref:string; evidence_index:array; contradictions:array; gaps:array; confidence_basis:object",
+        "producer_consumer": "A10 / A11",
+        "rule": "Four internal tasks remain one top-level agent. Retrieve/chunk evidence to fit measured model budgets; summaries retain provenance. Do not silently resolve factual conflicts or overwrite upstream reports."
+      },
+      "A11": {
+        "fields": [
+          {
+            "name": "risk_dimensions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "scores",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "unassessed_dimensions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "blockers",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "mitigations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "handoff_recommendation",
+            "type": "enum",
+            "nullable": false
+          }
+        ],
+        "raw": "risk_dimensions:array; scores:array; unassessed_dimensions:array; blockers:array; mitigations:array; handoff_recommendation:enum",
+        "producer_consumer": "A11 / G2",
+        "rule": "Does not grant its own release authority. No invented weights or defaults; missing scoring policy blocks final scoring. Unknown high-impact evidence cannot be averaged away. G2 authorizes handoff scope."
+      }
+    },
+    "named_objects": {
+      "Agent payload schemas": {
+        "type": "",
+        "required": "",
+        "definition": "",
+        "fields": [],
+        "producer_consumer": "",
+        "failure": ""
+      },
+      "Contract / field": {
+        "type": "Type",
+        "required": "Required",
+        "definition": "Definition / validation",
+        "fields": [],
+        "producer_consumer": "Producer / consumer",
+        "failure": "Missing / invalid handling"
+      },
+      "Snapshot and release packages": {
+        "type": "",
+        "required": "",
+        "definition": "",
+        "fields": [],
+        "producer_consumer": "",
+        "failure": ""
+      },
+      "G1 evidence_manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "agent_artifact_refs for A1–A7+A9; stakeholder_snapshot_ref nullable; stakeholder_state AVAILABLE/PENDING; cutoff; source/policy versions; gaps; annotation_refs; manifest_hash.",
+        "fields": [
+          {
+            "name": "cutoff",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "gaps",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "annotation_refs",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "manifest_hash",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "G1 / A10",
+        "failure": "Required technical records must exist; A8 may be PENDING."
+      },
+      "G2 decision_record": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "status HOLD/READY_FOR_PORTFOLIO_DRAFT/READY_FOR_PORTFOLIO_DECISION; candidate_ref; manifest_hash; policy_version; authorized_by; authorized_at; restrictions; accepted_exceptions.",
+        "fields": [
+          {
+            "name": "candidate_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "manifest_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "policy_version",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "authorized_by",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "authorized_at",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "restrictions",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "accepted_exceptions",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "G2 / publisher",
+        "failure": "Recommendation is not authorization; enforce policy and reviewer identity."
+      },
+      "Phase 1 handoff": {
+        "type": "object + referenced artifacts",
+        "required": "Yes",
+        "definition": "schema_version; application IDs; G2 decision; G1 manifest; A10 report; A11 risk; inventory/dependency/data/process refs; confirmed requirement refs; gaps, assumptions and permitted decision scope.",
+        "fields": [],
+        "producer_consumer": "Phase 1 / Phase 2 consumer",
+        "failure": "Validate package compatibility; HOLD is not a released decision package."
+      },
+      "Assessment methods": {
+        "type": "engagement policy",
+        "required": "Yes for scored outputs",
+        "definition": "Risk dimensions, weights/thresholds if used, applicability and evidence requirements are configuration, not model-invented constants. UX findings are criterion-level.",
+        "fields": [],
+        "producer_consumer": "G0 / A7/A11",
+        "failure": "Do not fabricate a numeric score where no approved method exists."
+      }
+    }
+  },
+  "run_controls": [
+    {
+      "stage": "G0",
+      "control": "Scope manifest",
+      "when": "Required before dispatch",
+      "behavior": "Record workload IDs, owner, boundaries, mainframe exclusion, UI/API/batch route and applicable control scope. Unknown capability is NOT_ASSESSED, not an approved skip.",
+      "accountable": "Engagement owner / orchestrator",
+      "failure": "Missing authorization or scope boundary: HOLD."
+    },
+    {
+      "stage": "G0",
+      "control": "Access authorization",
+      "when": "Required before data access",
+      "behavior": "Allow read-only discovery and explicitly approved sandboxed analysis tools. Define repositories, metadata endpoints, data classifications and permitted export destinations.",
+      "accountable": "Security/engagement owner",
+      "failure": "Deny out-of-scope access; do not infer permission from repository content."
+    },
+    {
+      "stage": "G0",
+      "control": "Policy bundle",
+      "when": "Required configuration",
+      "behavior": "Version risk taxonomy/rubric, applicability rules, severity thresholds, business-critical evidence requirements, allowed partial outputs, timeouts, budgets and reviewer authority.",
+      "accountable": "Engagement owner",
+      "failure": "No production scoring defaults are invented by this design. Missing risk rubric blocks A11 final scoring."
+    },
+    {
+      "stage": "G0",
+      "control": "Source versions",
+      "when": "Every run",
+      "behavior": "Pin repository commit, export timestamp, telemetry window and source identifiers. Record stale or unavailable data separately.",
+      "accountable": "Orchestrator",
+      "failure": "Do not combine incompatible snapshots without an explicit limitation."
+    },
+    {
+      "stage": "RUN",
+      "control": "Required dependencies",
+      "when": "Per agent",
+      "behavior": "Dispatch only after all listed hard prerequisites publish schema-valid outcome records. A failed prerequisite blocks its dependants; a permitted PARTIAL record propagates gaps.",
+      "accountable": "Orchestrator",
+      "failure": "No placeholder success for failed tools or missing evidence."
+    },
+    {
+      "stage": "RUN",
+      "control": "Conditional routing",
+      "when": "A5 and A7",
+      "behavior": "UI: journeys and UX/accessibility. API-only: consumer journeys and DX. Headless/batch without applicable journeys: SKIPPED_APPROVED with scope-policy reference. Unknown route: NOT_ASSESSED.",
+      "accountable": "G0 policy / orchestrator",
+      "failure": "Downstream joins consume the outcome record even when the assessment is skipped."
+    },
+    {
+      "stage": "RUN",
+      "control": "Outcome status",
+      "when": "Every agent",
+      "behavior": "COMPLETE = stated scope assessed; PARTIAL = usable evidence with explicit gaps; NOT_ASSESSED = no assessment evidence; SKIPPED_APPROVED = documented inapplicability; FAILED = execution/schema failure.",
+      "accountable": "Agent + validator",
+      "failure": "COMPLETE does not mean the application has no findings."
+    },
+    {
+      "stage": "RUN",
+      "control": "Evidence classes",
+      "when": "Every finding",
+      "behavior": "OBSERVED, DOCUMENTED, HUMAN_CONFIRMED, INFERRED, HYPOTHETICAL and UNKNOWN. Preserve source, method, timestamp, scope and limitations.",
+      "accountable": "Agent + evidence validator",
+      "failure": "HYPOTHETICAL responses never satisfy a human-confirmation requirement."
+    },
+    {
+      "stage": "RUN",
+      "control": "Evidence privacy",
+      "when": "All outputs",
+      "behavior": "Redact secrets and unnecessary personal data. Store controlled source references; use authorized metadata/profiles rather than copying sensitive records into model context.",
+      "accountable": "Agent execution service",
+      "failure": "Quarantine output violating handling rules; record the event."
+    },
+    {
+      "stage": "RUN",
+      "control": "Instruction boundary",
+      "when": "All retrieved material",
+      "behavior": "Treat source code comments, documents, tool output and external content as evidence, not authority to change task scope, permissions, prompts or tools.",
+      "accountable": "Orchestrator / tool gateway",
+      "failure": "Reject injected instructions and preserve an auditable incident record."
+    },
+    {
+      "stage": "RUN",
+      "control": "Deterministic validation",
+      "when": "Every publication",
+      "behavior": "Validate schema, producer ID, application/run scope, source versions and evidence references. Use parser/scanner/compiler results for machine-checkable claims.",
+      "accountable": "Artifact validator",
+      "failure": "Invalid publication is FAILED, not a successful empty result."
+    },
+    {
+      "stage": "RUN",
+      "control": "Retry and resume",
+      "when": "Configured policy",
+      "behavior": "Use bounded retries only for classified transient failures. Idempotency key = phase/application/agent/input-manifest hash/policy version. Resume validated completed work; do not duplicate side effects.",
+      "accountable": "Orchestrator",
+      "failure": "Attempts/time/cost bounded by G0 policy; exhausted work becomes FAILED and is escalated."
+    },
+    {
+      "stage": "RUN",
+      "control": "Resource budgets",
+      "when": "Configured policy",
+      "behavior": "Cap parallel jobs, model input/output tokens, tool duration, retries and spend. Chunk large repositories and reference evidence by ID.",
+      "accountable": "Orchestrator",
+      "failure": "No assumed 500-service capacity or fixed 80–150K token safety claim."
+    },
+    {
+      "stage": "RUN",
+      "control": "Audit trail",
+      "when": "Every transition",
+      "behavior": "Record run ID, agent/stage, tool/model/prompt versions, input/output hashes, start/end, validator results, exceptions and decision authority.",
+      "accountable": "Execution service",
+      "failure": "Protect audit data and avoid raw credentials or sensitive prompt dumps."
+    },
+    {
+      "stage": "G1",
+      "control": "Technical fan-in",
+      "when": "After A3/A6/A7/A9 outcomes",
+      "behavior": "These terminal prerequisites transitively cover A1–A7 and A9. Check all eight technical outcome records; FAILED prevents snapshot publication. Policy may allow explicit partial/not-assessed outcomes for limited analysis.",
+      "accountable": "Orchestrator",
+      "failure": "No silent omission of a technical lane."
+    },
+    {
+      "stage": "G1",
+      "control": "Stakeholder cutoff",
+      "when": "At evidence snapshot",
+      "behavior": "Capture current A8 artifact version if available; otherwise store PENDING with open questions. Never wait indefinitely or fabricate responses.",
+      "accountable": "Orchestrator",
+      "failure": "Freeze what was known at the cutoff. G2 handles decision restrictions."
+    },
+    {
+      "stage": "G1",
+      "control": "Cross-domain annotations",
+      "when": "Before sealing manifest",
+      "behavior": "Apply CF-01/02/03 only to matching evidence. Record unsupported correlations as questions. Never modify a sealed A4/A5/A6/A7 report.",
+      "accountable": "Evidence assembler",
+      "failure": "Annotations retain provenance and do not create new asserted facts."
+    },
+    {
+      "stage": "G1",
+      "control": "Immutable manifest",
+      "when": "Before A10",
+      "behavior": "Manifest names exact source and agent artifact versions, A8 cutoff/snapshot, permitted gaps, annotations and policy version; hash and seal it.",
+      "accountable": "Artifact store",
+      "failure": "Later evidence creates a new manifest revision."
+    },
+    {
+      "stage": "A10",
+      "control": "Synthesis coverage",
+      "when": "Three domain tasks then meta task",
+      "behavior": "Technical = A1/A2/A3/A4; Experience = A5/A7; Business/control = A6/A8 snapshot/A9. Each summary preserves finding IDs and unresolved conflicts.",
+      "accountable": "A10",
+      "failure": "Synthesis may not convert missing data into a low-risk finding."
+    },
+    {
+      "stage": "A11",
+      "control": "Risk scoring",
+      "when": "After A10",
+      "behavior": "Score only supported applicable dimensions using the approved rubric. List unassessed high-impact dimensions and business assumptions separately.",
+      "accountable": "A11",
+      "failure": "No averaging away blockers; human confirmation requirements remain explicit."
+    },
+    {
+      "stage": "G2",
+      "control": "HOLD",
+      "when": "Release evaluation",
+      "behavior": "Use HOLD for failed required validation, unauthorized evidence, missing scoring policy, unresolved policy-mandated blockers or an attempted decision beyond the permitted scope.",
+      "accountable": "Authorized reviewer / policy evaluator",
+      "failure": "Candidate remains unpublished for the requested scope; record remediation owner."
+    },
+    {
+      "stage": "G2",
+      "control": "READY_FOR_PORTFOLIO_DRAFT",
+      "when": "Release evaluation",
+      "behavior": "Permit exploratory Phase 2 analysis when technical evidence is usable but business confirmation or other required decision evidence is pending. Publish explicit restrictions and assumptions.",
+      "accountable": "Authorized reviewer / policy evaluator",
+      "failure": "No final disposition, investment approval or wave commitment based on unresolved mandatory evidence."
+    },
+    {
+      "stage": "G2",
+      "control": "READY_FOR_PORTFOLIO_DECISION",
+      "when": "Release evaluation",
+      "behavior": "All policy-required evidence, risk coverage and owner confirmations are satisfied; unresolved issues are explicitly accepted by an authorized reviewer and no non-waivable blocker remains.",
+      "accountable": "Authorized reviewer / policy evaluator",
+      "failure": "Authorizes the stated portfolio decision scope only; never production deployment."
+    },
+    {
+      "stage": "G2",
+      "control": "Decision record",
+      "when": "Every release",
+      "behavior": "Bind status, application scope, manifest hash, policy version, reviewer identity/authority, time, accepted exceptions and restrictions to the handoff package.",
+      "accountable": "Orchestrator",
+      "failure": "A11 recommendation or model confidence cannot authorize release alone."
+    },
+    {
+      "stage": "REV",
+      "control": "Late evidence and revisions",
+      "when": "After snapshot",
+      "behavior": "Create a new version, assess which findings/risks change, invalidate affected synthesis/risk/release records and rerun that closure. Unchanged artifacts may be reused by hash.",
+      "accountable": "Orchestrator + reviewer",
+      "failure": "A sealed handoff is never silently edited."
+    },
+    {
+      "stage": "REV",
+      "control": "Conflict resolution",
+      "when": "Bounded by policy",
+      "behavior": "Assign an owner, required corroboration and revision limit. On unresolved conflict, preserve both claims and escalate; block only the affected decision scope as policy requires.",
+      "accountable": "Domain owner",
+      "failure": "No unbounded critic loops or unsupported consensus."
+    },
+    {
+      "stage": "HANDOFF",
+      "control": "Phase 2 compatibility",
+      "when": "Published package",
+      "behavior": "Transfer inventory, dependency/data/integration maps, process evidence, confirmed requirements, UX/DX applicability, risk profile, gaps and restrictions with schema version.",
+      "accountable": "Phase 1 publisher / Phase 2 consumer",
+      "failure": "Consumer must validate manifest and respect draft/decision scope. Other phases are unchanged."
+    },
+    {
+      "stage": "FREEZE",
+      "control": "Design versus runtime",
+      "when": "Phase 1 v3.0",
+      "behavior": "Stable IDs, graph ordering, conditional-state handling and artifact consistency are statically checked in this revision. Runtime quality, throughput and effectiveness need an implementation pilot.",
+      "accountable": "Architecture owner",
+      "failure": "Design may be reviewed for freeze; do not claim production validation."
+    }
+  ],
+  "activation_matrix": [],
+  "execution_routes": []
+}

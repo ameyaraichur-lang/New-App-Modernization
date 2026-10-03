@@ -1,0 +1,1450 @@
+{
+  "phase": 4,
+  "name": "Modernization planning",
+  "schema_version": "P4.planning.v3.0",
+  "source_workbook": "ModPlan_Phase4_Agent_Swarm_Tuned.xlsx",
+  "freeze_recommendation": "FREEZE CORE STRUCTURE",
+  "agents": [
+    {
+      "id": "P4.A1",
+      "local_id": "A1",
+      "name": "Wave Architecture Agent",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0; after G0",
+      "activities": "Translate approved strategic waves into a proposed calendar, milestones, resource envelopes and provisioning timeline. Assess precedence, coupled applications and shared services. Expose infeasible dates rather than silently changing approved grouping.",
+      "inputs": "Pinned Phase 2 approved grouping, budget and constraints; Phase 3 released architecture and conditions; organizational calendar, capacity and environment lead-time evidence.",
+      "outputs": "Proposed wave calendar, milestones, capacity/budget assumptions, dependency groups, environment timeline and replan triggers.",
+      "origin": "Merge original Phase Planning A1 + Wave Planner A2",
+      "contract_rule": "Initial feasibility is provisional until detailed estimates, resources and tools reconcile. Calendar/resource assumptions need owners; material grouping/budget changes require upstream approval.",
+      "merge_tuning": "Initial feasibility is provisional until detailed estimates, resources and tools reconcile. Calendar/resource assumptions need owners; material grouping/budget changes require upstream approval.",
+      "responsibility": "Translate approved strategic waves into a proposed calendar, milestones, resource envelopes and provisioning timeline. Assess precedence, coupled applications and shared services. Expose infeasible dates rather than silently changing approved grouping."
+    },
+    {
+      "id": "P4.A2",
+      "local_id": "A2",
+      "name": "Wave Specification Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A1"
+      ],
+      "execution_raw": "Tier 1; after A1",
+      "activities": "Specify component scope, task entry/exit obligations, environment readiness, data transfer/reconciliation/freeze and sync windows. Separate preparation, implementation, rehearsal and production cutover stages.",
+      "inputs": "A1 wave calendar; Phase 3 component/contract registry, data transition, recovery constraints and acceptance matrix; source dependency evidence.",
+      "outputs": "Per-wave specifications, component scope, data/environment plans, entry/exit requirements and inter-wave dependencies.",
+      "origin": "Retain original Wave Breakdown A3",
+      "contract_rule": "These are execution plans, not executed migrations or provisioned environments. Any missing detailed acceptance or readiness evidence remains an explicit obligation.",
+      "merge_tuning": "These are execution plans, not executed migrations or provisioned environments. Any missing detailed acceptance or readiness evidence remains an explicit obligation.",
+      "responsibility": "Specify component scope, task entry/exit obligations, environment readiness, data transfer/reconciliation/freeze and sync windows. Separate preparation, implementation, rehearsal and production cutover stages."
+    },
+    {
+      "id": "P4.A3",
+      "local_id": "A3",
+      "name": "Task Generator Agent",
+      "tier": 2,
+      "tier_label": "Tier 2",
+      "lane": "normal",
+      "prerequisites": [
+        "A2"
+      ],
+      "execution_raw": "Tier 2; after A2",
+      "activities": "Generate uniquely identified tasks with dependencies, owner role, estimates/ranges, acceptance links, phase/environment, deliverable and authority requirements. Publish one immutable task/context version for all five planners.",
+      "inputs": "A2 wave specification; pinned Phase 3 transition patterns, interface contracts, functional/NFR acceptance and recovery constraints; Phase 2 cost guardrails.",
+      "outputs": "Task DAG, task interpretation manifest, requirement/contract mapping, effort assumptions and phase ownership.",
+      "origin": "Retain original Task Generator A4",
+      "contract_rule": "Task dependencies must be acyclic or explicitly model coupled execution units. Phase 5/6/8/9 work remains separately scoped; Phase 7 is intentionally absent.",
+      "merge_tuning": "Task dependencies must be acyclic or explicitly model coupled execution units. Phase 5/6/8/9 work remains separately scoped; Phase 7 is intentionally absent.",
+      "responsibility": "Generate uniquely identified tasks with dependencies, owner role, estimates/ranges, acceptance links, phase/environment, deliverable and authority requirements. Publish one immutable task/context version for all five planners."
+    },
+    {
+      "id": "P4.A4",
+      "local_id": "A4",
+      "name": "Runbook Generator Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A3"
+      ],
+      "execution_raw": "Tier 3; after A3",
+      "activities": "Draft ordered procedures, prerequisites, checkpoints, verification evidence, stop conditions, escalation and handover. Bind exact selected tools, roles, tests and recovery refs during controlled finalization after peer plans are available.",
+      "inputs": "A3 task/context manifest and A2 wave plans; Phase 3 transition/recovery constraints; stakeholder and communication policies.",
+      "outputs": "Draft then reconciled runbooks; notification matrix, blackout coordination, hypercare and step-to-task mapping.",
+      "origin": "Retain original Runbook Generator A5",
+      "contract_rule": "Parallel output may contain declared unresolved bindings. It cannot be released until A9 verifies exact tool/resource/test/recovery refs. No guessed commands, traffic percentages or runtime endpoints.",
+      "merge_tuning": "Parallel output may contain declared unresolved bindings. It cannot be released until A9 verifies exact tool/resource/test/recovery refs. No guessed commands, traffic percentages or runtime endpoints.",
+      "responsibility": "Draft ordered procedures, prerequisites, checkpoints, verification evidence, stop conditions, escalation and handover. Bind exact selected tools, roles, tests and recovery refs during controlled finalization after peer plans are available."
+    },
+    {
+      "id": "P4.A5",
+      "local_id": "A5",
+      "name": "Resource Planner Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A3"
+      ],
+      "execution_raw": "Tier 3; after A3",
+      "activities": "Plan task/shift roles and shared-resource capacity, identify contention and coverage gaps. Reconcile selected-tool competence, access and procurement dependencies with A6 during finalization.",
+      "inputs": "A3 task estimates and role needs; A1 proposed calendar/envelopes; named availability, skills, time zones and support roster evidence.",
+      "outputs": "Proposed staffing, capacity schedule, role coverage, competency evidence, gaps and recruitment/training needs.",
+      "origin": "Retain original Resource Planner A6",
+      "contract_rule": "Competence requirements derive from the task/tool and organizational policy; no universal certification mandate. Proposed staffing is not a confirmed commitment.",
+      "merge_tuning": "Competence requirements derive from the task/tool and organizational policy; no universal certification mandate. Proposed staffing is not a confirmed commitment.",
+      "responsibility": "Plan task/shift roles and shared-resource capacity, identify contention and coverage gaps. Reconcile selected-tool competence, access and procurement dependencies with A6 during finalization."
+    },
+    {
+      "id": "P4.A6",
+      "local_id": "A6",
+      "name": "Tool Selection Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A3"
+      ],
+      "execution_raw": "Tier 3; after A3",
+      "activities": "Specify per-task tool versions, integrations, permissions, license availability, lead times and operator competence. Compare options and document compatibility validation needs.",
+      "inputs": "A3 task/context manifest; Phase 3 technology/BOM/contracts; approved tool policy, compatibility evidence, cost and procurement constraints.",
+      "outputs": "Tool-to-task mapping, version/compatibility matrix, licensing and lead-time constraints, operator and environment prerequisites.",
+      "origin": "Retain original Tool Selection A7",
+      "contract_rule": "Selection does not establish purchase, installed availability or operational compatibility. Any substitution requires runbook/resource/validation impact review.",
+      "merge_tuning": "Selection does not establish purchase, installed availability or operational compatibility. Any substitution requires runbook/resource/validation impact review.",
+      "responsibility": "Specify per-task tool versions, integrations, permissions, license availability, lead times and operator competence. Compare options and document compatibility validation needs."
+    },
+    {
+      "id": "P4.A7",
+      "local_id": "A7",
+      "name": "Validation Planner Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A3"
+      ],
+      "execution_raw": "Tier 3; after A3",
+      "activities": "Define measurable functional, business-journey, NFR, interface, data, security and operational tests. Include approved behavior changes, representative data, environment and workload, evidence location, owner and decision rules.",
+      "inputs": "A3 tasks; Phase 3 functional and NFR acceptance matrix, data/interface contracts and security criteria; Phase 1 risks; A2 exit obligations.",
+      "outputs": "Validation plan, requirement-to-test coverage, gate criteria, evidence requirements, rehearsal and exception process.",
+      "origin": "Retain original Validation Planner A8",
+      "contract_rule": "Plans do not prove compliance or passing tests. Each gate traces to its relevant requirement, not necessarily an NFR. Missing required criteria block the affected release.",
+      "merge_tuning": "Plans do not prove compliance or passing tests. Each gate traces to its relevant requirement, not necessarily an NFR. Missing required criteria block the affected release.",
+      "responsibility": "Define measurable functional, business-journey, NFR, interface, data, security and operational tests. Include approved behavior changes, representative data, environment and workload, evidence location, owner and decision rules."
+    },
+    {
+      "id": "P4.A8",
+      "local_id": "A8",
+      "name": "Rollback & Contingency Planner Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A3"
+      ],
+      "execution_raw": "Tier 3; after A3",
+      "activities": "Plan recovery for app, data, interfaces and infrastructure; identify irreversible steps and point of no return. Define triggers, decision owners, roll-forward alternatives, reconciliation, rehearsals, contingency and hypercare exit.",
+      "inputs": "A3 tasks; A2 data state and wave plan; Phase 3 recovery constraints and transition architecture; risks, budget and decision authority policy.",
+      "outputs": "Recovery procedures and limits, risk responses, decision/escalation matrix, contingency assumptions, rehearsal and hypercare criteria.",
+      "origin": "Retain original Rollback Planner A9",
+      "contract_rule": "A feature switch or traffic rollback does not undo committed data or external effects. Cross-plan thresholds and recovery timing must reconcile before release.",
+      "merge_tuning": "A feature switch or traffic rollback does not undo committed data or external effects. Cross-plan thresholds and recovery timing must reconcile before release.",
+      "responsibility": "Plan recovery for app, data, interfaces and infrastructure; identify irreversible steps and point of no return. Define triggers, decision owners, roll-forward alternatives, reconciliation, rehearsals, contingency and hypercare exit."
+    },
+    {
+      "id": "P4.A9",
+      "local_id": "A9",
+      "name": "Planning Validation & Handoff Agent",
+      "tier": 4,
+      "tier_label": "Tier 4",
+      "lane": "normal",
+      "prerequisites": [
+        "G1"
+      ],
+      "execution_raw": "Tier 4; after G1",
+      "activities": "Validate cross-plan bindings, task/requirement coverage, schedule/resources/tools, procurement, budgets and recovery consistency. Assign unresolved changes to artifact owners and assemble a candidate handoff; repeat after approved revisions.",
+      "inputs": "G1 exact A1-A8 snapshot and context version; P2/P3 authority/conditions; governance and release criteria.",
+      "outputs": "Coverage/feasibility report, conflict register, candidate plan manifest, task routes, governance and downstream handoff.",
+      "origin": "Retain original Migration Planning Validation A10",
+      "contract_rule": "A9 does not silently repair producer artifacts or approve release. Evidence-backed findings replace uncalibrated confidence scores; G2 owns authorization.",
+      "merge_tuning": "A9 does not silently repair producer artifacts or approve release. Evidence-backed findings replace uncalibrated confidence scores; G2 owns authorization.",
+      "responsibility": "Validate cross-plan bindings, task/requirement coverage, schedule/resources/tools, procurement, budgets and recovery consistency. Assign unresolved changes to artifact owners and assemble a candidate handoff; repeat after approved revisions."
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "kind": "intake",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G0 exact versioned artifact / manifest",
+      "blocking_rule": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "id": "G1",
+      "kind": "snapshot",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G1 exact versioned artifact / manifest",
+      "blocking_rule": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "id": "G2",
+      "kind": "release",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G2 exact versioned artifact / manifest",
+      "blocking_rule": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "External"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "Intake",
+      "nodes": [
+        "G0"
+      ],
+      "prerequisites": "Phase 2 + released Phase 3",
+      "activity": "Validate versions, authorized planning scope and conditions.",
+      "blocking": "Invalid, held or incompatible input package.",
+      "meaning": "Gate"
+    },
+    {
+      "stage": "Tier 0",
+      "nodes": [
+        "A1"
+      ],
+      "prerequisites": "G0",
+      "activity": "Proposed wave calendar, milestones and envelopes.",
+      "blocking": "Missing required constraints or explicit infeasibility.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Tier 1",
+      "nodes": [
+        "A2"
+      ],
+      "prerequisites": "A1",
+      "activity": "Detailed wave/data/environment plan.",
+      "blocking": "Required scope and acceptance obligations unresolved.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Tier 2",
+      "nodes": [
+        "A3"
+      ],
+      "prerequisites": "A2",
+      "activity": "Task DAG and shared interpretation manifest.",
+      "blocking": "Unknown task IDs, cycles or incomplete scope mapping.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Tier 3",
+      "nodes": [
+        "A4",
+        "A5",
+        "A6",
+        "A7",
+        "A8"
+      ],
+      "prerequisites": "A3 exact context hash",
+      "activity": "Parallel runbook/resource/tool/validation/recovery candidates.",
+      "blocking": "Each producer publishes version, coverage and unresolved bindings.",
+      "meaning": "5 agents"
+    },
+    {
+      "stage": "Snapshot",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "A4+A5+A6+A7+A8",
+      "activity": "Seal candidate versions including transitive A1-A3.",
+      "blocking": "Missing/FAILED outcome or context/reference mismatch.",
+      "meaning": "Gate, not semantic acceptance"
+    },
+    {
+      "stage": "Tier 4",
+      "nodes": [
+        "A9"
+      ],
+      "prerequisites": "G1",
+      "activity": "Validate feasibility, bindings, coverage and candidate handoff.",
+      "blocking": "Unresolved findings produce owner-assigned revision requests.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Acceptance",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "A9",
+      "activity": "Accept exact package for listed preparation scope.",
+      "blocking": "Mandatory conflicts, absent authority or unmet scoped prerequisite.",
+      "meaning": "Gate"
+    },
+    {
+      "stage": "External",
+      "nodes": [
+        "P5"
+      ],
+      "prerequisites": "G2 released applicable tasks",
+      "activity": "Phase 5 intake validates manifest, conditions and task scope.",
+      "blocking": "No production execution or future-phase bypass.",
+      "meaning": "Consumer boundary"
+    },
+    {
+      "stage": "From",
+      "nodes": [
+        "To"
+      ],
+      "prerequisites": "Type",
+      "activity": "Required object",
+      "blocking": "Failure behavior",
+      "meaning": "Scope"
+    },
+    {
+      "stage": "G0",
+      "nodes": [
+        "A1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G0 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A1",
+      "nodes": [
+        "A2"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A1 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A2",
+      "nodes": [
+        "A3"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A2 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A3",
+      "nodes": [
+        "A4"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A3",
+      "nodes": [
+        "A5"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A3",
+      "nodes": [
+        "A6"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A3",
+      "nodes": [
+        "A7"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A3",
+      "nodes": [
+        "A8"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "G1",
+      "nodes": [
+        "A9"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G1 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A4 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A5",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A5 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A6",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A6 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A7",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A7 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A8",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A8 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "A9",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A9 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "Phase 4"
+    },
+    {
+      "stage": "G2",
+      "nodes": [
+        "P5"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G2 exact versioned artifact / manifest",
+      "blocking": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "meaning": "External"
+    }
+  ],
+  "hard_edges": [
+    {
+      "from": "G0",
+      "to": "A1",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G0 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A2",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A1 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A2",
+      "to": "A3",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A2 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A4",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A5",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A8",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "G1",
+      "to": "A9",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G1 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A4 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A5 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A6",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A6 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A7",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A7 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A8",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A8 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "A9",
+      "to": "G2",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A9 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": false
+    },
+    {
+      "from": "G2",
+      "to": "P5",
+      "from_kind": "gate",
+      "to_kind": "external",
+      "type": "HARD",
+      "required_artifact": "G2 exact versioned artifact / manifest",
+      "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+      "external": true
+    }
+  ],
+  "cross_feeds": [
+    {
+      "id": "CF-01 retained",
+      "sources": "A5 resources + A6 tools",
+      "consumer": "",
+      "purpose": "",
+      "protocol": "After both candidates exist",
+      "consequence": ""
+    },
+    {
+      "id": "Runbook bindings",
+      "sources": "A4 + A5 + A6 + A7 + A8",
+      "consumer": "",
+      "purpose": "",
+      "protocol": "Before G2 acceptance",
+      "consequence": ""
+    },
+    {
+      "id": "Feasibility feedback",
+      "sources": "A5/A6 detail + A3 estimates",
+      "consumer": "",
+      "purpose": "",
+      "protocol": "After detailed planning",
+      "consequence": ""
+    },
+    {
+      "id": "Acceptance / recovery alignment",
+      "sources": "A7 gates + A8 recovery + A4 steps",
+      "consumer": "",
+      "purpose": "",
+      "protocol": "Before G2 acceptance",
+      "consequence": ""
+    },
+    {
+      "id": "Version changes",
+      "sources": "Any owner / A9 finding",
+      "consumer": "",
+      "purpose": "",
+      "protocol": "New revision only",
+      "consequence": ""
+    }
+  ],
+  "artifact_contracts": {
+    "envelope_fields": [],
+    "agent_payloads": {
+      "A1": {
+        "fields": [
+          {
+            "name": "waves",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "calendar",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "capacity_envelopes",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "budget_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "environment_timeline",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "infeasibilities",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "replan_triggers",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "waves[]; calendar; capacity_envelopes[]; budget_refs[]; environment_timeline[]; infeasibilities[]; replan_triggers[]",
+        "producer_consumer": "Wave Architecture Agent",
+        "rule": "Initial feasibility is provisional until detailed estimates, resources and tools reconcile. Calendar/resource assumptions need owners; material grouping/budget changes require upstream approval."
+      },
+      "A2": {
+        "fields": [
+          {
+            "name": "wave_specs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "component_scope",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "data_plan",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "environment_plan",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "entry_exit_criteria",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "interwave_constraints",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "wave_specs[]; component_scope[]; data_plan; environment_plan; entry_exit_criteria[]; interwave_constraints[]",
+        "producer_consumer": "Wave Specification Agent",
+        "rule": "These are execution plans, not executed migrations or provisioned environments. Any missing detailed acceptance or readiness evidence remains an explicit obligation."
+      },
+      "A3": {
+        "fields": [
+          {
+            "name": "tasks",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "dependency_edges",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "context_manifest",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "acceptance_links",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "estimate_assumptions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "phase_routes",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "tasks[]; dependency_edges[]; context_manifest; acceptance_links[]; estimate_assumptions[]; phase_routes[]",
+        "producer_consumer": "Task Generator Agent",
+        "rule": "Task dependencies must be acyclic or explicitly model coupled execution units. Phase 5/6/8/9 work remains separately scoped; Phase 7 is intentionally absent."
+      },
+      "A4": {
+        "fields": [
+          {
+            "name": "runbooks",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "step_task_links",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "tool_bindings",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "role_bindings",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "gate_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "recovery_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "communications",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "hypercare",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "runbooks[]; step_task_links[]; tool_bindings[]; role_bindings[]; gate_refs[]; recovery_refs[]; communications; hypercare",
+        "producer_consumer": "Runbook Generator Agent",
+        "rule": "Parallel output may contain declared unresolved bindings. It cannot be released until A9 verifies exact tool/resource/test/recovery refs. No guessed commands, traffic percentages or runtime endpoints."
+      },
+      "A5": {
+        "fields": [
+          {
+            "name": "assignments",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "capacity_schedule",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "skill_evidence",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "access_needs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "coverage_gaps",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "external_commitments",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "assignments[]; capacity_schedule[]; skill_evidence[]; access_needs[]; coverage_gaps[]; external_commitments[]",
+        "producer_consumer": "Resource Planner Agent",
+        "rule": "Competence requirements derive from the task/tool and organizational policy; no universal certification mandate. Proposed staffing is not a confirmed commitment."
+      },
+      "A6": {
+        "fields": [
+          {
+            "name": "tool_bindings",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "versions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "compatibility_evidence",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "license_status",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "lead_times",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "operator_requirements",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "tool_bindings[]; versions[]; compatibility_evidence[]; license_status[]; lead_times[]; operator_requirements[]",
+        "producer_consumer": "Tool Selection Agent",
+        "rule": "Selection does not establish purchase, installed availability or operational compatibility. Any substitution requires runbook/resource/validation impact review."
+      },
+      "A7": {
+        "fields": [
+          {
+            "name": "tests",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "requirement_coverage",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "gates",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "test_data_requirements",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "environment_needs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "evidence_requirements",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "tests[]; requirement_coverage[]; gates[]; test_data_requirements[]; environment_needs[]; evidence_requirements[]",
+        "producer_consumer": "Validation Planner Agent",
+        "rule": "Plans do not prove compliance or passing tests. Each gate traces to its relevant requirement, not necessarily an NFR. Missing required criteria block the affected release."
+      },
+      "A8": {
+        "fields": [
+          {
+            "name": "recovery_plans",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "irreversible_steps",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "trigger_rules",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "decision_authorities",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "risk_responses",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "contingency",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "rehearsal_criteria",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "recovery_plans[]; irreversible_steps[]; trigger_rules[]; decision_authorities[]; risk_responses[]; contingency; rehearsal_criteria[]",
+        "producer_consumer": "Rollback & Contingency Planner Agent",
+        "rule": "A feature switch or traffic rollback does not undo committed data or external effects. Cross-plan thresholds and recovery timing must reconcile before release."
+      },
+      "A9": {
+        "fields": [
+          {
+            "name": "validation_report",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "coverage",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "conflicts",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "candidate_manifest",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "handoffs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "governance",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "revision_requests",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "validation_report; coverage; conflicts[]; candidate_manifest; handoffs[]; governance; revision_requests[]",
+        "producer_consumer": "Planning Validation & Handoff Agent",
+        "rule": "A9 does not silently repair producer artifacts or approve release. Evidence-backed findings replace uncalibrated confidence scores; G2 owns authorization."
+      }
+    },
+    "named_objects": {
+      "Identity and version": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "schema_version=P4.planning.v3.0; artifact_id/version; phase_id=4; run_id; portfolio/app/cohort/wave IDs; producer; content_hash.",
+        "fields": [
+          {
+            "name": "run_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "producer",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "content_hash",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "All / validators",
+        "failure": "Reject unsupported versions, duplicate IDs and modified hashes."
+      },
+      "Input/context manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Exact P2/P3 refs/authority, A3 context hash where applicable, input versions, policy version, conditions and scope.",
+        "fields": [],
+        "producer_consumer": "All / G1,A9",
+        "failure": "No cross-wave or mixed-revision substitution."
+      },
+      "Status / evidence": {
+        "type": "object + arrays",
+        "required": "Yes",
+        "definition": "COMPLETE/PARTIAL/NOT_ASSESSED/SKIPPED_APPROVED/FAILED; provenance, capture date, scope, evidence class, gaps and unresolved bindings.",
+        "fields": [],
+        "producer_consumer": "All / validators",
+        "failure": "COMPLETE means producer assessment complete, not plan accepted."
+      },
+      "Audit metadata": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Tool/model/prompt/policy versions, attempts, checkpoints, timestamps, validation records and access classification; no secrets.",
+        "fields": [],
+        "producer_consumer": "Runtime / audit",
+        "failure": "Unattributed candidate cannot authorize release."
+      },
+      "Task record": {
+        "type": "object",
+        "required": "Per task",
+        "definition": "task_id; app/component/wave IDs; phase/environment; deliverable; predecessor IDs; input_refs; role; estimate and basis; acceptance refs; authority needs; recovery/rehearsal refs; applicability.",
+        "fields": [
+          {
+            "name": "task_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "deliverable",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "input_refs",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "role",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "applicability",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A3 / A4-A9",
+        "failure": "Reject missing IDs, invalid routing, cycles and orphan scope."
+      },
+      "Runbook step": {
+        "type": "object",
+        "required": "Per step",
+        "definition": "step_id; task_id; preconditions; action specification; exact tool/version; role; expected result; evidence; gate; stop/recovery refs; authority; irreversible flag.",
+        "fields": [
+          {
+            "name": "step_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "task_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "preconditions",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "role",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "evidence",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "gate",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "authority",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A4 / A9",
+        "failure": "Unbound required tool, role or recovery state prevents release."
+      },
+      "Validation gate": {
+        "type": "object",
+        "required": "Per gate",
+        "definition": "criterion_id/type; requirement_ref; threshold/approval state; workload/data/environment; method; evidence location; owner; decision rule; exception policy.",
+        "fields": [
+          {
+            "name": "requirement_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "method",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "owner",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A7 / A4,A9",
+        "failure": "No inferred passing result from planned test coverage."
+      },
+      "Recovery record": {
+        "type": "object",
+        "required": "Per relevant action",
+        "definition": "state assumptions; source of truth; irreversible point; trigger; decision authority/window; rollback/compensation/roll-forward route; reconciliation; rehearsal evidence required.",
+        "fields": [
+          {
+            "name": "trigger",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "reconciliation",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A8 / A4,A9",
+        "failure": "Unrecoverable effects require explicit accepted constraints or HOLD."
+      },
+      "G1 candidate manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Exact A1-A8 refs, app/wave/task coverage, shared context, binding refs, known unresolved conflicts and manifest_hash.",
+        "fields": [],
+        "producer_consumer": "G1 / A9",
+        "failure": "Snapshot may contain semantic findings but not missing/failed required artifacts."
+      },
+      "G2 acceptance": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "candidate_hash; HOLD/SCOPED_PREPARATION/READY_FOR_PREPARATION; authorized_by/time; task/environment scope; inherited conditions; accepted exceptions; future prerequisites.",
+        "fields": [
+          {
+            "name": "candidate_hash",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "G2 / publisher",
+        "failure": "No model confidence score substitutes for approval."
+      },
+      "Phase 5 handoff": {
+        "type": "object",
+        "required": "For release",
+        "definition": "P4 version/hash; authorized app/task IDs; task registry; accepted runbook/resource/tool/gate/recovery refs; P2/P3 design refs; constraints; entry obligations; conditions; phase ownership register.",
+        "fields": [
+          {
+            "name": "constraints",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "conditions",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Phase 4 / Phase 5",
+        "failure": "Validate exact scope on intake; future-stage tasks remain gated."
+      },
+      "Change request": {
+        "type": "object",
+        "required": "When revision needed",
+        "definition": "Finding, owner, proposed correction, affected task/artifact IDs, upstream impact, approvals, replacement versions and invalidated descendants.",
+        "fields": [],
+        "producer_consumer": "A9/owner / change authority",
+        "failure": "Republish and revalidate before new release."
+      }
+    }
+  },
+  "run_controls": [
+    {
+      "stage": "G0",
+      "control": "Intake compatibility",
+      "when": "",
+      "behavior": "Validate P2.portfolio.v3.0 authorized scope and P3.architecture.v3.0 READY_FOR_PLANNING or CONDITIONAL_PLANNING, exact hashes, app/cohort IDs and conditions. HOLD cannot enter.",
+      "accountable": "Orchestrator",
+      "failure": "Conditional planning allows only explicitly listed actions."
+    },
+    {
+      "stage": "A1",
+      "control": "Upstream planning authority",
+      "when": "",
+      "behavior": "Treat approved Phase 2 grouping and constraints as baseline. Refine dates/capacity only within delegated tolerances; changes affecting disposition, cohort, budget or approved scope require Phase 2 decision and Phase 3 impact review.",
+      "accountable": "Portfolio and architecture owners",
+      "failure": "No silent overwrite of strategy or architecture."
+    },
+    {
+      "stage": "A1/A5",
+      "control": "Schedule feasibility",
+      "when": "",
+      "behavior": "Use explicit calendar/time zone, holidays, availability, shared resources and environment/procurement lead times. Detailed staffing and estimates can invalidate the initial A1 calendar.",
+      "accountable": "Planning owner",
+      "failure": "Publish unresolved infeasibility; no fabricated dates or commitments."
+    },
+    {
+      "stage": "A3",
+      "control": "Task record",
+      "when": "",
+      "behavior": "Require task_id, wave/app/component IDs, phase/environment, deliverable, dependencies, role, estimate basis, acceptance refs, input versions, permissions and recovery/rehearsal needs.",
+      "accountable": "Task owner",
+      "failure": "Every scoped requirement/component has a task or approved exclusion."
+    },
+    {
+      "stage": "A3",
+      "control": "Task DAG",
+      "when": "",
+      "behavior": "Check unknown references, duplicate IDs, cycles, external predecessors and coupled units. Treat approval/availability as prerequisites, not implicit elapsed-time assumptions.",
+      "accountable": "Orchestrator",
+      "failure": "No schedule release with unresolved dependency cycles."
+    },
+    {
+      "stage": "A4-A8",
+      "control": "Parallel draft boundary",
+      "when": "",
+      "behavior": "All planners consume the same A3 context hash. Independent first passes publish candidates and unresolved peer bindings. Candidate completion is not final readiness.",
+      "accountable": "Artifact owners",
+      "failure": "No claimed independence for final cross-plan consistency."
+    },
+    {
+      "stage": "A5/A6",
+      "control": "CF-01 reconciliation",
+      "when": "",
+      "behavior": "Compare tool versions, operator skills, permissions, shifts and license/procurement status by task_id. Record evidence and mismatches; certification only where policy or contract requires it.",
+      "accountable": "Resource and tool owners",
+      "failure": "Single reconciliation pass is not assumed sufficient."
+    },
+    {
+      "stage": "A4/A7/A8",
+      "control": "Runbook finalization",
+      "when": "",
+      "behavior": "Each runbook step binds exact tool/resource versions, expected outputs, validation gate, recovery action and authority. Reconcile stop thresholds, irreversible actions, notifications and hypercare criteria.",
+      "accountable": "Runbook and domain owners",
+      "failure": "Unresolved required bindings prevent release."
+    },
+    {
+      "stage": "G1",
+      "control": "Immutable snapshot",
+      "when": "",
+      "behavior": "Require A4-A8 candidates plus transitive A1-A3, matching context hash, complete scoped task coverage and resolved artifact references. FAILED or missing outcomes block assembly.",
+      "accountable": "Deterministic validator",
+      "failure": "Known semantic conflicts remain visible for A9; snapshot is not acceptance."
+    },
+    {
+      "stage": "A9",
+      "control": "Cross-plan consistency",
+      "when": "",
+      "behavior": "Validate bidirectional task/requirement coverage, tool/skill/role binding, capacity/calendar, cost/contingency, environment/license readiness, test/recovery feasibility and phase routing. Record checks and limitations.",
+      "accountable": "Planning validator",
+      "failure": "Absence of a reported issue is not universal proof."
+    },
+    {
+      "stage": "All",
+      "control": "Controlled revisions",
+      "when": "",
+      "behavior": "A9/orchestrator issues change request with affected IDs, proposed owner and impacted descendants. Owners republish artifacts; G1 creates a new snapshot and A9 revalidates. Invalidate related approvals/handoffs.",
+      "accountable": "Change authority",
+      "failure": "No in-place mutation of a sealed package or same-run back edge."
+    },
+    {
+      "stage": "All",
+      "control": "Bounded resolution",
+      "when": "",
+      "behavior": "Configure attempt/time/token/revision budgets and escalation authority. Unresolved disputes remain HOLD; no infinite retry and no forced single-pass claim.",
+      "accountable": "Orchestrator",
+      "failure": "Budget exhaustion cannot silently waive a gate."
+    },
+    {
+      "stage": "A7",
+      "control": "Acceptance breadth",
+      "when": "",
+      "behavior": "Trace functional journeys, approved behavior changes, NFRs, security, data, interfaces, operational support and recovery to their own acceptance criteria. Define evidence, workload, owner and approval state.",
+      "accountable": "Business and technical acceptance owners",
+      "failure": "No claim that a plan proves NFR compliance."
+    },
+    {
+      "stage": "A8",
+      "control": "Recovery feasibility",
+      "when": "",
+      "behavior": "Distinguish app rollback, data recovery, compensating actions and roll-forward. Specify source of truth, write state, reconciliation, external side effects, decision window and recovery targets.",
+      "accountable": "Recovery owner",
+      "failure": "Crossing point of no return changes permitted recovery actions."
+    },
+    {
+      "stage": "A6",
+      "control": "Tool evidence",
+      "when": "",
+      "behavior": "Pin candidate versions and dated official compatibility evidence at execution time; record unknowns, lead times and commercial constraints.",
+      "accountable": "Tool owner",
+      "failure": "No procurement, download or operational use performed here."
+    },
+    {
+      "stage": "A5",
+      "control": "Commitment state",
+      "when": "",
+      "behavior": "Keep proposed, confirmed and unavailable resource assignments distinct; include shared-service/on-call coverage and required permissions.",
+      "accountable": "Resource owner",
+      "failure": "A proposed named role is not accepted staffing."
+    },
+    {
+      "stage": "G2",
+      "control": "Release decision",
+      "when": "",
+      "behavior": "Require valid upstream scope and snapshot, sufficient acceptance coverage, resolved mandatory conflicts, feasible scoped resources/tools, accepted conditions and accountable reviewer approval of exact candidate hash.",
+      "accountable": "Delivery decision authority",
+      "failure": "HOLD / SCOPED_PREPARATION / READY_FOR_PREPARATION."
+    },
+    {
+      "stage": "G2",
+      "control": "Scope and future prerequisites",
+      "when": "",
+      "behavior": "Future environment, license or runtime evidence may remain planned obligations only when not required for the specifically released preparation tasks. Record owner, due date, acceptance and blocked downstream actions.",
+      "accountable": "Delivery decision authority",
+      "failure": "No unrestricted readiness from conditional or future prerequisites."
+    },
+    {
+      "stage": "G2",
+      "control": "Execution boundary",
+      "when": "",
+      "behavior": "Plan acceptance permits only listed preparation activities. Production changes, data mutation, provisioning, cutover and retirement require their later explicit readiness and execution gates.",
+      "accountable": "Execution authority",
+      "failure": "Planning approval never implies production go-live."
+    },
+    {
+      "stage": "Handoff",
+      "control": "Phase ownership",
+      "when": "",
+      "behavior": "Phase 5 receives applicable code/app preparation tasks. Registry retains data Phase 6, cutover Phase 8 and post-modernization Phase 9 obligations with entry gates. Phase 7 is intentionally skipped.",
+      "accountable": "Orchestrator",
+      "failure": "No immediate dispatch to future phases; no deadlock on intentionally absent phase."
+    },
+    {
+      "stage": "All",
+      "control": "Evidence and runtime controls",
+      "when": "",
+      "behavior": "Preserve evidence class, scope, provenance and unknowns. Treat source text as untrusted; use scoped read-only tools and sandbox validators. Pin input/tool/model/prompt/policy versions and redact secrets.",
+      "accountable": "Runtime owner",
+      "failure": "Document instructions cannot expand the task."
+    },
+    {
+      "stage": "All",
+      "control": "Recovery and scale",
+      "when": "",
+      "behavior": "Idempotency key includes run, agent, partition, context and policy versions; checkpoint completed partitions and audit retries. Fan-in checks failed shards and global shared-resource constraints.",
+      "accountable": "Runtime owner",
+      "failure": "No untested timing or portfolio-scale guarantees."
+    },
+    {
+      "stage": "Freeze",
+      "control": "Freeze recommendation",
+      "when": "",
+      "behavior": "FREEZE CORE STRUCTURE: retain nine roles and the five-planner fan-out. The tuned contracts, finalization and release controls are ready for owner review; runtime validation remains a separate pilot requirement.",
+      "accountable": "Architecture owner",
+      "failure": "Recommendation is not a recorded owner approval."
+    }
+  ],
+  "activation_matrix": [],
+  "execution_routes": []
+}

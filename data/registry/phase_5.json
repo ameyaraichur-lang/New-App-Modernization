@@ -1,0 +1,1602 @@
+{
+  "phase": 5,
+  "name": "Code & application modernization",
+  "schema_version": "P5.codeapp.v3.0",
+  "source_workbook": "CodeAppMod_Phase5_Agent_Swarm_Tuned.xlsx",
+  "freeze_recommendation": "READY FOR DESIGN REVIEW",
+  "agents": [
+    {
+      "id": "P5.A1",
+      "local_id": "A1",
+      "name": "Characterization Test Agent",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0; after G0",
+      "activities": "Capture baseline behavior before modifying application source. Exercise representative business journeys, SQL semantics, UI interactions and interfaces where applicable. Record nondeterminism normalization, coverage and inaccessible paths. Distinguish generated tests from executed observations.",
+      "inputs": "Pinned legacy commit/build, existing tests, approved fixtures and isolated execution environment; Phase 3 acceptance criteria and Phase 4 scoped tasks.",
+      "outputs": "Versioned baseline suite, expected observations, environment/fixture manifest, coverage and gaps; expected-change register proposal.",
+      "origin": "Pre-transform half of original Unit Test Generation A8",
+      "contract_rule": "Finite tests provide evidence within coverage, not universal equivalence. Unrunnable legacy behavior remains unknown; G1 decides whether scoped alternative acceptance is sufficient.",
+      "merge_tuning": "Finite tests provide evidence within coverage, not universal equivalence. Unrunnable legacy behavior remains unknown; G1 decides whether scoped alternative acceptance is sufficient.",
+      "responsibility": "Capture baseline behavior before modifying application source. Exercise representative business journeys, SQL semantics, UI interactions and interfaces where applicable. Record nondeterminism normalization, coverage and inaccessible paths. Distinguish generated tests from executed observations."
+    },
+    {
+      "id": "P5.A2",
+      "local_id": "A2",
+      "name": "Code Transformation Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "G1"
+      ],
+      "execution_raw": "Tier 1; after G1",
+      "activities": "Apply approved convert/upgrade/rebuild/adapter changes in owned files. Choose an evidence-based staged order when multiple transformations are needed. Implement contract adapters and actual required logic; publish patch and lane test evidence.",
+      "inputs": "G1 sealed baseline/acceptance manifest; Phase 3 target/contracts; Phase 4 exact task/tool scope; assigned files and isolated worktree.",
+      "outputs": "Code patch, transformation log, updated dependencies, adapter implementation and scoped build/test results, or validated unchanged artifact.",
+      "origin": "Merge original Code Conversion A1 + Software Upgrade A2",
+      "contract_rule": "Do not assume upgrade-then-convert always works. Stubs and unimplemented paths remain incomplete. Shared manifests, generated clients and data-access files have one assigned owner.",
+      "merge_tuning": "Do not assume upgrade-then-convert always works. Stubs and unimplemented paths remain incomplete. Shared manifests, generated clients and data-access files have one assigned owner.",
+      "responsibility": "Apply approved convert/upgrade/rebuild/adapter changes in owned files. Choose an evidence-based staged order when multiple transformations are needed. Implement contract adapters and actual required logic; publish patch and lane test evidence."
+    },
+    {
+      "id": "P5.A3",
+      "local_id": "A3",
+      "name": "SQL & Data Layer Modernization Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "G1"
+      ],
+      "execution_raw": "Tier 1; after G1",
+      "activities": "Transform applicable SQL, procedures, queries and data-access code. Test types, precision, nulls, transactions, collation, time zones and query semantics on disposable fixtures. Coordinate shared interfaces via owned contracts.",
+      "inputs": "G1 baseline; approved SQL/stored logic and data contracts; target test engine; assigned SQL/data-access paths and tool bindings.",
+      "outputs": "SQL/data-layer patch, per-object conversion status and semantic test evidence; Phase 6 migration obligations or approved no-change record.",
+      "origin": "Retain original SQL Scripts Transformer A3",
+      "contract_rule": "Phase 5 authors and tests assets; production schema/data migration is not authorized. SQL compilation alone does not establish semantic equivalence.",
+      "merge_tuning": "Phase 5 authors and tests assets; production schema/data migration is not authorized. SQL compilation alone does not establish semantic equivalence.",
+      "responsibility": "Transform applicable SQL, procedures, queries and data-access code. Test types, precision, nulls, transactions, collation, time zones and query semantics on disposable fixtures. Coordinate shared interfaces via owned contracts."
+    },
+    {
+      "id": "P5.A4",
+      "local_id": "A4",
+      "name": "UI Modernization Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "G1"
+      ],
+      "execution_raw": "Tier 1; after G1",
+      "activities": "Implement approved UI scope including routing, state, error/loading paths and service integration. Validate representative journeys and accessibility criteria. For vendor or unchanged UI, test integration/compatibility rather than fabricate vendor source.",
+      "inputs": "G1 baseline; approved UI architecture and journeys; accessibility/performance acceptance; owned UI paths and interface contracts.",
+      "outputs": "Working UI changes, component mapping, journey/accessibility evidence and outstanding gaps, or approved headless/no-change record.",
+      "origin": "Retain original UI Modernization A4",
+      "contract_rule": "Scaffolding or rendering alone cannot satisfy implementation acceptance. Headless skip emits a typed artifact; shared BFF/API ownership must be assigned.",
+      "merge_tuning": "Scaffolding or rendering alone cannot satisfy implementation acceptance. Headless skip emits a typed artifact; shared BFF/API ownership must be assigned.",
+      "responsibility": "Implement approved UI scope including routing, state, error/loading paths and service integration. Validate representative journeys and accessibility criteria. For vendor or unchanged UI, test integration/compatibility rather than fabricate vendor source."
+    },
+    {
+      "id": "P5.A5",
+      "local_id": "A5",
+      "name": "Configuration & Secrets Externalization Agent",
+      "tier": 2,
+      "tier_label": "Tier 2",
+      "lane": "normal",
+      "prerequisites": [
+        "G2"
+      ],
+      "execution_raw": "Tier 2; after G2",
+      "activities": "Externalize applicable environment configuration across all components. Add secret references and tested retrieval/rotation hooks using non-production credentials. Prevent browser bundles/logs from containing server secrets; validate missing-config behavior.",
+      "inputs": "G2 combined core commit covering code, SQL/data-access and UI; approved configuration and secret-reference patterns; task scope.",
+      "outputs": "Combined configured commit, per-component config schema, secret references, ownership and tests; deployment/rotation prerequisites.",
+      "origin": "Retain original Configuration Externalization A5",
+      "contract_rule": "No real secret values in artifacts. Externalization does not revoke leaked credentials or prove live rotation; those actions require explicit operational authority and evidence.",
+      "merge_tuning": "No real secret values in artifacts. Externalization does not revoke leaked credentials or prove live rotation; those actions require explicit operational authority and evidence.",
+      "responsibility": "Externalize applicable environment configuration across all components. Add secret references and tested retrieval/rotation hooks using non-production credentials. Prevent browser bundles/logs from containing server secrets; validate missing-config behavior."
+    },
+    {
+      "id": "P5.A6",
+      "local_id": "A6",
+      "name": "Feature Flag Integration Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A5"
+      ],
+      "execution_raw": "Tier 3; after A5",
+      "activities": "Implement applicable flags with safe defaults, failure behavior, ownership, expiry and access control. Test enabled/disabled states and relevant interactions. Keep shadow traffic isolated from unintended writes or external effects.",
+      "inputs": "A5 immutable commit/config schema; approved rollout/recovery constraints; owned files and flag scope.",
+      "outputs": "Flag patch, rollout/kill-switch mapping, state-test evidence and lifecycle plan, or approved not-applicable record.",
+      "origin": "Retain original Feature Flag Integration A6",
+      "contract_rule": "Flags disable paths but cannot reverse data writes, schema changes or external effects. No production flag changes or shadow traffic activation here.",
+      "merge_tuning": "Flags disable paths but cannot reverse data writes, schema changes or external effects. No production flag changes or shadow traffic activation here.",
+      "responsibility": "Implement applicable flags with safe defaults, failure behavior, ownership, expiry and access control. Test enabled/disabled states and relevant interactions. Keep shadow traffic isolated from unintended writes or external effects."
+    },
+    {
+      "id": "P5.A7",
+      "local_id": "A7",
+      "name": "Observability Instrumentation Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A5"
+      ],
+      "execution_raw": "Tier 3; after A5",
+      "activities": "Instrument applicable backend, UI and data-access boundaries. Propagate correlation safely, test telemetry emission, sensitive-data redaction and overhead. Validate failure behavior when telemetry backends are unavailable.",
+      "inputs": "A5 immutable commit; Phase 3 telemetry/SLI design; approved data minimization and resource budgets; owned instrumentation paths.",
+      "outputs": "Instrumentation patch, telemetry config and SLI mapping, redaction/overhead test evidence and later environment prerequisites.",
+      "origin": "Retain original Observability Instrumentation A7",
+      "contract_rule": "No real customer/secret data in test telemetry. Dashboard seeds or generated collectors do not prove deployed observability.",
+      "merge_tuning": "No real customer/secret data in test telemetry. Dashboard seeds or generated collectors do not prove deployed observability.",
+      "responsibility": "Instrument applicable backend, UI and data-access boundaries. Propagate correlation safely, test telemetry emission, sensitive-data redaction and overhead. Validate failure behavior when telemetry backends are unavailable."
+    },
+    {
+      "id": "P5.A8",
+      "local_id": "A8",
+      "name": "Security Hardening Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A5"
+      ],
+      "execution_raw": "Tier 3; after A5",
+      "activities": "Implement applicable auth/authz, input validation, dependency fixes and security configuration. Test controls in the authorized sandbox; record code versus deployment enforcement responsibilities, unresolved vulnerabilities and justified exceptions.",
+      "inputs": "A5 immutable commit; approved threat/control requirements, dependency policies and tests; owned security files and shared-manifest coordination.",
+      "outputs": "Security patch, control-to-test mapping, dependency/SBOM deltas and findings; deployment enforcement obligations.",
+      "origin": "New security implementation role retained from v2",
+      "contract_rule": "Code/config generation cannot prove deployed mTLS, storage encryption or compliance. Retest affected flows after security fixes; approved behavior changes are explicit.",
+      "merge_tuning": "Code/config generation cannot prove deployed mTLS, storage encryption or compliance. Retest affected flows after security fixes; approved behavior changes are explicit.",
+      "responsibility": "Implement applicable auth/authz, input validation, dependency fixes and security configuration. Test controls in the authorized sandbox; record code versus deployment enforcement responsibilities, unresolved vulnerabilities and justified exceptions."
+    },
+    {
+      "id": "P5.A9",
+      "local_id": "A9",
+      "name": "Validation Test & Equivalence Agent",
+      "tier": 4,
+      "tier_label": "Tier 4",
+      "lane": "normal",
+      "prerequisites": [
+        "G3",
+        "G1"
+      ],
+      "execution_raw": "Tier 4; after G3 + G1",
+      "activities": "Execute applicable functional, differential, contract, integration, SQL/UI, flag-state, security and NFR checks against the same integrated build. Trace approved changes to revised expectations and report PASS/FAIL/NOT_RUN/BLOCKED by criterion.",
+      "inputs": "G3 exact integrated source/build digests; G1 sealed baseline and expected-change policy; Phase 3/4 acceptance, contracts, test data and authorized environment.",
+      "outputs": "Build-bound validation evidence, coverage/gaps, approved-difference results, unresolved failures and candidate handoff manifest.",
+      "origin": "Post-transform half of original Unit Test Generation A8",
+      "contract_rule": "Test generation is not execution. No universal equivalence proof, invented coverage or pass on unexecuted gates. A9 reports evidence; G4 owns release.",
+      "merge_tuning": "Test generation is not execution. No universal equivalence proof, invented coverage or pass on unexecuted gates. A9 reports evidence; G4 owns release.",
+      "responsibility": "Execute applicable functional, differential, contract, integration, SQL/UI, flag-state, security and NFR checks against the same integrated build. Trace approved changes to revised expectations and report PASS/FAIL/NOT_RUN/BLOCKED by criterion."
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "kind": "intake",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G0 exact artifact / source / manifest",
+      "blocking_rule": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "id": "G1",
+      "kind": "snapshot",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G1 exact artifact / source / manifest",
+      "blocking_rule": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "id": "G2",
+      "kind": "release",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G2 exact artifact / source / manifest",
+      "blocking_rule": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "id": "G3",
+      "kind": "release",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G3 exact artifact / source / manifest",
+      "blocking_rule": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "id": "G4",
+      "kind": "release",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G4 exact artifact / source / manifest",
+      "blocking_rule": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "External"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "Intake",
+      "nodes": [
+        "G0"
+      ],
+      "prerequisites": "P4 scoped handoff + execution permit",
+      "activity": "Pin source, tools, environment, ownership and allowed actions.",
+      "blocking": "Missing write/build/test authority or invalid upstream scope.",
+      "meaning": "Gate"
+    },
+    {
+      "stage": "Tier 0",
+      "nodes": [
+        "A1"
+      ],
+      "prerequisites": "G0",
+      "activity": "Capture legacy baseline and coverage/gaps.",
+      "blocking": "No observed or accepted alternate criterion for required scope.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Baseline gate",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "A1",
+      "activity": "Accept and seal baseline, expected changes and limitations.",
+      "blocking": "Required unresolved baseline gap; acceptance owner absent.",
+      "meaning": "Gate"
+    },
+    {
+      "stage": "Tier 1",
+      "nodes": [
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "prerequisites": "G1",
+      "activity": "Isolated code, SQL and UI patches or typed unchanged/N/A records.",
+      "blocking": "Unknown shared-file ownership or failed lane publication.",
+      "meaning": "3 agents"
+    },
+    {
+      "stage": "Core integration",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "A2+A3+A4",
+      "activity": "Merge core patches and validate combined build.",
+      "blocking": "Unresolved conflict, invalid substitute or failed combined check.",
+      "meaning": "Integration gate"
+    },
+    {
+      "stage": "Tier 2",
+      "nodes": [
+        "A5"
+      ],
+      "prerequisites": "G2",
+      "activity": "Configure every applicable component of combined product.",
+      "blocking": "Config/secret validation failure or missing component coverage.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Tier 3",
+      "nodes": [
+        "A6",
+        "A7",
+        "A8"
+      ],
+      "prerequisites": "A5",
+      "activity": "Isolated flag, telemetry and security patches.",
+      "blocking": "Mismatched A5 base or unauthorized shared edits.",
+      "meaning": "3 agents"
+    },
+    {
+      "stage": "Final integration",
+      "nodes": [
+        "G3"
+      ],
+      "prerequisites": "A6+A7+A8",
+      "activity": "Merge, rebuild and seal source/build/SBOM identities.",
+      "blocking": "Merge/build failure or inconsistent dependencies.",
+      "meaning": "Integration gate"
+    },
+    {
+      "stage": "Tier 4",
+      "nodes": [
+        "A9"
+      ],
+      "prerequisites": "G3 + G1",
+      "activity": "Test final integrated build against required acceptance and baseline.",
+      "blocking": "Required failed, blocked or unrun criterion.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Release",
+      "nodes": [
+        "G4"
+      ],
+      "prerequisites": "A9",
+      "activity": "Approve exact evidence-bound package and downstream scope.",
+      "blocking": "Digest mismatch, mandatory blocker or absent review.",
+      "meaning": "Gate"
+    },
+    {
+      "stage": "External",
+      "nodes": [
+        "NEXT"
+      ],
+      "prerequisites": "G4",
+      "activity": "Scoped Phase 6/data N/A record; retain later readiness obligations.",
+      "blocking": "No production execution or Phase 8 gate bypass.",
+      "meaning": "Consumer boundary"
+    },
+    {
+      "stage": "From",
+      "nodes": [
+        "To"
+      ],
+      "prerequisites": "Type",
+      "activity": "Required object",
+      "blocking": "Failure behavior",
+      "meaning": "Scope"
+    },
+    {
+      "stage": "G0",
+      "nodes": [
+        "A1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G0 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "G1",
+      "nodes": [
+        "A2"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G1 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "G1",
+      "nodes": [
+        "A3"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G1 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "G1",
+      "nodes": [
+        "A4"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G1 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "G2",
+      "nodes": [
+        "A5"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G2 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A5",
+      "nodes": [
+        "A6"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A5 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A5",
+      "nodes": [
+        "A7"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A5 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A5",
+      "nodes": [
+        "A8"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A5 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "G3",
+      "nodes": [
+        "A9"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G3 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "G1",
+      "nodes": [
+        "A9"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G1 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A1",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A1 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A2",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A2 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A3",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A3 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A4 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A6",
+      "nodes": [
+        "G3"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A6 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A7",
+      "nodes": [
+        "G3"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A7 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A8",
+      "nodes": [
+        "G3"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A8 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "A9",
+      "nodes": [
+        "G4"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A9 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "Phase 5"
+    },
+    {
+      "stage": "G4",
+      "nodes": [
+        "NEXT"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G4 exact artifact / source / manifest",
+      "blocking": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "meaning": "External"
+    }
+  ],
+  "hard_edges": [
+    {
+      "from": "G0",
+      "to": "A1",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G0 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G1",
+      "to": "A2",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G1 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G1",
+      "to": "A3",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G1 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G1",
+      "to": "A4",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G1 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G2",
+      "to": "A5",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G2 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A5 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A5 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "A8",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A5 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G3",
+      "to": "A9",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G3 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G1",
+      "to": "A9",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G1 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A1 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A2",
+      "to": "G2",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A2 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "G2",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A3 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "G2",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A4 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A6",
+      "to": "G3",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A6 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A7",
+      "to": "G3",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A7 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A8",
+      "to": "G3",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A8 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A9",
+      "to": "G4",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A9 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G4",
+      "to": "NEXT",
+      "from_kind": "gate",
+      "to_kind": "external",
+      "type": "HARD",
+      "required_artifact": "G4 exact artifact / source / manifest",
+      "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+      "external": true
+    }
+  ],
+  "cross_feeds": [
+    {
+      "id": "CF-01 normalized",
+      "sources": "A1 via G1",
+      "consumer": "A2/A3/A4 and A9",
+      "purpose": "",
+      "protocol": "Seal observed oracle, gaps, fixtures and expected-change policy. A9 consumes exact G1 hash independently of the modernized build.",
+      "consequence": ""
+    },
+    {
+      "id": "Core integration",
+      "sources": "A2 + A3 + A4",
+      "consumer": "G2 → A5",
+      "purpose": "",
+      "protocol": "Validate base/ownership, integrate reviewed patches or typed no-change records, run combined checks and publish one commit.",
+      "consequence": ""
+    },
+    {
+      "id": "CF-02 retained",
+      "sources": "A5 combined configured commit",
+      "consumer": "A6/A7/A8",
+      "purpose": "",
+      "protocol": "Each lane starts from the same A5 commit and config schema in isolated workspace; assign shared startup/middleware/manifest ownership.",
+      "consequence": ""
+    },
+    {
+      "id": "Final integration",
+      "sources": "A6 + A7 + A8",
+      "consumer": "G3 → A9",
+      "purpose": "",
+      "protocol": "Integrate patches; rebuild and run affected checks; seal source/build/SBOM identities.",
+      "consequence": ""
+    },
+    {
+      "id": "Corrections",
+      "sources": "A9 failure / integration conflict",
+      "consumer": "Owning producer, new revision",
+      "purpose": "",
+      "protocol": "Record affected IDs and changed inputs; republish patches, reintegrate and retest impacted acceptance; obtain fresh G4 approval.",
+      "consequence": ""
+    }
+  ],
+  "artifact_contracts": {
+    "envelope_fields": [],
+    "agent_payloads": {
+      "A1": {
+        "fields": [
+          {
+            "name": "baseline_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "suite_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "observed_results",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "fixture_manifest",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "environment_digest",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "normalization_rules",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "coverage",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "gaps",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "expected_change_refs",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "baseline_commit; suite_ref; observed_results[]; fixture_manifest; environment_digest; normalization_rules[]; coverage; gaps[]; expected_change_refs[]",
+        "producer_consumer": "Characterization Test Agent",
+        "rule": "Finite tests provide evidence within coverage, not universal equivalence. Unrunnable legacy behavior remains unknown; G1 decides whether scoped alternative acceptance is sufficient."
+      },
+      "A2": {
+        "fields": [
+          {
+            "name": "base_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "patch_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "touched_paths",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "dependency_changes",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "adapters",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "lane_checks",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "limitations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "applicability",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "base_commit; patch_ref; touched_paths[]; dependency_changes[]; adapters[]; lane_checks[]; limitations[]; applicability",
+        "producer_consumer": "Code Transformation Agent",
+        "rule": "Do not assume upgrade-then-convert always works. Stubs and unimplemented paths remain incomplete. Shared manifests, generated clients and data-access files have one assigned owner."
+      },
+      "A3": {
+        "fields": [
+          {
+            "name": "base_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "patch_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "object_status",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "semantic_checks",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "migration_obligations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "applicability",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "substitute_ref",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "base_commit; patch_ref; object_status[]; semantic_checks[]; migration_obligations[]; applicability; substitute_ref",
+        "producer_consumer": "SQL & Data Layer Modernization Agent",
+        "rule": "Phase 5 authors and tests assets; production schema/data migration is not authorized. SQL compilation alone does not establish semantic equivalence."
+      },
+      "A4": {
+        "fields": [
+          {
+            "name": "base_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "patch_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "component_map",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "journey_results",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "accessibility_results",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "incomplete_features",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "applicability",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "substitute_ref",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "base_commit; patch_ref; component_map[]; journey_results[]; accessibility_results[]; incomplete_features[]; applicability; substitute_ref",
+        "producer_consumer": "UI Modernization Agent",
+        "rule": "Scaffolding or rendering alone cannot satisfy implementation acceptance. Headless skip emits a typed artifact; shared BFF/API ownership must be assigned."
+      },
+      "A5": {
+        "fields": [
+          {
+            "name": "input_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "output_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "component_coverage",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "config_schema",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "secret_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "retrieval_tests",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "deployment_obligations",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "input_commit; output_commit; component_coverage[]; config_schema; secret_refs[]; retrieval_tests[]; deployment_obligations[]",
+        "producer_consumer": "Configuration & Secrets Externalization Agent",
+        "rule": "No real secret values in artifacts. Externalization does not revoke leaked credentials or prove live rotation; those actions require explicit operational authority and evidence."
+      },
+      "A6": {
+        "fields": [
+          {
+            "name": "base_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "patch_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "flags",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "state_tests",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "recovery_mapping",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "lifecycle",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "applicability",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "base_commit; patch_ref; flags[]; state_tests[]; recovery_mapping[]; lifecycle[]; applicability",
+        "producer_consumer": "Feature Flag Integration Agent",
+        "rule": "Flags disable paths but cannot reverse data writes, schema changes or external effects. No production flag changes or shadow traffic activation here."
+      },
+      "A7": {
+        "fields": [
+          {
+            "name": "base_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "patch_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "instrumentation_map",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "telemetry_config",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "emission_tests",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "redaction_checks",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "overhead_evidence",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "deployment_obligations",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "base_commit; patch_ref; instrumentation_map[]; telemetry_config; emission_tests[]; redaction_checks[]; overhead_evidence; deployment_obligations[]",
+        "producer_consumer": "Observability Instrumentation Agent",
+        "rule": "No real customer/secret data in test telemetry. Dashboard seeds or generated collectors do not prove deployed observability."
+      },
+      "A8": {
+        "fields": [
+          {
+            "name": "base_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "patch_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "control_coverage",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "security_tests",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "dependency_changes",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "findings",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "exceptions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "deployment_obligations",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "base_commit; patch_ref; control_coverage[]; security_tests[]; dependency_changes[]; findings[]; exceptions[]; deployment_obligations[]",
+        "producer_consumer": "Security Hardening Agent",
+        "rule": "Code/config generation cannot prove deployed mTLS, storage encryption or compliance. Retest affected flows after security fixes; approved behavior changes are explicit."
+      },
+      "A9": {
+        "fields": [
+          {
+            "name": "tested_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "build_digest",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "baseline_manifest_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "test_results",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "acceptance_coverage",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "expected_difference_results",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "residual_risks",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "candidate_manifest",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "tested_commit; build_digest; baseline_manifest_hash; test_results[]; acceptance_coverage[]; expected_difference_results[]; residual_risks[]; candidate_manifest",
+        "producer_consumer": "Validation Test & Equivalence Agent",
+        "rule": "Test generation is not execution. No universal equivalence proof, invented coverage or pass on unexecuted gates. A9 reports evidence; G4 owns release."
+      }
+    },
+    "named_objects": {
+      "Identity and version": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "P5.codeapp.v3.0; artifact_id/version; phase_id=5; run_id; app/component/task IDs; producer; content_hash and access classification.",
+        "fields": [
+          {
+            "name": "run_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "producer",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "All / validators",
+        "failure": "Reject modified hashes, unknown IDs and incompatible versions."
+      },
+      "Input and execution manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Exact upstream refs, source/base commit, policy/tool/model versions, execution permit, environment digest, approved task scope and applicability.",
+        "fields": [],
+        "producer_consumer": "All / orchestrator",
+        "failure": "No implicit write/execute permission from a planning document."
+      },
+      "Status and evidence": {
+        "type": "object + arrays",
+        "required": "Yes",
+        "definition": "COMPLETE/PARTIAL/NOT_ASSESSED/SKIPPED_APPROVED/FAILED; provenance, method, evidence class, coverage, timestamps, gaps and unresolved obligations.",
+        "fields": [],
+        "producer_consumer": "All / gates",
+        "failure": "Generated work is not observed or passing runtime evidence."
+      },
+      "Patch record": {
+        "type": "object",
+        "required": "Per mutation lane",
+        "definition": "base_commit; patch_hash; touched paths; file-owner approvals; dependency/lock changes; lane checks; conflicts; immutable output refs.",
+        "fields": [
+          {
+            "name": "base_commit",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "patch_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "conflicts",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A2-A4,A6-A8 / integrator",
+        "failure": "Reject changed base, unowned paths or unresolved shared edits."
+      },
+      "Typed no-change record": {
+        "type": "object",
+        "required": "Skipped/unchanged scope",
+        "definition": "Mode UNCHANGED/NOT_APPLICABLE; source artifact ref/hash; justification; approved applicability; required consumer fields; limitations.",
+        "fields": [
+          {
+            "name": "justification",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "limitations",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Conditional lane / G2,G3",
+        "failure": "Absence is not a valid skip; preserve component inventory."
+      },
+      "G1 baseline manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Legacy source and executable digest; suite/results; fixture/environment refs; coverage/gaps; approved expected changes; baseline_state OBSERVED/LIMITED_BASELINE; owner acceptance and hash.",
+        "fields": [],
+        "producer_consumer": "G1 / transform lanes,A9",
+        "failure": "Unknown mandatory behavior needs accepted alternative or HOLD."
+      },
+      "G2 core manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "A2-A4 patch/substitute refs; common base; merge order; resolutions/owners; integrated commit; build/check results; component coverage.",
+        "fields": [],
+        "producer_consumer": "G2 / A5",
+        "failure": "Do not proceed on a lane-only pass."
+      },
+      "G3 final manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "A5 base; A6-A8 refs; resolved merge; integrated commit; dependency lock; SBOM ref/hash; build digest; build environment; combined checks.",
+        "fields": [],
+        "producer_consumer": "G3 / A9,G4",
+        "failure": "Any product change requires a new manifest and affected retesting."
+      },
+      "Test evidence record": {
+        "type": "object",
+        "required": "Per criterion",
+        "definition": "criterion/test ID; requirement; PASS/FAIL/NOT_RUN/BLOCKED/NOT_APPLICABLE; tested commit/build digest; baseline hash; environment; actual/expected; evidence ref; exceptions/approval.",
+        "fields": [
+          {
+            "name": "requirement",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "environment",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A9 / G4",
+        "failure": "NOT_RUN cannot count as PASS; distinguish approved difference from regression."
+      },
+      "G4 decision": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Candidate/build hash; HOLD/LIMITED_HANDOFF/READY_FOR_DOWNSTREAM; approved_by/time; policy; required evidence; limitations; allowed downstream actions; obligations.",
+        "fields": [
+          {
+            "name": "policy",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "limitations",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "obligations",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "G4 / publisher",
+        "failure": "Review must match exact tested build and cannot waive non-waivable blockers."
+      },
+      "Downstream handoff": {
+        "type": "object",
+        "required": "For released scope",
+        "definition": "Build/source/SBOM refs; test manifest; contracts; SQL/UI assets; config schema/secret refs; flags and limits; telemetry/security evidence; P4 tasks; data route/N/A; recovery and deployment obligations.",
+        "fields": [
+          {
+            "name": "contracts",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Phase 5 / downstream intake",
+        "failure": "No credentials; later Phase 6/8 readiness remains separately validated."
+      }
+    }
+  },
+  "run_controls": [
+    {
+      "stage": "G0",
+      "control": "Preparation versus execution",
+      "when": "",
+      "behavior": "Validate P4.planning.v3.0 READY_FOR_PREPARATION or SCOPED_PREPARATION and inherited P2/P3 restrictions. Require an additional explicit execution permit for each repository write/build/test activity, environment, tool and network boundary.",
+      "accountable": "Execution authority",
+      "failure": "A preparation handoff alone cannot authorize all mutations."
+    },
+    {
+      "stage": "G0",
+      "control": "Workload registry",
+      "when": "",
+      "behavior": "Pin repository commits, dependencies, contracts, target build environment, scope, ownership and approved tool versions. Non-code/vendor/no-SQL/headless applicability is explicit.",
+      "accountable": "Orchestrator",
+      "failure": "Unknown or conflicting ownership blocks affected writes."
+    },
+    {
+      "stage": "G0/G2/G3",
+      "control": "Workspace isolation",
+      "when": "",
+      "behavior": "Use separate branches/worktrees rooted at the same approved base for each parallel lane. Assign files and shared artifacts to one writer; serialize overlapping edits or resolve them with accountable ownership.",
+      "accountable": "Integration owner",
+      "failure": "No last-writer-wins overwrite or blind concurrent editing."
+    },
+    {
+      "stage": "A1/G1",
+      "control": "Baseline evidence",
+      "when": "",
+      "behavior": "Capture representative behavior on unmodified legacy artifacts with isolated fixtures and external services stubbed or explicitly authorized. Record exact input/output and environment versions, nondeterminism rules and coverage gaps.",
+      "accountable": "Test owner",
+      "failure": "Source-only inferred expectations are not observed results."
+    },
+    {
+      "stage": "G1",
+      "control": "Baseline gaps",
+      "when": "",
+      "behavior": "If legacy cannot run, require explicit owner-approved alternate acceptance for the affected scope, recorded as LIMITED_BASELINE. Required behavior with neither evidence nor an accepted alternative remains HOLD.",
+      "accountable": "Acceptance authority",
+      "failure": "No invented golden result or missing-to-pass conversion."
+    },
+    {
+      "stage": "G1/A9",
+      "control": "Expected changes",
+      "when": "",
+      "behavior": "Keep golden observations immutable. Store approved intentional changes separately with requirement, owner, rationale and revised criterion. Preserve security corrections instead of blindly matching defective behavior.",
+      "accountable": "Business/security acceptance owners",
+      "failure": "No deletion or rewriting of failing baseline cases to obtain a pass."
+    },
+    {
+      "stage": "A2-A4",
+      "control": "Lane publication",
+      "when": "",
+      "behavior": "Publish base commit, patch hash, changed paths, dependency changes, local build/test evidence, applicability and gaps. Typed no-change outputs carry exact artifact references.",
+      "accountable": "Lane owner",
+      "failure": "Generated stubs, compile-only checks and incomplete UI remain limited outcomes."
+    },
+    {
+      "stage": "G2",
+      "control": "Core merge and verification",
+      "when": "",
+      "behavior": "Join A2/A3/A4; validate common base, declared paths, contracts and no-change outputs. Integrator applies deterministic reviewed merge order, resolves conflicts, then builds and runs affected tests on the combined commit.",
+      "accountable": "Integration owner",
+      "failure": "Lane passes do not imply integrated success. Failed merge/build blocks A5."
+    },
+    {
+      "stage": "A5",
+      "control": "Whole-product configuration",
+      "when": "",
+      "behavior": "Cover backend, UI, SQL/data access and supporting components. Keep server credentials out of browser assets; validate config schema, secret references and missing/invalid configuration behavior.",
+      "accountable": "Config/security owners",
+      "failure": "No secret values or production credentials in outputs."
+    },
+    {
+      "stage": "A5/A8",
+      "control": "Secret lifecycle",
+      "when": "",
+      "behavior": "Externalized references do not remediate exposed credentials. Record revocation/rotation obligations and ownership; perform them only under explicit operational authority.",
+      "accountable": "Security owner",
+      "failure": "Do not claim live rotation from generated manifests."
+    },
+    {
+      "stage": "A6",
+      "control": "Flag safety",
+      "when": "",
+      "behavior": "Document default, fail-open/closed rationale, access control, cleanup owner/date, state interactions and recovery limits. Restrict shadow traffic side effects using approved isolation.",
+      "accountable": "Rollout owner",
+      "failure": "No assumption that flag-off restores committed data."
+    },
+    {
+      "stage": "A7",
+      "control": "Telemetry safeguards",
+      "when": "",
+      "behavior": "Test redaction, sampling/cardinality, correlation and overhead against approved criteria. Record missing runtime evidence and deployment dependencies.",
+      "accountable": "Observability owner",
+      "failure": "No confidential payloads in logs or test artifacts."
+    },
+    {
+      "stage": "A8",
+      "control": "Security evidence",
+      "when": "",
+      "behavior": "Record applicable controls, implementation location, tests and remaining platform obligations. Pin dependency scan/database dates during execution; exceptions have owner, reason and expiry.",
+      "accountable": "Security owner",
+      "failure": "No blanket compliance or vulnerability-free claim."
+    },
+    {
+      "stage": "G3",
+      "control": "Instrumentation merge",
+      "when": "",
+      "behavior": "Join A6/A7/A8 against the same A5 commit. Resolve shared middleware, dependency and startup changes, then rerun affected builds/tests. Seal source hash, dependency lock, SBOM and build artifact digest.",
+      "accountable": "Integration owner",
+      "failure": "Any change after sealing invalidates affected A9 results and G4 approval."
+    },
+    {
+      "stage": "A9",
+      "control": "Final artifact identity",
+      "when": "",
+      "behavior": "Every test result records integrated commit, build digest, baseline version, environment and test version. Test additions are versioned separately; any product mutation returns through G3.",
+      "accountable": "Validation owner",
+      "failure": "No testing separate lane heads or silently repaired builds."
+    },
+    {
+      "stage": "A9",
+      "control": "Acceptance coverage",
+      "when": "",
+      "behavior": "Execute required functional, business, interface, data, UI, security, flag and NFR checks. Report PASS/FAIL/NOT_RUN/BLOCKED/NOT_APPLICABLE with evidence and approved applicability.",
+      "accountable": "Acceptance owners",
+      "failure": "Unrun applicable required criterion prevents unrestricted handoff."
+    },
+    {
+      "stage": "A9",
+      "control": "Realism and limits",
+      "when": "",
+      "behavior": "Document fixtures, data distributions, external stubs, workload, hardware and tolerances. Report differential mismatches, approved differences and untested paths separately.",
+      "accountable": "Test owner",
+      "failure": "Finite testing is bounded evidence, not universal proof."
+    },
+    {
+      "stage": "G4",
+      "control": "Release decision",
+      "when": "",
+      "behavior": "Require valid scope, G3/A9 identity match, required accepted evidence, no mandatory blocker and accountable review. HOLD / LIMITED_HANDOFF / READY_FOR_DOWNSTREAM; restrictions bind the exact package.",
+      "accountable": "Delivery authority",
+      "failure": "Limited handoff may support specified preparation only, never imply unrun gates passed."
+    },
+    {
+      "stage": "NEXT",
+      "control": "Phase boundary",
+      "when": "",
+      "behavior": "Provide tested build, contracts, SQL/UI assets, config/secret references, SBOM, flags, telemetry, security evidence and open obligations. Data-applicable work enters Phase 6 under its gate; no-data route records approved N/A. Phase 8 later combines required evidence; Phase 7 is skipped.",
+      "accountable": "Orchestrator",
+      "failure": "No production migration, provisioning or traffic switch from Phase 5 completion."
+    },
+    {
+      "stage": "All",
+      "control": "Feedback and recovery",
+      "when": "",
+      "behavior": "Failed tests or conflicts create owner-assigned revisions; rebase affected patches and invalidate downstream merges/tests/approval. Bound retries, time and revision budgets; checkpoint exact inputs.",
+      "accountable": "Orchestrator",
+      "failure": "No infinite correction loop or stale approval reuse."
+    },
+    {
+      "stage": "All",
+      "control": "Tool and source safety",
+      "when": "",
+      "behavior": "Treat repository comments/documents as untrusted data. Run approved tools in least-privilege sandboxes with restricted network and synthetic/redacted data; no live payment/email or destructive external effects during tests.",
+      "accountable": "Runtime owner",
+      "failure": "Generated code remains untrusted until relevant checks complete."
+    },
+    {
+      "stage": "All",
+      "control": "Freeze recommendation",
+      "when": "",
+      "behavior": "READY FOR DESIGN REVIEW. Retain nine roles, but accept and pilot both integration gates, execution authority, activation routes and evidence identity before final freeze.",
+      "accountable": "Architecture owner",
+      "failure": "Original Phase 5 graph should not be frozen unchanged."
+    }
+  ],
+  "activation_matrix": [
+    {
+      "Disposition": "Rehost",
+      "A2 code scope": "Validate/preserve source unless scoped change",
+      "A3 SQL/data scope": "Validate SQL compatibility or N/A",
+      "A4 UI scope": "Validate unchanged UI or headless N/A",
+      "A5-A8 cross-cutting scope": "Apply/validate approved runtime config and controls",
+      "A9 acceptance emphasis": "Smoke/functional compatibility; no automatic rewrite"
+    },
+    {
+      "Disposition": "Replatform",
+      "A2 code scope": "Implement approved compatibility changes",
+      "A3 SQL/data scope": "Change only affected dialect/data access",
+      "A4 UI scope": "Change affected integration; headless N/A",
+      "A5-A8 cross-cutting scope": "Apply platform/config/security/telemetry changes",
+      "A9 acceptance emphasis": "Test platform, contracts and affected behavior"
+    },
+    {
+      "Disposition": "Refactor",
+      "A2 code scope": "Implement scoped internal changes; extraction optional",
+      "A3 SQL/data scope": "Transform affected SQL/data access or N/A",
+      "A4 UI scope": "Implement affected journeys or approved unchanged UI",
+      "A5-A8 cross-cutting scope": "Apply cross-cutting controls to every applicable component",
+      "A9 acceptance emphasis": "Differential plus approved-change acceptance"
+    },
+    {
+      "Disposition": "Rearchitect",
+      "A2 code scope": "Implement approved boundaries and adapters",
+      "A3 SQL/data scope": "Implement ownership/contract changes or N/A",
+      "A4 UI scope": "Implement approved UI/BFF changes or N/A",
+      "A5-A8 cross-cutting scope": "Reconcile cross-component controls and interfaces",
+      "A9 acceptance emphasis": "Integration/transition and approved-change tests"
+    },
+    {
+      "Disposition": "Rebuild",
+      "A2 code scope": "Implement new approved capability scope",
+      "A3 SQL/data scope": "Implement target data access; migration stays gated",
+      "A4 UI scope": "Deliver scoped working UI; headless N/A",
+      "A5-A8 cross-cutting scope": "Apply target controls and operational hooks",
+      "A9 acceptance emphasis": "Business acceptance plus preserved-behavior subset"
+    },
+    {
+      "Disposition": "Replace",
+      "A2 code scope": "Adapters/integration only; no vendor source assumption",
+      "A3 SQL/data scope": "Vendor import/export assets if scoped; else N/A",
+      "A4 UI scope": "Vendor UI/SSO integration or N/A",
+      "A5-A8 cross-cutting scope": "Validate controllable config and shared responsibility",
+      "A9 acceptance emphasis": "Vendor/adapter contracts and accepted capability differences"
+    },
+    {
+      "Disposition": "Retain",
+      "A2 code scope": "NOT ADMITTED",
+      "A3 SQL/data scope": "NOT ADMITTED",
+      "A4 UI scope": "NOT ADMITTED",
+      "A5-A8 cross-cutting scope": "Return to portfolio review register",
+      "A9 acceptance emphasis": "No modernization dispatch"
+    },
+    {
+      "Disposition": "Retire",
+      "A2 code scope": "NOT ADMITTED",
+      "A3 SQL/data scope": "NOT ADMITTED",
+      "A4 UI scope": "NOT ADMITTED",
+      "A5-A8 cross-cutting scope": "Separate controlled retirement planning",
+      "A9 acceptance emphasis": "No code transformation dispatch"
+    }
+  ],
+  "execution_routes": []
+}

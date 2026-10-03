@@ -1,0 +1,1395 @@
+{
+  "phase": 3,
+  "name": "Target architecture",
+  "schema_version": "P3.architecture.v3.0",
+  "source_workbook": "TargetArch_Phase3_Agent_Swarm_Tuned.xlsx",
+  "freeze_recommendation": "READY FOR DESIGN REVIEW",
+  "agents": [
+    {
+      "id": "P3.A1",
+      "local_id": "A1",
+      "name": "Target Architecture Agent",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0; after G0",
+      "activities": "Define candidate target stack and component mapping, measurable NFR criteria, transition alternatives and route activation. Evaluate modular monolith and service options against evidence, budget and operability. Record source/version support for technology choices.",
+      "inputs": "Authorized Phase 2 decision and conditions; pinned Phase 1 architecture, requirements, security, data and runtime evidence; approved technology policy.",
+      "outputs": "Foundation blueprint; proposed ADRs; NFR criteria; transition constraints; per-agent activation and substitution manifest.",
+      "origin": "Absorb original Trend & Tech Match A1 into Target Architecture A2",
+      "contract_rule": "Targets are proposed unless owner-approved. Technology trends are context, not a mandate. Changed disposition, cost envelope or wave scope returns through Phase 2 change control.",
+      "merge_tuning": "Targets are proposed unless owner-approved. Technology trends are context, not a mandate. Changed disposition, cost envelope or wave scope returns through Phase 2 change control.",
+      "responsibility": "Define candidate target stack and component mapping, measurable NFR criteria, transition alternatives and route activation. Evaluate modular monolith and service options against evidence, budget and operability. Record source/version support for technology choices."
+    },
+    {
+      "id": "P3.A2",
+      "local_id": "A2",
+      "name": "Monolith Decomposition Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A1"
+      ],
+      "execution_raw": "Tier 1; after A1",
+      "activities": "Assess service or module boundaries, ownership and communication needs. Preserve a modular monolith where justified. For routes without decomposition, validate existing or vendor boundaries and publish a typed substitute.",
+      "inputs": "A1 foundation; source domain/process and coupling evidence; approved Phase 2 constraints.",
+      "outputs": "Boundary and data-ownership map; rationale; transition units; domain events or validated substitute map.",
+      "origin": "Retain original Monolith to Microservice Decomposition A3",
+      "contract_rule": "Refactor does not automatically mean microservices. Rebuild/rearchitecture still require a reasoned boundary choice. Skipping decomposition never removes the required boundary artifact.",
+      "merge_tuning": "Refactor does not automatically mean microservices. Rebuild/rearchitecture still require a reasoned boundary choice. Skipping decomposition never removes the required boundary artifact.",
+      "responsibility": "Assess service or module boundaries, ownership and communication needs. Preserve a modular monolith where justified. For routes without decomposition, validate existing or vendor boundaries and publish a typed substitute."
+    },
+    {
+      "id": "P3.A3",
+      "local_id": "A3",
+      "name": "Schema Alignment & Data Architecture Agent",
+      "tier": 2,
+      "tier_label": "Tier 2",
+      "lane": "normal",
+      "prerequisites": [
+        "A2",
+        "A4"
+      ],
+      "execution_raw": "Tier 2; after A2 + A4",
+      "activities": "Design target schemas and data ownership, migration/backfill, CDC or alternative transfer, reconciliation and cutover criteria. Evaluate dual-write failure modes, ordering, idempotency and recovery instead of assuming it is safe.",
+      "inputs": "A2 boundaries/ownership or substitute; A4 security requirements; A1 targets; source data and approved retention/governance requirements.",
+      "outputs": "Target data contracts; migration/consistency design; retention/classification controls; reconciliation and data recovery criteria.",
+      "origin": "Retain original Schema Alignment & Contracts A6",
+      "contract_rule": "Security and boundary inputs are hard prerequisites. A proposed boundary change creates a revision request to A2, not a same-run feedback cycle. No data migration is executed.",
+      "merge_tuning": "Security and boundary inputs are hard prerequisites. A proposed boundary change creates a revision request to A2, not a same-run feedback cycle. No data migration is executed.",
+      "responsibility": "Design target schemas and data ownership, migration/backfill, CDC or alternative transfer, reconciliation and cutover criteria. Evaluate dual-write failure modes, ordering, idempotency and recovery instead of assuming it is safe."
+    },
+    {
+      "id": "P3.A4",
+      "local_id": "A4",
+      "name": "Security Architecture Agent",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A1"
+      ],
+      "execution_raw": "Tier 1; after A1",
+      "activities": "Model threats and trust boundaries; define identity, authorization, secrets, encryption/key management, network and audit requirements. Map controls to applicable requirements with evidence and validation criteria.",
+      "inputs": "A1 candidate blueprint and route; source security findings and data sensitivity; applicable organization-approved control requirements.",
+      "outputs": "Threat model, security constraint set, responsibility matrix, control mapping and review criteria.",
+      "origin": "Retain original Security Architecture A10",
+      "contract_rule": "No automatic claim of regulatory compliance. Microsegmentation does not require a separate VNet per service; transport security must be implemented and tested beyond API documentation.",
+      "merge_tuning": "No automatic claim of regulatory compliance. Microsegmentation does not require a separate VNet per service; transport security must be implemented and tested beyond API documentation.",
+      "responsibility": "Model threats and trust boundaries; define identity, authorization, secrets, encryption/key management, network and audit requirements. Map controls to applicable requirements with evidence and validation criteria."
+    },
+    {
+      "id": "P3.A5",
+      "local_id": "A5",
+      "name": "UI Architecture Agent",
+      "tier": 2,
+      "tier_label": "Tier 2",
+      "lane": "normal",
+      "prerequisites": [
+        "A2",
+        "A4"
+      ],
+      "execution_raw": "Tier 2; after A2 + A4",
+      "activities": "Select rendering, frontend boundaries, state and BFF design where applicable. Map journeys to services and performance/accessibility criteria. Headless routes publish an approved not-applicable record with no UI/BFF demand.",
+      "inputs": "A2 workload boundaries; A4 identity/security requirements; A1 NFRs; source journeys, accessibility and UI evidence.",
+      "outputs": "UI architecture, service/BFF demand, journey mapping and acceptance criteria, or explicit headless substitution.",
+      "origin": "Retain original User Interface A9 with architecture-only scope",
+      "contract_rule": "UI existence does not require a redesign. Replace routes assess vendor UI/SSO/accessibility fit; no invented ownership of vendor internals.",
+      "merge_tuning": "UI existence does not require a redesign. Replace routes assess vendor UI/SSO/accessibility fit; no invented ownership of vendor internals.",
+      "responsibility": "Select rendering, frontend boundaries, state and BFF design where applicable. Map journeys to services and performance/accessibility criteria. Headless routes publish an approved not-applicable record with no UI/BFF demand."
+    },
+    {
+      "id": "P3.A6",
+      "local_id": "A6",
+      "name": "Interface & Integration Contract Agent",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "A3",
+        "A5",
+        "A4"
+      ],
+      "execution_raw": "Tier 3; after A3 + A5 + A4",
+      "activities": "Define synchronous/asynchronous interfaces, payload ownership, auth, versioning, ordering, retries, idempotency and failure semantics. Design gateway/broker/legacy coexistence topology only where needed; derive platform requirements.",
+      "inputs": "A3 data contracts; A5 UI/BFF demand or N/A; A4 security; transitive A2 boundaries; pinned existing integrations and A1 constraints.",
+      "outputs": "Versioned API/event contract registry; integration topology; delivery/failure semantics; platform demand and compatibility criteria.",
+      "origin": "Merge original API Contract A4 + Event-Driven Architecture A5",
+      "contract_rule": "Exactly-once must state its actual transactional boundary; do not promise end-to-end exactly-once effects. Contract schema validity alone does not prove deployed security or interoperability.",
+      "merge_tuning": "Exactly-once must state its actual transactional boundary; do not promise end-to-end exactly-once effects. Contract schema validity alone does not prove deployed security or interoperability.",
+      "responsibility": "Define synchronous/asynchronous interfaces, payload ownership, auth, versioning, ordering, retries, idempotency and failure semantics. Design gateway/broker/legacy coexistence topology only where needed; derive platform requirements."
+    },
+    {
+      "id": "P3.A7",
+      "local_id": "A7",
+      "name": "Cloud Platform & Capacity Agent",
+      "tier": 4,
+      "tier_label": "Tier 4",
+      "lane": "normal",
+      "prerequisites": [
+        "A6",
+        "A4"
+      ],
+      "execution_raw": "Tier 4; after A6 + A4",
+      "activities": "Design hosting, networking, data/messaging capacity, availability and observability. Reconcile demand and budget, record operating ownership and recovery assumptions. For SaaS, assess shared responsibility, connectivity, limits and telemetry rather than vendor infrastructure internals.",
+      "inputs": "A6 platform demand and topology; A4 security constraints; transitive data/UI/boundary design; A1 NFRs; measured demand or labelled benchmark assumptions; Phase 2 cost envelope.",
+      "outputs": "Platform blueprint; capacity model; infrastructure BOM; SLI/SLO and alerting design; cost comparison; test and ownership requirements.",
+      "origin": "Merge original Cloud Infra A7 + Rightsizing A8",
+      "contract_rule": "Missing utilization yields provisional estimates with validation needs. Unsupported vendor capabilities remain gaps. BOM/IaC-ready design is not provisioning or verified capacity.",
+      "merge_tuning": "Missing utilization yields provisional estimates with validation needs. Unsupported vendor capabilities remain gaps. BOM/IaC-ready design is not provisioning or verified capacity.",
+      "responsibility": "Design hosting, networking, data/messaging capacity, availability and observability. Reconcile demand and budget, record operating ownership and recovery assumptions. For SaaS, assess shared responsibility, connectivity, limits and telemetry rather than vendor infrastructure internals."
+    },
+    {
+      "id": "P3.A8",
+      "local_id": "A8",
+      "name": "Architecture Consolidator Agent",
+      "tier": 5,
+      "tier_label": "Tier 5",
+      "lane": "normal",
+      "prerequisites": [
+        "G1"
+      ],
+      "execution_raw": "Tier 5; after G1",
+      "activities": "Check boundary/data/interface/security/platform consistency and requirement traceability. Record conflicts and accountable revision owners. Assemble ADRs, contract registry, BOM, transition/recovery design and Phase 4 acceptance obligations.",
+      "inputs": "G1 exact A1-A7 manifest, typed substitutions, Phase 2 authority and conditions; architecture review criteria.",
+      "outputs": "Candidate target architecture package; consistency report; unresolved risks; ADR register and versioned Phase 4 planning handoff.",
+      "origin": "Retain v2 architecture consolidation role",
+      "contract_rule": "A8 cannot rewrite upstream artifacts or self-approve. “No unresolved checked conflicts” is bounded by coverage, not a universal contradiction-free guarantee.",
+      "merge_tuning": "A8 cannot rewrite upstream artifacts or self-approve. “No unresolved checked conflicts” is bounded by coverage, not a universal contradiction-free guarantee.",
+      "responsibility": "Check boundary/data/interface/security/platform consistency and requirement traceability. Record conflicts and accountable revision owners. Assemble ADRs, contract registry, BOM, transition/recovery design and Phase 4 acceptance obligations."
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "kind": "intake",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G0 exact outcome / manifest",
+      "blocking_rule": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "id": "G1",
+      "kind": "snapshot",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G1 exact outcome / manifest",
+      "blocking_rule": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "id": "G2",
+      "kind": "release",
+      "node_type": "gate",
+      "entry": "HARD",
+      "output": "G2 exact outcome / manifest",
+      "blocking_rule": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "External"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "Intake",
+      "nodes": [
+        "G0"
+      ],
+      "prerequisites": "Authorized P2 design package",
+      "activity": "Validate version, scope, route and Phase 1 references.",
+      "blocking": "Unauthorized, stale, held or non-design route.",
+      "meaning": "Gate"
+    },
+    {
+      "stage": "Tier 0",
+      "nodes": [
+        "A1"
+      ],
+      "prerequisites": "G0",
+      "activity": "Target foundation, NFR criteria and activation manifest.",
+      "blocking": "Required intake evidence absent.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Tier 1",
+      "nodes": [
+        "A2",
+        "A4"
+      ],
+      "prerequisites": "A1",
+      "activity": "Boundaries and security constraints independently from the foundation.",
+      "blocking": "Missing valid boundary/security outcome.",
+      "meaning": "2 agents"
+    },
+    {
+      "stage": "Tier 2",
+      "nodes": [
+        "A3",
+        "A5"
+      ],
+      "prerequisites": "A2 + A4",
+      "activity": "Data design and UI design/validation or headless N/A.",
+      "blocking": "Absent or invalid substitution.",
+      "meaning": "2 agents"
+    },
+    {
+      "stage": "Tier 3",
+      "nodes": [
+        "A6"
+      ],
+      "prerequisites": "A3 + A5 + A4",
+      "activity": "Reconcile data, UI and security into interface and platform demand.",
+      "blocking": "Incomplete or inconsistent required inputs.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Tier 4",
+      "nodes": [
+        "A7"
+      ],
+      "prerequisites": "A6 + A4",
+      "activity": "Platform, capacity, cost and observability design.",
+      "blocking": "Unresolved capacity/cost constraints remain explicit.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Snapshot",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "A7; transitively A1-A7",
+      "activity": "Seal exact versions and accepted applicability records.",
+      "blocking": "Any required missing, failed or mismatched record.",
+      "meaning": "Gate"
+    },
+    {
+      "stage": "Tier 5",
+      "nodes": [
+        "A8"
+      ],
+      "prerequisites": "G1",
+      "activity": "Cross-domain validation, candidate architecture and handoff.",
+      "blocking": "Mandatory unresolved conflicts prevent release.",
+      "meaning": "1 agent"
+    },
+    {
+      "stage": "Review",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "A8",
+      "activity": "Authorized review and planning-scope release.",
+      "blocking": "Missing required acceptance or non-waivable blocker.",
+      "meaning": "Gate"
+    },
+    {
+      "stage": "External",
+      "nodes": [
+        "P4"
+      ],
+      "prerequisites": "G2",
+      "activity": "Validate planning handoff and conditions.",
+      "blocking": "HOLD cannot enter planning.",
+      "meaning": "Outside Phase 3"
+    },
+    {
+      "stage": "From",
+      "nodes": [
+        "To"
+      ],
+      "prerequisites": "Type",
+      "activity": "Required artifact",
+      "blocking": "Failure behavior",
+      "meaning": "Scope"
+    },
+    {
+      "stage": "G0",
+      "nodes": [
+        "A1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G0 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A1",
+      "nodes": [
+        "A2"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A1 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A2",
+      "nodes": [
+        "A3"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A2 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "A3"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A4 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A1",
+      "nodes": [
+        "A4"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A1 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A2",
+      "nodes": [
+        "A5"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A2 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "A5"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A4 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A3",
+      "nodes": [
+        "A6"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A3 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A5",
+      "nodes": [
+        "A6"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A5 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "A6"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A4 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A6",
+      "nodes": [
+        "A7"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A6 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A4",
+      "nodes": [
+        "A7"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A4 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "G1",
+      "nodes": [
+        "A8"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G1 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A7",
+      "nodes": [
+        "G1"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A7 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "A8",
+      "nodes": [
+        "G2"
+      ],
+      "prerequisites": "HARD",
+      "activity": "A8 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "Phase 3"
+    },
+    {
+      "stage": "G2",
+      "nodes": [
+        "P4"
+      ],
+      "prerequisites": "HARD",
+      "activity": "G2 exact outcome / manifest",
+      "blocking": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "meaning": "External"
+    }
+  ],
+  "hard_edges": [
+    {
+      "from": "G0",
+      "to": "A1",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A2",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A2",
+      "to": "A3",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A3",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A4",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A2",
+      "to": "A5",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A5",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A6",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G1",
+      "to": "A8",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A7",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "A8",
+      "to": "G2",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": false
+    },
+    {
+      "from": "G2",
+      "to": "P4",
+      "from_kind": "gate",
+      "to_kind": "external",
+      "type": "HARD",
+      "required_artifact": "",
+      "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+      "external": true
+    }
+  ],
+  "cross_feeds": [
+    {
+      "id": "CF-01 normalized",
+      "sources": "A4 security",
+      "consumer": "A6 integration",
+      "purpose": "",
+      "protocol": "Consume exact security requirements alongside data and UI inputs. Implementation bindings and test criteria accompany contract specifications.",
+      "consequence": ""
+    },
+    {
+      "id": "CF-02 normalized",
+      "sources": "A4 security",
+      "consumer": "A7 platform",
+      "purpose": "",
+      "protocol": "Consume exact segmentation, identity, key-management and audit requirements. Validate detailed design against them.",
+      "consequence": ""
+    },
+    {
+      "id": "CF-03 normalized",
+      "sources": "A2 boundaries",
+      "consumer": "A3 data",
+      "purpose": "",
+      "protocol": "A3 consumes ownership/boundary map. If it proposes a better boundary, record impact, obtain owner decision, revise A2 and invalidate affected descendants.",
+      "consequence": ""
+    },
+    {
+      "id": "Added data/UI constraints",
+      "sources": "A3 + A5",
+      "consumer": "A6 integration",
+      "purpose": "",
+      "protocol": "Data contracts and UI/BFF demands or typed N/A must exist before final interface design.",
+      "consequence": ""
+    },
+    {
+      "id": "Added platform demand",
+      "sources": "A6 integration",
+      "consumer": "A7 platform",
+      "purpose": "",
+      "protocol": "Size and design topology against finalized interface/workload demand. Early sizing remains provisional.",
+      "consequence": ""
+    },
+    {
+      "id": "Replanning",
+      "sources": "Any design owner",
+      "consumer": "Phase 2 change authority",
+      "purpose": "",
+      "protocol": "Changed disposition, material cost/wave or authorization scope is proposed with impact evidence. Re-approve Phase 2 and affected Phase 3 outputs.",
+      "consequence": ""
+    }
+  ],
+  "artifact_contracts": {
+    "envelope_fields": [],
+    "agent_payloads": {
+      "A1": {
+        "fields": [
+          {
+            "name": "blueprint_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "component_map",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "technology_evidence",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "nfr_criteria",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "transition_constraints",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "activation_manifest",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "proposed_adrs",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "blueprint_ref; component_map[]; technology_evidence[]; nfr_criteria[]; transition_constraints[]; activation_manifest[]; proposed_adrs[]",
+        "producer_consumer": "Target Architecture Agent",
+        "rule": "Targets are proposed unless owner-approved. Technology trends are context, not a mandate. Changed disposition, cost envelope or wave scope returns through Phase 2 change control."
+      },
+      "A2": {
+        "fields": [
+          {
+            "name": "boundaries",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "ownership",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "communication_needs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "transition_units",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "rationale",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "boundaries[]; ownership[]; communication_needs[]; transition_units[]; substitution_ref|null; rationale[]",
+        "producer_consumer": "Monolith Decomposition Agent",
+        "rule": "Refactor does not automatically mean microservices. Rebuild/rearchitecture still require a reasoned boundary choice. Skipping decomposition never removes the required boundary artifact."
+      },
+      "A3": {
+        "fields": [
+          {
+            "name": "schemas",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "data_contracts",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "migration_design",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "reconciliation_criteria",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "retention_controls",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "recovery_limits",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "schemas[]; data_contracts[]; migration_design; reconciliation_criteria[]; retention_controls[]; recovery_limits[]",
+        "producer_consumer": "Schema Alignment & Data Architecture Agent",
+        "rule": "Security and boundary inputs are hard prerequisites. A proposed boundary change creates a revision request to A2, not a same-run feedback cycle. No data migration is executed."
+      },
+      "A4": {
+        "fields": [
+          {
+            "name": "threats",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "trust_boundaries",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "security_constraints",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "control_mapping",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "responsibility_matrix",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "validation_criteria",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "threats[]; trust_boundaries[]; security_constraints[]; control_mapping[]; responsibility_matrix[]; validation_criteria[]",
+        "producer_consumer": "Security Architecture Agent",
+        "rule": "No automatic claim of regulatory compliance. Microsegmentation does not require a separate VNet per service; transport security must be implemented and tested beyond API documentation."
+      },
+      "A5": {
+        "fields": [
+          {
+            "name": "ui_applicability",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "patterns",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "service_demands",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "journey_mapping",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "acceptance_criteria",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "ui_applicability; patterns[]; service_demands[]; journey_mapping[]; acceptance_criteria[]; skip_record|null",
+        "producer_consumer": "UI Architecture Agent",
+        "rule": "UI existence does not require a redesign. Replace routes assess vendor UI/SSO/accessibility fit; no invented ownership of vendor internals."
+      },
+      "A6": {
+        "fields": [
+          {
+            "name": "contract_registry",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "integration_topology",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "delivery_semantics",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "compatibility_criteria",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "platform_demands",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "contract_registry[]; integration_topology; delivery_semantics[]; compatibility_criteria[]; platform_demands[]",
+        "producer_consumer": "Interface & Integration Contract Agent",
+        "rule": "Exactly-once must state its actual transactional boundary; do not promise end-to-end exactly-once effects. Contract schema validity alone does not prove deployed security or interoperability."
+      },
+      "A7": {
+        "fields": [
+          {
+            "name": "platform_blueprint",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "capacity_model",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "bom",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "observability_design",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "cost_comparison",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "ownership",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "verification_requirements",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "platform_blueprint; capacity_model; bom[]; observability_design; cost_comparison; ownership[]; verification_requirements[]",
+        "producer_consumer": "Cloud Platform & Capacity Agent",
+        "rule": "Missing utilization yields provisional estimates with validation needs. Unsupported vendor capabilities remain gaps. BOM/IaC-ready design is not provisioning or verified capacity."
+      },
+      "A8": {
+        "fields": [
+          {
+            "name": "architecture_package",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "consistency_report",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "adr_register",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "traceability",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "unresolved_items",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "phase4_handoff",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "architecture_package; consistency_report; adr_register[]; traceability[]; unresolved_items[]; phase4_handoff",
+        "producer_consumer": "Architecture Consolidator Agent",
+        "rule": "A8 cannot rewrite upstream artifacts or self-approve. “No unresolved checked conflicts” is bounded by coverage, not a universal contradiction-free guarantee."
+      }
+    },
+    "named_objects": {
+      "Identity and version": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "schema_version=P3.architecture.v3.0; artifact_id/version; phase_id=3; run_id; portfolio/app/cohort IDs; producer; content_hash.",
+        "fields": [
+          {
+            "name": "run_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "producer",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "content_hash",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "All / validators",
+        "failure": "Reject incompatible versions, duplicate IDs and altered hashes."
+      },
+      "Input and authorization manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Exact upstream refs/hashes, Phase 2 authorization/conditions, policy version and applicability mode.",
+        "fields": [],
+        "producer_consumer": "All / descendants",
+        "failure": "No cross-app or mixed-revision substitution."
+      },
+      "Status and evidence": {
+        "type": "object + arrays",
+        "required": "Yes",
+        "definition": "COMPLETE/PARTIAL/NOT_ASSESSED/SKIPPED_APPROVED/FAILED; source refs with dates, method, evidence class, limitations and missing coverage.",
+        "fields": [],
+        "producer_consumer": "All / G1,A8,G2",
+        "failure": "Missing facts cannot become measured targets or approved decisions."
+      },
+      "Execution and audit": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Tool/model/prompt versions, attempt/checkpoint, timestamps, validator outcomes and access classification; no secrets.",
+        "fields": [],
+        "producer_consumer": "Runtime / audit",
+        "failure": "Unattributed outputs cannot authorize handoff."
+      },
+      "NFR / acceptance criterion": {
+        "type": "object",
+        "required": "Yes per requirement",
+        "definition": "requirement_id; owner; metric/unit; target nullable with approval state; workload/window/percentile; test method; threshold source; component refs; validation stage.",
+        "fields": [
+          {
+            "name": "requirement_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "owner",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A1 / all,A8,P4",
+        "failure": "UNSET required targets restrict release; no fabricated defaults."
+      },
+      "Activation / substitute record": {
+        "type": "object",
+        "required": "Yes per agent/app",
+        "definition": "mode; disposition; applicability evidence; scope; approved_by/policy; status; substitute_ref; required consumer fields; limitations.",
+        "fields": [
+          {
+            "name": "mode",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "disposition",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "scope",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "substitute_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "limitations",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A1 plus producer / G1",
+        "failure": "Skipped work still publishes a validated contract record."
+      },
+      "G1 architecture manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Exact A1-A7 refs; coverage; dependency-ref consistency; substitutions; inherited conditions; manifest_hash.",
+        "fields": [
+          {
+            "name": "coverage",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "substitutions",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "manifest_hash",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "G1 / A8",
+        "failure": "Validate every required record, not only A7 completion."
+      },
+      "G2 review record": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "candidate_hash; scope; READY_FOR_PLANNING/CONDITIONAL_PLANNING/HOLD; reviewer identity/time; accepted ADRs; required approvals; conditions and restrictions.",
+        "fields": [
+          {
+            "name": "candidate_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "scope",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "G2 / publisher",
+        "failure": "Approval cannot precede required evidence or upgrade Phase 2 scope."
+      },
+      "Phase 4 handoff": {
+        "type": "object",
+        "required": "For release",
+        "definition": "Authorized IDs; P2 refs; architecture/ADR refs; dependency units and coupled groups; contract registry; BOM; capacity/cost evidence; acceptance matrix; transition and data recovery constraints; risks; conditions; schema version/hash.",
+        "fields": [
+          {
+            "name": "risks",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "conditions",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Phase 3 / Phase 4",
+        "failure": "Consumer validates route/version; no implicit execution authorization."
+      },
+      "Change request": {
+        "type": "object",
+        "required": "When revision needed",
+        "definition": "Originating artifact; issue; owner; proposed change; affected descendants; Phase 2 impact; approval and replacement versions.",
+        "fields": [
+          {
+            "name": "issue",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "owner",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Producer/A8 / change authority",
+        "failure": "Invalidate affected approvals; preserve history."
+      }
+    }
+  },
+  "run_controls": [
+    {
+      "stage": "G0",
+      "control": "Upstream authorization",
+      "when": "",
+      "behavior": "Accept only P2.portfolio.v3.0 AUTHORIZED app/cohort design routes, bound to candidate hash and approved conditions. DRAFT_ONLY, HOLD, Retain and Retire do not start this approved-design workflow.",
+      "accountable": "Orchestrator",
+      "failure": "No scope promotion."
+    },
+    {
+      "stage": "G0",
+      "control": "Pinned evidence",
+      "when": "",
+      "behavior": "Verify Phase 1 refs, Phase 2 manifest, app/cohort IDs, dependencies, condition scope and supported schema versions. Mixed revisions or unresolved hashes block intake.",
+      "accountable": "Artifact validator",
+      "failure": "Keep external dependencies explicit."
+    },
+    {
+      "stage": "A1",
+      "control": "NFR contract",
+      "when": "",
+      "behavior": "Each requirement has ID, owner, metric/unit, target or UNSET, workload/percentile/window, rationale, acceptance method and approval state. Include functional journeys and approved behavior changes as well as NFRs.",
+      "accountable": "Requirement owner",
+      "failure": "No invented SLA, RPO/RTO or business approval."
+    },
+    {
+      "stage": "A1",
+      "control": "Technology selection",
+      "when": "",
+      "behavior": "Use dated authoritative product documentation and approved organizational standards at execution time. Record support horizon, licensing, operability and constraints; shortlist unavailable evidence explicitly.",
+      "accountable": "Architecture owner",
+      "failure": "This blueprint selects no specific current vendor/version."
+    },
+    {
+      "stage": "All",
+      "control": "Activation and substitution",
+      "when": "",
+      "behavior": "A1 publishes per-app mode DESIGN/VALIDATE_EXISTING/VALIDATE_VENDOR/SKIP_APPROVED, justification and required artifact. A2 always supplies a boundary map. Headless A5 supplies typed N/A. Other omissions need approved applicability and substitute data sufficient for every consumer.",
+      "accountable": "Orchestrator",
+      "failure": "No absent producer mistaken for completion."
+    },
+    {
+      "stage": "A2",
+      "control": "Boundary choices",
+      "when": "",
+      "behavior": "Use domain cohesion, coupling, data ownership, team capacity and operational cost. Modular monolith is an allowed choice. Waves constrain transition planning, not artificial service boundaries.",
+      "accountable": "Architecture owner",
+      "failure": "Infeasible waves trigger Phase 2 revision."
+    },
+    {
+      "stage": "A3",
+      "control": "Data consistency",
+      "when": "",
+      "behavior": "Specify system of record, transaction boundaries, replay/idempotency, lag tolerance, conflict handling, reconciliation and recovery. Justify CDC/dual-write; define divergence handling and point beyond which rollback requires reconciliation.",
+      "accountable": "Data owner",
+      "failure": "No generic dual-write or rollback guarantee."
+    },
+    {
+      "stage": "A4",
+      "control": "Security review",
+      "when": "",
+      "behavior": "Treat applicable control requirements as configured inputs. Threat-model initial trust boundaries; after detailed design A8 checks coverage against A4 criteria and routes uncovered threats back for security-owner revision.",
+      "accountable": "Security owner",
+      "failure": "New trust boundary cannot pass on an outdated threat model."
+    },
+    {
+      "stage": "A6",
+      "control": "Interface semantics",
+      "when": "",
+      "behavior": "Validate schema syntax and references with approved parsers; check payload/data ownership, authorization, version compatibility, error semantics, delivery scope and consumer assumptions.",
+      "accountable": "Integration owner",
+      "failure": "Schema validity is not end-to-end runtime proof."
+    },
+    {
+      "stage": "A7",
+      "control": "Capacity and cost",
+      "when": "",
+      "behavior": "Record load profile, peak/concurrency assumptions, redundancy, storage growth, quotas, sizing evidence, price date and currency. Compare same-scope costs with Phase 2; escalate material deltas under configured tolerances.",
+      "accountable": "Platform and cost owners",
+      "failure": "Missing benchmarks stay provisional."
+    },
+    {
+      "stage": "G1",
+      "control": "Snapshot consistency",
+      "when": "",
+      "behavior": "Require A1-A7 output records transitively reached through A7, exact versions and complete app/component coverage. Validate all hard dependency refs and skip/substitute contracts.",
+      "accountable": "Deterministic validator",
+      "failure": "FAILED, absent or mismatched outcomes block sealing."
+    },
+    {
+      "stage": "A8",
+      "control": "Consistency coverage",
+      "when": "",
+      "behavior": "Check component-to-requirement traceability; boundary/data ownership; schemas/interfaces; auth/network; traffic/data recovery; demand/capacity; BOM/cost; conditions/waves. Publish checks performed and unresolved exceptions.",
+      "accountable": "Architecture reviewer",
+      "failure": "Do not label package universally contradiction-free."
+    },
+    {
+      "stage": "All",
+      "control": "Revision ownership",
+      "when": "",
+      "behavior": "Change requests name originating artifact, affected contracts, owner, rationale and impacted consumers. Accepted change creates new revision, invalidates affected descendants and approvals, and repeats checks.",
+      "accountable": "Change owner",
+      "failure": "No same-run backward edge or arbitrary single-pass resolution claim."
+    },
+    {
+      "stage": "All",
+      "control": "Bounded resolution",
+      "when": "",
+      "behavior": "Configure attempt, token/time and revision limits. Escalate unresolved cross-domain conflicts; A8 may recommend resolution but each producer owns its artifact.",
+      "accountable": "Orchestrator",
+      "failure": "Do not silently resolve conflicts by dropping requirements."
+    },
+    {
+      "stage": "G2",
+      "control": "Planning release",
+      "when": "",
+      "behavior": "Require intake authorization, valid manifest, required approved criteria, accepted ADRs, resolved mandatory conflicts and authorized architecture/security/data/platform review as applicable. Release READY_FOR_PLANNING or scoped CONDITIONAL_PLANNING; otherwise HOLD.",
+      "accountable": "Architecture authority",
+      "failure": "No provisioning, code change, migration or cutover authorization."
+    },
+    {
+      "stage": "G2",
+      "control": "Conditional scope",
+      "when": "",
+      "behavior": "Each condition has owner, due date, acceptance test and allowed planning actions. Non-waivable blockers stay HOLD. Approval binds package hash, app/cohort scope and exact conditions.",
+      "accountable": "Architecture authority",
+      "failure": "Unmet condition never implies unrestricted readiness."
+    },
+    {
+      "stage": "P4",
+      "control": "Handoff obligations",
+      "when": "",
+      "behavior": "Include IDs/decision refs, component order or coupled groups, ADRs, contract registry, BOM, capacity evidence, requirement acceptance matrix, transition/data recovery constraints, risks and planning conditions. Phase 4 validates compatibility.",
+      "accountable": "Planning owner",
+      "failure": "Detailed runbooks, implementation and measured validation remain downstream."
+    },
+    {
+      "stage": "All",
+      "control": "Evidence and states",
+      "when": "",
+      "behavior": "Preserve OBSERVED/DOCUMENTED/HUMAN_CONFIRMED/INFERRED/HYPOTHETICAL/UNKNOWN and COMPLETE/PARTIAL/NOT_ASSESSED/SKIPPED_APPROVED/FAILED. Partial evidence limits relevant decisions.",
+      "accountable": "Validator",
+      "failure": "Never transform assumptions into measured facts."
+    },
+    {
+      "stage": "All",
+      "control": "Security and recovery",
+      "when": "",
+      "behavior": "Treat source documents as untrusted data; use scoped read-only tools and sandbox validation. Pin model/tool/prompt versions; audit without secrets. Retry transient faults idempotently by run/agent/app/input/policy version.",
+      "accountable": "Runtime owner",
+      "failure": "No repository instructions override authorized task scope."
+    },
+    {
+      "stage": "All",
+      "control": "Freeze recommendation",
+      "when": "",
+      "behavior": "READY FOR DESIGN REVIEW. Freeze after architecture-owner acceptance of topology, activation/substitution, contracts and review policy; validate runtime with route-specific pilots.",
+      "accountable": "Architecture owner",
+      "failure": "Static checks do not demonstrate executed correctness or speed."
+    }
+  ],
+  "activation_matrix": [
+    {
+      "Disposition": "Rehost",
+      "A2 boundary scope": "Validate existing boundaries",
+      "A3 data scope": "Validate existing schemas; assess transfer and recovery",
+      "A5 UI scope": "Validate existing UI or headless N/A",
+      "A6 interface scope": "Validate existing interfaces; adapt endpoints/auth if required",
+      "A7 platform scope": "Hosting, network, DR, telemetry and capacity design"
+    },
+    {
+      "Disposition": "Replatform",
+      "A2 boundary scope": "Preserve boundaries unless approved change",
+      "A3 data scope": "Platform compatibility and migration design",
+      "A5 UI scope": "Validate compatibility or headless N/A",
+      "A6 interface scope": "Compatibility, endpoint and managed-service contract changes",
+      "A7 platform scope": "Platform service and workload capacity design"
+    },
+    {
+      "Disposition": "Refactor",
+      "A2 boundary scope": "Assess module/service changes; extraction optional",
+      "A3 data scope": "Design only affected data contracts and migration",
+      "A5 UI scope": "Design affected UI/BFF or validate unchanged UI; headless N/A",
+      "A6 interface scope": "Affected API/event contracts and compatibility",
+      "A7 platform scope": "Affected resource and observability design"
+    },
+    {
+      "Disposition": "Rearchitect",
+      "A2 boundary scope": "Assess target boundaries; justify decomposition",
+      "A3 data scope": "Target ownership/schema and transition design",
+      "A5 UI scope": "Target UI/BFF where affected; headless N/A",
+      "A6 interface scope": "Target contracts and coexistence design",
+      "A7 platform scope": "Target hosting and capacity design"
+    },
+    {
+      "Disposition": "Rebuild",
+      "A2 boundary scope": "Choose new implementation boundaries",
+      "A3 data scope": "Target data plus source-to-target migration design",
+      "A5 UI scope": "New UI only if in approved scope; headless N/A",
+      "A6 interface scope": "Replacement contracts and legacy transition",
+      "A7 platform scope": "Target hosting and capacity design"
+    },
+    {
+      "Disposition": "Replace",
+      "A2 boundary scope": "Validate vendor/system boundary map",
+      "A3 data scope": "Vendor import/export, retention and ownership design",
+      "A5 UI scope": "Vendor UI/SSO/accessibility fit or headless N/A",
+      "A6 interface scope": "Vendor integrations, limits, versioning and exit design",
+      "A7 platform scope": "Shared responsibility, connectivity, limits and telemetry"
+    },
+    {
+      "Disposition": "Retain",
+      "A2 boundary scope": "NOT ADMITTED",
+      "A3 data scope": "NOT ADMITTED",
+      "A5 UI scope": "NOT ADMITTED",
+      "A6 interface scope": "NOT ADMITTED",
+      "A7 platform scope": "Return to Phase 2 review register"
+    },
+    {
+      "Disposition": "Retire",
+      "A2 boundary scope": "NOT ADMITTED",
+      "A3 data scope": "NOT ADMITTED",
+      "A5 UI scope": "NOT ADMITTED",
+      "A6 interface scope": "NOT ADMITTED",
+      "A7 platform scope": "Controlled retirement planning route outside Phase 3"
+    }
+  ],
+  "execution_routes": []
+}

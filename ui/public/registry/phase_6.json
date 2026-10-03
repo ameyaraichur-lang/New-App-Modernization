@@ -1,0 +1,1988 @@
+{
+  "phase": 6,
+  "name": "Data modernization",
+  "schema_version": "P6.data.v3.0",
+  "source_workbook": "DataMod_Phase6_Agent_Swarm_Tuned.xlsx",
+  "freeze_recommendation": "READY FOR DESIGN REVIEW",
+  "agents": [
+    {
+      "id": "P6.A1",
+      "local_id": "A1",
+      "name": "Data Migration Orchestrator",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0; after G0",
+      "activities": "Plan batch/CDC/hybrid routes per object, dependency-aware waves, freeze and reconciliation windows, downtime criteria and recovery options. Reconcile feasibility with the approved A5 scope at G1.",
+      "inputs": "P3 approved data architecture; P4 waves, windows, recovery and tasks; P5 tested build/data obligations; source estate and volume evidence.",
+      "outputs": "Migration plan, wave schedule, checkpoint criteria, recovery proposal and constraint register.",
+      "origin": "Retain original A1; planning only",
+      "contract_rule": "A1 plans and coordinates. X1 executes only permitted jobs; an accountable operator authorizes recovery. No autonomous cutover or offset reset.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A2",
+      "local_id": "A2",
+      "name": "Data Mapping & Semantic Alignment",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0; after G0",
+      "activities": "Map business meanings before structural conversions. Specify casts, units, time zones, nulls, precision, joins/splits and intentional target changes. Record ambiguous/unmapped objects for owner resolution.",
+      "inputs": "Source/target schema versions, dictionaries and business definitions; P3 target contracts; P1 estate references; approved sample access.",
+      "outputs": "Versioned mapping, transformation registry, coverage and unresolved semantic exceptions.",
+      "origin": "Merge original A2 mapping + A3 semantics",
+      "contract_rule": "Required unresolved mappings block G1. Confidence is not owner acceptance; sampled observations cannot establish all values are convertible.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A3",
+      "local_id": "A3",
+      "name": "Sensitive Data & Compliance",
+      "tier": 0,
+      "tier_label": "Tier 0",
+      "lane": "normal",
+      "prerequisites": [
+        "G0"
+      ],
+      "execution_raw": "Tier 0; after G0",
+      "activities": "Classify sensitive fields and propose permitted handling by environment. Specify masking/tokenization, encryption/access requirements and protected evidence. Identify uncertain classifications for review.",
+      "inputs": "Approved classification, residency, retention and access policies with owner/source references; schema/profile evidence and P3 security design.",
+      "outputs": "Sensitive-data inventory, handling rules, policy traceability and unresolved controls.",
+      "origin": "Retain original A8; early control design",
+      "contract_rule": "Use approved organizational policies; do not invent legal requirements or certify compliance. G0 already restricts profiling access; A3 cannot retroactively authorize exposure.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A4",
+      "local_id": "A4",
+      "name": "Data Quality Preparation",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A2",
+        "A3"
+      ],
+      "execution_raw": "Tier 1; after A2 + A3",
+      "activities": "Author and test normalization, null, deduplication and reference-code rules on authorized samples/staging. Define deterministic tie-breakers, rejects and lineage. Preserve source records.",
+      "inputs": "A2 mapping and A3 handling; approved profiling samples, business rules and reference datasets.",
+      "outputs": "Quality-rule registry, reference mappings, staged test evidence and expected transformation effects.",
+      "origin": "Merge original A4 cleansing + A5 reference data",
+      "contract_rule": "Rule generation is not a cleansed production baseline. No source mutation; unresolved business rules or unsafe handling block execution.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A5",
+      "local_id": "A5",
+      "name": "Data Disposition",
+      "tier": 1,
+      "tier_label": "Tier 1",
+      "lane": "normal",
+      "prerequisites": [
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "execution_raw": "Tier 1; after A1 + A2 + A3",
+      "activities": "Propose Migrate/Archive/Purge/Retain-in-place for each object/partition. Assess referential closure, external dependencies and access to retained history. Obtain owner decisions; legal holds override purge proposals.",
+      "inputs": "A1 plan, A2 object relationships and A3 retention/handling; legal-hold and business-owner evidence.",
+      "outputs": "Versioned disposition manifest, migration inclusion/exclusion reasons, hold evidence and disposition obligations.",
+      "origin": "New role retained from supplied v2",
+      "contract_rule": "G1 accepts signed scope; archive/purge are proposals only in this phase. Never exclude unresolved required references silently. No automatic deletion.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A6",
+      "local_id": "A6",
+      "name": "ETL/ELT Pipeline Synthesis",
+      "tier": 2,
+      "tier_label": "Tier 2",
+      "lane": "normal",
+      "prerequisites": [
+        "A1",
+        "A3",
+        "A4",
+        "A5"
+      ],
+      "execution_raw": "Tier 2; after A1 + A3 + A4 + A5",
+      "activities": "Generate pinned batch/initial-load jobs and tests. Embed the same mapping, quality, handling and disposition versions used by CDC. Define idempotent writes, rejects, resumability and per-partition ownership.",
+      "inputs": "A1 route/window plan; A2 mapping through A4; A3 handling; A4 quality rules; A5 approved candidate scope; P5 SQL assets.",
+      "outputs": "Batch artifacts and config, test results, dependency lock and execution manifest; typed N/A if route excludes batch.",
+      "origin": "Retain original A6",
+      "contract_rule": "Synthesis does not move data. X1 is the sole execution boundary after G1. Initial-load ownership must not overlap uncontrolled CDC snapshot writers.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A7",
+      "local_id": "A7",
+      "name": "Streaming & CDC Migration",
+      "tier": 2,
+      "tier_label": "Tier 2",
+      "lane": "normal",
+      "prerequisites": [
+        "A1",
+        "A3",
+        "A4",
+        "A5"
+      ],
+      "execution_raw": "Tier 2; after A1 + A3 + A4 + A5",
+      "activities": "Generate CDC config and tests for initial snapshot ownership, log start position, ordering, transactions, deletes, duplicates, schema evolution, replay and gap detection. Define watermark/lag criteria and batch-to-tail handoff.",
+      "inputs": "Same plan, mapping, quality, handling and scope versions as A6; connector/source capabilities and approved P3 event contracts.",
+      "outputs": "CDC artifacts, event contracts, checkpoint/replay policy and connector capability evidence; typed N/A for batch-only route.",
+      "origin": "Retain original A7; generation separated from execution",
+      "contract_rule": "No live replication during synthesis. Unsupported semantics, expired log retention or unexplained gaps block readiness; exactly-once is not assumed.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A8",
+      "local_id": "A8",
+      "name": "Schema Parity",
+      "tier": 2,
+      "tier_label": "Tier 2",
+      "lane": "normal",
+      "prerequisites": [
+        "A2",
+        "A5"
+      ],
+      "execution_raw": "Tier 2; after A2 + A5",
+      "activities": "Compare actual target types, keys, constraints, indexes and ownership with approved target expectations. Separate intended differences from defects; record metadata version and observation time.",
+      "inputs": "A2 intentional transformations, A5 scope, P3 target design and actual authorized target metadata/DDL.",
+      "outputs": "Pre-execution target-conformance evidence, expected schema digest and blocking drift list.",
+      "origin": "Retain original A9; target conformance",
+      "contract_rule": "Conformance is not literal source/target equality. Missing target is NOT_READY. G2 rechecks actual schema after execution; this report is time-bound.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A9",
+      "local_id": "A9",
+      "name": "Reconciliation & Completeness",
+      "tier": 3,
+      "tier_label": "Tier 3",
+      "lane": "normal",
+      "prerequisites": [
+        "G2"
+      ],
+      "execution_raw": "Tier 3; after G2",
+      "activities": "Reconcile object/partition/key coverage, expected transformed counts, canonicalized checksums and field completeness at the same logical cutoff. Explain dedup, splits, filters and rejected records; quantify sampling and unresolved differences.",
+      "inputs": "G2 comparable source/target checkpoint bundle, A2/A4 expected transforms, A5 approved inventory and X1 reject journal.",
+      "outputs": "Checkpoint-bound reconciliation results, coverage, mismatch and quarantine disposition.",
+      "origin": "Merge original A10 reconciliation + A11 completeness",
+      "contract_rule": "Raw counts need not match intentional transforms. A startup snapshot cannot prove later CDC parity. Missing required evidence is BLOCKED/NOT_RUN, never PASS.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A10",
+      "local_id": "A10",
+      "name": "Data Quality & Performance Validation",
+      "tier": 4,
+      "tier_label": "Tier 4",
+      "lane": "normal",
+      "prerequisites": [
+        "A9"
+      ],
+      "execution_raw": "Tier 4; after A9",
+      "activities": "Measure accuracy, completeness, consistency, integrity, uniqueness and validity with explicit populations and evidence. Execute scoped performance tests. Report threshold breaches and pause/recovery recommendations to accountable operators.",
+      "inputs": "A9 reconciliation and G2 checkpoint references; P3 NFRs, approved DQ criteria, environment/load profile and P4 recovery thresholds.",
+      "outputs": "DQ scorecard with denominators, performance evidence, criterion results and recovery recommendation.",
+      "origin": "Retain original A12; evidence and recommendation only",
+      "contract_rule": "Accuracy requires a trusted reference. Sampled tests remain bounded. A10 cannot execute destructive rollback, reset offsets or reverse dual writes; operator/runbook authority is separate.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A11",
+      "local_id": "A11",
+      "name": "Data Flow Validation",
+      "tier": 5,
+      "tier_label": "Tier 5",
+      "lane": "normal",
+      "prerequisites": [
+        "A10"
+      ],
+      "execution_raw": "Tier 5; after A10",
+      "activities": "Exercise representative service-to-data and event flows, ordering/errors and contract compatibility against the accepted dataset. Bind each result to build, environment, dataset and checkpoint; isolate side effects.",
+      "inputs": "A10 accepted checkpoint evidence, P3 service/event contracts and actual deployed P5 build identity in an authorized test environment.",
+      "outputs": "End-to-end flow evidence, contract results, coverage and operational prerequisites.",
+      "origin": "Retain original A13; dependent validation",
+      "contract_rule": "No running approved environment means NOT_RUN. Test provisioning is an external prerequisite, not proof that P5 handoff deployed services. Required failed/unrun flows block full handoff.",
+      "merge_tuning": "",
+      "responsibility": ""
+    },
+    {
+      "id": "P6.A12",
+      "local_id": "A12",
+      "name": "Data Monitoring & Lineage",
+      "tier": 6,
+      "tier_label": "Tier 6",
+      "lane": "normal",
+      "prerequisites": [
+        "A11"
+      ],
+      "execution_raw": "Tier 6; after A11",
+      "activities": "Assemble field/object lineage, versioned monitoring/alert configuration, runbooks and unresolved obligations. Verify configurations in the authorized environment and distinguish tested config from active production monitoring.",
+      "inputs": "A11 and preceding evidence; A2/A4/A5 lineage, X1 audit/metrics and approved P3 telemetry/retention policies.",
+      "outputs": "Lineage graph, alert/dashboard config, checkpoint baseline, ownership and candidate Phase 8 preparation package.",
+      "origin": "Retain original A14; configuration and handoff",
+      "contract_rule": "X1 must have live audit/health capture before migration starts. A12 packaging is not a prerequisite for that capture and is not compliance certification.",
+      "merge_tuning": "",
+      "responsibility": ""
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "kind": "intake",
+      "node_type": "gate",
+      "entry": "Upstream contracts + access approval",
+      "output": "Validate P3.architecture.v3.0, P4.planning.v3.0 and P5.codeapp.v3.0 scope, identities and obligations. Pin approved read/profile access and criteria. LIMITED_HANDOFF allows only named preparation. No-data route emits an approved N/A outside this active migration graph.",
+      "blocking_rule": "",
+      "meaning": ""
+    },
+    {
+      "id": "G1",
+      "kind": "snapshot",
+      "node_type": "gate",
+      "entry": "A6 + A7 + A8",
+      "output": "Join pinned artifacts or valid route-specific N/A; validate common rules, owner-approved disposition, actual target, sensitive-data controls, recovery evidence, snapshot/CDC ownership and explicit job/write permit. Authorize only named environment/objects/actions; no purge or traffic cutover.",
+      "blocking_rule": "",
+      "meaning": ""
+    },
+    {
+      "id": "G2",
+      "kind": "release",
+      "node_type": "gate",
+      "entry": "X1",
+      "output": "Seal consistent source/target references at matched logical cutoff or per-partition offsets; verify coverage, lag/gaps and actual target schema against A8. Include transformation/scope versions and rejects. A continuing CDC stream needs fresh evidence at later cutover.",
+      "blocking_rule": "",
+      "meaning": ""
+    },
+    {
+      "id": "G3",
+      "kind": "release",
+      "node_type": "gate",
+      "entry": "A12",
+      "output": "Review exact checkpoint/build, required A9-A11 results, monitoring/lineage, owner approval and unresolved obligations. HOLD / LIMITED_HANDOFF / READY_FOR_PHASE8_PREPARATION. A limited package names allowed preparation only; it grants no cutover authority.",
+      "blocking_rule": "",
+      "meaning": ""
+    },
+    {
+      "id": "X1",
+      "kind": "execution",
+      "node_type": "execution",
+      "entry": "G1",
+      "output": "Deterministic job service executes approved batch/CDC artifacts. Capture health, audit, idempotency journal, checkpoints, rejects and hashes. Enforce limits and preauthorized safe-stop policy. Recovery requires its own permitted runbook; no generic offset reset.",
+      "blocking_rule": "",
+      "meaning": ""
+    }
+  ],
+  "stages": [
+    {
+      "stage": "G0",
+      "nodes": [],
+      "prerequisites": "Upstream contracts + access approval",
+      "activity": "Validate P3.architecture.v3.0, P4.planning.v3.0 and P5.codeapp.v3.0 scope, identities and obligations. Pin approved read/profile access and criteria. LIMITED_HANDOFF allows only named preparation. No-data route emits an approved N/A outside this active migration graph.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A1",
+      "nodes": [],
+      "prerequisites": "G0",
+      "activity": "Plan batch/CDC/hybrid routes per object, dependency-aware waves, freeze and reconciliation windows, downtime criteria and recovery options. Reconcile feasibility with the approved A5 scope at G1.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A2",
+      "nodes": [],
+      "prerequisites": "G0",
+      "activity": "Map business meanings before structural conversions. Specify casts, units, time zones, nulls, precision, joins/splits and intentional target changes. Record ambiguous/unmapped objects for owner resolution.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A3",
+      "nodes": [],
+      "prerequisites": "G0",
+      "activity": "Classify sensitive fields and propose permitted handling by environment. Specify masking/tokenization, encryption/access requirements and protected evidence. Identify uncertain classifications for review.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A4",
+      "nodes": [],
+      "prerequisites": "A2 + A3",
+      "activity": "Author and test normalization, null, deduplication and reference-code rules on authorized samples/staging. Define deterministic tie-breakers, rejects and lineage. Preserve source records.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A5",
+      "nodes": [],
+      "prerequisites": "A1 + A2 + A3",
+      "activity": "Propose Migrate/Archive/Purge/Retain-in-place for each object/partition. Assess referential closure, external dependencies and access to retained history. Obtain owner decisions; legal holds override purge proposals.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A6",
+      "nodes": [],
+      "prerequisites": "A1 + A3 + A4 + A5",
+      "activity": "Generate pinned batch/initial-load jobs and tests. Embed the same mapping, quality, handling and disposition versions used by CDC. Define idempotent writes, rejects, resumability and per-partition ownership.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A7",
+      "nodes": [],
+      "prerequisites": "A1 + A3 + A4 + A5",
+      "activity": "Generate CDC config and tests for initial snapshot ownership, log start position, ordering, transactions, deletes, duplicates, schema evolution, replay and gap detection. Define watermark/lag criteria and batch-to-tail handoff.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A8",
+      "nodes": [],
+      "prerequisites": "A2 + A5",
+      "activity": "Compare actual target types, keys, constraints, indexes and ownership with approved target expectations. Separate intended differences from defects; record metadata version and observation time.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G1",
+      "nodes": [],
+      "prerequisites": "A6 + A7 + A8",
+      "activity": "Join pinned artifacts or valid route-specific N/A; validate common rules, owner-approved disposition, actual target, sensitive-data controls, recovery evidence, snapshot/CDC ownership and explicit job/write permit. Authorize only named environment/objects/actions; no purge or traffic cutover.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "X1",
+      "nodes": [],
+      "prerequisites": "G1",
+      "activity": "Deterministic job service executes approved batch/CDC artifacts. Capture health, audit, idempotency journal, checkpoints, rejects and hashes. Enforce limits and preauthorized safe-stop policy. Recovery requires its own permitted runbook; no generic offset reset.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G2",
+      "nodes": [],
+      "prerequisites": "X1",
+      "activity": "Seal consistent source/target references at matched logical cutoff or per-partition offsets; verify coverage, lag/gaps and actual target schema against A8. Include transformation/scope versions and rejects. A continuing CDC stream needs fresh evidence at later cutover.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A9",
+      "nodes": [],
+      "prerequisites": "G2",
+      "activity": "Reconcile object/partition/key coverage, expected transformed counts, canonicalized checksums and field completeness at the same logical cutoff. Explain dedup, splits, filters and rejected records; quantify sampling and unresolved differences.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A10",
+      "nodes": [],
+      "prerequisites": "A9",
+      "activity": "Measure accuracy, completeness, consistency, integrity, uniqueness and validity with explicit populations and evidence. Execute scoped performance tests. Report threshold breaches and pause/recovery recommendations to accountable operators.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A11",
+      "nodes": [],
+      "prerequisites": "A10",
+      "activity": "Exercise representative service-to-data and event flows, ordering/errors and contract compatibility against the accepted dataset. Bind each result to build, environment, dataset and checkpoint; isolate side effects.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A12",
+      "nodes": [],
+      "prerequisites": "A11",
+      "activity": "Assemble field/object lineage, versioned monitoring/alert configuration, runbooks and unresolved obligations. Verify configurations in the authorized environment and distinguish tested config from active production monitoring.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G3",
+      "nodes": [],
+      "prerequisites": "A12",
+      "activity": "Review exact checkpoint/build, required A9-A11 results, monitoring/lineage, owner approval and unresolved obligations. HOLD / LIMITED_HANDOFF / READY_FOR_PHASE8_PREPARATION. A limited package names allowed preparation only; it grants no cutover authority.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "NEXT",
+      "nodes": [],
+      "prerequisites": "G3",
+      "activity": "Publish pinned manifests, job/test evidence, checkpoint coverage, lineage, recovery limits, CDC ownership/freshness and open obligations. Phase 8 must independently establish deployment/cutover readiness and refresh data evidence.",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "From",
+      "nodes": [],
+      "prerequisites": "Class",
+      "activity": "Required transfer",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G0",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "G0 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G0",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "G0 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G0",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "G0 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A2",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A2 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A3",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A1",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A1 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A2",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A2 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A3",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A1",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A1 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A3",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A4",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A4 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A5",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A5 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A1",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A1 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A3",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A3 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A4",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A4 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A5",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A5 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A2",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A2 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A5",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A5 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G2",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "G2 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A9",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A9 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A10",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A10 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A11",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A11 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A6",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A6 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A7",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A7 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A8",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A8 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G1",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "G1 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "X1",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "X1 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "A12",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "A12 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    },
+    {
+      "stage": "G3",
+      "nodes": [],
+      "prerequisites": "HARD",
+      "activity": "G3 exact versioned manifest and transitive evidence",
+      "blocking": "",
+      "meaning": ""
+    }
+  ],
+  "hard_edges": [
+    {
+      "from": "G0",
+      "to": "A1",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G0 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "G0",
+      "to": "A2",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G0 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "G0",
+      "to": "A3",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G0 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A2",
+      "to": "A4",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A2 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A4",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A5",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A1 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A2",
+      "to": "A5",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A2 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A5",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A1 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A4 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "A6",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A5 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A1",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A1 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A3",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A3 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A4",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A4 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "A7",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A5 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A2",
+      "to": "A8",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A2 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A5",
+      "to": "A8",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A5 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "G2",
+      "to": "A9",
+      "from_kind": "gate",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "G2 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A9",
+      "to": "A10",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A9 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A10",
+      "to": "A11",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A10 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A11",
+      "to": "A12",
+      "from_kind": "agent",
+      "to_kind": "agent",
+      "type": "HARD",
+      "required_artifact": "A11 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A6",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A6 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A7",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A7 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A8",
+      "to": "G1",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A8 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "G1",
+      "to": "X1",
+      "from_kind": "gate",
+      "to_kind": "execution",
+      "type": "HARD",
+      "required_artifact": "G1 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "X1",
+      "to": "G2",
+      "from_kind": "execution",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "X1 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "A12",
+      "to": "G3",
+      "from_kind": "agent",
+      "to_kind": "gate",
+      "type": "HARD",
+      "required_artifact": "A12 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": false
+    },
+    {
+      "from": "G3",
+      "to": "NEXT",
+      "from_kind": "gate",
+      "to_kind": "external",
+      "type": "HARD",
+      "required_artifact": "G3 exact versioned manifest and transitive evidence",
+      "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+      "external": true
+    }
+  ],
+  "cross_feeds": [
+    {
+      "id": "CF01 handling",
+      "sources": "",
+      "consumer": "A4/A5/A6/A7 via graph",
+      "purpose": "Classified handling rules apply to samples, payloads, rejects, logs and retained evidence.",
+      "protocol": "",
+      "consequence": "Generated masking config does not prove enforced handling."
+    },
+    {
+      "id": "CF02 disposition",
+      "sources": "",
+      "consumer": "A6/A7/A8",
+      "purpose": "Same approved scope version, exclusions, referential closure and hold evidence.",
+      "protocol": "",
+      "consequence": "No implicit purge or missing required references."
+    },
+    {
+      "id": "Shared transformations",
+      "sources": "",
+      "consumer": "A6 and A7, joined at G1",
+      "purpose": "Pin compatible mapping, quality, reference, handling and disposition versions; define transform order.",
+      "protocol": "",
+      "consequence": "Reject divergent batch/CDC semantics."
+    },
+    {
+      "id": "Execution",
+      "sources": "",
+      "consumer": "G1 -> X1 -> G2",
+      "purpose": "Approved executable hashes/N/A, actual target evidence, scoped permit, runtime journal and comparable checkpoint.",
+      "protocol": "",
+      "consequence": "Synthesis output alone cannot feed post-migration validation."
+    },
+    {
+      "id": "Validation chain",
+      "sources": "",
+      "consumer": "A12 -> G3",
+      "purpose": "Same dataset/checkpoint; P5 exact build for service flows; criterion status, coverage and limitations.",
+      "protocol": "",
+      "consequence": "Required failed/unrun evidence prevents full handoff."
+    },
+    {
+      "id": "CF03 recovery revised",
+      "sources": "",
+      "consumer": "Accountable operator / authorized runner",
+      "purpose": "Recommendation or preauthorized safe-stop, runbook decision, scope permit, state journal and fresh reconciliation.",
+      "protocol": "",
+      "consequence": "Not an automatic destructive rollback edge; rework creates a new run."
+    },
+    {
+      "id": "Live stream transfer",
+      "sources": "",
+      "consumer": "A12/G3 -> Phase 8",
+      "purpose": "Stream owner, actual status, lag/gap limits, current offsets, freshness policy and transfer acceptance.",
+      "protocol": "",
+      "consequence": "Later writes invalidate cutoff assumptions; refresh before cutover."
+    }
+  ],
+  "artifact_contracts": {
+    "envelope_fields": [],
+    "agent_payloads": {
+      "A1": {
+        "fields": [
+          {
+            "name": "route_by_object",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "wave_dependencies",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "windows",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "acceptance_criteria",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "recovery_plan_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "constraints",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "route_by_object[]; wave_dependencies[]; windows[]; acceptance_criteria[]; recovery_plan_ref; constraints[]",
+        "producer_consumer": "Data Migration Orchestrator",
+        "rule": "A1 plans and coordinates. X1 executes only permitted jobs; an accountable operator authorizes recovery. No autonomous cutover or offset reset."
+      },
+      "A2": {
+        "fields": [
+          {
+            "name": "schema_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "mapping_rules",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "semantic_decisions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "coverage",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "unresolved",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "schema_refs[]; mapping_rules[]; semantic_decisions[]; coverage; unresolved[]",
+        "producer_consumer": "Data Mapping & Semantic Alignment",
+        "rule": "Required unresolved mappings block G1. Confidence is not owner acceptance; sampled observations cannot establish all values are convertible."
+      },
+      "A3": {
+        "fields": [
+          {
+            "name": "classification",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "handling_rules",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "policy_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "residency_rules",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "retention_rules",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "uncertainties",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "classification[]; handling_rules[]; policy_refs[]; residency_rules[]; retention_rules[]; uncertainties[]",
+        "producer_consumer": "Sensitive Data & Compliance",
+        "rule": "Use approved organizational policies; do not invent legal requirements or certify compliance. G0 already restricts profiling access; A3 cannot retroactively authorize exposure."
+      },
+      "A4": {
+        "fields": [
+          {
+            "name": "rule_versions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "reference_versions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "dedup_keys",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "survivor_policy",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "reject_policy",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "sample_test_results",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "rule_versions[]; reference_versions[]; dedup_keys[]; survivor_policy; reject_policy; sample_test_results[]",
+        "producer_consumer": "Data Quality Preparation",
+        "rule": "Rule generation is not a cleansed production baseline. No source mutation; unresolved business rules or unsafe handling block execution."
+      },
+      "A5": {
+        "fields": [
+          {
+            "name": "object_scope",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "disposition",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "dependency_closure",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "holds",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "owner_decisions",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "external_obligations",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "object_scope[]; disposition[]; dependency_closure[]; holds[]; owner_decisions[]; external_obligations[]",
+        "producer_consumer": "Data Disposition",
+        "rule": "G1 accepts signed scope; archive/purge are proposals only in this phase. Never exclude unresolved required references silently. No automatic deletion."
+      },
+      "A6": {
+        "fields": [
+          {
+            "name": "artifact_hashes",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "rule_manifest",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "partition_ownership",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "retry_resume_policy",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "harness_results",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "applicability",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "artifact_hashes[]; rule_manifest; partition_ownership[]; retry_resume_policy; harness_results[]; applicability",
+        "producer_consumer": "ETL/ELT Pipeline Synthesis",
+        "rule": "Synthesis does not move data. X1 is the sole execution boundary after G1. Initial-load ownership must not overlap uncontrolled CDC snapshot writers."
+      },
+      "A7": {
+        "fields": [
+          {
+            "name": "artifact_hashes",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "rule_manifest",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "snapshot_owner",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "start_offsets",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "ordering_scope",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "delete_policy",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "schema_change_policy",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "gap_policy",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "tests",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "artifact_hashes[]; rule_manifest; snapshot_owner; start_offsets; ordering_scope; delete_policy; schema_change_policy; gap_policy; tests[]",
+        "producer_consumer": "Streaming & CDC Migration",
+        "rule": "No live replication during synthesis. Unsupported semantics, expired log retention or unexplained gaps block readiness; exactly-once is not assumed."
+      },
+      "A8": {
+        "fields": [
+          {
+            "name": "expected_schema_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "observed_schema_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "target_env",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "object_coverage",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "differences",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "expected_schema_hash; observed_schema_hash; target_env; object_coverage[]; differences[]; observed_at",
+        "producer_consumer": "Schema Parity",
+        "rule": "Conformance is not literal source/target equality. Missing target is NOT_READY. G2 rechecks actual schema after execution; this report is time-bound."
+      },
+      "A9": {
+        "fields": [
+          {
+            "name": "checkpoint_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "expected_inventory",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "counts_by_partition",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "key_checks",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "checksum_rules",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "field_coverage",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "rejects",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "results",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "checkpoint_id; expected_inventory; counts_by_partition[]; key_checks[]; checksum_rules; field_coverage[]; rejects[]; results[]",
+        "producer_consumer": "Reconciliation & Completeness",
+        "rule": "Raw counts need not match intentional transforms. A startup snapshot cannot prove later CDC parity. Missing required evidence is BLOCKED/NOT_RUN, never PASS."
+      },
+      "A10": {
+        "fields": [
+          {
+            "name": "checkpoint_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "dq_metrics",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "denominators",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "reference_truth_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "load_profile",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "perf_results",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "recommendation",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "limitations",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "checkpoint_id; dq_metrics[]; denominators[]; reference_truth_refs[]; load_profile; perf_results[]; recommendation; limitations[]",
+        "producer_consumer": "Data Quality & Performance Validation",
+        "rule": "Accuracy requires a trusted reference. Sampled tests remain bounded. A10 cannot execute destructive rollback, reset offsets or reverse dual writes; operator/runbook authority is separate."
+      },
+      "A11": {
+        "fields": [
+          {
+            "name": "p5_build_digest",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "environment_ref",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "checkpoint_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "flow_tests",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "contract_results",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "coverage",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "gaps",
+            "type": "array",
+            "nullable": false
+          }
+        ],
+        "raw": "p5_build_digest; environment_ref; checkpoint_id; flow_tests[]; contract_results[]; coverage; gaps[]",
+        "producer_consumer": "Data Flow Validation",
+        "rule": "No running approved environment means NOT_RUN. Test provisioning is an external prerequisite, not proof that P5 handoff deployed services. Required failed/unrun flows block full handoff."
+      },
+      "A12": {
+        "fields": [
+          {
+            "name": "lineage_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "monitoring_config",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "config_tests",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "runtime_audit_refs",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "owners",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "open_obligations",
+            "type": "array",
+            "nullable": false
+          },
+          {
+            "name": "candidate_manifest",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "raw": "lineage_refs[]; monitoring_config; config_tests[]; runtime_audit_refs[]; owners[]; open_obligations[]; candidate_manifest",
+        "producer_consumer": "Data Monitoring & Lineage",
+        "rule": "X1 must have live audit/health capture before migration starts. A12 packaging is not a prerequisite for that capture and is not compliance certification."
+      }
+    },
+    "named_objects": {
+      "Envelope": {
+        "type": "object",
+        "required": "All",
+        "definition": "schema=P6.data.v3.0; phase_id=6; artifact_id/version; run_id; app/task/object IDs; producer; content_hash; parent_refs; policy/tool/model versions; classification; created_at.",
+        "fields": [
+          {
+            "name": "run_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "producer",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "content_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "parent_refs",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "classification",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "All / all",
+        "failure": "Reject identity, version or hash mismatch."
+      },
+      "Evidence state": {
+        "type": "object",
+        "required": "All",
+        "definition": "COMPLETE/PARTIAL/NOT_ASSESSED/SKIPPED_APPROVED/FAILED; evidence refs, method, coverage, timestamps and obligations. Per criterion: PASS/FAIL/NOT_RUN/BLOCKED/NOT_APPLICABLE.",
+        "fields": [],
+        "producer_consumer": "All / gates",
+        "failure": "Artifact completion is not criterion PASS; N/A requires applicability rationale/approval."
+      },
+      "G0 intake manifest": {
+        "type": "object",
+        "required": "Yes",
+        "definition": "Exact P3/P4/P5 refs and status; data applicability; approved read/profile scope; environment; required criteria/tolerances; policy refs; upstream obligations; permitted preparation actions.",
+        "fields": [
+          {
+            "name": "environment",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Intake / A1-A3",
+        "failure": "Limited upstream release cannot grant execution authority."
+      },
+      "Common rule manifest": {
+        "type": "object",
+        "required": "A6/A7",
+        "definition": "mapping_hash; quality_hash; reference_hash; handling_hash; disposition_hash; transform_order; schema refs; per-object applicability; owner approvals.",
+        "fields": [
+          {
+            "name": "mapping_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "quality_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "reference_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "handling_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "disposition_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "transform_order",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A6/A7 / G1",
+        "failure": "Reject incompatible batch/CDC versions or unresolved required mappings."
+      },
+      "Typed route N/A": {
+        "type": "object",
+        "required": "Skipped lane",
+        "definition": "lane_id; route; object_scope; reason; approved_by/time; substitute manifest; consumer-required fields; limits.",
+        "fields": [
+          {
+            "name": "lane_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "route",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "object_scope",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "reason",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "limits",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A6/A7 / G1",
+        "failure": "Absence is not N/A. Both lanes N/A valid only on separate no-data route, never X1 execution."
+      },
+      "G1 execution permit": {
+        "type": "object",
+        "required": "Before X1",
+        "definition": "artifact_hashes; route; rule_manifest_hash; scope_hash; target_env; allowed_objects/actions; source_access; issuer/expiry; actual readiness refs; schema evidence; recovery refs; partition/snapshot ownership; checkpoints/limits.",
+        "fields": [
+          {
+            "name": "artifact_hashes",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "route",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "rule_manifest_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "scope_hash",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "target_env",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "source_access",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Authority / X1",
+        "failure": "No unsupported route, missing prerequisites, expired permit or widened scope."
+      },
+      "X1 runtime journal": {
+        "type": "object",
+        "required": "Executed jobs",
+        "definition": "job/attempt IDs; pinned artifact/permit refs; start/end; per-partition source bounds and target commit refs; idempotency keys; checkpoint refs; rejects; metrics/log refs; safe-stop events; recovery actions.",
+        "fields": [
+          {
+            "name": "rejects",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Runner / G2",
+        "failure": "Partial commit remains visible; resume from verified state, not assumed success."
+      },
+      "G2 checkpoint manifest": {
+        "type": "object",
+        "required": "Validation",
+        "definition": "checkpoint_id; source/target snapshot or temporal refs; logical_cutoff/offset_vector; schema/rule/scope hashes; object/partition coverage; lag/gaps; rejects; observation time; validity/freshness policy.",
+        "fields": [
+          {
+            "name": "checkpoint_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "rejects",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "G2 / A9-A12,G3",
+        "failure": "Unmatched cutoff, unexplained gaps or actual-schema drift blocks."
+      },
+      "Criterion evidence": {
+        "type": "object",
+        "required": "Per required test",
+        "definition": "criterion_id; requirement; status; expected/actual; approved tolerance; numerator/denominator; full/sample population; checkpoint_id; environment; P5 build digest if service test; evidence refs; limitations.",
+        "fields": [
+          {
+            "name": "criterion_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "requirement",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "checkpoint_id",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "environment",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "limitations",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "A9-A11 / G3",
+        "failure": "Generated tests, unknown accuracy or unrun environments are not PASS."
+      },
+      "Recovery decision": {
+        "type": "object",
+        "required": "If needed",
+        "definition": "trigger/evidence; committed-state refs; operator; approved runbook/version; allowed actions; permit; expected data loss/time limits; execution journal; revalidation refs.",
+        "fields": [
+          {
+            "name": "operator",
+            "type": "string",
+            "nullable": false
+          },
+          {
+            "name": "permit",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Operator / runner",
+        "failure": "No implicit destructive rollback from a validation failure."
+      },
+      "G3 release decision": {
+        "type": "object",
+        "required": "Handoff",
+        "definition": "HOLD/LIMITED_HANDOFF/READY_FOR_PHASE8_PREPARATION; candidate/checkpoint/build hashes; required criteria; approved N/A; mandatory blockers; approved_by/time; allowed downstream actions; obligations.",
+        "fields": [
+          {
+            "name": "obligations",
+            "type": "string",
+            "nullable": false
+          }
+        ],
+        "producer_consumer": "Release owner / publisher",
+        "failure": "Require matching identity and authority. Limited permits named preparation only, never migration or cutover."
+      },
+      "Phase 8 handoff": {
+        "type": "object",
+        "required": "Released scope",
+        "definition": "Job artifacts, rule/disposition manifests, checkpoint evidence, test results, schema/contracts, P5 build, lineage, monitoring config/test refs, live CDC owner/status, recovery limits, freshness obligations and Phase 7 skip.",
+        "fields": [],
+        "producer_consumer": "P6 / P8 intake",
+        "failure": "Separate Phase 8 readiness and fresh cutover validation remain mandatory."
+      }
+    }
+  },
+  "run_controls": [
+    {
+      "stage": "Preparation",
+      "control": "Scoped harness permission",
+      "when": "",
+      "behavior": "G0 must name allowed isolated sample/staging writes and harness tests when needed by A4/A6/A7. This preparation permission is separate from G1 permission to execute migration jobs against the approved target.",
+      "accountable": "Intake / environment owner",
+      "failure": "Without preparation-test authority, publish NOT_RUN evidence; do not execute tests or widen access."
+    },
+    {
+      "stage": "Blocked evidence",
+      "control": "Diagnostic propagation",
+      "when": "",
+      "behavior": "A9-A11 may publish typed FAILED/BLOCKED/NOT_RUN records when prerequisites cannot support execution. Downstream validators do not run on rejected data; they propagate the blocker. A12 may assemble that diagnostic package for G3 HOLD or explicitly limited preparation review.",
+      "accountable": "Validation / release owners",
+      "failure": "A completed diagnostic artifact never satisfies a required PASS. G1 and G2 execution/checkpoint blocks cannot be bypassed."
+    },
+    {
+      "stage": "G0",
+      "control": "Admission and policy baseline",
+      "when": "",
+      "behavior": "Pin source/target/app/task IDs, upstream schema versions, acceptance criteria and applicable data route. P5 LIMITED_HANDOFF cannot become mutation authority.",
+      "accountable": "Intake owner",
+      "failure": "Invalid upstream package: HOLD; no-data emits reviewed N/A."
+    },
+    {
+      "stage": "All",
+      "control": "Artifact integrity and untrusted input",
+      "when": "",
+      "behavior": "Version every artifact; record hashes, parent refs, tool/model/policy versions and evidence provenance. Source text and data are untrusted, not execution instructions.",
+      "accountable": "Orchestration service",
+      "failure": "Reject unknown IDs, changed hashes or incompatible manifests."
+    },
+    {
+      "stage": "A1-A5",
+      "control": "Human decisions and rule closure",
+      "when": "",
+      "behavior": "Resolve ambiguous mappings, quality survivor rules, disposition, legal holds and referential dependencies before write permission. Keep source read-only during preparation.",
+      "accountable": "Data/business owners",
+      "failure": "Unresolved required decision blocks G1."
+    },
+    {
+      "stage": "A3/G1",
+      "control": "Sensitive-data enforcement",
+      "when": "",
+      "behavior": "Apply approved handling across payloads, staging, logs, rejects, test fixtures and lineage. Use secret references and least-privilege credentials; validate environment residency/access.",
+      "accountable": "Security/data owners",
+      "failure": "No assumed compliance from generated rules."
+    },
+    {
+      "stage": "A6/A7",
+      "control": "Shared rule manifest",
+      "when": "",
+      "behavior": "Batch and CDC must pin the same applicable mapping, cleansing, masking, reference and disposition versions. Specify transform order and deterministic replay.",
+      "accountable": "Pipeline owners",
+      "failure": "Reject incompatible rule versions or uncontrolled dual writers."
+    },
+    {
+      "stage": "G1",
+      "control": "Actual readiness and bounded permit",
+      "when": "",
+      "behavior": "Validate actual schema, running execution service, capacity, credentials, tests, monitored failure thresholds and rollback/restore rehearsal evidence as required by risk. Bind permit to artifacts, environment, objects, actions and expiry.",
+      "accountable": "Change/operator authority",
+      "failure": "Preparation approval is insufficient; expired or broader scope blocks X1."
+    },
+    {
+      "stage": "X1",
+      "control": "Execution isolation and audit",
+      "when": "",
+      "behavior": "Execute pinned jobs with resource budgets, logs, protected rejects and per-partition progress. Record attempts, source log bounds, target commits and outcomes; never claim exactly-once without evidence.",
+      "accountable": "Deterministic runner/operator",
+      "failure": "Safe-stop according to approved policy; isolate failed partitions and surface incomplete coverage."
+    },
+    {
+      "stage": "X1",
+      "control": "Retry, resume and concurrency",
+      "when": "",
+      "behavior": "Use stable business/event identities, checkpointed commits, idempotent writes and bounded retries. Detect duplicate/out-of-order events and source retention gaps. One declared owner per partition.",
+      "accountable": "Migration runtime",
+      "failure": "No blind full replay or offset reset after partial commits."
+    },
+    {
+      "stage": "G2",
+      "control": "Comparable data and drift",
+      "when": "",
+      "behavior": "Establish read-consistent snapshots/temporal queries or approved freeze/barrier; pin logical cutoff/offset vector. Validate schema, rule and disposition hashes, lag, gaps and reject accounting.",
+      "accountable": "Data validation service",
+      "failure": "Unmatched populations, unaccounted gaps or drift block checkpoint acceptance."
+    },
+    {
+      "stage": "A9-A11",
+      "control": "Bounded measured evidence",
+      "when": "",
+      "behavior": "Use PASS/FAIL/NOT_RUN/BLOCKED/NOT_APPLICABLE per criterion. Pin checkpoint, environment and build; state full versus sampled coverage and accepted tolerance.",
+      "accountable": "Validation owners",
+      "failure": "No result substitution across builds/checkpoints; required unrun checks block full handoff."
+    },
+    {
+      "stage": "Recovery",
+      "control": "Separate recommendation and action",
+      "when": "",
+      "behavior": "A10 recommends. Authorized operator selects a rehearsed pause/restore/replay/forward-fix procedure considering writes already committed and external effects; journal outcome and reconcile again.",
+      "accountable": "Recovery authority",
+      "failure": "No LLM destructive rollback, automatic dual-write reversal or generic offset reset."
+    },
+    {
+      "stage": "Rework",
+      "control": "Invalidate affected evidence",
+      "when": "",
+      "behavior": "Changed mappings, code, schema, policy, scope or data checkpoint create a new revision. Re-enter earliest affected producer/gate and rerun downstream checks; preserve previous audit trail.",
+      "accountable": "Orchestrator + owners",
+      "failure": "Rework is a new DAG run, not a hidden backward edge or reused approval."
+    },
+    {
+      "stage": "A12/G3",
+      "control": "Handoff and ongoing CDC ownership",
+      "when": "",
+      "behavior": "Name stream owner, health/lag limits, evidence expiry/freshness policy and transfer acceptance. Include continuing costs, credentials references and incident/recovery duties.",
+      "accountable": "Operations + release owner",
+      "failure": "No unattended live CDC after handoff; Phase 8 needs fresh cutover evidence."
+    },
+    {
+      "stage": "G3",
+      "control": "Release decision",
+      "when": "",
+      "behavior": "HOLD on integrity/authority/non-waivable blockers. LIMITED_HANDOFF permits named preparation despite explicitly missing execution evidence; READY_FOR_PHASE8_PREPARATION requires every applicable mandatory criterion PASS or approved valid N/A.",
+      "accountable": "Accountable release owner",
+      "failure": "Neither state authorizes production cutover; Phase 7 stays skipped."
+    }
+  ],
+  "activation_matrix": [],
+  "execution_routes": [
+    {
+      "Route": "Batch",
+      "Applicable lanes": "A6 active; A7 typed NOT_APPLICABLE",
+      "Snapshot / scope rule": "Consistent source snapshot/freeze; no untracked writes beyond cutoff.",
+      "Writer ownership": "One approved writer per target partition.",
+      "Checkpoint / evidence": "X1 loads; G2 compares same snapshot boundary.",
+      "Limit": "Later source changes need explicit delta plan and fresh cutover evidence."
+    },
+    {
+      "Route": "CDC",
+      "Applicable lanes": "A7 active; A6 active if initial load is batch-owned, otherwise typed N/A",
+      "Snapshot / scope rule": "Connector snapshot and log position must form a documented no-gap boundary.",
+      "Writer ownership": "Declare connector or A6 snapshot owner, not both for the same partition.",
+      "Checkpoint / evidence": "G2 uses comparable logical cutoff/offset set with lag/gap evidence.",
+      "Limit": "Retention gap or unsupported delete/order semantics blocks."
+    },
+    {
+      "Route": "Hybrid",
+      "Applicable lanes": "A6 snapshot + A7 tail both active",
+      "Snapshot / scope rule": "Pin snapshot/log start and transition barrier per object/partition.",
+      "Writer ownership": "Avoid double application with explicit routing and idempotency keys.",
+      "Checkpoint / evidence": "Reconcile snapshot plus changes through sealed watermark.",
+      "Limit": "A live tail alone is not proof of complete migrated history."
+    },
+    {
+      "Route": "No data migration",
+      "Applicable lanes": "Approved N/A route at G0, outside active graph",
+      "Snapshot / scope rule": "Owner-approved applicability and surviving data/access dependencies.",
+      "Writer ownership": "No runner invocation; no fabricated migration PASS.",
+      "Checkpoint / evidence": "Emit N/A handoff with rationale and Phase 8 obligations.",
+      "Limit": "No data movement does not waive application/deployment readiness."
+    },
+    {
+      "Route": "Archive / purge / retain",
+      "Applicable lanes": "A5 proposals and obligations; migrate subset only",
+      "Snapshot / scope rule": "Hold and retention policy references; owner decisions and dependency closure.",
+      "Writer ownership": "Separate authorized operational workflow for archival/deletion.",
+      "Checkpoint / evidence": "Excluded records appear in reconciliation population rules.",
+      "Limit": "No purge or archival execution is authorized by this design."
+    },
+    {
+      "Route": "Missing target/runtime",
+      "Applicable lanes": "Preparation only within approved P5 scope",
+      "Snapshot / scope rule": "A8 actual target or A11 running service evidence remains missing.",
+      "Writer ownership": "G1 blocks writes without actual target; G3 blocks full release without required tests.",
+      "Checkpoint / evidence": "NOT_READY / NOT_RUN; narrowly authorized limited handoff if useful.",
+      "Limit": "Never substitute generated DDL or a build package for a running environment."
+    }
+  ]
+}

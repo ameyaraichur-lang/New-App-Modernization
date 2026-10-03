@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# runs: job stores, cloned repos, sqlite fixtures (all reproducible per-run)
+runs/
+
+# UI build + dependencies (rebuild with: cd ui && npm install && npm run build)
+ui/node_modules/
+ui/dist/
+ui/tsconfig.tsbuildinfo
+
+# local env / secrets
+.env
+*.local
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

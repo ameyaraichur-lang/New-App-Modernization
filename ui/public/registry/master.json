@@ -1,0 +1,550 @@
+{
+  "scope": "Review view, not executable orchestrator",
+  "phase7": "SKIPPED",
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Discovery",
+      "roles": [
+        {
+          "id": "P1.A1",
+          "name": "Repo Intelligence Agent"
+        },
+        {
+          "id": "P1.A2",
+          "name": "Architecture Agent"
+        },
+        {
+          "id": "P1.A3",
+          "name": "Data Intelligence Agent"
+        },
+        {
+          "id": "P1.A4",
+          "name": "Infrastructure & Runtime Profiler Agent"
+        },
+        {
+          "id": "P1.A5",
+          "name": "Journey Intelligence Agent"
+        },
+        {
+          "id": "P1.A6",
+          "name": "Compliance Agent"
+        },
+        {
+          "id": "P1.A7",
+          "name": "UX Evaluator Agent"
+        },
+        {
+          "id": "P1.A8",
+          "name": "Stakeholder Elicitation Agent"
+        },
+        {
+          "id": "P1.A9",
+          "name": "Business Process Agent"
+        },
+        {
+          "id": "P1.A10",
+          "name": "Synthesis Discovery Agent"
+        },
+        {
+          "id": "P1.A11",
+          "name": "Risk Scoring Agent"
+        }
+      ],
+      "freeze_recommendation": "READY FOR DESIGN REVIEW"
+    },
+    {
+      "phase": 2,
+      "name": "Portfolio",
+      "roles": [
+        {
+          "id": "P2.A1",
+          "name": "Business Value & Market Agent"
+        },
+        {
+          "id": "P2.A2",
+          "name": "Technical Complexity & Impact Agent"
+        },
+        {
+          "id": "P2.A3",
+          "name": "Cost Estimation Agent"
+        },
+        {
+          "id": "P2.A4",
+          "name": "Portfolio Rationalization Agent"
+        },
+        {
+          "id": "P2.A5",
+          "name": "Readiness Assessment Agent"
+        },
+        {
+          "id": "P2.A6",
+          "name": "Modernization Strategy Agent"
+        },
+        {
+          "id": "P2.A7",
+          "name": "Decision Consolidator Agent"
+        }
+      ],
+      "freeze_recommendation": "READY FOR DESIGN REVIEW"
+    },
+    {
+      "phase": 3,
+      "name": "Target architecture",
+      "roles": [
+        {
+          "id": "P3.A1",
+          "name": "Target Architecture Agent"
+        },
+        {
+          "id": "P3.A2",
+          "name": "Monolith Decomposition Agent"
+        },
+        {
+          "id": "P3.A3",
+          "name": "Schema Alignment & Data Architecture Agent"
+        },
+        {
+          "id": "P3.A4",
+          "name": "Security Architecture Agent"
+        },
+        {
+          "id": "P3.A5",
+          "name": "UI Architecture Agent"
+        },
+        {
+          "id": "P3.A6",
+          "name": "Interface & Integration Contract Agent"
+        },
+        {
+          "id": "P3.A7",
+          "name": "Cloud Platform & Capacity Agent"
+        },
+        {
+          "id": "P3.A8",
+          "name": "Architecture Consolidator Agent"
+        }
+      ],
+      "freeze_recommendation": "READY FOR DESIGN REVIEW"
+    },
+    {
+      "phase": 4,
+      "name": "Modernization planning",
+      "roles": [
+        {
+          "id": "P4.A1",
+          "name": "Wave Architecture Agent"
+        },
+        {
+          "id": "P4.A2",
+          "name": "Wave Specification Agent"
+        },
+        {
+          "id": "P4.A3",
+          "name": "Task Generator Agent"
+        },
+        {
+          "id": "P4.A4",
+          "name": "Runbook Generator Agent"
+        },
+        {
+          "id": "P4.A5",
+          "name": "Resource Planner Agent"
+        },
+        {
+          "id": "P4.A6",
+          "name": "Tool Selection Agent"
+        },
+        {
+          "id": "P4.A7",
+          "name": "Validation Planner Agent"
+        },
+        {
+          "id": "P4.A8",
+          "name": "Rollback & Contingency Planner Agent"
+        },
+        {
+          "id": "P4.A9",
+          "name": "Planning Validation & Handoff Agent"
+        }
+      ],
+      "freeze_recommendation": "FREEZE CORE STRUCTURE"
+    },
+    {
+      "phase": 5,
+      "name": "Code & application modernization",
+      "roles": [
+        {
+          "id": "P5.A1",
+          "name": "Characterization Test Agent"
+        },
+        {
+          "id": "P5.A2",
+          "name": "Code Transformation Agent"
+        },
+        {
+          "id": "P5.A3",
+          "name": "SQL & Data Layer Modernization Agent"
+        },
+        {
+          "id": "P5.A4",
+          "name": "UI Modernization Agent"
+        },
+        {
+          "id": "P5.A5",
+          "name": "Configuration & Secrets Externalization Agent"
+        },
+        {
+          "id": "P5.A6",
+          "name": "Feature Flag Integration Agent"
+        },
+        {
+          "id": "P5.A7",
+          "name": "Observability Instrumentation Agent"
+        },
+        {
+          "id": "P5.A8",
+          "name": "Security Hardening Agent"
+        },
+        {
+          "id": "P5.A9",
+          "name": "Validation Test & Equivalence Agent"
+        }
+      ],
+      "freeze_recommendation": "READY FOR DESIGN REVIEW"
+    },
+    {
+      "phase": 6,
+      "name": "Data modernization",
+      "roles": [
+        {
+          "id": "P6.A1",
+          "name": "Data Migration Orchestrator"
+        },
+        {
+          "id": "P6.A2",
+          "name": "Data Mapping & Semantic Alignment"
+        },
+        {
+          "id": "P6.A3",
+          "name": "Sensitive Data & Compliance"
+        },
+        {
+          "id": "P6.A4",
+          "name": "Data Quality Preparation"
+        },
+        {
+          "id": "P6.A5",
+          "name": "Data Disposition"
+        },
+        {
+          "id": "P6.A6",
+          "name": "ETL/ELT Pipeline Synthesis"
+        },
+        {
+          "id": "P6.A7",
+          "name": "Streaming & CDC Migration"
+        },
+        {
+          "id": "P6.A8",
+          "name": "Schema Parity"
+        },
+        {
+          "id": "P6.A9",
+          "name": "Reconciliation & Completeness"
+        },
+        {
+          "id": "P6.A10",
+          "name": "Data Quality & Performance Validation"
+        },
+        {
+          "id": "P6.A11",
+          "name": "Data Flow Validation"
+        },
+        {
+          "id": "P6.A12",
+          "name": "Data Monitoring & Lineage"
+        }
+      ],
+      "freeze_recommendation": "READY FOR DESIGN REVIEW"
+    },
+    {
+      "phase": 8,
+      "name": "Deployment & cutover",
+      "roles": [
+        {
+          "id": "P8.A1",
+          "name": "Container & Deployment Packaging"
+        },
+        {
+          "id": "P8.A2",
+          "name": "Infrastructure Provisioning"
+        },
+        {
+          "id": "P8.A3",
+          "name": "Secrets & Identity Provisioning"
+        },
+        {
+          "id": "P8.A4",
+          "name": "Service Mesh Configuration"
+        },
+        {
+          "id": "P8.A5",
+          "name": "CI/CD Pipeline"
+        },
+        {
+          "id": "P8.A6",
+          "name": "Application Deployment Runbook"
+        },
+        {
+          "id": "P8.A7",
+          "name": "Data Migration Runbook"
+        },
+        {
+          "id": "P8.A8",
+          "name": "Integration Reconfiguration Guide"
+        },
+        {
+          "id": "P8.A9",
+          "name": "Network & Traffic Cutover"
+        },
+        {
+          "id": "P8.A10",
+          "name": "Cutover Orchestration"
+        },
+        {
+          "id": "P8.A11",
+          "name": "Validation Test Pack"
+        },
+        {
+          "id": "P8.A12",
+          "name": "Hypercare & Incident Response"
+        }
+      ],
+      "freeze_recommendation": "READY FOR DESIGN REVIEW"
+    },
+    {
+      "phase": 9,
+      "name": "Post-modernization operations",
+      "roles": [
+        {
+          "id": "P9.A1",
+          "name": "Day-2 Operations"
+        },
+        {
+          "id": "P9.A2",
+          "name": "Operational Dashboards"
+        },
+        {
+          "id": "P9.A3",
+          "name": "FinOps"
+        },
+        {
+          "id": "P9.A4",
+          "name": "SecOps & Compliance Monitoring"
+        },
+        {
+          "id": "P9.A5",
+          "name": "Architecture Drift Detection"
+        },
+        {
+          "id": "P9.A6",
+          "name": "Knowledge & Support"
+        },
+        {
+          "id": "P9.A7",
+          "name": "Legacy Decommissioning"
+        },
+        {
+          "id": "P9.A8",
+          "name": "BAU Operational Handover"
+        },
+        {
+          "id": "P9.A9",
+          "name": "Modernization Progress Tracker"
+        },
+        {
+          "id": "P9.A10",
+          "name": "Execution Summary & Closure"
+        }
+      ],
+      "freeze_recommendation": "READY FOR DESIGN REVIEW"
+    }
+  ],
+  "links": [
+    {
+      "id": "M01",
+      "from": "P1",
+      "to": "P2",
+      "type": "HANDOFF",
+      "handoff": "H01",
+      "label": "Draft or decision scope"
+    },
+    {
+      "id": "M02",
+      "from": "P2",
+      "to": "P3",
+      "type": "HANDOFF",
+      "handoff": "H02",
+      "label": "Authorized design routes"
+    },
+    {
+      "id": "M03",
+      "from": "P2",
+      "to": "R",
+      "type": "BRANCH",
+      "handoff": "H03",
+      "label": "Retain / Retire / HOLD"
+    },
+    {
+      "id": "M04",
+      "from": "P3",
+      "to": "P4",
+      "type": "HANDOFF",
+      "handoff": "H04",
+      "label": "Planning scope + conditions"
+    },
+    {
+      "id": "M05",
+      "from": "P4",
+      "to": "P5",
+      "type": "HANDOFF",
+      "handoff": "H05",
+      "label": "Scoped preparation + permits"
+    },
+    {
+      "id": "M06",
+      "from": "P5",
+      "to": "P6",
+      "type": "CONDITIONAL",
+      "handoff": "H06",
+      "label": "Data-applicable route"
+    },
+    {
+      "id": "M07",
+      "from": "P5",
+      "to": "P8",
+      "type": "CONDITIONAL",
+      "handoff": "H07",
+      "label": "Approved no-data bypass"
+    },
+    {
+      "id": "M08",
+      "from": "P6",
+      "to": "P8",
+      "type": "HANDOFF",
+      "handoff": "H08",
+      "label": "Preparation only; refresh before cutover"
+    },
+    {
+      "id": "M09",
+      "from": "P8",
+      "to": "P9",
+      "type": "ACTIVATE",
+      "handoff": "H11",
+      "label": "OPS: first live/partial transition"
+    },
+    {
+      "id": "M10",
+      "from": "P8",
+      "to": "P9",
+      "type": "HANDOFF",
+      "handoff": "H12",
+      "label": "NEXT: ACCEPTED_FOR_DAY2"
+    },
+    {
+      "id": "M11",
+      "from": "P9",
+      "to": "C",
+      "type": "HANDOFF",
+      "handoff": "H13",
+      "label": "Signed program closure; BAU continues"
+    },
+    {
+      "id": "M12",
+      "from": "P3",
+      "to": "P6",
+      "type": "REFERENCE",
+      "handoff": "H10",
+      "label": "Pinned design + criteria"
+    },
+    {
+      "id": "M13",
+      "from": "P3",
+      "to": "P8",
+      "type": "REFERENCE",
+      "handoff": "H10",
+      "label": "Pinned platform/security/contracts"
+    },
+    {
+      "id": "M14",
+      "from": "P4",
+      "to": "P6",
+      "type": "REFERENCE",
+      "handoff": "H18",
+      "label": "Tasks, windows and recovery"
+    },
+    {
+      "id": "M15",
+      "from": "P4",
+      "to": "P8",
+      "type": "REFERENCE",
+      "handoff": "H18",
+      "label": "Wave tasks and acceptance obligations"
+    },
+    {
+      "id": "M16",
+      "from": "E",
+      "to": "P6",
+      "type": "PROPOSED",
+      "handoff": "H09",
+      "label": "AH01: observed environment manifest"
+    },
+    {
+      "id": "M17",
+      "from": "P8",
+      "to": "E",
+      "type": "PROPOSED",
+      "handoff": "H09",
+      "label": "AH01: optional bootstrap-only producer"
+    }
+  ],
+  "open_findings": [
+    {
+      "id": "AH01",
+      "severity": "High",
+      "category": "OPEN ROUTE GAP",
+      "title": "P6/P8 environment bootstrap ordering"
+    },
+    {
+      "id": "AH02",
+      "severity": "High",
+      "category": "OPEN ROUTE GAP",
+      "title": "Direct Retain/Retire and portfolio closure"
+    },
+    {
+      "id": "AH03",
+      "severity": "Medium",
+      "category": "CONTRACT CLARIFICATION",
+      "title": "Build versus deployable identity"
+    },
+    {
+      "id": "AH04",
+      "severity": "Medium",
+      "category": "CONTRACT CLARIFICATION",
+      "title": "Executable identity/schema compatibility"
+    },
+    {
+      "id": "AH05",
+      "severity": "Medium",
+      "category": "IMPLEMENTATION PREREQUISITE",
+      "title": "Shared assurance criteria and approved policy"
+    },
+    {
+      "id": "AH06",
+      "severity": "Medium",
+      "category": "IMPLEMENTATION PREREQUISITE",
+      "title": "Cross-phase invalidation and recovery implementation"
+    }
+  ]
+}

@@ -1,0 +1,3009 @@
+{
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Discovery",
+      "schema_version": "P1.discovery.v3.0",
+      "freeze_recommendation": "READY FOR DESIGN REVIEW",
+      "roles": 11,
+      "gates": [
+        "G0",
+        "G1",
+        "G2"
+      ],
+      "edges": [
+        {
+          "from": "A3",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A3 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A6",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A6 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A7",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A7 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A9",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A9 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A11",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A11 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "P2",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "Authorized handoff",
+          "failure_behavior": "Do not consume an unauthorized package",
+          "external": true
+        },
+        {
+          "from": "G0",
+          "to": "A1",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Authorized intake",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A2",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A2",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A4 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A3",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A3",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A4 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A4",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Authorized intake",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A5",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Authorized intake",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A4 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A8",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Authorized intake",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A9",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A9",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A10",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Sealed evidence manifest",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        },
+        {
+          "from": "A10",
+          "to": "A11",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A10 versioned outcome",
+          "failure_behavior": "Block on missing/failed prerequisite",
+          "external": false
+        }
+      ],
+      "agents": [
+        {
+          "id": "P1.A1",
+          "local_id": "A1",
+          "name": "Repo Intelligence Agent",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P1.A2",
+          "local_id": "A2",
+          "name": "Architecture Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A4"
+          ]
+        },
+        {
+          "id": "P1.A3",
+          "local_id": "A3",
+          "name": "Data Intelligence Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A4"
+          ]
+        },
+        {
+          "id": "P1.A4",
+          "local_id": "A4",
+          "name": "Infrastructure & Runtime Profiler Agent",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P1.A5",
+          "local_id": "A5",
+          "name": "Journey Intelligence Agent",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P1.A6",
+          "local_id": "A6",
+          "name": "Compliance Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A4"
+          ]
+        },
+        {
+          "id": "P1.A7",
+          "local_id": "A7",
+          "name": "UX Evaluator Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A5"
+          ]
+        },
+        {
+          "id": "P1.A8",
+          "local_id": "A8",
+          "name": "Stakeholder Elicitation Agent",
+          "tier": null,
+          "lane": "async",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P1.A9",
+          "local_id": "A9",
+          "name": "Business Process Agent",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "P1.A10",
+          "local_id": "A10",
+          "name": "Synthesis Discovery Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "G1"
+          ]
+        },
+        {
+          "id": "P1.A11",
+          "local_id": "A11",
+          "name": "Risk Scoring Agent",
+          "tier": 4,
+          "lane": "normal",
+          "prerequisites": [
+            "A10"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "Portfolio",
+      "schema_version": "P2.portfolio.v3.0",
+      "freeze_recommendation": "READY FOR DESIGN REVIEW",
+      "roles": 7,
+      "gates": [
+        "G0",
+        "G1",
+        "G2"
+      ],
+      "edges": [
+        {
+          "from": "G0",
+          "to": "A1",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A2",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A3",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A4",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A4",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A4 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A6",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G1 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A6",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A6 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A3 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A5 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "A7",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A7 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "P3",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "G2 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": true
+        },
+        {
+          "from": "G2",
+          "to": "R",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "G2 versioned outcome / manifest",
+          "failure_behavior": "Missing or FAILED blocks; allowed partials retain restrictions.",
+          "external": true
+        }
+      ],
+      "agents": [
+        {
+          "id": "P2.A1",
+          "local_id": "A1",
+          "name": "Business Value & Market Agent",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P2.A2",
+          "local_id": "A2",
+          "name": "Technical Complexity & Impact Agent",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P2.A3",
+          "local_id": "A3",
+          "name": "Cost Estimation Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A2"
+          ]
+        },
+        {
+          "id": "P2.A4",
+          "local_id": "A4",
+          "name": "Portfolio Rationalization Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "P2.A5",
+          "local_id": "A5",
+          "name": "Readiness Assessment Agent",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "A2",
+            "A4"
+          ]
+        },
+        {
+          "id": "P2.A6",
+          "local_id": "A6",
+          "name": "Modernization Strategy Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "G1"
+          ]
+        },
+        {
+          "id": "P2.A7",
+          "local_id": "A7",
+          "name": "Decision Consolidator Agent",
+          "tier": 4,
+          "lane": "normal",
+          "prerequisites": [
+            "A6"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "Target architecture",
+      "schema_version": "P3.architecture.v3.0",
+      "freeze_recommendation": "READY FOR DESIGN REVIEW",
+      "roles": 8,
+      "gates": [
+        "G0",
+        "G1",
+        "G2"
+      ],
+      "edges": [
+        {
+          "from": "G0",
+          "to": "A1",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A2",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A3",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A3",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A4",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A6",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A8",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A7",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A8",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "P4",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "",
+          "failure_behavior": "Missing or FAILED blocks; approved substitutes must satisfy the consumer contract.",
+          "external": true
+        }
+      ],
+      "agents": [
+        {
+          "id": "P3.A1",
+          "local_id": "A1",
+          "name": "Target Architecture Agent",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P3.A2",
+          "local_id": "A2",
+          "name": "Monolith Decomposition Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A1"
+          ]
+        },
+        {
+          "id": "P3.A3",
+          "local_id": "A3",
+          "name": "Schema Alignment & Data Architecture Agent",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "A2",
+            "A4"
+          ]
+        },
+        {
+          "id": "P3.A4",
+          "local_id": "A4",
+          "name": "Security Architecture Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A1"
+          ]
+        },
+        {
+          "id": "P3.A5",
+          "local_id": "A5",
+          "name": "UI Architecture Agent",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "A2",
+            "A4"
+          ]
+        },
+        {
+          "id": "P3.A6",
+          "local_id": "A6",
+          "name": "Interface & Integration Contract Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A3",
+            "A5",
+            "A4"
+          ]
+        },
+        {
+          "id": "P3.A7",
+          "local_id": "A7",
+          "name": "Cloud Platform & Capacity Agent",
+          "tier": 4,
+          "lane": "normal",
+          "prerequisites": [
+            "A6",
+            "A4"
+          ]
+        },
+        {
+          "id": "P3.A8",
+          "local_id": "A8",
+          "name": "Architecture Consolidator Agent",
+          "tier": 5,
+          "lane": "normal",
+          "prerequisites": [
+            "G1"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "Modernization planning",
+      "schema_version": "P4.planning.v3.0",
+      "freeze_recommendation": "FREEZE CORE STRUCTURE",
+      "roles": 9,
+      "gates": [
+        "G0",
+        "G1",
+        "G2"
+      ],
+      "edges": [
+        {
+          "from": "G0",
+          "to": "A1",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A2",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A3",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A4",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A8",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A9",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G1 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A4 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A5 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A6",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A6 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A7",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A7 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A8",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A8 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "A9",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A9 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "P5",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "G2 exact versioned artifact / manifest",
+          "failure_behavior": "Missing or FAILED blocks; partial outcomes require explicit policy and scope restrictions.",
+          "external": true
+        }
+      ],
+      "agents": [
+        {
+          "id": "P4.A1",
+          "local_id": "A1",
+          "name": "Wave Architecture Agent",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P4.A2",
+          "local_id": "A2",
+          "name": "Wave Specification Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A1"
+          ]
+        },
+        {
+          "id": "P4.A3",
+          "local_id": "A3",
+          "name": "Task Generator Agent",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "A2"
+          ]
+        },
+        {
+          "id": "P4.A4",
+          "local_id": "A4",
+          "name": "Runbook Generator Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A3"
+          ]
+        },
+        {
+          "id": "P4.A5",
+          "local_id": "A5",
+          "name": "Resource Planner Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A3"
+          ]
+        },
+        {
+          "id": "P4.A6",
+          "local_id": "A6",
+          "name": "Tool Selection Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A3"
+          ]
+        },
+        {
+          "id": "P4.A7",
+          "local_id": "A7",
+          "name": "Validation Planner Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A3"
+          ]
+        },
+        {
+          "id": "P4.A8",
+          "local_id": "A8",
+          "name": "Rollback & Contingency Planner Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A3"
+          ]
+        },
+        {
+          "id": "P4.A9",
+          "local_id": "A9",
+          "name": "Planning Validation & Handoff Agent",
+          "tier": 4,
+          "lane": "normal",
+          "prerequisites": [
+            "G1"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "Code & application modernization",
+      "schema_version": "P5.codeapp.v3.0",
+      "freeze_recommendation": "READY FOR DESIGN REVIEW",
+      "roles": 9,
+      "gates": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "edges": [
+        {
+          "from": "G0",
+          "to": "A1",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A2",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G1 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A3",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G1 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A4",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G1 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "A5",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G2 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A8",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G3",
+          "to": "A9",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G3 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A9",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G1 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A1 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A2 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A3 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A4 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A6",
+          "to": "G3",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A6 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A7",
+          "to": "G3",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A7 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A8",
+          "to": "G3",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A8 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "A9",
+          "to": "G4",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A9 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": false
+        },
+        {
+          "from": "G4",
+          "to": "NEXT",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "G4 exact artifact / source / manifest",
+          "failure_behavior": "Missing or failed prerequisite blocks; approved no-change records must satisfy consumer contract.",
+          "external": true
+        }
+      ],
+      "agents": [
+        {
+          "id": "P5.A1",
+          "local_id": "A1",
+          "name": "Characterization Test Agent",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P5.A2",
+          "local_id": "A2",
+          "name": "Code Transformation Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "G1"
+          ]
+        },
+        {
+          "id": "P5.A3",
+          "local_id": "A3",
+          "name": "SQL & Data Layer Modernization Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "G1"
+          ]
+        },
+        {
+          "id": "P5.A4",
+          "local_id": "A4",
+          "name": "UI Modernization Agent",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "G1"
+          ]
+        },
+        {
+          "id": "P5.A5",
+          "local_id": "A5",
+          "name": "Configuration & Secrets Externalization Agent",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "G2"
+          ]
+        },
+        {
+          "id": "P5.A6",
+          "local_id": "A6",
+          "name": "Feature Flag Integration Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A5"
+          ]
+        },
+        {
+          "id": "P5.A7",
+          "local_id": "A7",
+          "name": "Observability Instrumentation Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A5"
+          ]
+        },
+        {
+          "id": "P5.A8",
+          "local_id": "A8",
+          "name": "Security Hardening Agent",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "A5"
+          ]
+        },
+        {
+          "id": "P5.A9",
+          "local_id": "A9",
+          "name": "Validation Test & Equivalence Agent",
+          "tier": 4,
+          "lane": "normal",
+          "prerequisites": [
+            "G3",
+            "G1"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": 6,
+      "name": "Data modernization",
+      "schema_version": "P6.data.v3.0",
+      "freeze_recommendation": "READY FOR DESIGN REVIEW",
+      "roles": 12,
+      "gates": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "X1"
+      ],
+      "edges": [
+        {
+          "from": "G0",
+          "to": "A1",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A2",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A3",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A4",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A4",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A4 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A4 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A7",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A8",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A8",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "A9",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G2 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A9",
+          "to": "A10",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A9 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A10",
+          "to": "A11",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A10 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A11",
+          "to": "A12",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A11 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A6",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A6 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A7",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A7 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A8",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A8 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "X1",
+          "from_kind": "gate",
+          "to_kind": "execution",
+          "type": "HARD",
+          "required_artifact": "G1 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "X1",
+          "to": "G2",
+          "from_kind": "execution",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "X1 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "A12",
+          "to": "G3",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A12 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": false
+        },
+        {
+          "from": "G3",
+          "to": "NEXT",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "G3 exact versioned manifest and transitive evidence",
+          "failure_behavior": "Missing prerequisite blocks; route N/A must be approved and satisfy the receiving contract.",
+          "external": true
+        }
+      ],
+      "agents": [
+        {
+          "id": "P6.A1",
+          "local_id": "A1",
+          "name": "Data Migration Orchestrator",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P6.A2",
+          "local_id": "A2",
+          "name": "Data Mapping & Semantic Alignment",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P6.A3",
+          "local_id": "A3",
+          "name": "Sensitive Data & Compliance",
+          "tier": 0,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P6.A4",
+          "local_id": "A4",
+          "name": "Data Quality Preparation",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A2",
+            "A3"
+          ]
+        },
+        {
+          "id": "P6.A5",
+          "local_id": "A5",
+          "name": "Data Disposition",
+          "tier": 1,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A2",
+            "A3"
+          ]
+        },
+        {
+          "id": "P6.A6",
+          "local_id": "A6",
+          "name": "ETL/ELT Pipeline Synthesis",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A3",
+            "A4",
+            "A5"
+          ]
+        },
+        {
+          "id": "P6.A7",
+          "local_id": "A7",
+          "name": "Streaming & CDC Migration",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A3",
+            "A4",
+            "A5"
+          ]
+        },
+        {
+          "id": "P6.A8",
+          "local_id": "A8",
+          "name": "Schema Parity",
+          "tier": 2,
+          "lane": "normal",
+          "prerequisites": [
+            "A2",
+            "A5"
+          ]
+        },
+        {
+          "id": "P6.A9",
+          "local_id": "A9",
+          "name": "Reconciliation & Completeness",
+          "tier": 3,
+          "lane": "normal",
+          "prerequisites": [
+            "G2"
+          ]
+        },
+        {
+          "id": "P6.A10",
+          "local_id": "A10",
+          "name": "Data Quality & Performance Validation",
+          "tier": 4,
+          "lane": "normal",
+          "prerequisites": [
+            "A9"
+          ]
+        },
+        {
+          "id": "P6.A11",
+          "local_id": "A11",
+          "name": "Data Flow Validation",
+          "tier": 5,
+          "lane": "normal",
+          "prerequisites": [
+            "A10"
+          ]
+        },
+        {
+          "id": "P6.A12",
+          "local_id": "A12",
+          "name": "Data Monitoring & Lineage",
+          "tier": 6,
+          "lane": "normal",
+          "prerequisites": [
+            "A11"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": 8,
+      "name": "Deployment & cutover",
+      "schema_version": "P8.deploy.v3.0",
+      "freeze_recommendation": "READY FOR DESIGN REVIEW",
+      "roles": 12,
+      "gates": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "X1",
+        "X2",
+        "X3"
+      ],
+      "edges": [
+        {
+          "from": "G0",
+          "to": "A1",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A2",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A3",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A4",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A4",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A1 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A2 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A5",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A4 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A6",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A7",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "G0 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "A8",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A3 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "A9",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A4 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "A9",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A5 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A8",
+          "to": "A9",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A8 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A6",
+          "to": "A10",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A6 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A7",
+          "to": "A10",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A7 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A8",
+          "to": "A10",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A8 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A9",
+          "to": "A10",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A9 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A10",
+          "to": "A11.P",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A10 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A10",
+          "to": "A12.P",
+          "from_kind": "agent",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "A10 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "X1",
+          "to": "A11.R",
+          "from_kind": "execution",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "X1 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "X3",
+          "to": "A11.V",
+          "from_kind": "execution",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "X3 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "X3",
+          "to": "A12.H",
+          "from_kind": "execution",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "X3 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A11.P",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A11.P exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A12.P",
+          "to": "G1",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A12.P exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "X1",
+          "from_kind": "gate",
+          "to_kind": "execution",
+          "type": "HARD",
+          "required_artifact": "G1 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A11.R",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A11.R exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "X2",
+          "from_kind": "gate",
+          "to_kind": "execution",
+          "type": "HARD",
+          "required_artifact": "G2 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "X2",
+          "to": "G3",
+          "from_kind": "execution",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "X2 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "G3",
+          "to": "X3",
+          "from_kind": "gate",
+          "to_kind": "execution",
+          "type": "HARD",
+          "required_artifact": "G3 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A11.V",
+          "to": "G4",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A11.V exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "A12.H",
+          "to": "G4",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "A12.H exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": false
+        },
+        {
+          "from": "X3",
+          "to": "OPS",
+          "from_kind": "execution",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "X3 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": true
+        },
+        {
+          "from": "G4",
+          "to": "NEXT",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "G4 exact versioned manifest, event or evidence with transitive refs",
+          "failure_behavior": "Missing prerequisite blocks dependent execution. Failure/partial-state records support HOLD and incident handling, never acceptance.",
+          "external": true
+        }
+      ],
+      "agents": [
+        {
+          "id": "P8.A1",
+          "local_id": "A1",
+          "name": "Container & Deployment Packaging",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P8.A2",
+          "local_id": "A2",
+          "name": "Infrastructure Provisioning",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P8.A3",
+          "local_id": "A3",
+          "name": "Secrets & Identity Provisioning",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "A2"
+          ]
+        },
+        {
+          "id": "P8.A4",
+          "local_id": "A4",
+          "name": "Service Mesh Configuration",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A3"
+          ]
+        },
+        {
+          "id": "P8.A5",
+          "local_id": "A5",
+          "name": "CI/CD Pipeline",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "A1",
+            "A2",
+            "A3"
+          ]
+        },
+        {
+          "id": "P8.A6",
+          "local_id": "A6",
+          "name": "Application Deployment Runbook",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "A4",
+            "A5"
+          ]
+        },
+        {
+          "id": "P8.A7",
+          "local_id": "A7",
+          "name": "Data Migration Runbook",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "G0"
+          ]
+        },
+        {
+          "id": "P8.A8",
+          "local_id": "A8",
+          "name": "Integration Reconfiguration Guide",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "A3"
+          ]
+        },
+        {
+          "id": "P8.A9",
+          "local_id": "A9",
+          "name": "Network & Traffic Cutover",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "A4",
+            "A5",
+            "A8"
+          ]
+        },
+        {
+          "id": "P8.A10",
+          "local_id": "A10",
+          "name": "Cutover Orchestration",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": [
+            "A6",
+            "A7",
+            "A8",
+            "A9"
+          ]
+        },
+        {
+          "id": "P8.A11",
+          "local_id": "A11",
+          "name": "Validation Test Pack",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P8.A12",
+          "local_id": "A12",
+          "name": "Hypercare & Incident Response",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        }
+      ]
+    },
+    {
+      "phase": 9,
+      "name": "Post-modernization operations",
+      "schema_version": "P9.ops.v3.0",
+      "freeze_recommendation": "READY FOR DESIGN REVIEW",
+      "roles": 10,
+      "gates": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "X1"
+      ],
+      "edges": [
+        {
+          "from": "P8OPS",
+          "to": "G0",
+          "from_kind": "external",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "Live/partial-state custody event",
+          "failure_behavior": "",
+          "external": true
+        },
+        {
+          "from": "G0",
+          "to": "A1",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "ACTIVATE",
+          "required_artifact": "Scoped activation and policy; not a completion dependency",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A2",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "ACTIVATE",
+          "required_artifact": "Scoped activation and policy; not a completion dependency",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A3",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "ACTIVATE",
+          "required_artifact": "Scoped activation and policy; not a completion dependency",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A4",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "ACTIVATE",
+          "required_artifact": "Scoped activation and policy; not a completion dependency",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A5",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "ACTIVATE",
+          "required_artifact": "Scoped activation and policy; not a completion dependency",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A6",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "ACTIVATE",
+          "required_artifact": "Scoped activation and policy; not a completion dependency",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G0",
+          "to": "A9",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "ACTIVATE",
+          "required_artifact": "Scoped activation and policy; not a completion dependency",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A1",
+          "to": "BUS",
+          "from_kind": "agent",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Versioned observation, dashboard definition or approved knowledge event",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A2",
+          "to": "BUS",
+          "from_kind": "agent",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Versioned observation, dashboard definition or approved knowledge event",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A3",
+          "to": "BUS",
+          "from_kind": "agent",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Versioned observation, dashboard definition or approved knowledge event",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A4",
+          "to": "BUS",
+          "from_kind": "agent",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Versioned observation, dashboard definition or approved knowledge event",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A5",
+          "to": "BUS",
+          "from_kind": "agent",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Versioned observation, dashboard definition or approved knowledge event",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A6",
+          "to": "BUS",
+          "from_kind": "agent",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Versioned observation, dashboard definition or approved knowledge event",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "BUS",
+          "to": "A2",
+          "from_kind": "service",
+          "to_kind": "agent",
+          "type": "EVENT",
+          "required_artifact": "Subscribed relevant evidence; ignore own unchanged publications; missing feeds remain UNKNOWN",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "BUS",
+          "to": "A3",
+          "from_kind": "service",
+          "to_kind": "agent",
+          "type": "EVENT",
+          "required_artifact": "Subscribed relevant evidence; ignore own unchanged publications; missing feeds remain UNKNOWN",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "BUS",
+          "to": "A6",
+          "from_kind": "service",
+          "to_kind": "agent",
+          "type": "EVENT",
+          "required_artifact": "Subscribed relevant evidence; ignore own unchanged publications; missing feeds remain UNKNOWN",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "BUS",
+          "to": "A9",
+          "from_kind": "service",
+          "to_kind": "agent",
+          "type": "EVENT",
+          "required_artifact": "Subscribed relevant evidence; ignore own unchanged publications; missing feeds remain UNKNOWN",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "BUS",
+          "from_kind": "gate",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Authoritative handover, disposition or publication milestone event; update future reporting snapshots",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G4",
+          "to": "BUS",
+          "from_kind": "gate",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Authoritative handover, disposition or publication milestone event; update future reporting snapshots",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G6",
+          "to": "BUS",
+          "from_kind": "gate",
+          "to_kind": "service",
+          "type": "EVENT",
+          "required_artifact": "Authoritative handover, disposition or publication milestone event; update future reporting snapshots",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "BUS",
+          "to": "S",
+          "from_kind": "service",
+          "to_kind": "service",
+          "type": "SNAPSHOT",
+          "required_artifact": "Cutoff-bound evidence references",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A9",
+          "to": "S",
+          "from_kind": "agent",
+          "to_kind": "service",
+          "type": "SNAPSHOT",
+          "required_artifact": "Reconciled milestone state and source refs",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "P8NEXT",
+          "to": "G1",
+          "from_kind": "external",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "Accepted wave package",
+          "failure_behavior": "",
+          "external": true
+        },
+        {
+          "from": "S",
+          "to": "G1",
+          "from_kind": "service",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "Fresh wave-readiness snapshot",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A8",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Eligible wave decision",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A8",
+          "to": "G2",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "Exact handover candidate",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G1",
+          "to": "A7.P",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Wave context for retirement planning",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A7.P",
+          "to": "G3",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "Retirement/disposition proposal",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "G3",
+          "from_kind": "gate",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "Signed accountable owner and transferred obligations",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G3",
+          "to": "X1",
+          "from_kind": "gate",
+          "to_kind": "execution",
+          "type": "EXECUTE",
+          "required_artifact": "Only permitted EXECUTE decision",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "X1",
+          "to": "A7.V",
+          "from_kind": "execution",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Actual action journal and outcome",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A7.V",
+          "to": "G4",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "EXECUTED",
+          "required_artifact": "Verified execution evidence; only EXECUTE branch",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G3",
+          "to": "G4",
+          "from_kind": "gate",
+          "to_kind": "gate",
+          "type": "RETAIN_OR_NA",
+          "required_artifact": "Signed retained or not-applicable disposition; bypass execution only",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G2",
+          "to": "G5",
+          "from_kind": "gate",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "All in-scope wave BAU acceptances",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G4",
+          "to": "G5",
+          "from_kind": "gate",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "All in-scope component dispositions",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "S",
+          "to": "G5",
+          "from_kind": "service",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "Fresh scoped program evidence",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G5",
+          "to": "A10",
+          "from_kind": "gate",
+          "to_kind": "agent",
+          "type": "HARD",
+          "required_artifact": "Eligible immutable closure snapshot",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "A10",
+          "to": "G6",
+          "from_kind": "agent",
+          "to_kind": "gate",
+          "type": "HARD",
+          "required_artifact": "Versioned closure candidate",
+          "failure_behavior": "",
+          "external": false
+        },
+        {
+          "from": "G6",
+          "to": "NEXT",
+          "from_kind": "gate",
+          "to_kind": "external",
+          "type": "HARD",
+          "required_artifact": "Approved publication and accepted obligations",
+          "failure_behavior": "",
+          "external": true
+        }
+      ],
+      "agents": [
+        {
+          "id": "P9.A1",
+          "local_id": "A1",
+          "name": "Day-2 Operations",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A2",
+          "local_id": "A2",
+          "name": "Operational Dashboards",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A3",
+          "local_id": "A3",
+          "name": "FinOps",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A4",
+          "local_id": "A4",
+          "name": "SecOps & Compliance Monitoring",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A5",
+          "local_id": "A5",
+          "name": "Architecture Drift Detection",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A6",
+          "local_id": "A6",
+          "name": "Knowledge & Support",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A7",
+          "local_id": "A7",
+          "name": "Legacy Decommissioning",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A8",
+          "local_id": "A8",
+          "name": "BAU Operational Handover",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A9",
+          "local_id": "A9",
+          "name": "Modernization Progress Tracker",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        },
+        {
+          "id": "P9.A10",
+          "local_id": "A10",
+          "name": "Execution Summary & Closure",
+          "tier": null,
+          "lane": "normal",
+          "prerequisites": []
+        }
+      ]
+    }
+  ],
+  "master_links": [
+    {
+      "id": "M01",
+      "from": "P1",
+      "to": "P2",
+      "type": "HANDOFF",
+      "handoff": "H01",
+      "label": "Draft or decision scope"
+    },
+    {
+      "id": "M02",
+      "from": "P2",
+      "to": "P3",
+      "type": "HANDOFF",
+      "handoff": "H02",
+      "label": "Authorized design routes"
+    },
+    {
+      "id": "M03",
+      "from": "P2",
+      "to": "R",
+      "type": "BRANCH",
+      "handoff": "H03",
+      "label": "Retain / Retire / HOLD"
+    },
+    {
+      "id": "M04",
+      "from": "P3",
+      "to": "P4",
+      "type": "HANDOFF",
+      "handoff": "H04",
+      "label": "Planning scope + conditions"
+    },
+    {
+      "id": "M05",
+      "from": "P4",
+      "to": "P5",
+      "type": "HANDOFF",
+      "handoff": "H05",
+      "label": "Scoped preparation + permits"
+    },
+    {
+      "id": "M06",
+      "from": "P5",
+      "to": "P6",
+      "type": "CONDITIONAL",
+      "handoff": "H06",
+      "label": "Data-applicable route"
+    },
+    {
+      "id": "M07",
+      "from": "P5",
+      "to": "P8",
+      "type": "CONDITIONAL",
+      "handoff": "H07",
+      "label": "Approved no-data bypass"
+    },
+    {
+      "id": "M08",
+      "from": "P6",
+      "to": "P8",
+      "type": "HANDOFF",
+      "handoff": "H08",
+      "label": "Preparation only; refresh before cutover"
+    },
+    {
+      "id": "M09",
+      "from": "P8",
+      "to": "P9",
+      "type": "ACTIVATE",
+      "handoff": "H11",
+      "label": "OPS: first live/partial transition"
+    },
+    {
+      "id": "M10",
+      "from": "P8",
+      "to": "P9",
+      "type": "HANDOFF",
+      "handoff": "H12",
+      "label": "NEXT: ACCEPTED_FOR_DAY2"
+    },
+    {
+      "id": "M11",
+      "from": "P9",
+      "to": "C",
+      "type": "HANDOFF",
+      "handoff": "H13",
+      "label": "Signed program closure; BAU continues"
+    },
+    {
+      "id": "M12",
+      "from": "P3",
+      "to": "P6",
+      "type": "REFERENCE",
+      "handoff": "H10",
+      "label": "Pinned design + criteria"
+    },
+    {
+      "id": "M13",
+      "from": "P3",
+      "to": "P8",
+      "type": "REFERENCE",
+      "handoff": "H10",
+      "label": "Pinned platform/security/contracts"
+    },
+    {
+      "id": "M14",
+      "from": "P4",
+      "to": "P6",
+      "type": "REFERENCE",
+      "handoff": "H18",
+      "label": "Tasks, windows and recovery"
+    },
+    {
+      "id": "M15",
+      "from": "P4",
+      "to": "P8",
+      "type": "REFERENCE",
+      "handoff": "H18",
+      "label": "Wave tasks and acceptance obligations"
+    },
+    {
+      "id": "M16",
+      "from": "E",
+      "to": "P6",
+      "type": "PROPOSED",
+      "handoff": "H09",
+      "label": "AH01: observed environment manifest"
+    },
+    {
+      "id": "M17",
+      "from": "P8",
+      "to": "E",
+      "type": "PROPOSED",
+      "handoff": "H09",
+      "label": "AH01: optional bootstrap-only producer"
+    }
+  ],
+  "open_findings": [
+    {
+      "id": "AH01",
+      "severity": "High",
+      "category": "OPEN ROUTE GAP",
+      "title": "P6/P8 environment bootstrap ordering"
+    },
+    {
+      "id": "AH02",
+      "severity": "High",
+      "category": "OPEN ROUTE GAP",
+      "title": "Direct Retain/Retire and portfolio closure"
+    },
+    {
+      "id": "AH03",
+      "severity": "Medium",
+      "category": "CONTRACT CLARIFICATION",
+      "title": "Build versus deployable identity"
+    },
+    {
+      "id": "AH04",
+      "severity": "Medium",
+      "category": "CONTRACT CLARIFICATION",
+      "title": "Executable identity/schema compatibility"
+    },
+    {
+      "id": "AH05",
+      "severity": "Medium",
+      "category": "IMPLEMENTATION PREREQUISITE",
+      "title": "Shared assurance criteria and approved policy"
+    },
+    {
+      "id": "AH06",
+      "severity": "Medium",
+      "category": "IMPLEMENTATION PREREQUISITE",
+      "title": "Cross-phase invalidation and recovery implementation"
+    }
+  ]
+}
