@@ -14,7 +14,6 @@ assembles and validates the full envelope and decides publication.
 
 from __future__ import annotations
 
-import time
 from dataclasses import dataclass, field
 from typing import Any, Protocol
 
@@ -35,6 +34,8 @@ class AgentOutcome:
     scope: dict[str, Any] = field(default_factory=dict)
     applicability: dict[str, Any] = field(default_factory=dict)
     notes: str = ""
+    execution_metadata: dict[str, Any] = field(default_factory=dict)
+    known_evidence: set[str] | None = None       # citable ids (LLM runs); None = no ledger
 
 
 class AgentRunner(Protocol):

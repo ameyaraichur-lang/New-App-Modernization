@@ -22,7 +22,7 @@ from __future__ import annotations
 import hashlib
 import json
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 from appmod.agents.runtime import AgentOutcome
@@ -64,6 +64,11 @@ class P2AgentRunner:
             policy: Any) -> AgentOutcome:
         local = agent_spec["local_id"]
         return getattr(self, f"_run_{local.lower()}")(agent_spec, inputs, policy)
+
+    def fingerprint(self) -> str:
+        from dataclasses import asdict
+        return "P2:" + hashlib.sha256(json.dumps([asdict(a) for a in self.apps],
+                                                 sort_keys=True).encode()).hexdigest()[:16]
 
     # -- A1 Business Value & Market ------------------------------------------------
 
