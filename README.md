@@ -61,6 +61,50 @@ path or `https://github.com/org/repo.git`, and watch it execute.
 
 ![Phase 1 DAG with agent work anatomy](docs/screenshots/03-agent-anatomy.png)
 
+## Agentic mode (Azure OpenAI "Astra")
+
+With Astra configured, every P1–P4 agent (35 roles) runs a real tool-use loop on top of
+its deterministic seed: it investigates the repository and upstream artifacts through a
+sandboxed tool gateway, then submits a strict, evidence-cited outcome that the kernel
+validates before publishing.
+
+```bash
+uv venv --python 3.12 && uv pip install -e ".[dev]"
+cp .env.example .env               # APPMOD_ASTRA_ENDPOINT / APPMOD_ASTRA_API_KEY / deployments
+uv run python scripts/install_tools.py   # scc, syft, osv-scanner, gitleaks (+ semgrep via uv tool)
+uv run python scripts/doctor.py --live   # config, analyzers, tool catalog, MCP, one call per tier
+uv run python -m appmod.server           # → http://localhost:8600 (sign in with a token)
+```
+
+- **Model tiers** — `reasoning` (gpt-6-astra), `coding`, `fast`, `fallback`, `embedding`;
+  one automatic failover to the fallback tier on transient/unavailable errors; TPM limiter;
+  record/replay response cache (`APPMOD_LLM_CACHE=off|read|record|replay`).
+- **Tools** — repo (`read_file`, `grep`, `list_dir`, `search_code` embeddings, `git_log`, …),
+  artifacts (`get_artifact`, `list_artifacts`), analyzers (`vulnerability_scan` osv,
+  `secret_scan` gitleaks, `static_analysis` semgrep, `sbom_packages` syft, `loc_metrics` scc),
+  plus any MCP server listed in `config/mcp_servers.json` (`mcp__<server>__<tool>`).
+  Tool output is redacted, truncated and wrapped as untrusted evidence with a citable id.
+- **Evidence rules** (kernel-enforced) — uncited OBSERVED/DOCUMENTED → INFERRED; model-claimed
+  HUMAN_CONFIRMED → HYPOTHETICAL; unknown citations stripped; COMPLETE with NOT_ASSESSED gap →
+  PARTIAL; configured secrets redacted everywhere (artifacts, audit, events, logs).
+- **Portfolio runs** — several repos in one run: P1 per app (parallel) → one P2 portfolio
+  decision → P3/P4 per authorized app. Single-repo runs continue to P5/P6.
+- **Review modes** — `simulated` (gates auto-release, labelled) or `human`: P1–P4 release gates
+  wait in `AWAITING_REVIEW` until a reviewer approves the exact candidate hash; P1.A8 confirmations
+  come only from answers recorded in the questionnaire. Answers re-run only the affected nodes
+  (reuse-by-input-hash); a changed candidate supersedes its pending review.
+- **Durability** — jobs, events, reviews and questions live in `runs/appmod.db` (SQLite WAL).
+  After a restart, interrupted jobs resume and reuse every finished node.
+- **Auth** — bearer tokens with roles `viewer`, `operator`, `reviewer`, `stakeholder`, `admin`
+  (`APPMOD_API_TOKENS="tok=user:role1,role2;…"`). With none configured, an admin token is
+  generated into `runs/.admin_token` (mode 600). Repo-root and git-host allowlists and per-user
+  run quotas apply to every submission.
+
+**Acceptance run:** `uv run python scripts/e2e_agentic.py --label run1 --cache record` starts the
+server, submits the 4-repo corpus in human review mode with live Astra, answers and approves through
+the API with a *scripted, labelled* reviewer and stakeholder, and scores every P1–P4 agent dispatch
+(not FAILED + enriched by the live loop + passes ContractValidator). Reports land in `docs/runs/`.
+
 ## The console
 
 - **Master pipeline map** — all 8 active phases and the 17 typed links
@@ -181,11 +225,16 @@ directory of checkouts, or just run any repo through the UI.
 
 | Endpoint | Purpose |
 |---|---|
-| `POST /api/runs` | start a run `{repo, app_id?, decision_mode?, include_p6?}` |
-| `GET /api/runs` / `GET /api/runs/{id}` | list / live snapshot (stage, progress, log, phases, gates) |
-| `GET /api/runs/{id}/artifacts` | all artifact pointers for a run |
-| `GET /api/runs/{id}/artifacts/{artifact_id}` | one full artifact envelope |
+| `POST /api/runs` | start a run `{repo \| repos[], review_mode?, llm?, decision_mode?, include_p6?}` (operator) |
+| `GET /api/runs` / `GET /api/runs/{id}` | list / live snapshot (phases per app, gates, LLM usage) |
+| `POST /api/runs/{id}/cancel` · `/resume` · `/rerun {phase, app, nodes}` | lifecycle (operator) |
+| `GET /api/runs/{id}/events?after=` · `/stream?token=` | durable event log · SSE stream |
+| `GET /api/runs/{id}/trace` | per-agent model calls, tool calls, rejected submissions |
+| `GET /api/reviews?job_id=` · `POST /api/reviews/{id}/decision` | release-gate approvals (reviewer; 409 on stale hash) |
+| `GET /api/runs/{id}/questions` · `POST /api/questions/{id}/answer` | stakeholder questionnaire (stakeholder) |
+| `GET /api/runs/{id}/artifacts[/{artifact_id}]` | artifact pointers / one full envelope |
 | `GET /api/runs/{id}/outcome[?format=md\|json]` | downloadable outcome bundle / report / state |
+| `GET /api/health` · `/api/health/tools` · `/api/me` | liveness · Astra/analyzers/tools/MCP · identity |
 | `GET /registry/{name}` | compiled registry JSONs |
 
 ## License
