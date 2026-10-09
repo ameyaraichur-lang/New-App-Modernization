@@ -96,8 +96,8 @@ export default function App() {
             className={`nav-btn ${view.kind === 'runner' ? 'active' : ''}`}
             onClick={() => setView({ kind: 'runner' })}
           >
-            Run pipeline on a repo
-            <span className="meta">P1–P6 pilot · live progress</span>
+            Run pipeline on repos
+            <span className="meta">Astra agents P1–P4 · approvals · trace</span>
           </button>
         </div>
 
@@ -162,7 +162,7 @@ function crumb(
 ): string {
   if (view.kind === 'master') return 'Master pipeline — 17 typed links, 78 roles, Phase 7 skipped';
   if (view.kind === 'findings') return 'Open findings (AH01–AH06) · freeze recommendations';
-  if (view.kind === 'runner') return 'Pipeline runner — supply a repository, watch every gate';
+  if (view.kind === 'runner') return 'Pipeline runner — one or many repositories, live agents, human release gates';
   const reg = phaseReqs[view.phase];
   return reg ? `P${reg.phase} · ${reg.name} · ${reg.schema_version} · ${reg.freeze_recommendation}` : `Phase ${view.phase}`;
 }

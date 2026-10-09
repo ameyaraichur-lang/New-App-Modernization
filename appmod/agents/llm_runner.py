@@ -290,7 +290,9 @@ class LLMAgentRunner:
             "confidence": submitted.get("confidence"), "llm_status": submitted.get("status"),
         }
         emit("AGENT_LLM_DONE", agent=spec["id"], turns=turn, tool_calls=len(session.calls),
-             tokens=usage.total, status=out.status)
+             tokens=usage.total, status=out.status, enriched=True,
+             mode=out.execution_metadata["llm"]["mode"], repairs=repairs,
+             summary=submitted.get("summary", "")[:300])
         return out
 
     # -- context ------------------------------------------------------------------
