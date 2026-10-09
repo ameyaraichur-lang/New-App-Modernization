@@ -9,14 +9,13 @@ no shortcuts, and the honest-depth rules (NOT_RUN never PASS) apply.
 from __future__ import annotations
 
 import re
-import shutil
 import sqlite3
 import subprocess
 import threading
 import time
 import uuid
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 from appmod.kernel.audit import AuditJournal
 from appmod.kernel.orchestrator import PhaseOrchestrator

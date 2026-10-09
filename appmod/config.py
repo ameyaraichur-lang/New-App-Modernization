@@ -39,8 +39,11 @@ class Settings(BaseSettings):
     llm_mode: str = "auto"            # auto (use Astra when configured) | off
     llm_cache: str = "read"           # off | read | record | replay
     llm_timeout_s: float = 240.0
-    llm_tpm_limit: int = 400_000      # client-side tokens-per-minute ceiling
-    max_parallel_agents: int = 4
+    llm_tpm_limit: int = 900_000      # client-side tokens-per-minute ceiling
+    max_parallel_agents: int = 6
+    max_parallel_apps: int = 4
+    analyzers: str = "on"             # on | off (external analyzer CLIs in deterministic seeds)
+    review_mode: str = "simulated"    # simulated | human (gate approvals via the approvals API)
 
     # API
     auth_mode: str = "token"          # token | none
@@ -51,6 +54,8 @@ class Settings(BaseSettings):
 
     runs_dir: Path = ROOT / "runs"
     tools_dir: Path = ROOT / ".tools" / "bin"
+    mcp_config: Path = ROOT / "config" / "mcp_servers.json"
+    max_concurrent_jobs: int = 3
 
     @property
     def astra_configured(self) -> bool:
