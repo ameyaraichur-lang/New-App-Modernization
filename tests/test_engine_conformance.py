@@ -2,11 +2,9 @@
 compiled contract schema (T1 gate for phase engines)."""
 
 import jsonschema
-import pytest
 from pathlib import Path
 
 from appmod.contracts.schemas import normalize_payload, payload_schema
-from appmod.registry.compiler import compile_all
 from appmod.phases.p1.engine import P1AgentRunner
 from appmod.phases.p2.engine import P2AgentRunner, PortfolioApp
 from appmod.phases.p3.engine import P3AgentRunner

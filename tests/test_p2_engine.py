@@ -1,6 +1,5 @@
 """T2/T4 P2 engine tests: route router integrity, scope rules, IA02 register."""
 
-from pathlib import Path
 
 import pytest
 

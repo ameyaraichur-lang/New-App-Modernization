@@ -14,7 +14,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
-from appmod.contracts.schemas import canonical_json, content_hash, intake_errors
+from appmod.contracts.schemas import canonical_json, intake_errors
 
 
 @dataclass

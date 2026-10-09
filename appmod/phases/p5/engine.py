@@ -334,7 +334,8 @@ def p5_core_integration_gate(ctx: GateContext) -> GateResult:
                        "applicability": art["payload"].get("applicability", {})}
     if blockers:
         return GateResult("FAILED", "FAILED", {"blockers": blockers}, blockers)
-    import hashlib as _h, json as _j
+    import hashlib as _h
+    import json as _j
     core_hash = _h.sha256(_j.dumps(lanes, sort_keys=True).encode()).hexdigest()
     return GateResult("PUBLISHED", "COMPLETE", {
         "core_manifest": {
@@ -363,7 +364,8 @@ def p5_final_integration_gate(ctx: GateContext) -> GateResult:
         lanes[lane] = art["status"]
     if blockers:
         return GateResult("FAILED", "FAILED", {"blockers": blockers}, blockers)
-    import hashlib as _h, json as _j
+    import hashlib as _h
+    import json as _j
     build_digest = _h.sha256(_j.dumps(lanes, sort_keys=True).encode()).hexdigest()
     return GateResult("PUBLISHED", "COMPLETE", {
         "final_manifest": {

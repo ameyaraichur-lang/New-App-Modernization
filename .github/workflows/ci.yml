@@ -16,6 +16,7 @@ jobs:
       - run: uv run pytest -q
         env:
           APPMOD_LLM_MODE: "off"
+          APPMOD_ANALYZERS: "off"
   ui:
     runs-on: ubuntu-latest
     steps:

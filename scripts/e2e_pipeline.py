@@ -15,7 +15,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from appmod.kernel.audit import AuditJournal
 from appmod.kernel.orchestrator import PhaseOrchestrator
 from appmod.kernel.policy import PolicyService
-from appmod.registry.compiler import compile_all
 from appmod.phases.p1.engine import P1AgentRunner, P1_GATE_OVERRIDES
 from appmod.phases.p2.engine import P2AgentRunner, P2_GATE_OVERRIDES, PortfolioApp
 from appmod.phases.p3.engine import P3AgentRunner, P3_GATE_OVERRIDES
