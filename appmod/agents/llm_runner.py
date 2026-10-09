@@ -328,12 +328,18 @@ class LLMAgentRunner:
                ledger: EvidenceLedger, review_only: bool):
         problems: list[str] = []
         cited: list[str] = []
+
+        def alias(ids: list[str]) -> list[str]:
+            return [f"seed:{c}" if not ledger.has(c) and ledger.has(f"seed:{c}") else c for c in ids]
+
         for f in args.get("findings", []):
-            cited.extend(f.get("evidence_ids", []))
+            f["evidence_ids"] = alias(f.get("evidence_ids", []))
+            cited.extend(f["evidence_ids"])
         for v in (args.get("payload") or {}).values():
             for it in (v if isinstance(v, list) else [v]):
-                if isinstance(it, dict):
-                    cited.extend(it.get("evidence_ids", []))
+                if isinstance(it, dict) and isinstance(it.get("evidence_ids"), list):
+                    it["evidence_ids"] = alias(it["evidence_ids"])
+                    cited.extend(it["evidence_ids"])
         unknown = sorted({c for c in cited if not ledger.has(c)})
         if unknown:
             problems.append(f"unknown evidence ids (cite only ids you were given): {unknown[:15]}")

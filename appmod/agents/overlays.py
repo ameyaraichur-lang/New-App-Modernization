@@ -305,11 +305,15 @@ P1 = {
             "observations": (A(item(observation=S(), location=S())), "append"),
         }),
     "A8": Overlay(
-        tier="fast", effort="low", tools=ARTIFACT_TOOLS,
+        tier="reasoning", effort="low", tools=ARTIFACT_TOOLS,
         guidance=(
-            "Draft precise stakeholder questions that would resolve the open gaps of this discovery "
-            "(criticality, owners, SLAs, compliance, roadmap). You cannot answer them: any answer you "
-            "write is HYPOTHETICAL. Confirmed responses only come from recorded human answers."),
+            "Draft 3-8 NEW stakeholder questions specific to THIS application that would resolve its "
+            "open discovery gaps. Read the upstream artifacts (gaps, NOT_ASSESSED items, risky "
+            "dependencies, data stores, integrations) and ask about those concretely, naming the "
+            "component, dataset or dependency. Do NOT restate the generic seed questions already in the "
+            "payload (criticality / compliance / ownership) - only ask what they leave open. Fill "
+            "resolves_gap with the gap you target. You cannot answer them: any answer you write is "
+            "HYPOTHETICAL. Confirmed responses only come from recorded human answers."),
         fields={
             "questions_drafted": (A(item(question=S(), why=S(), target_role=S(),
                                          resolves_gap=S())), "append"),

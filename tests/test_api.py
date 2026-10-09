@@ -96,7 +96,8 @@ def test_human_run_over_http(client):
                 decided.add((rv["phase"], rv["app"]))
         time.sleep(0.3)
     snap = client.get(f"/api/runs/{job}", headers=H("vw")).json()
-    assert snap["status"] == "COMPLETED", (snap["status"], snap["error"])
+    assert snap["status"] == "COMPLETED", (snap["status"], snap["error"],
+                                           [l["msg"] for l in snap["log"] if l["level"] == "error"])
     assert answered >= 3 and stale_checked
     assert {p for p, _ in decided} >= {1, 2, 3, 4}
     g2 = client.get(f"/api/runs/{job}/artifacts/P1/microblog/G2", headers=H("vw")).json()
