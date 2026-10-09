@@ -20,3 +20,6 @@ ui/tsconfig.tsbuildinfo
 # OS / editor noise
 .DS_Store
 Thumbs.db
+
+# local analyzer binaries, corpus checkouts
+.tools/
