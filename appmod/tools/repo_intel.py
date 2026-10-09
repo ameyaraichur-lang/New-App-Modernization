@@ -35,6 +35,11 @@ LANG_BY_EXT = {
     ".txt": "doc", ".gradle": "gradle", ".kt": "kotlin", ".scala": "scala",
 }
 
+CODE_LANGUAGES = {
+    "python", "javascript", "typescript", "java", "ruby", "go", "php", "csharp",
+    "vb", "kotlin", "scala", "shell", "powershell", "sql",
+}
+
 MANIFEST_FILES = [
     "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt",
     "requirements-dev.txt", "dev-requirements.txt", "package.json",
@@ -111,6 +116,20 @@ class RepoScan:
     def loc(self) -> int:
         return sum(self.languages.values())
 
+    @property
+    def code_languages(self) -> dict[str, int]:
+        return {k: v for k, v in self.languages.items() if k in CODE_LANGUAGES}
+
+    @property
+    def code_loc(self) -> int:
+        return sum(self.code_languages.values())
+
+    @property
+    def primary_language(self) -> str:
+        """Largest *code* language by LOC; data/markup/doc formats never win."""
+        code = {k: v for k, v in self.code_languages.items() if k != "sql"} or self.code_languages
+        return max(code, key=code.get) if code else "unknown"
+
     def has_ui(self) -> bool:
         return bool(self.templates or self.ui_frameworks)
 
@@ -163,8 +182,9 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             scan.infra_files.append(str(rel).replace("\\", "/"))
         if name.startswith("license") or name.startswith("copying") or name == "notice":
             _scan_license(scan, path, rel)
-        if re.match(r"test_.*\.py$|.*_test\.go$|.*test\.java$|.*test\.cs$|.*_spec\.rb$|.*test\.js$|.*test\.ts$",
-                    name) or "tests" in parts or "test" in parts:
+        if re.match(r"test_.*\.py$|tests?\.py$|.*_tests?\.py$|.*_test\.go$|.*tests?\.java$|.*tests?\.cs$"
+                    r"|.*_spec\.rb$|.*[._-](test|spec)\.[jt]sx?$|.*test\.[jt]s$",
+                    name) or {"tests", "test", "__tests__", "spec"} & set(parts):
             scan.tests.append(str(rel).replace("\\", "/"))
         if any(d.lower() in ("templates", "views") for d in parts) and path.suffix.lower() in (
             ".html", ".htm", ".jinja", ".j2", ".erb", ".hbs", ".cshtml", ".razor",
@@ -184,7 +204,18 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             scan.entry_candidates.append(str(rel).replace("\\", "/"))
 
     _detect_ui_frameworks(scan)
+    scan.commit = _git_head(root)
     return scan
+
+
+def _git_head(root: Path) -> str:
+    import subprocess
+    try:
+        out = subprocess.run(["git", "-C", str(root), "rev-parse", "HEAD"],
+                             capture_output=True, text=True, timeout=10)
+        return out.stdout.strip() if out.returncode == 0 else ""
+    except (OSError, subprocess.SubprocessError):
+        return ""
 
 
 def _scan_text(scan: RepoScan, path: Path, rel: Path, text: str) -> None:

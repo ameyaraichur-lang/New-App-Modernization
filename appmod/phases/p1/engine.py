@@ -26,7 +26,7 @@ from typing import Any
 
 from appmod.agents.runtime import AgentOutcome
 from appmod.kernel.gates import GateContext, GateResult
-from appmod.tools.repo_intel import parse_dependencies, scan_repo
+from appmod.tools.repo_intel import CODE_LANGUAGES, parse_dependencies, scan_repo
 
 _now = lambda: time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
@@ -82,7 +82,7 @@ class P1AgentRunner:
         deps = parse_dependencies(s)
         code_dirs: dict[str, int] = {}
         for f in s.files:
-            if f["language"] in ("python", "javascript", "java", "ruby", "go", "php", "csharp"):
+            if f["language"] in CODE_LANGUAGES and f["language"] != "sql":
                 top = f["path"].split("/")[0]
                 code_dirs[top] = code_dirs.get(top, 0) + 1
         components = [
@@ -100,8 +100,8 @@ class P1AgentRunner:
         findings: list[dict[str, Any]] = [
             _finding("A1-F1", "OBSERVED",
                      f"{len(s.files)} source files, {s.loc} LOC across "
-                     f"{len(s.languages)} languages; primary: "
-                     f"{max(s.languages, key=s.languages.get) if s.languages else 'none'}"),
+                     f"{len(s.languages)} languages ({s.code_loc} code LOC); primary: "
+                     f"{s.primary_language}"),
         ]
         lic_type = (s.license or {}).get("type")
         if lic_type and lic_type != "UNKNOWN":
@@ -121,6 +121,11 @@ class P1AgentRunner:
             payload={
                 "repositories": [{
                     "path": str(s.root), "files": len(s.files), "loc": s.loc,
+                    "code_loc": s.code_loc,
+                    "primary_language": s.primary_language,
+                    "languages": dict(sorted(s.languages.items(), key=lambda kv: -kv[1])),
+                    "test_files": len(s.tests),
+                    "commit": s.commit,
                 }],
                 "components": components,
                 "dependencies": deps,
@@ -128,6 +133,7 @@ class P1AgentRunner:
                 "coverage": {
                     "measured": False,
                     "test_files": len(s.tests),
+                    "test_paths": list(s.tests[:200]),
                     "note": "Runtime coverage not measured in discovery; test inventory only.",
                 },
                 "build_status": "UNKNOWN",
@@ -164,7 +170,7 @@ class P1AgentRunner:
                              "No Dockerfile/CI/IaC descriptors found; hosting model code-inferred only"),
                 ],
             },
-            findings=[_finding("A4-F2", "NOT_ASSESSED" if False else "UNKNOWN",
+            findings=[_finding("A4-F2", "UNKNOWN",
                                "Runtime telemetry, RTO/RPO and restore evidence unavailable for corpus repos")],
             gaps=[{"requirement": "runtime utilization baseline", "impact": "capacity unknown",
                    "state": "NOT_ASSESSED"}],
@@ -335,7 +341,7 @@ class P1AgentRunner:
             },
             findings=[_finding("A6-F1", "OBSERVED",
                                f"{len(s.secret_findings)} potential secret-pattern matches"),
-                      _finding("A6-F2", "NOT_ASSESSED" if False else "UNKNOWN",
+                      _finding("A6-F2", "UNKNOWN",
                                "Dependency vulnerability scan NOT_RUN: no scanner in pilot policy")],
             gaps=[{"requirement": "dependency vulnerability scan", "impact": "CVE exposure unknown",
                    "state": "NOT_ASSESSED"}],
