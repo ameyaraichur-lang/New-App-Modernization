@@ -130,6 +130,7 @@ class PipelineJob:
         self._last_persist = 0.0
         self._router = None
         self._gateway = None
+        self._llm_base: dict[str, float] = {}
 
     # -- construction from the DB (resume after restart) -----------------------------
 
@@ -142,6 +143,8 @@ class PipelineJob:
                   review_mode=spec.get("review_mode"), llm=spec.get("llm"), job_id=row["job_id"],
                   db=db, runs_root=runs_root)
         job.state.update({k: v for k, v in row["state"].items() if k in job.state})
+        job._llm_base = {k: v for k, v in job.state["llm"].items() if isinstance(v, (int, float))
+                         and not isinstance(v, bool)}
         return job
 
     # -- state helpers ------------------------------------------------------------------
@@ -292,11 +295,14 @@ class PipelineJob:
         r = self._router
         if r is None:
             return
+        b = self._llm_base
         with self._lock:
-            self.state["llm"].update(calls=r.calls, input_tokens=r.usage.input_tokens,
-                                     output_tokens=r.usage.output_tokens,
-                                     reasoning_tokens=r.usage.reasoning_tokens,
-                                     failovers=r.failovers, cached=r.cache.hits)
+            self.state["llm"].update(calls=b.get("calls", 0) + r.calls,
+                                     input_tokens=b.get("input_tokens", 0) + r.usage.input_tokens,
+                                     output_tokens=b.get("output_tokens", 0) + r.usage.output_tokens,
+                                     reasoning_tokens=b.get("reasoning_tokens", 0) + r.usage.reasoning_tokens,
+                                     failovers=b.get("failovers", 0) + r.failovers,
+                                     cached=b.get("cached", 0) + r.cache.hits)
 
     # -- repos ----------------------------------------------------------------------------
 
