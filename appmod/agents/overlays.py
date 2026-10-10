@@ -322,11 +322,16 @@ P1 = {
         tier="reasoning", tools=REPO,
         guidance=(
             "Reconstruct business processes and business rules from controllers, services, "
-            "validators and models. Cite the exact file for each rule. Owner confirmation is "
-            "PENDING — never mark rules as confirmed."),
+            "validators and models. Locate them with search_code first — one natural-language "
+            "query per candidate process (e.g. 'register a new user', 'place an order', "
+            "'follow another user') — then read_file the hits. For each process and rule name the "
+            "implementing function or method and its file, and cite the search_code and read_file "
+            "evidence ids. Owner confirmation is PENDING — never mark rules as confirmed."),
         fields={
-            "processes": (A(item(name=S(), trigger=S(), steps=A(S()), file=S())), "append"),
-            "business_rules": (A(item(rule=S(), file=S(), enforcement=S())), "append"),
+            "processes": (A(item(name=S(), trigger=S(), steps=A(S()), file=S(),
+                                 function=S("implementing function/method"))), "append"),
+            "business_rules": (A(item(rule=S(), file=S(), function=S("enforcing function/method"),
+                                      enforcement=S())), "append"),
             "exception_paths": (A(item(process=S(), condition=S(), handling=S())), "append"),
         }),
     "A10": Overlay(
@@ -341,11 +346,16 @@ P1 = {
             "gaps": (A(item(area=S(), impact=S())), "append"),
         }),
     "A11": Overlay(
-        tier="reasoning", tools=ARTIFACT_TOOLS + ["repo_summary", "vulnerability_scan"],
+        tier="reasoning", tools=ARTIFACT_TOOLS + ["repo_summary", "vulnerability_scan", "eol_lookup"],
         guidance=(
-            "Score each assessable risk dimension 1 (low) – 5 (high) from the evidence: technical "
-            "(debt, framework age, complexity), security (vulnerabilities, secrets), data (schema "
-            "complexity, migrations). Unassessed dimensions stay unassessed — never average them in."),
+            "Score technical, security and data risk with the G0 policy rubric: read "
+            "get_artifact('G0') field intake_manifest.risk_taxonomy.rubric — it is the approved run "
+            "policy (labelled pilot-default), so apply it; do not record its absence as a blocker. "
+            "Score = 1 + one point per matched anchor, capped at 5. The seed already applied the "
+            "anchors it can check deterministically (see each seed dimension's drivers); verify them, "
+            "add anchors the seed cannot check (e.g. an end-of-life framework — check it with "
+            "eol_lookup — or a shared database) only with cited evidence, and return every assessable dimension with its drivers and "
+            "evidence ids. Unassessed dimensions stay unassessed — never average them in."),
         fields={
             "risk_dimensions": (A(item(dimension=E("technical", "security", "data"), score=I(),
                                        basis=S(), drivers=A(S()))), "decide"),
@@ -391,12 +401,17 @@ P2 = {
             "sensitivities": (A(item(driver=S(), effect=S())), "append"),
         }),
     "A4": Overlay(
-        tier="fast", effort="low", tools=PF_TOOLS,
+        tier="fast", effort="low", tools=PF_TOOLS + ["app_similarity"],
         guidance=(
             "Look for functional overlap between applications (same domain, duplicate capability). "
-            "Similarity proposes investigation only; never approve retirement."),
+            "Call app_similarity first: it measures code overlap from embeddings (share of "
+            "near-duplicate chunks = copied code; mean best-match cosine = same capability even "
+            "across languages; centroid cosine; closest chunk pairs). Report each pair's "
+            "measured overlap, then confirm or reject a functional overlap from P1 capabilities "
+            "and processes. Similarity proposes investigation only; never approve retirement."),
         fields={
-            "overlap": (A(item(group=S(), members=A(S()), signal=S())), "append"),
+            "overlap": (A(item(group=S(), members=A(S()), signal=S(),
+                               code_overlap=NUM("app_similarity overlap share 0-1"))), "append"),
             "constraints": (A(item(constraint=S())), "append"),
         }),
     "A5": Overlay(
@@ -436,11 +451,13 @@ P2 = {
 
 P3 = {
     "A1": Overlay(
-        tier="reasoning", effort="high", tools=REPO,
+        tier="reasoning", effort="high", tools=REPO + ["eol_lookup"],
         guidance=(
             "Propose the target architecture for the approved disposition: target runtime and "
             "framework versions, component mapping from current modules, and ADRs with rationale "
-            "and consequences. NFR targets stay UNSET (engagement policy) — never invent numbers."),
+            "and consequences. Ground every runtime/framework version choice in eol_lookup "
+            "(endoflife.date: current version's cycle and EOL date, supported target cycle) and "
+            "cite it. NFR targets stay UNSET (engagement policy) — never invent numbers."),
         fields={
             "component_map": (A(item(component=S(), current=S(), target=S(), change=E(
                 "keep", "upgrade", "replace", "split", "merge", "retire"))), "append"),

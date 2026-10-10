@@ -212,6 +212,7 @@ class LLMAgentRunner:
 
         usage = Usage()
         deployments: set[str] = set()
+        model_id = ""
         failover = False
         cached_turns = 0
         repairs = 0
@@ -231,6 +232,7 @@ class LLMAgentRunner:
                 context={"agent": spec["id"], "turn": turn, "prompt_version": prompt_version})
             usage.add(resp.usage)
             deployments.add(resp.deployment)
+            model_id = resp.model or resp.deployment
             failover = failover or resp.failover
             cached_turns += int(resp.cached)
             items.extend(resp.output_items)
@@ -285,11 +287,13 @@ class LLMAgentRunner:
         out.execution_metadata["llm"] = {
             "enriched": True, "mode": "review" if review_only else "enrich",
             "tier": ov.tier, "deployments": sorted(deployments),
+            "model_id": model_id, "model_failover": failover,
             "model_version": self.settings.astra_model_version, "prompt_version": prompt_version,
             "turns": turn, "repairs": repairs, "failover": failover, "cached_turns": cached_turns,
             "tool_calls": len(session.calls),
             "tools_used": sorted({c["tool"] for c in session.calls}),
             "evidence_ids": len(ledger.ids()),
+            "instruction_boundary_incidents": session.incidents,
             "input_tokens": usage.input_tokens, "output_tokens": usage.output_tokens,
             "reasoning_tokens": usage.reasoning_tokens,
             "latency_ms": int((time.monotonic() - t0) * 1000),
@@ -299,7 +303,7 @@ class LLMAgentRunner:
         emit("AGENT_LLM_DONE", agent=spec["id"], turns=turn, tool_calls=len(session.calls),
              tokens=usage.total, status=out.status, enriched=True,
              mode=out.execution_metadata["llm"]["mode"], repairs=repairs,
-             summary=submitted.get("summary", "")[:300])
+             incidents=len(session.incidents), summary=submitted.get("summary", "")[:300])
         return out
 
     # -- context ------------------------------------------------------------------
