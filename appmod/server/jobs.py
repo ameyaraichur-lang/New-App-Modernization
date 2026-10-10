@@ -400,6 +400,9 @@ class PipelineJob:
 
         def on_event(ctx, ev):
             node = ev.get("node", "?")
+            if phase == 1 and node == "A8":
+                # questions must be visible before G2 can raise a review on the draft-scope candidate
+                self._register_questions(app, ctx)
             with self._lock:
                 for n in pstate["nodes"]:
                     if n["id"] == node:
