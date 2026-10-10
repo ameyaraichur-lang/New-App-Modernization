@@ -125,6 +125,13 @@ class LLMAgentRunner:
                                                       for t in ("reasoning", "coding", "fast")},
                            "llm": self.settings.llm_enabled}, sort_keys=True)
 
+    def fingerprint_for(self, local_id: str) -> str:
+        """Runner identity for one agent: a changed overlay (guidance, fields,
+        tools, tier, effort) invalidates reuse of that agent's outputs."""
+        ov = overlay_for(self.phase, local_id)
+        ov_fp = ov.prompt_version(ov.effort or "") if ov is not None else "no-overlay"
+        return json.dumps({"runner": self.fingerprint(), "overlay": ov_fp}, sort_keys=True)
+
     def __getattr__(self, name: str) -> Any:     # delegate engine-specific helpers (bind_repo...)
         if name.startswith("__"):
             raise AttributeError(name)

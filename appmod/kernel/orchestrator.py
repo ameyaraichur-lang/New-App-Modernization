@@ -201,7 +201,9 @@ class PhaseOrchestrator:
         ).hexdigest()
         fp = getattr(self.runner, "fingerprint", None)
         if callable(fp) and ctx.state.nodes[node].kind == "agent":
-            manifest["_runner"] = hashlib.sha256(str(fp()).encode()).hexdigest()[:16]
+            per_node = getattr(self.runner, "fingerprint_for", None)
+            ident = per_node(node) if callable(per_node) else fp()
+            manifest["_runner"] = hashlib.sha256(str(ident).encode()).hexdigest()[:16]
         if self.external_digest is not None:
             ext = self.external_digest(node)
             if ext:
