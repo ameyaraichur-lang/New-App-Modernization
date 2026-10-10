@@ -309,8 +309,9 @@ class P4AgentRunner:
                     and (e.get("from") not in task_ids or e.get("to") not in task_ids)]
         add("task-dag-closed", not dangling, f"{len(dangling)} dangling edges" if dangling
             else f"{len(edges)} edges resolve", "P4.A3")
+        status = "FAILED" if missing else "PARTIAL" if conflicts else "COMPLETE"
         return AgentOutcome(
-            status="COMPLETE",
+            status=status,
             payload={
                 "validation_report": {"checks": checks,
                                       "limitations": "absence of a reported issue is not universal proof"},

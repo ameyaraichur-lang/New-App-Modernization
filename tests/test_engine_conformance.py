@@ -71,6 +71,31 @@ def build_cases():
     ]
 
 
+def _p4_sealed(drop=()):
+    r = P4AgentRunner({"app_id": "a", "disposition": "Rehost"})
+    published, refs = {}, {}
+    for lid in ("A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8"):
+        o = getattr(r, f"_run_{lid.lower()}")({"local_id": lid}, {"A3": published.get("A3", art())}, None)
+        published[lid] = {"payload": o.payload, "scope": o.scope, "artifact_version": 1,
+                          "content_hash": f"h-{lid}", "status": o.status}
+        if lid not in drop:
+            refs[lid] = {"version": 1, "content_hash": f"h-{lid}"}
+    g1 = art({"evidence_manifest": {"artifact_refs": refs}})
+    return r._run_a9({"local_id": "A9"}, {"G1": g1}, None, context={"published": published})
+
+
+def test_p4_a9_checks_are_real():
+    ok = _p4_sealed()
+    by = {c["check"]: c["result"] for c in ok.payload["validation_report"]["checks"]}
+    assert by["all-planner-candidates-sealed"] == "PASS" and ok.status in ("COMPLETE", "PARTIAL")
+    assert (ok.status == "COMPLETE") == all(v == "PASS" for v in by.values())
+    missing = _p4_sealed(drop=("A7",))
+    by = {c["check"]: c for c in missing.payload["validation_report"]["checks"]}
+    assert missing.status == "FAILED"
+    assert by["all-planner-candidates-sealed"]["result"] == "FAIL" and "A7" in by["all-planner-candidates-sealed"]["detail"]
+    assert by["validation-plan-present"]["result"] == "FAIL"
+
+
 def test_all_engine_payloads_conform(registry):
     failures = []
     for phase_num, runner, inputs in build_cases():

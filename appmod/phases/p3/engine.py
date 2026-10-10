@@ -294,7 +294,7 @@ class P3AgentRunner:
         checks = _p3_consistency_checks(sealed, self.brief)
         unresolved = [f"{c['check']}: {c['detail']}" for c in checks if c["result"] == "FAIL"]
         return AgentOutcome(
-            status="COMPLETE",
+            status="PARTIAL" if unresolved else "COMPLETE",
             payload={
                 "architecture_package": {
                     "components": self.brief.get("components", ["app"]),
