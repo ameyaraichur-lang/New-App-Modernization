@@ -150,6 +150,51 @@ class CodeIndex:
                  "snippet": self.chunks[i]["text"][:1500]} for i in top if scores[i] > 0]
 
 
+NEAR_DUPLICATE = 0.92
+
+
+def app_similarity(roots: dict[str, Path], top: int = 3) -> dict[str, Any]:
+    """Pairwise code similarity between applications from their chunk embeddings.
+
+    ``overlap`` is the share of the smaller app's chunks whose best match in the
+    other app reaches NEAR_DUPLICATE (copied code); ``mean_best_match`` is the
+    mean best-match cosine of those chunks (same capability, any language);
+    ``centroid_cosine`` compares whole-app profiles. Lexical mode (no Astra)
+    uses token-set Jaccard instead.
+    """
+    idx = {app: get_index(r) for app, r in sorted(roots.items())}
+    mode = "embedding" if all(i.vectors is not None for i in idx.values()) else "lexical"
+    apps = list(idx)
+    pairs = []
+    for i, a in enumerate(apps):
+        for b in apps[i + 1:]:
+            ia, ib = idx[a], idx[b]
+            if not ia.chunks or not ib.chunks:
+                continue
+            if mode == "embedding":
+                sim = ia.vectors @ ib.vectors.T
+                small_axis = 1 if len(ia.chunks) <= len(ib.chunks) else 0
+                best = sim.max(axis=small_axis)
+                ca, cb = ia.vectors.mean(axis=0), ib.vectors.mean(axis=0)
+                centroid = float(ca @ cb / (np.linalg.norm(ca) * np.linalg.norm(cb) + 1e-9))
+                overlap = float((best >= NEAR_DUPLICATE).mean())
+                mean_best = float(best.mean())
+                flat = np.argsort(-sim, axis=None)[:top]
+                matches = [{"a": f"{ia.chunks[x]['path']}:{ia.chunks[x]['start']}",
+                            "b": f"{ib.chunks[y]['path']}:{ib.chunks[y]['start']}",
+                            "cosine": round(float(sim[x, y]), 4)}
+                           for x, y in (np.unravel_index(f, sim.shape) for f in flat)]
+            else:
+                ta, tb = set().union(*ia._toks), set().union(*ib._toks)
+                centroid = len(ta & tb) / max(1, len(ta | tb))
+                overlap, mean_best, matches = centroid, centroid, []
+            pairs.append({"apps": [a, b], "overlap": round(overlap, 4),
+                          "mean_best_match": round(mean_best, 4),
+                          "centroid_cosine": round(centroid, 4), "top_matches": matches})
+    pairs.sort(key=lambda p: (-p["overlap"], -p["mean_best_match"]))
+    return {"mode": mode, "near_duplicate_threshold": NEAR_DUPLICATE, "pairs": pairs}
+
+
 def get_index(root: Path) -> CodeIndex:
     key = str(Path(root).resolve())
     with _lock:
