@@ -175,6 +175,15 @@ def test_gateway_sandbox(tmp_path):
     assert "hello" in text and eid.startswith("ev-") and 'trust="untrusted-data"' in text
     denied, _ = sess.call("grep", {"pattern": "x", "path": None, "glob": None, "application_id": None})
     assert "not allowlisted" in denied
+    class _Store:
+        def get(self, aid, version=None):
+            return {"artifact_id": aid, "artifact_version": 3, "status": "COMPLETE", "payload": {"x": 1}}
+    ledger = EvidenceLedger()
+    art_sess = gw.session("P3.A2", ["get_artifact"],
+                          ToolEnv(application_id="t", phase=3, repo_root=None, store=_Store(), published={}),
+                          ledger)
+    text, eid = art_sess.call("get_artifact", {"artifact_id": "P1/t/A3", "field": None, "application_id": None})
+    assert ledger.has("art:P1/t/A3@v3") and "art:P1/t/A3@v3" in text
     no_repo = gw.session("P2.A1", ["read_file", "list_artifacts"],
                          ToolEnv(application_id="t", phase=2, repo_root=None, store=None, published={}),
                          EvidenceLedger())

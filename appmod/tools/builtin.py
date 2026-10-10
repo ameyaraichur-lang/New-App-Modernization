@@ -179,7 +179,7 @@ def get_artifact(env: ToolEnv, a: dict[str, Any]) -> dict[str, Any]:
         except Exception as exc:
             raise KeyError(f"artifact {aid} not found") from exc
     if a.get("field"):
-        return {"artifact_id": art["artifact_id"], "field": a["field"],
+        return {"artifact_id": art["artifact_id"], "version": art["artifact_version"], "field": a["field"],
                 "value": _dig(art.get("payload", {}), a["field"])}
     return {"artifact_id": art["artifact_id"], "version": art["artifact_version"],
             "status": art["status"], "payload": art.get("payload"),
