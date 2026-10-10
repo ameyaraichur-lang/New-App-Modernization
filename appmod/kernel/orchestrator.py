@@ -19,7 +19,7 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Callable
 
 from appmod.agents.runtime import AgentRunner, TransientAgentError
 from appmod.contracts.schemas import (
@@ -85,7 +85,7 @@ class PhaseOrchestrator:
         self.scheduler = Scheduler(phase_reg)
         self.validator = ContractValidator(phase_reg)
         self.gate_overrides = gate_overrides or {}
-        self.event_listener = None    # optional callable(event dict) for live traces (SSE)
+        self.event_listener: Callable[[dict[str, Any]], None] | None = None   # live traces (SSE)
         self.max_parallel = max(1, int(max_parallel))
         self._lock = threading.RLock()
         # Policy version is pinned at construction; a run started without a

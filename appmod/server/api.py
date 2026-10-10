@@ -62,7 +62,10 @@ def _recover_jobs() -> None:
         if summary["job_id"] in _jobs:
             continue
         try:
-            job = PipelineJob.from_db(db().get_job(summary["job_id"]), db())
+            row = db().get_job(summary["job_id"])
+            if row is None:
+                continue
+            job = PipelineJob.from_db(row, db())
         except Exception as exc:
             log.warning("could not recover job %s: %s: %s", summary["job_id"], type(exc).__name__, exc)
             continue
@@ -298,7 +301,7 @@ def run_artifacts(job_id: str, phase: int | None = None, _: Principal = Depends(
 def get_artifact(job_id: str, artifact_id: str, version: int | None = None,
                  _: Principal = Depends(require("viewer"))):
     from appmod.store.artifact_store import ArtifactStore
-    store = ArtifactStore(_store_path(job_id))
+    store = ArtifactStore(Path(str(_store_path(job_id))))
     try:
         art = store.get(artifact_id, version)
     except Exception as exc:

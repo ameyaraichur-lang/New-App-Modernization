@@ -128,7 +128,7 @@ class RepoScan:
     def primary_language(self) -> str:
         """Largest *code* language by LOC; data/markup/doc formats never win."""
         code = {k: v for k, v in self.code_languages.items() if k != "sql"} or self.code_languages
-        return max(code, key=code.get) if code else "unknown"
+        return max(code, key=lambda k: code[k]) if code else "unknown"
 
     def has_ui(self) -> bool:
         return bool(self.templates or self.ui_frameworks)

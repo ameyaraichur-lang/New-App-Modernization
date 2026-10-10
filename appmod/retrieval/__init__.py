@@ -34,7 +34,7 @@ _lock = threading.Lock()
 
 def _tokens(text: str) -> list[str]:
     parts = re.findall(r"[A-Za-z_][A-Za-z0-9_]*", text)
-    out = []
+    out: list[str] = []
     for p in parts:
         out.extend(x.lower() for x in re.findall(r"[A-Z]?[a-z]+|[A-Z]+(?![a-z])|\d+", p) or [p])
         out.append(p.lower())
@@ -51,7 +51,8 @@ def chunk_file(rel: str, text: str) -> list[dict[str, Any]]:
         try:
             from tree_sitter_language_pack import get_parser
             tree = get_parser(lang).parse(text.encode("utf-8", "ignore"))
-            cur_s, cur_e = None, None
+            cur_s: int | None = None
+            cur_e = 0
             for node in tree.root_node.children:
                 s, e = node.start_point[0], node.end_point[0]
                 if cur_s is None:
@@ -165,13 +166,14 @@ def app_similarity(roots: dict[str, Path], top: int = 3) -> dict[str, Any]:
     idx = {app: get_index(r) for app, r in sorted(roots.items())}
     mode = "embedding" if all(i.vectors is not None for i in idx.values()) else "lexical"
     apps = list(idx)
-    pairs = []
+    pairs: list[dict[str, Any]] = []
     for i, a in enumerate(apps):
         for b in apps[i + 1:]:
             ia, ib = idx[a], idx[b]
             if not ia.chunks or not ib.chunks:
                 continue
             if mode == "embedding":
+                assert ia.vectors is not None and ib.vectors is not None
                 sim = ia.vectors @ ib.vectors.T
                 small_axis = 1 if len(ia.chunks) <= len(ib.chunks) else 0
                 best = sim.max(axis=small_axis)

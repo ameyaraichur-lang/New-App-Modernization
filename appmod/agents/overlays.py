@@ -124,7 +124,8 @@ def _pp_p1_a11(seed: dict, llm: dict, ctx: dict) -> dict:
 def _pp_p2_a6(seed: dict, llm: dict, ctx: dict) -> dict:
     out = dict(seed)
     by_app = {d["application_id"]: d for d in llm.get("decisions", [])}
-    decisions, waves, unscheduled = [], {}, []
+    decisions, unscheduled = [], []
+    waves: dict[str, list[str]] = {}
     for d in seed.get("decisions", []):
         m = by_app.get(d["application_id"])
         nd = dict(d)

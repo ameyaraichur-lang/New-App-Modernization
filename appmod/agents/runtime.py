@@ -40,7 +40,7 @@ class AgentOutcome:
 
 class AgentRunner(Protocol):
     def run(self, agent_spec: dict[str, Any], inputs: dict[str, dict],
-            policy: Any) -> AgentOutcome: ...
+            policy: Any, context: dict[str, Any] | None = None) -> AgentOutcome: ...
 
 
 # ---------------------------------------------------------------------------

@@ -252,16 +252,16 @@ class LLMAgentRunner:
                         repairs += 1
                         if candidate is not None:
                             fallback = (args, candidate)
-                        out = {"accepted": False, "problems": problems[:20],
-                               "instruction": "Fix these problems and call submit_outcome again."}
+                        reply = {"accepted": False, "problems": problems[:20],
+                                 "instruction": "Fix these problems and call submit_outcome again."}
                         emit("SUBMISSION_REJECTED", agent=spec["id"], problems=problems[:5])
                     elif candidate is None:
                         raise LLMError("submission unusable after repairs: " + "; ".join(problems[:3]))
                     else:
                         submitted, merged = args, candidate
-                        out = {"accepted": True}
+                        reply = {"accepted": True}
                     items.append({"type": "function_call_output", "call_id": call.call_id,
-                                  "output": json.dumps(out)})
+                                  "output": json.dumps(reply)})
                 else:
                     try:
                         cargs = call.parsed()
@@ -406,7 +406,7 @@ class LLMAgentRunner:
         for g in args.get("gaps", []):
             out.gaps.append({"requirement": g["area"], "impact": g["reason"], "state": g["state"],
                              "needed_evidence": g["needed_evidence"], "origin": "llm"})
-        if not review_only and STRICTNESS.get(args.get("status"), 0) > STRICTNESS.get(out.status, 0):
+        if not review_only and STRICTNESS.get(str(args.get("status")), 0) > STRICTNESS.get(out.status, 0):
             out.status = args["status"]
         out.evidence_refs = list(out.evidence_refs) + [
             {"source": "astra-agent-loop", "method": f"LLM tool-use investigation ({ov.tier} tier)"}]

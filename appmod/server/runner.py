@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from appmod.kernel.audit import AuditJournal
-from appmod.kernel.orchestrator import PhaseOrchestrator
+from appmod.kernel.orchestrator import PhaseOrchestrator, RunContext
 from appmod.kernel.policy import PolicyService
 from appmod.phases.p1.engine import P1AgentRunner, P1_GATE_OVERRIDES
 from appmod.phases.p2.engine import P2AgentRunner, P2_GATE_OVERRIDES, PortfolioApp
@@ -188,7 +188,7 @@ class PipelineJob:
         self.state["facts"]["store_path"] = str(work / "store")
 
         def run_phase(phase: int, runner, run_app: str, run_inputs: dict,
-                      overrides: dict, na_ok: bool = False) -> PhaseOrchestrator:
+                      overrides: dict, na_ok: bool = False) -> tuple[ArtifactStore, RunContext]:
             pstate = self._phase(phase)
             pstate["status"] = "RUNNING"
             orch = PhaseOrchestrator(registry["phases"][phase], store, policy, audit,
@@ -455,7 +455,7 @@ def _build_fixture(seed: Path, work: Path):
     tables: dict[str, int] = {}
     rows: dict[str, list[list]] = {}
     for table, values in inserts:
-        vals = []
+        vals: list[Any] = []
         for raw in re.findall(r"'(?:[^']|'')*'|[^,]+", values):
             raw = raw.strip()
             if raw == "default":

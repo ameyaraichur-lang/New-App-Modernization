@@ -158,7 +158,7 @@ class RunDB:
             return self._review(self._q("SELECT * FROM reviews WHERE review_id=?", (review_id,))[0])
 
     def list_reviews(self, job_id: str | None = None, status: str | None = None) -> list[dict[str, Any]]:
-        sql, args = "SELECT * FROM reviews WHERE 1=1", []
+        sql, args = "SELECT * FROM reviews WHERE 1=1", list[Any]()
         if job_id:
             sql, args = sql + " AND job_id=?", args + [job_id]
         if status:

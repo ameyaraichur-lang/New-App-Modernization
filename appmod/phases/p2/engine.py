@@ -288,7 +288,7 @@ class P2AgentRunner:
                              f"complexity L{complexity.get(a.app_id, 1)}",
             })
 
-        by_family = {}
+        by_family: dict[str, list[PortfolioApp]] = {}
         for a in self.apps:
             by_family.setdefault(a.source_family or "solo", []).append(a)
         wave_no = 1

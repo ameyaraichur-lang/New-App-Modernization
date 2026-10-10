@@ -22,12 +22,12 @@ import json
 import re
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from appmod.agents.runtime import AgentOutcome
 from appmod.kernel.gates import GateContext, GateResult
 from appmod.tools import analyzers
-from appmod.tools.repo_intel import CODE_LANGUAGES, parse_dependencies, scan_repo
+from appmod.tools.repo_intel import CODE_LANGUAGES, RepoScan, parse_dependencies, scan_repo
 
 _now = lambda: time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
@@ -45,12 +45,13 @@ class P1AgentRunner:
     evidence-bound; LLM enrichment slots in later behind this same runner."""
 
     def __init__(self, confirmed_stakeholder: bool = False, use_analyzers: bool | None = None) -> None:
-        self._scan = None
+        self._scan: RepoScan | None = None
         if use_analyzers is None:
             from appmod.config import get_settings
             use_analyzers = get_settings().analyzers == "on"
         self.use_analyzers = use_analyzers
-        self.answers_provider = None    # callable -> recorded questions/answers (human mode)
+        # callable -> recorded questions/answers (human mode)
+        self.answers_provider: Callable[[], list[dict[str, Any]]] | None = None
         # Pilot decision mode: designated apps receive simulated stakeholder
         # confirmations recorded as HUMAN_CONFIRMED with an explicit
         # pilot-simulated basis, and G2 records them as accepted exceptions
@@ -61,7 +62,7 @@ class P1AgentRunner:
     # -- shared scan ----------------------------------------------------------
 
     @property
-    def scan(self):
+    def scan(self) -> RepoScan:
         if self._scan is None:
             raise RuntimeError("repo_path not set: call bind_repo first")
         return self._scan
@@ -94,7 +95,7 @@ class P1AgentRunner:
         components = [
             {"name": d, "code_files": n} for d, n in sorted(code_dirs.items(), key=lambda kv: -kv[1])[:12]
         ]
-        sbom = {
+        sbom: dict[str, Any] = {
             "format": "appmod-lite-sbom/1",
             "generated_at": _now(),
             "packages": [
@@ -102,8 +103,9 @@ class P1AgentRunner:
             ],
             "license": s.license or {"type": "UNKNOWN"},
         }
-        syft = analyzers.sbom(s.root) if self.use_analyzers else {"status": "DISABLED"}
-        scc = analyzers.loc_metrics(s.root) if self.use_analyzers else {"status": "DISABLED"}
+        disabled: dict[str, Any] = {"status": "DISABLED"}
+        syft = analyzers.sbom(s.root) if self.use_analyzers else disabled
+        scc = analyzers.loc_metrics(s.root) if self.use_analyzers else disabled
         if syft.get("status") == "OK":
             sbom.update(format="syft-json/summary", generator=syft.get("version"),
                         package_count=syft["package_count"], by_type=syft["by_type"],
@@ -345,9 +347,11 @@ class P1AgentRunner:
         a1 = inputs.get("A1", {})
         deps = a1.get("payload", {}).get("dependencies", [])
         on = self.use_analyzers
-        osv = analyzers.vulnerabilities(s.root) if on else {"status": "DISABLED", "tool": "osv-scanner"}
-        leaks = analyzers.secrets(s.root) if on else {"status": "DISABLED", "tool": "gitleaks"}
-        sast = analyzers.static_analysis(s.root) if on else {"status": "DISABLED", "tool": "semgrep"}
+        def off(tool: str) -> dict[str, Any]:
+            return {"status": "DISABLED", "tool": tool}
+        osv = analyzers.vulnerabilities(s.root) if on else off("osv-scanner")
+        leaks = analyzers.secrets(s.root) if on else off("gitleaks")
+        sast = analyzers.static_analysis(s.root) if on else off("semgrep")
         control_findings = [
             {"file": f["file"], "kind": f["kind"], "severity": "high", "source": "pattern-scan"}
             for f in s.secret_findings[:30]
@@ -580,7 +584,7 @@ class P1AgentRunner:
     def _run_a8_recorded(self) -> AgentOutcome:
         """Human mode: confirmations are exactly the answers recorded through
         the questionnaire API (respondent identity + timestamp kept)."""
-        qs = self.answers_provider() or []
+        qs = (self.answers_provider() if self.answers_provider else None) or []
         answered = [q for q in qs if q.get("status") == "ANSWERED"]
         open_qs = [q for q in qs if q.get("status") != "ANSWERED"]
         confirmed = [{
@@ -667,10 +671,9 @@ class P1AgentRunner:
                 unassessed.append({"dimension": "operational", "reason": "no runtime telemetry (A4 PARTIAL)"})
             elif dim == "organizational":
                 unassessed.append({"dimension": "organizational", "reason": "stakeholder input PENDING (A8)"})
-            elif drivers.get(dim) is None:
+            elif (matched := drivers.get(dim)) is None:
                 unassessed.append({"dimension": dim, "reason": "required analyzer not available (NOT_ASSESSED)"})
             else:
-                matched = drivers[dim]
                 dims.append({"dimension": dim, "score": min(5, 1 + len(matched)),
                              "basis": f"rubric {policy.version if policy else 'none'}: 1 + one point per "
                                       f"matched anchor ({len(matched)} matched)",

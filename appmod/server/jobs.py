@@ -366,6 +366,11 @@ class PipelineJob:
         if kind == "MODEL_CALL":
             self._sync_llm()
 
+    def _review_pending(self, r: dict[str, Any]) -> None:
+        self._event("REVIEW_PENDING", **r)
+        self._log(f"P{r['phase']} {r['app']} G2 awaiting human review {r['review_id']} "
+                  f"(proposed {r['proposed_status']})", level="gate")
+
     def _run_phase(self, phase: int, app: str, base: Any, run_inputs: dict[str, Any],
                    overrides: dict[str, Any], na_ok: bool = False) -> Any:
         from appmod.agents.llm_runner import LLMAgentRunner
@@ -382,10 +387,7 @@ class PipelineJob:
             g2 = overrides.get("G2") or gate_impl_for("G2")
             overrides["G2"] = with_human_review(
                 g2, self.db, self.job_id, phase, "G2", audit=self.audit,
-                on_pending=lambda r: (self._event("REVIEW_PENDING", **r),
-                                      self._log(f"P{r['phase']} {r['app']} G2 awaiting human review "
-                                                f"{r['review_id']} (proposed {r['proposed_status']})",
-                                                level="gate")))
+                on_pending=self._review_pending)
         pstate = self._phase(phase, app)
         pstate["status"] = "RUNNING"
         kinds = {a["local_id"]: a.get("kind", "agent") for a in reg["agents"]}
