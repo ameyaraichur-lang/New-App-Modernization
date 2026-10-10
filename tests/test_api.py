@@ -51,6 +51,26 @@ def test_auth_required_and_roles(client):
                        headers=H("op")).status_code == 400
 
 
+def test_admin_token_generated_at_startup(tmp_path, monkeypatch):
+    monkeypatch.setenv("APPMOD_RUNS_DIR", str(tmp_path))
+    monkeypatch.setenv("APPMOD_API_TOKENS", "")
+    monkeypatch.setenv("APPMOD_AUTH_MODE", "token")
+    from appmod.config import get_settings
+    from appmod.server import api, auth
+    get_settings.cache_clear()
+    auth.reset()
+    api._db = None
+    try:
+        with TestClient(api.app) as c:
+            tok_file = tmp_path / ".admin_token"
+            assert tok_file.is_file() and oct(tok_file.stat().st_mode & 0o777) == "0o600"
+            assert c.get("/api/me", headers=H(tok_file.read_text().strip())).json()["roles"] == ["admin"]
+    finally:
+        api._db = None
+        get_settings.cache_clear()
+        auth.reset()
+
+
 def test_health_tools(client):
     r = client.get("/api/health/tools", headers=H("vw")).json()
     assert {"astra", "analyzers", "tools", "mcp"} <= set(r)

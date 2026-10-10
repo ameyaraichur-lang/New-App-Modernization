@@ -24,7 +24,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from appmod.config import get_settings, install_log_redaction
-from appmod.server.auth import Principal, require
+from appmod.server.auth import Principal, require, tokens
 from appmod.server.jobs import PipelineJob, validate_repo_input
 from appmod.server.rundb import RunDB, StaleReview
 
@@ -48,6 +48,7 @@ def db() -> RunDB:
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
+    tokens()
     _recover_jobs()
     yield
 
