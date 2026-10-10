@@ -6,7 +6,7 @@ __pycache__/
 venv/
 
 # runs: job stores, cloned repos, sqlite fixtures (all reproducible per-run)
-runs/
+/runs/
 
 # UI build + dependencies (rebuild with: cd ui && npm install && npm run build)
 ui/node_modules/
