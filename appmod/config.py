@@ -43,6 +43,8 @@ class Settings(BaseSettings):
     max_parallel_agents: int = 6
     max_parallel_apps: int = 4
     analyzers: str = "on"             # on | off (external analyzer CLIs in deterministic seeds)
+    http_tools: str = "on"            # on | off (policy-gated outbound HTTP tools, e.g. eol_lookup)
+    http_hosts: str = "endoflife.date"   # comma-separated outbound host allowlist
     review_mode: str = "simulated"    # simulated | human (gate approvals via the approvals API)
 
     # API

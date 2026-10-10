@@ -148,6 +148,68 @@ def search_code(env: ToolEnv, a: dict[str, Any]) -> dict[str, Any]:
     return {"query": a["query"], "results": idx.search(a["query"], k)}
 
 
+def app_similarity(env: ToolEnv, a: dict[str, Any]) -> dict[str, Any]:
+    from appmod.retrieval import app_similarity as sim
+    roots = dict(env.repo_roots)
+    if len(roots) < 2:
+        raise ValueError("app_similarity needs a portfolio with at least two applications")
+    return sim(roots)
+
+
+# -- policy-gated HTTP tools -----------------------------------------------------
+
+EOL_HOST = "endoflife.date"
+EOL_CACHE_TTL_S = 7 * 24 * 3600
+
+
+def eol_lookup(env: ToolEnv, a: dict[str, Any]) -> dict[str, Any]:
+    import datetime
+    import re
+    import time
+
+    import httpx
+
+    from appmod.config import get_settings
+    s = get_settings()
+    hosts = {h.strip() for h in s.http_hosts.split(",") if h.strip()}
+    if s.http_tools != "on" or EOL_HOST not in hosts:
+        raise PermissionError(f"outbound HTTP to {EOL_HOST} is not allowed by policy")
+    product = (a.get("product") or "").strip().lower()
+    if not re.fullmatch(r"[a-z0-9][a-z0-9.+-]{0,60}", product):
+        raise ValueError("product must be an endoflife.date slug such as 'spring-boot', 'python', 'nodejs'")
+    cache = s.runs_dir / "http_cache" / "endoflife" / f"{product}.json"
+    data = None
+    if cache.is_file() and time.time() - cache.stat().st_mtime < EOL_CACHE_TTL_S:
+        data = json.loads(cache.read_text())
+    if data is None:
+        try:
+            r = httpx.get(f"https://{EOL_HOST}/api/{product}.json", timeout=10, follow_redirects=False)
+        except httpx.HTTPError as exc:
+            raise ValueError(f"{EOL_HOST} unavailable: {type(exc).__name__}") from exc
+        if r.status_code == 404:
+            raise ValueError(f"unknown product '{product}' on {EOL_HOST}")
+        r.raise_for_status()
+        data = r.json()
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        cache.write_text(json.dumps(data))
+    today = datetime.date.today().isoformat()
+
+    def is_eol(c: dict[str, Any]) -> bool | None:
+        e = c.get("eol")
+        return e if isinstance(e, bool) else (str(e) <= today if e else None)
+
+    cycles = [{"cycle": str(c.get("cycle")), "release": c.get("releaseDate"), "eol": c.get("eol"),
+               "latest": c.get("latest"), "lts": c.get("lts"), "is_eol": is_eol(c)} for c in data]
+    version = (a.get("version") or "").strip()
+    match = None
+    if version:
+        cands = [c for c in cycles if version == c["cycle"] or version.startswith(c["cycle"] + ".")]
+        match = max(cands, key=lambda c: len(c["cycle"]), default=None)
+    return {"product": product, "source": f"https://{EOL_HOST}/api/{product}.json", "as_of": today,
+            "version": version or None, "match": match,
+            "supported_cycles": [c for c in cycles if c["is_eol"] is False][:6]}
+
+
 # -- artifact tools ------------------------------------------------------------
 
 
@@ -234,6 +296,14 @@ def build_gateway() -> ToolGateway:
                         "relevant code chunks for a natural-language query.",
                         P({"application_id": APP, "query": {"type": "string"},
                            "k": {"type": ["integer", "null"]}}), search_code, needs_repo=True))
+    gw.register(ToolDef("app_similarity", "Pairwise code similarity across the portfolio from code "
+                        "embeddings: near-duplicate chunk overlap, whole-app centroid cosine and the "
+                        "closest chunk pairs.", P({}), app_similarity, needs_repo=True))
+    gw.register(ToolDef("eol_lookup", "endoflife.date facts for a product (policy-gated HTTP): "
+                        "release cycles, end-of-life dates, latest versions; with a version, the "
+                        "matching cycle and whether it is end-of-life.",
+                        P({"product": {"type": "string"}, "version": {"type": ["string", "null"]}}),
+                        eol_lookup))
     gw.register(ToolDef("get_artifact", "Read a published pipeline artifact. artifact_id is a node "
                         "of the current phase (e.g. 'A1', 'G1') or a full id like 'P1/<app>/A3'. "
                         "field is an optional dotted payload path.",
