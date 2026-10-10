@@ -74,6 +74,77 @@ def test_redact_masks_key(tmp_path):
     assert "k" * 20 not in redact(f"key={'k' * 20}", s)
 
 
+def _astra(tmp_path, handler):
+    import httpx
+    from openai import AzureOpenAI
+
+    from appmod.llm.astra import AstraClient
+    s = _settings(tmp_path, astra_api_version="2025-04-01-preview")
+    c = AstraClient(s, max_attempts=1)
+    c._client = AzureOpenAI(azure_endpoint="https://x.invalid", api_key="k" * 20,
+                            api_version=s.astra_api_version, max_retries=0,
+                            http_client=httpx.Client(transport=httpx.MockTransport(handler)))
+    return c
+
+
+RESPONSE = {"id": "resp_1", "object": "response", "created_at": 0, "model": "gpt-6-astra",
+            "status": "completed", "parallel_tool_calls": True, "tool_choice": "auto", "tools": [],
+            "output": [{"type": "message", "id": "m1", "role": "assistant", "status": "completed",
+                        "content": [{"type": "output_text", "text": "hi", "annotations": []}]}],
+            "usage": {"input_tokens": 3, "output_tokens": 2, "total_tokens": 5,
+                      "input_tokens_details": {"cached_tokens": 1},
+                      "output_tokens_details": {"reasoning_tokens": 1}}}
+
+
+def test_astra_client_request_shape_and_usage(tmp_path):
+    import json
+
+    import httpx
+    sent = []
+
+    def ok(req):
+        sent.append(json.loads(req.content))
+        return httpx.Response(200, json=RESPONSE)
+    c = _astra(tmp_path, ok)
+    r = c.create("gpt-6-astra", instructions="i", input_items=[{"role": "user", "content": "x"}],
+                 reasoning_effort="high")
+    c.create("gpt-4.1-mini", instructions="i", input_items=[], reasoning_effort="low")
+    assert r.text == "hi" and r.response_id == "resp_1"
+    assert (r.usage.input_tokens, r.usage.output_tokens, r.usage.reasoning_tokens, r.usage.cached_tokens) == (3, 2, 1, 1)
+    assert all("temperature" not in b and "top_p" not in b for b in sent)
+    assert sent[0]["reasoning"] == {"effort": "high"} and "reasoning" not in sent[1]
+
+
+@pytest.mark.parametrize("status,body,err", [
+    (429, {"error": {"code": "429", "message": "Rate limit"}}, "TransientLLMError"),
+    (500, {"error": {"message": "boom"}}, "TransientLLMError"),
+    (400, {"error": {"code": "content_filter", "message": "ResponsibleAIPolicyViolation"}}, "ContentFilteredError"),
+    (400, {"error": {"code": "context_length_exceeded", "message": "maximum context length"}}, "ContextLengthError"),
+    (404, {"error": {"code": "DeploymentNotFound", "message": "no"}}, "DeploymentUnavailableError"),
+    (401, {"error": {"message": "bad key"}}, "LLMConfigError"),
+])
+def test_astra_client_error_mapping(tmp_path, status, body, err):
+    import httpx
+
+    from appmod.llm import errors
+    c = _astra(tmp_path, lambda req: httpx.Response(status, json=body, headers={"retry-after-ms": "5"}))
+    with pytest.raises(getattr(errors, err)):
+        c.create("gpt-6-astra", instructions="i", input_items=[])
+
+
+def test_astra_client_retries_transient_then_succeeds(tmp_path):
+    import httpx
+    n = []
+
+    def flaky(req):
+        n.append(1)
+        return httpx.Response(429, json={"error": {"message": "slow down"}},
+                              headers={"retry-after-ms": "1"}) if len(n) < 3 else httpx.Response(200, json=RESPONSE)
+    c = _astra(tmp_path, flaky)
+    c.max_attempts = 4
+    assert c.create("gpt-6-astra", instructions="i", input_items=[]).text == "hi" and len(n) == 3
+
+
 def test_log_filter_keeps_uvicorn_access_args():
     import logging
 
