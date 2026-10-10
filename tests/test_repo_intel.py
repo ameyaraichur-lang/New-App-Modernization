@@ -43,3 +43,23 @@ def test_p1_a1_payload_exposes_language_and_tests():
     assert repo0["primary_language"] == "python"
     assert repo0["test_files"] == out.payload["coverage"]["test_files"] > 0
     assert all(p.startswith("tests/") for p in out.payload["coverage"]["test_paths"])
+
+
+def test_p1_a11_scores_follow_policy_rubric():
+    from appmod.kernel.policy import PolicyService
+    from appmod.phases.p1.engine import P1AgentRunner
+    policy = PolicyService()
+    assert policy.get("risk_taxonomy", "rubric", "technical")
+    scores = {}
+    for repo in ("spring-petclinic", "microblog"):
+        if not (CORPUS / repo).exists():
+            pytest.skip(f"corpus repo {repo} not cloned")
+        r = P1AgentRunner(use_analyzers=False)
+        r.bind_repo(CORPUS / repo)
+        out = r.run({"local_id": "A11"}, {}, policy)
+        dims = {d["dimension"]: d for d in out.payload["risk_dimensions"]}
+        assert "pilot-default mid band" not in str(out.payload)
+        assert all(d["score"] == min(5, 1 + len(d["drivers"])) for d in dims.values())
+        assert "security" in {u["dimension"] for u in out.payload["unassessed_dimensions"]}
+        scores[repo] = {k: d["score"] for k, d in dims.items()}
+    assert scores["spring-petclinic"]["data"] >= 2 and scores["microblog"]["data"] >= 2

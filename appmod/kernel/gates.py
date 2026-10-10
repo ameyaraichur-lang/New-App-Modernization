@@ -53,6 +53,8 @@ class GenericGates:
             "intake_manifest": {
                 "scope": ctx.run_inputs["scope_manifest"],
                 "policy_version": ctx.policy.version,
+                "policy_label": ctx.policy.bundle.get("label", ""),
+                "risk_taxonomy": ctx.policy.bundle.get("risk_taxonomy", {}),
                 "source_pins": ctx.run_inputs.get("source_pins", {}),
             }
         }

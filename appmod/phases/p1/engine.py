@@ -658,18 +658,23 @@ class P1AgentRunner:
     # -- A11 Risk Scoring ---------------------------------------------------------------------------
 
     def _run_a11(self, spec, inputs, policy) -> AgentOutcome:
-        a10 = inputs.get("A10", {})
-        rubric = policy.get("risk_taxonomy") if policy else None
+        taxonomy = policy.get("risk_taxonomy") if policy else None
+        drivers = self._risk_drivers()
         dims = []
         unassessed = []
-        for dim in (rubric or {}).get("dimensions", ["technical", "security", "data", "operational", "organizational"]):
+        for dim in (taxonomy or {}).get("dimensions", ["technical", "security", "data", "operational", "organizational"]):
             if dim == "operational":
                 unassessed.append({"dimension": "operational", "reason": "no runtime telemetry (A4 PARTIAL)"})
             elif dim == "organizational":
                 unassessed.append({"dimension": "organizational", "reason": "stakeholder input PENDING (A8)"})
+            elif drivers.get(dim) is None:
+                unassessed.append({"dimension": dim, "reason": "required analyzer not available (NOT_ASSESSED)"})
             else:
-                dims.append({"dimension": dim, "score": 3, "basis": "pilot-default mid band",
-                             "evidence": "bounded static evidence"})
+                matched = drivers[dim]
+                dims.append({"dimension": dim, "score": min(5, 1 + len(matched)),
+                             "basis": f"rubric {policy.version if policy else 'none'}: 1 + one point per "
+                                      f"matched anchor ({len(matched)} matched)",
+                             "drivers": matched, "evidence": "repo scan + analyzers"})
         return AgentOutcome(
             status="COMPLETE",
             payload={
@@ -683,12 +688,50 @@ class P1AgentRunner:
                 "handoff_recommendation": "READY_FOR_PORTFOLIO_DRAFT",
             },
             findings=[_finding("A11-F1", "DOCUMENTED",
-                               f"Scoring under pilot-default rubric {policy.version if policy else 'none'}; "
+                               f"Scoring under rubric {policy.version if policy else 'none'} "
+                               f"({(policy.bundle.get('label') if policy else '') or 'no label'}); "
                                "unassessed dimensions listed, not averaged")],
             evidence_refs=[{"source": "policy-rubric", "method": "configured scoring"}],
             scope={"policy": policy.version if policy else "none"},
             applicability={"route": "capstone"},
         )
+
+    def _risk_drivers(self) -> dict[str, list[str] | None]:
+        """Rubric anchors matched by deterministic evidence; None = dimension not assessable."""
+        s = self.scan
+        tech = []
+        if s.code_loc > 5000:
+            tech.append(f"code LOC > 5,000 ({s.code_loc})")
+        if s.code_loc > 50000:
+            tech.append("code LOC > 50,000")
+        if not s.tests:
+            tech.append("no automated tests found")
+        n_deps = len(parse_dependencies(s))
+        if n_deps > 40:
+            tech.append(f"more than 40 declared dependencies ({n_deps})")
+        security: list[str] | None = None
+        if self.use_analyzers:
+            osv = analyzers.vulnerabilities(s.root)
+            if osv.get("status") == "OK":
+                bands = {_cvss_band(v.get("severity")) for v in osv.get("vulnerabilities", [])}
+                n = len(osv.get("vulnerabilities", []))
+                security = []
+                if n:
+                    security.append(f"any known vulnerability (OSV: {n})")
+                if bands & {"medium", "high", "critical"}:
+                    security.append("any medium-or-worse vulnerability")
+                if bands & {"high", "critical"}:
+                    security.append("any high-or-worse vulnerability")
+                if "critical" in bands or s.secret_findings:
+                    security.append("any critical vulnerability or hardcoded secret")
+        data = []
+        if s.has_data_layer():
+            data.append("has a persistent data layer (models, SQL or migrations)")
+            if len(s.model_files) > 10:
+                data.append(f"more than 10 model/entity files ({len(s.model_files)})")
+            if s.sql_files or len(s.migrations) > 20:
+                data.append("raw SQL files or more than 20 migrations")
+        return {"technical": tech, "security": security, "data": data}
 
 
 # ---------------------------------------------------------------------------
