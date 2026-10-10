@@ -21,8 +21,14 @@ EXCLUDE_DIRS = {
 EXCLUDE_SUFFIXES = {
     ".sqlite", ".sqlite3", ".log", ".pyc", ".class", ".jar", ".war",
     ".zip", ".gz", ".7z", ".exe", ".dll", ".pdf", ".png", ".jpg", ".gif",
-    ".ico", ".woff", ".woff2", ".ttf", ".eot", ".svg", ".min.js", ".map",
+    ".ico", ".woff", ".woff2", ".ttf", ".eot", ".svg", ".map",
 }
+# Third-party client libraries checked into the app (not the app's own code).
+VENDORED_DIRS = {"bower_components", "jspm_packages", "third_party", "third-party"}
+VENDORED_FILE_RE = re.compile(
+    r"^(jquery|bootstrap|modernizr|respond|angular|react|react-dom|vue|lodash|underscore|backbone|"
+    r"knockout|moment|d3|popper|require|signalr|ember|handlebars)([.-][\w.-]*)?\.(js|css)$"
+    r"|.*(\.intellisense|-vsdoc)\.js$")
 
 LANG_BY_EXT = {
     ".py": "python", ".js": "javascript", ".jsx": "javascript", ".ts": "typescript",
@@ -147,7 +153,10 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
         parts = rel.parts
         if any(p in EXCLUDE_DIRS for p in parts):
             continue
-        if path.suffix.lower() in EXCLUDE_SUFFIXES:
+        name = path.name.lower()
+        if path.suffix.lower() in EXCLUDE_SUFFIXES or name.endswith((".min.js", ".min.css")):
+            continue
+        if VENDORED_FILE_RE.match(name) or any(p.lower() in VENDORED_DIRS for p in parts[:-1]):
             continue
         try:
             size = path.stat().st_size

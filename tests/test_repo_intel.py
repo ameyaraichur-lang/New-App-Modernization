@@ -18,6 +18,18 @@ def test_primary_language_ignores_data_and_docs():
     assert s.code_loc < s.loc
 
 
+def test_vendored_and_minified_files_are_not_app_code(tmp_path):
+    (tmp_path / "Controllers").mkdir()
+    (tmp_path / "Controllers" / "Home.cs").write_text("class Home {}\n" * 50)
+    (tmp_path / "wwwroot").mkdir()
+    for name in ("jquery-2.0.3.js", "bootstrap.js", "app.min.js", "jquery.validate-vsdoc.js"):
+        (tmp_path / "wwwroot" / name).write_text("var x = 1;\n" * 5000)
+    (tmp_path / "wwwroot" / "site.js").write_text("init();\n" * 10)
+    s = scan_repo(tmp_path)
+    assert s.primary_language == "csharp"
+    assert {f["path"] for f in s.files if f["language"] == "javascript"} == {"wwwroot/site.js"}
+
+
 def test_commit_pinned_for_git_repo():
     assert len(scan_repo(ROOT).commit) == 40
 
@@ -26,6 +38,10 @@ def test_commit_pinned_for_git_repo():
     ("spring-petclinic", "java"),
     ("microblog", "python"),
     ("node-express-realworld-example-app", "typescript"),
+    ("musicstore", "csharp"),           # vendored jQuery/Bootstrap must not win
+    ("laravel58", "php"),
+    ("sinatra", "ruby"),
+    ("golang-example", "go"),
 ])
 def test_corpus_primary_language(repo, lang):
     path = CORPUS / repo
