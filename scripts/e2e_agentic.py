@@ -90,6 +90,7 @@ def main() -> int:
     ap.add_argument("--threshold", type=float, default=97.0)
     ap.add_argument("--no-llm", action="store_true", help="plumbing check only (scores will fail)")
     ap.add_argument("--rescore", metavar="JOB_ID", help="score a finished job from the run DB (no server)")
+    ap.add_argument("--resume", metavar="JOB_ID", help="resume an interrupted job (finished nodes are reused)")
     args = ap.parse_args()
     if args.rescore:
         return rescore(args)
@@ -118,6 +119,7 @@ def main() -> int:
     H = {r: {"Authorization": f"Bearer {t}"} for r, t in toks.items()}
     c = httpx.Client(base_url=base, timeout=60)
     t0 = time.time()
+    m0 = time.monotonic()      # timeout clock: does not advance while the host sleeps
     try:
         for _ in range(120):
             try:
@@ -127,14 +129,20 @@ def main() -> int:
                 pass
             time.sleep(0.5)
         health = c.get("/api/health/tools", headers=H["vw"]).json()
-        repos = [str(CORPUS / r) if not r.startswith(("/", "http", "git@")) else r for r in args.repos]
-        r = c.post("/api/runs", headers=H["op"], json={"repos": repos, "review_mode": "human", "llm": True})
-        r.raise_for_status()
-        job = r.json()["job_id"]
-        print(f"[e2e] job {job} on {len(repos)} repos (port {port}, cache={args.cache})", flush=True)
+        if args.resume:
+            job = args.resume
+            r = c.post(f"/api/runs/{job}/resume", headers=H["op"])
+            r.raise_for_status()
+            print(f"[e2e] resumed job {job} (port {port}, cache={args.cache})", flush=True)
+        else:
+            repos = [str(CORPUS / r) if not r.startswith(("/", "http", "git@")) else r for r in args.repos]
+            r = c.post("/api/runs", headers=H["op"], json={"repos": repos, "review_mode": "human", "llm": True})
+            r.raise_for_status()
+            job = r.json()["job_id"]
+            print(f"[e2e] job {job} on {len(repos)} repos (port {port}, cache={args.cache})", flush=True)
 
         answered, decisions, last = 0, [], ""
-        while time.time() - t0 < args.timeout:
+        while time.monotonic() - m0 < args.timeout:
             snap = c.get(f"/api/runs/{job}", headers=H["vw"]).json()
             for q in c.get(f"/api/runs/{job}/questions", params={"status": "OPEN"}, headers=H["vw"]).json():
                 resp = c.post(f"/api/questions/{q['question_id']}/answer", headers=H["sh"],
