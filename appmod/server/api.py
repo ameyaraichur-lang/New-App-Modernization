@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import threading
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -31,6 +32,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REGISTRY_DIR = ROOT / "data" / "registry"
 UI_DIST = ROOT / "ui" / "dist"
 ACTIVE = {"PENDING", "QUEUED", "RUNNING", "AWAITING_REVIEW"}
+log = logging.getLogger("appmod.server")
 
 _jobs: dict[str, PipelineJob] = {}
 _jobs_lock = threading.Lock()
@@ -55,12 +57,13 @@ app = FastAPI(title="App Modernization — Pipeline Console API", lifespan=lifes
 
 def _recover_jobs() -> None:
     install_log_redaction()
-    for row in db().list_jobs():
-        if row["job_id"] in _jobs:
+    for summary in db().list_jobs():
+        if summary["job_id"] in _jobs:
             continue
         try:
-            job = PipelineJob.from_db(row, db())
-        except Exception:
+            job = PipelineJob.from_db(db().get_job(summary["job_id"]), db())
+        except Exception as exc:
+            log.warning("could not recover job %s: %s: %s", summary["job_id"], type(exc).__name__, exc)
             continue
         if job.state["status"] in ACTIVE:
             job.state["status"] = "INTERRUPTED"

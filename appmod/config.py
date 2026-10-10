@@ -102,9 +102,12 @@ def redact(text: str, settings: Settings | None = None) -> str:
 
 class RedactingFilter(logging.Filter):
     def filter(self, record: logging.LogRecord) -> bool:
-        record.msg = redact(str(record.msg))
-        if record.args:
-            record.args = tuple(redact(str(a)) for a in record.args)
+        try:
+            msg = record.getMessage()
+        except Exception:
+            msg = str(record.msg)
+        record.msg = redact(msg)
+        record.args = None
         return True
 
 

@@ -60,6 +60,22 @@ def test_health_tools(client):
 
 
 @pytest.mark.skipif(not MICROBLOG.is_dir(), reason="corpus not cloned")
+def test_restart_recovers_and_resumes(client, tmp_path):
+    from appmod.server import api
+    from appmod.server.jobs import PipelineJob
+    job = PipelineJob(repos=[str(MICROBLOG)], llm=False, include_p5_p6=False, db=api.db(), owner="olivia")
+    job.state["status"] = "RUNNING"
+    job._persist(force=True)
+    api._jobs.clear()
+    api._recover_jobs()
+    snap = client.get(f"/api/runs/{job.job_id}", headers=H("vw")).json()
+    assert snap["status"] == "INTERRUPTED"
+    assert client.post(f"/api/runs/{job.job_id}/resume", headers=H("op")).status_code == 200
+    api._jobs[job.job_id].thread.join(60)
+    assert client.get(f"/api/runs/{job.job_id}", headers=H("vw")).json()["status"] == "COMPLETED"
+
+
+@pytest.mark.skipif(not MICROBLOG.is_dir(), reason="corpus not cloned")
 def test_human_run_over_http(client):
     r = client.post("/api/runs", json={"repo": str(MICROBLOG), "review_mode": "human", "llm": False},
                     headers=H("op"))
