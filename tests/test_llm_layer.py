@@ -72,3 +72,14 @@ def test_token_bucket_settles():
 def test_redact_masks_key(tmp_path):
     s = _settings(tmp_path)
     assert "k" * 20 not in redact(f"key={'k' * 20}", s)
+
+
+def test_log_filter_keeps_uvicorn_access_args():
+    import logging
+
+    from appmod.config import RedactingFilter
+    rec = logging.LogRecord("uvicorn.access", logging.INFO, __file__, 1, '%s - "%s %s HTTP/%s" %d',
+                            ("127.0.0.1:1", "GET", "/api/health", "1.1", 200), None)
+    assert RedactingFilter().filter(rec)
+    client_addr, method, path, version, status = rec.args
+    assert status == 200 and rec.getMessage() == '127.0.0.1:1 - "GET /api/health HTTP/1.1" 200'

@@ -102,6 +102,12 @@ def redact(text: str, settings: Settings | None = None) -> str:
 
 class RedactingFilter(logging.Filter):
     def filter(self, record: logging.LogRecord) -> bool:
+        if isinstance(record.args, tuple):
+            # uvicorn's AccessFormatter unpacks record.args, so keep the tuple shape
+            if isinstance(record.msg, str):
+                record.msg = redact(record.msg)
+            record.args = tuple(redact(a) if isinstance(a, str) else a for a in record.args)
+            return True
         try:
             msg = record.getMessage()
         except Exception:
