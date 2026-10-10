@@ -114,6 +114,19 @@ def test_stale_review(tmp_path):
     assert db.get_decision("j", 1, "a", "G2", "h2")["reviewer"] == "r"
 
 
+def test_single_elicitation_round(tmp_path):
+    from types import SimpleNamespace
+    db = RunDB(tmp_path / "x.db")
+    job = PipelineJob(repos=[str(tmp_path)], runs_root=tmp_path, llm=False, db=db)
+
+    def ctx(drafts):
+        return SimpleNamespace(inputs_by_node={"A8": {"status": "PARTIAL", "payload": {
+            "questions": ["Who owns it?"], "questions_drafted": [{"question": d} for d in drafts]}}})
+    job._register_questions("a", ctx(["Q1?", "Q2?"]))
+    job._register_questions("a", ctx(["Q3?"]))
+    assert sorted(q["question"] for q in db.list_questions(job.job_id, "a")) == ["Q1?", "Q2?", "Who owns it?"]
+
+
 def test_answers_digest_changes(tmp_path):
     db = RunDB(tmp_path / "x.db")
     q = db.add_question("j", "a", "Who owns it?")

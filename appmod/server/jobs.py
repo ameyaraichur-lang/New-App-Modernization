@@ -488,6 +488,10 @@ class PipelineJob:
         for q in qs:
             if isinstance(q, str) and q.strip():
                 self.db.add_question(self.job_id, app, q.strip(), source="seed")
+        # one elicitation round: drafts from later A8 re-runs stay in the artifact but do not
+        # reopen the questionnaire, otherwise every answer would spawn new questions forever
+        if any(q["source"] == "llm-drafted" for q in self.db.list_questions(self.job_id, app)):
+            return
         for d in p.get("questions_drafted", []) or []:
             if isinstance(d, dict) and d.get("question"):
                 self.db.add_question(self.job_id, app, d["question"].strip(), why=d.get("why", ""),
