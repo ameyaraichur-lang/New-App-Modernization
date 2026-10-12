@@ -1,0 +1,794 @@
+{
+ "job": "job-1791610584-955e05",
+ "schema_valid_after_repair": {
+  "pct": 100.0,
+  "valid": 287,
+  "total": 287
+ },
+ "evidence_resolvability": {
+  "pct": 99.93,
+  "resolved": 15912,
+  "cited": 15923,
+  "unresolved_sample": [
+   {
+    "artifact": "P1/flask-tutorial/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/flask-tutorial/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/flask-tutorial/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/django-realworld-example-app/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/django-realworld-example-app/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/django-realworld-example-app/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/musicstore/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/musicstore/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/musicstore/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/sinatra/A4",
+    "id": "seed:A4-F1"
+   },
+   {
+    "artifact": "P1/sinatra/A4",
+    "id": "seed:A4-F1"
+   }
+  ]
+ },
+ "hallucinated_paths": {
+  "count": 6,
+  "checked": 900,
+  "items": [
+   {
+    "artifact": "P1/flask-tutorial/A2",
+    "path": "instance/flaskr.sqlite"
+   },
+   {
+    "artifact": "P1/laravel58/A3",
+    "path": "storage/logs/laravel.log"
+   },
+   {
+    "artifact": "P1/laravel58/A3",
+    "path": "database/database.sqlite"
+   },
+   {
+    "artifact": "P1/sinatra/A2",
+    "path": "topic/article.md"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "path": "topic/article.md"
+   },
+   {
+    "artifact": "P1/golang-example/A2",
+    "path": "A1/go.mod"
+   }
+  ]
+ },
+ "hallucinated_symbols": {
+  "count": 87,
+  "checked": 488,
+  "items": [
+   {
+    "artifact": "P1/spring-petclinic/A9",
+    "symbol": "Visit constructor",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/node-express-realworld-example-app/A9",
+    "symbol": "auth.controller.ts POST /users handler",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/musicstore/A9",
+    "symbol": "StoreManagerController authorization",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/musicstore/A9",
+    "symbol": "Album data annotations enforced by StoreManagerController.Create/Edit",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/musicstore/A9",
+    "symbol": "StoreManagerController.Details/Create/Edit/RemoveAlbumConfirmed",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "GET / route closure",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "GET /user route closure",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "RegistersUsers trait",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "AuthenticatesUsers trait",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "SendsPasswordResetEmails trait",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "ResetsPasswords trait",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "VerifiesEmails trait",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "Broadcast::channel closure",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "Artisan::command closure",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "GET /user route closure",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "App\\User class configuration: $hidden",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "$fillable",
+    "why": "not in source"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "$casts",
+    "why": "not in source"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "inherited serialization/assignment methods",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "RedirectIfAuthenticated::handle($request",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "Closure $next",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "$guard = null)",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "consumed by framework password broker",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "Broadcast::channel closure",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/laravel58/A9",
+    "symbol": "@auth and Route::has branches",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "@@ layout",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "before '/p/:topic'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/p/:topic'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "@@ layout",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "before '/p/:topic/:article'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/p/:topic/:article'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "@@ layout",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/activity'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "@@ layout",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/style.css'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "@@ style",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "Not implemented in application methods",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "README 'How can I help?' and 'On translations'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "app.rb @@ layout links to contribution guidance",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/p/:topic'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/p/:topic/:article'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/p/:topic'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/p/:topic/:article'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/activity'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/p/:topic'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/p/:topic/:article'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "@@ layout",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "@@ layout",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "get '/activity'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "configure :production",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "production before filter",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "No enforcing application method",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "README 'How can I help?' and app.rb @@ layout contribution footer",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "No enforcing application method",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/sinatra/A9",
+    "symbol": "README 'On translations'",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/todomvc/A9",
+    "symbol": "Specification sections New todo",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/todomvc/A9",
+    "symbol": "Persistence and Routing",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/todomvc/A9",
+    "symbol": "implementing methods mapped in P1/P2/P5/P6",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "App.componentWillMount/componentWillReceiveProps",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Auth.login/register/current",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default auth/common reducers",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default articleList reducer",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Articles.all/feed/byTag",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Editor.componentWillMount/submitForm/watchForEnter/removeTagHandler/componentWillUnmount",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default editor/common reducers",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Articles.create/update",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default common reducer",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Article.componentWillMount/render",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default article reducer",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Comments.create/delete/forArticle",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Profile.componentWillMount/render",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "mapDispatchToProps.onFollow/onUnfollow",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default profile/articleList reducers",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Profile.follow/unfollow/get",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "mapDispatchToProps.favorite/unfavorite",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default articleList reducer",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Articles.favorite/unfavorite",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "SettingsForm.componentWillMount/componentWillReceiveProps/updateState/submitForm/render",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default settings/common reducers",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default common/auth reducers",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default articleList reducer",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Articles.create/update",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default articleList reducer",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "Editor.watchForEnter/removeTagHandler",
+    "why": "not a code name"
+   },
+   {
+    "artifact": "P1/react-redux-realworld/A9",
+    "symbol": "default editor reducer",
+    "why": "not a code name"
+   }
+  ]
+ },
+ "golden_agreement": {
+  "primary_language": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": "java",
+     "got": "java",
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": "python",
+     "got": "python",
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": "python",
+     "got": "python",
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": "typescript",
+     "got": "typescript",
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": "csharp",
+     "got": "csharp",
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": "php",
+     "got": "php",
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": "ruby",
+     "got": "ruby",
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": "go",
+     "got": "go",
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true
+    }
+   ]
+  },
+  "framework": {
+   "pct": 66.67,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": "spring-boot",
+     "got": "spring-boot",
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": "flask",
+     "got": null,
+     "ok": false
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": "django",
+     "got": "django",
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": "express",
+     "got": "express",
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": "Microsoft.AspNetCore",
+     "got": null,
+     "ok": false
+    },
+    {
+     "app": "laravel58",
+     "expected": "laravel/framework",
+     "got": "laravel/framework",
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": "sinatra",
+     "got": null,
+     "ok": false
+    },
+    {
+     "app": "golang-example",
+     "expected": "gin-gonic/gin",
+     "got": "gin-gonic/gin",
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": "react",
+     "got": "react",
+     "ok": true
+    }
+   ]
+  },
+  "has_tests": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": false,
+     "got": false,
+     "ok": true
+    }
+   ]
+  },
+  "has_data_layer": {
+   "pct": 90.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": false,
+     "got": true,
+     "ok": false
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": false,
+     "got": false,
+     "ok": true
+    }
+   ]
+  }
+ },
+ "variation": {
+  "p2_dispositions": {
+   "Refactor": 10
+  },
+  "p3_distinct_boundary_sets": 10,
+  "p3_apps": 10
+ },
+ "pass": false
+}
