@@ -1,0 +1,421 @@
+{
+ "job": "job-1791792319-d40469",
+ "schema_valid_after_repair": {
+  "pct": 100.0,
+  "valid": 253,
+  "total": 253
+ },
+ "evidence_resolvability": {
+  "pct": 100.0,
+  "resolved": 14169,
+  "cited": 14169,
+  "unresolved_sample": []
+ },
+ "hallucinated_paths": {
+  "count": 0,
+  "checked": 888,
+  "items": []
+ },
+ "hallucinated_symbols": {
+  "count": 0,
+  "checked": 370,
+  "items": []
+ },
+ "golden_agreement": {
+  "primary_language": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": "java",
+     "got": "java",
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": "python",
+     "got": "python",
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": "python",
+     "got": "python",
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": "typescript",
+     "got": "typescript",
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": "csharp",
+     "got": "csharp",
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": "php",
+     "got": "php",
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": "ruby",
+     "got": "ruby",
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": "go",
+     "got": "go",
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true
+    }
+   ]
+  },
+  "framework": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": "spring-boot",
+     "got": "spring-boot",
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": "flask",
+     "got": "flask",
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": "django",
+     "got": "django",
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": "express",
+     "got": "express",
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": "Microsoft.AspNetCore",
+     "got": "Microsoft.AspNetCore",
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": "laravel/framework",
+     "got": "laravel/framework",
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": "sinatra",
+     "got": "sinatra",
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": "gin-gonic/gin",
+     "got": "gin-gonic/gin",
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": "react",
+     "got": "react",
+     "ok": true
+    }
+   ]
+  },
+  "has_tests": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": false,
+     "got": false,
+     "ok": true
+    }
+   ]
+  },
+  "has_data_layer": {
+   "pct": 90.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": false,
+     "got": true,
+     "ok": false
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": false,
+     "got": false,
+     "ok": true
+    }
+   ]
+  }
+ },
+ "variation": {
+  "p2_dispositions": {
+   "Refactor": 4,
+   "Replatform": 4,
+   "Retain": 2
+  },
+  "p3_distinct_boundary_sets": 8,
+  "p3_apps": 8
+ },
+ "pass": true,
+ "confidence": {
+  "confidence_score": 0.0,
+  "weakest": "C3",
+  "assessed": [
+   "C1",
+   "C2"
+  ],
+  "not_assessed": [
+   "C3",
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8",
+   "C9"
+  ],
+  "weakest_assessed": "C2",
+  "components": [
+   {
+    "id": "C1",
+    "name": "Integrity",
+    "assessed": true,
+    "lower_bound": 98.5,
+    "reason": "",
+    "measures": [
+     {
+      "name": "schema valid after repair",
+      "k": 253,
+      "n": 253,
+      "lower_bound": 98.5
+     },
+     {
+      "name": "evidence ids resolve",
+      "k": 14169,
+      "n": 14169,
+      "lower_bound": 99.97
+     },
+     {
+      "name": "cited paths exist",
+      "k": 888,
+      "n": 888,
+      "lower_bound": 99.57
+     },
+     {
+      "name": "A9 function names exist",
+      "k": 370,
+      "n": 370,
+      "lower_bound": 98.97
+     }
+    ]
+   },
+   {
+    "id": "C2",
+    "name": "Factual accuracy",
+    "assessed": true,
+    "lower_bound": 86.82,
+    "reason": "",
+    "measures": [
+     {
+      "name": "golden facts agree",
+      "k": 38,
+      "n": 39,
+      "lower_bound": 86.82
+     }
+    ]
+   },
+   {
+    "id": "C3",
+    "name": "Claim support",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "claim-support verifier not built (stack PR 6)",
+    "measures": []
+   },
+   {
+    "id": "C4",
+    "name": "Decision correctness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no expert decision labels (decision 2: skipped)",
+    "measures": []
+   },
+   {
+    "id": "C5",
+    "name": "Stability",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no repeated runs (stack PR 4)",
+    "measures": []
+   },
+   {
+    "id": "C6",
+    "name": "Calibration",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no confidence field on decisions (stack PR 5)",
+    "measures": []
+   },
+   {
+    "id": "C7",
+    "name": "Execution proof",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "P5 runtime differential NOT_RUN; sandbox deferred (decision 1)",
+    "measures": []
+   },
+   {
+    "id": "C8",
+    "name": "Robustness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "adversarial suite not built (stack PR 8)",
+    "measures": []
+   },
+   {
+    "id": "C9",
+    "name": "Human acceptance",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "all reviews were by scripted actors",
+    "measures": [
+     {
+      "name": "human reviews approved",
+      "k": 0,
+      "n": 0,
+      "lower_bound": null
+     }
+    ]
+   }
+  ]
+ }
+}
