@@ -27,6 +27,7 @@ import sys
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
+from typing import Any, Callable
 
 import httpx
 
@@ -77,6 +78,21 @@ def free_port() -> int:
     with socket.socket() as s:
         s.bind(("127.0.0.1", 0))
         return s.getsockname()[1]
+
+
+MAX_TRANSIENT = 40
+
+
+def retry(call: Callable[[], Any]) -> Any:
+    """Calls to the local server, retried on transient transport errors (resets under load)."""
+    for attempt in range(1, MAX_TRANSIENT + 1):
+        try:
+            return call()
+        except httpx.TransportError as e:
+            if attempt == MAX_TRANSIENT:
+                raise
+            print(f"[e2e] transient {type(e).__name__} ({attempt}/{MAX_TRANSIENT}): {e}", flush=True)
+            time.sleep(3)
 
 
 def main() -> int:
@@ -147,21 +163,30 @@ def main() -> int:
             job = r.json()["job_id"]
             print(f"[e2e] job {job} on {len(repos)} repos (port {port}, cache={args.cache})", flush=True)
 
-        answered, decisions, last = 0, [], ""
+        answered, decisions, last, failures = 0, [], "", 0
         while time.monotonic() - m0 < args.timeout:
-            snap = c.get(f"/api/runs/{job}", headers=H["vw"]).json()
-            for q in c.get(f"/api/runs/{job}/questions", params={"status": "OPEN"}, headers=H["vw"]).json():
-                resp = c.post(f"/api/questions/{q['question_id']}/answer", headers=H["sh"],
-                              json={"answer": answer_for(q["question"])})
-                answered += resp.status_code == 200
-            for rv in c.get("/api/reviews", params={"job_id": job, "status": "PENDING"}, headers=H["vw"]).json():
-                prop = rv["proposal"]
-                resp = c.post(f"/api/reviews/{rv['review_id']}/decision", headers=H["rv"],
-                              json={"decision": "approve", "candidate_hash": rv["candidate_hash"],
-                                    "comment": f"approve proposed {prop.get('status')} {SCRIPTED}"})
-                if resp.status_code == 200:
-                    decisions.append({"phase": rv["phase"], "app": rv["app"], "gate": rv["gate"],
-                                      "proposed": prop.get("status"), "decision": "approve"})
+            try:
+                snap = c.get(f"/api/runs/{job}", headers=H["vw"]).json()
+                for q in c.get(f"/api/runs/{job}/questions", params={"status": "OPEN"}, headers=H["vw"]).json():
+                    resp = c.post(f"/api/questions/{q['question_id']}/answer", headers=H["sh"],
+                                  json={"answer": answer_for(q["question"])})
+                    answered += resp.status_code == 200
+                for rv in c.get("/api/reviews", params={"job_id": job, "status": "PENDING"}, headers=H["vw"]).json():
+                    prop = rv["proposal"]
+                    resp = c.post(f"/api/reviews/{rv['review_id']}/decision", headers=H["rv"],
+                                  json={"decision": "approve", "candidate_hash": rv["candidate_hash"],
+                                        "comment": f"approve proposed {prop.get('status')} {SCRIPTED}"})
+                    if resp.status_code == 200:
+                        decisions.append({"phase": rv["phase"], "app": rv["app"], "gate": rv["gate"],
+                                          "proposed": prop.get("status"), "decision": "approve"})
+            except httpx.TransportError as e:
+                failures += 1
+                if failures > MAX_TRANSIENT:
+                    raise
+                print(f"[e2e] transient {type(e).__name__} while polling ({failures}/{MAX_TRANSIENT}): {e}", flush=True)
+                time.sleep(3)
+                continue
+            failures = 0
             line = (f"{snap['status']} {snap['progress']}% {snap.get('stage_detail') or ''} | "
                     f"llm calls={snap['llm']['calls']} tok_in={snap['llm']['input_tokens']} "
                     f"answers={answered} approvals={len(decisions)}")
@@ -171,10 +196,10 @@ def main() -> int:
             if snap["status"] in TERMINAL:
                 break
             time.sleep(3)
-        snap = c.get(f"/api/runs/{job}", headers=H["vw"]).json()
-        trace = c.get(f"/api/runs/{job}/trace", headers=H["vw"]).json()
-        reviews = c.get("/api/reviews", params={"job_id": job}, headers=H["vw"]).json()
-        questions = c.get(f"/api/runs/{job}/questions", headers=H["vw"]).json()
+        snap = retry(lambda: c.get(f"/api/runs/{job}", headers=H["vw"]).json())
+        trace = retry(lambda: c.get(f"/api/runs/{job}/trace", headers=H["vw"]).json())
+        reviews = retry(lambda: c.get("/api/reviews", params={"job_id": job}, headers=H["vw"]).json())
+        questions = retry(lambda: c.get(f"/api/runs/{job}/questions", headers=H["vw"]).json())
     finally:
         server.terminate()
         try:
