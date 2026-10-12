@@ -1,0 +1,255 @@
+{
+ "repo": "laravel58",
+ "commit": "c4a7a7bc9cdccd00d6fdda8846d1660a0608d7ef",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "php",
+   "source": "scc",
+   "snippet": "scc: php 1126, javascript 10",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "vue",
+   "expected": "vue",
+   "source": "package.json:23",
+   "snippet": "vue",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "laravel",
+   "expected": "laravel/framework",
+   "source": "composer.json:13",
+   "snippet": "laravel/framework",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "phpunit/phpunit",
+   "expected": true,
+   "source": "composer.json:22",
+   "snippet": "phpunit/phpunit",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "composer.json",
+   "expected": true,
+   "source": "composer.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "tests/CreatesApplication.php",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "mysql",
+   "expected": true,
+   "source": ".env.example:9",
+   "snippet": "lhost\n\nlog_channel=stack\n\ndb_connection=mysql\ndb_host=127.0.0.1\ndb_port=3306\ndb_datab",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": ".env.example:22",
+   "snippet": "ssion_driver=file\nsession_lifetime=120\n\nredis_host=127.0.0.1\nredis_password=null\nredi",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlite",
+   "expected": true,
+   "source": "config/database.php:38",
+   "snippet": "*/\n\n    'connections' => [\n\n        'sqlite' => [\n            'driver' => 'sqlite',",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "app/User.php:9",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "User",
+   "expected": true,
+   "source": "app/User.php:9",
+   "snippet": "class User extends Authenticatable",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "beyondcode/laravel-dump-server",
+   "expected": true,
+   "source": "composer.json:17",
+   "snippet": "beyondcode/laravel-dump-server",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "bootstrap",
+   "expected": true,
+   "source": "package.json:14",
+   "snippet": "bootstrap",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "cross-env",
+   "expected": true,
+   "source": "package.json:5",
+   "snippet": "cross-env",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "fideloper/proxy",
+   "expected": true,
+   "source": "composer.json:12",
+   "snippet": "fideloper/proxy",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "filp/whoops",
+   "expected": true,
+   "source": "composer.json:18",
+   "snippet": "filp/whoops",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "fzaninotto/faker",
+   "expected": true,
+   "source": "composer.json:19",
+   "snippet": "fzaninotto/faker",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jquery",
+   "expected": true,
+   "source": "package.json:16",
+   "snippet": "jquery",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "laravel-mix",
+   "expected": true,
+   "source": "package.json:5",
+   "snippet": "laravel-mix",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "laravel/tinker",
+   "expected": true,
+   "source": "composer.json:14",
+   "snippet": "laravel/tinker",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "lodash",
+   "expected": true,
+   "source": "package.json:18",
+   "snippet": "lodash",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "nunomaduro/collision",
+   "expected": true,
+   "source": "composer.json:21",
+   "snippet": "nunomaduro/collision",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "popper.js",
+   "expected": true,
+   "source": "package.json:19",
+   "snippet": "popper.js",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "sass",
+   "expected": true,
+   "source": "package.json:21",
+   "snippet": "sass",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "sass-loader",
+   "expected": true,
+   "source": "package.json:22",
+   "snippet": "sass-loader",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "vue",
+   "expected": true,
+   "source": "package.json:23",
+   "snippet": "vue",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "php 7.1",
+   "source": "composer.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

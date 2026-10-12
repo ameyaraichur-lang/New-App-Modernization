@@ -1,0 +1,3382 @@
+{
+ "job": "job-1791792319-d40469",
+ "schema_valid_after_repair": {
+  "pct": 100.0,
+  "valid": 253,
+  "total": 253
+ },
+ "evidence_resolvability": {
+  "pct": 100.0,
+  "resolved": 14169,
+  "cited": 14169,
+  "unresolved_sample": []
+ },
+ "hallucinated_paths": {
+  "count": 0,
+  "checked": 888,
+  "items": []
+ },
+ "hallucinated_symbols": {
+  "count": 0,
+  "checked": 370,
+  "items": []
+ },
+ "golden_agreement": {
+  "primary_language": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "java",
+     "got": "java",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "python",
+     "got": "python",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "python",
+     "got": "python",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "typescript",
+     "got": "typescript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "musicstore",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "csharp",
+     "got": "csharp",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "laravel58",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "php",
+     "got": "php",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "sinatra",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "ruby",
+     "got": "ruby",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "golang-example",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "go",
+     "got": "go",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "todomvc",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    }
+   ]
+  },
+  "framework": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "framework",
+     "key": "spring-boot",
+     "expected": "org.springframework.boot:spring-boot-starter-cache",
+     "got": "org.springframework.boot:spring-boot-starter-cache",
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:34"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "framework",
+     "key": "flask",
+     "expected": "flask",
+     "got": "flask",
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:2"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "framework",
+     "key": "django",
+     "expected": "django",
+     "got": "django",
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:1"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "framework",
+     "key": "express",
+     "expected": "express",
+     "got": "express",
+     "ok": true,
+     "review": null,
+     "source": "package.json:22"
+    },
+    {
+     "app": "musicstore",
+     "type": "framework",
+     "key": "aspnetcore",
+     "expected": "microsoft.aspnetcore.authentication.core",
+     "got": "microsoft.aspnetcore.authentication.core",
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/MusicStore.Test.csproj:12"
+    },
+    {
+     "app": "musicstore",
+     "type": "framework",
+     "key": "entity-framework",
+     "expected": "microsoft.entityframeworkcore.inmemory",
+     "got": "microsoft.entityframeworkcore.inmemory",
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:40"
+    },
+    {
+     "app": "laravel58",
+     "type": "framework",
+     "key": "vue",
+     "expected": "vue",
+     "got": "vue",
+     "ok": true,
+     "review": null,
+     "source": "package.json:23"
+    },
+    {
+     "app": "laravel58",
+     "type": "framework",
+     "key": "laravel",
+     "expected": "laravel/framework",
+     "got": "laravel/framework",
+     "ok": true,
+     "review": null,
+     "source": "composer.json:13"
+    },
+    {
+     "app": "sinatra",
+     "type": "framework",
+     "key": "sinatra",
+     "expected": "sinatra",
+     "got": "sinatra",
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:5"
+    },
+    {
+     "app": "golang-example",
+     "type": "framework",
+     "key": "gin",
+     "expected": "github.com/gin-gonic/gin",
+     "got": "github.com/gin-gonic/gin",
+     "ok": true,
+     "review": null,
+     "source": "go.mod:6"
+    },
+    {
+     "app": "todomvc",
+     "type": "framework",
+     "key": "express",
+     "expected": "express",
+     "got": "express",
+     "ok": true,
+     "review": null,
+     "source": "package.json:26"
+    },
+    {
+     "app": "todomvc",
+     "type": "framework",
+     "key": "react",
+     "expected": "react",
+     "got": "react",
+     "ok": true,
+     "review": null,
+     "source": "examples/typescript-react/package.json:9"
+    },
+    {
+     "app": "todomvc",
+     "type": "framework",
+     "key": "angular",
+     "expected": "angular",
+     "got": "angular",
+     "ok": true,
+     "review": null,
+     "source": "examples/typescript-angular/package.json:7"
+    },
+    {
+     "app": "todomvc",
+     "type": "framework",
+     "key": "vue",
+     "expected": "vue",
+     "got": "vue",
+     "ok": true,
+     "review": null,
+     "source": "examples/vue/package.json:2"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "framework",
+     "key": "react",
+     "expected": "react",
+     "got": "react",
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    }
+   ]
+  },
+  "test_framework": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "test_framework",
+     "key": "org.testcontainers:testcontainers-junit-jupiter",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:55"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "test_framework",
+     "key": "jest",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:32"
+    },
+    {
+     "app": "laravel58",
+     "type": "test_framework",
+     "key": "phpunit/phpunit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:22"
+    }
+   ]
+  },
+  "build_manifest": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "build_manifest",
+     "key": "build.gradle",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "build_manifest",
+     "key": "pyproject.toml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "build_manifest",
+     "key": "requirements.txt",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "musicstore",
+     "type": "build_manifest",
+     "key": "*.csproj",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/MusicStore.Test.csproj"
+    },
+    {
+     "app": "laravel58",
+     "type": "build_manifest",
+     "key": "composer.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json"
+    },
+    {
+     "app": "laravel58",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "sinatra",
+     "type": "build_manifest",
+     "key": "gemfile",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile"
+    },
+    {
+     "app": "golang-example",
+     "type": "build_manifest",
+     "key": "go.mod",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod"
+    },
+    {
+     "app": "todomvc",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "todomvc",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/duel/pom.xml"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    }
+   ]
+  },
+  "has_tests": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/test/java/org/springframework/samples/petclinic/MySqlIntegrationTests.java"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/conftest.py"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no test code found"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/tests/prisma-mock.ts"
+    },
+    {
+     "app": "musicstore",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/CartSummaryComponentTest.cs"
+    },
+    {
+     "app": "laravel58",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/CreatesApplication.php"
+    },
+    {
+     "app": "sinatra",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no test code found"
+    },
+    {
+     "app": "golang-example",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/unit_test.go"
+    },
+    {
+     "app": "todomvc",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/cya.js"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no test code found"
+    }
+   ]
+  },
+  "datastore": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:14"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:2"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "datastore",
+     "key": "h2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/resources/application.properties:2"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "datastore",
+     "key": "sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/settings.py:88"
+    },
+    {
+     "app": "musicstore",
+     "type": "datastore",
+     "key": "sqlserver",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:33"
+    },
+    {
+     "app": "laravel58",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".env.example:9"
+    },
+    {
+     "app": "laravel58",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".env.example:22"
+    },
+    {
+     "app": "laravel58",
+     "type": "datastore",
+     "key": "sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "config/database.php:38"
+    },
+    {
+     "app": "golang-example",
+     "type": "datastore",
+     "key": "sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".env.example:5"
+    }
+   ]
+  },
+  "has_data_layer": {
+   "pct": 70.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/Specialty.java:28"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/data.sql"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/core/models.py:4"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:11"
+    },
+    {
+     "app": "musicstore",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:18"
+    },
+    {
+     "app": "laravel58",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/User.php:9"
+    },
+    {
+     "app": "sinatra",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no entities, .sql, migrations or datastore"
+    },
+    {
+     "app": "golang-example",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/models.go:36"
+    },
+    {
+     "app": "todomvc",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no entities, .sql, migrations or datastore"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no entities, .sql, migrations or datastore"
+    }
+   ]
+  },
+  "entity": {
+   "pct": 95.83,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Owner",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java:48"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Pet",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java:44"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "PetType",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java:26"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Specialty",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/Specialty.java:28"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Vet",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java:43"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Visit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/Visit.java:35"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "entity",
+     "key": "TimestampedModel",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "conduit/apps/core/models.py:4"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "entity",
+     "key": "Article",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:11"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "entity",
+     "key": "Comment",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:26"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "entity",
+     "key": "Tag",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:37"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "entity",
+     "key": "User",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:43"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "Album",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:18"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "Artist",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:19"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "CartItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:22"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "Genre",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:21"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "Order",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:20"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "OrderDetail",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:23"
+    },
+    {
+     "app": "laravel58",
+     "type": "entity",
+     "key": "User",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/User.php:9"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "ArticleModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:11"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "ArticleUserModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:23"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "CommentModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:45"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "FavoriteModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:31"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "FollowModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/models.go:36"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "TagModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:39"
+    }
+   ]
+  },
+  "route": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/oups",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/system/CrashController.java:31"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:94"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:178"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/*/edit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:148"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/*/pets/*/visits/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java:90"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/find",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:89"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:72"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/pets/*/edit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java:139"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/pets/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java:100"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/vets",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java:72"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/vets.html",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java:45"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/*/delete",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/blog.py:113"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/*/update",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/blog.py:86"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/create",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/blog.py:60"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/hello",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/__init__.py:26"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/auth.py:84"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/logout",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/auth.py:112"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/register",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/auth.py:46"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/admin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/urls.py:20"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/urls.py:22"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/articles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/articles/urls.py:18"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/articles/feed",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/articles/urls.py:16"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/profiles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/profiles/urls.py:6"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/tags",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/articles/urls.py:27"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/user",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/authentication/urls.py:8"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/users",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/authentication/urls.py:9"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/users/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/authentication/urls.py:10"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:30"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:87"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/*/comments",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:149"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/*/comments/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:190"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/*/favorite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:210"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/feed",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:45"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/profiles/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/profile/profile.controller.ts:14"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/profiles/*/follow",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/profile/profile.controller.ts:34"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/tags",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/tag/tag.controller.ts:13"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/user",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/auth/auth.controller.ts:45"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/users",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/auth/auth.controller.ts:14"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/users/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/auth/auth.controller.ts:30"
+    },
+    {
+     "app": "sinatra",
+     "type": "route",
+     "key": "/activity",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app.rb:141"
+    },
+    {
+     "app": "sinatra",
+     "type": "route",
+     "key": "/p/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app.rb:123"
+    },
+    {
+     "app": "sinatra",
+     "type": "route",
+     "key": "/p/*/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app.rb:133"
+    },
+    {
+     "app": "sinatra",
+     "type": "route",
+     "key": "/style.css",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app.rb:152"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/*/comments",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/routers.go:22"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/*/comments/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/routers.go:23"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/*/favorite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/routers.go:20"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/*/follow",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/routers.go:28"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:41"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/api/ping",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:54"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/articles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:44"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/feed",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/routers.go:14"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/routers.go:13"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/profiles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:46"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/tags",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:45"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/user",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:49"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/users",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:42"
+    }
+   ]
+  },
+  "dependency": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "com.github.ben-manes.caffeine:caffeine",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:45"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "com.puppycrawl.tools:checkstyle",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:30"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.postgresql:postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:48"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-devtools",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:117"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-docker-compose",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:54"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-cache",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:34"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-cache-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:168"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-data-jpa-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:50"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-restclient-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:51"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-thymeleaf",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:36"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-validation",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:38"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-validation-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:143"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-testcontainers",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:53"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.testcontainers:testcontainers-mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:56"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.webjars.npm:bootstrap",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:43"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "dependency",
+     "key": "flask",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:2"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "django",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:1"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "django-cors-middleware",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:2"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "django-extensions",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:3"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "djangorestframework",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:4"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "pyjwt",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:5"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "six",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:6"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@nx/eslint-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:31"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@nx/node",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:34"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@nx/workspace",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:35"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@types/bcryptjs",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:38"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@types/cors",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:39"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@types/express",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:40"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "bcryptjs",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:19"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "body-parser",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:20"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "cors",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:21"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "esbuild",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:29"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "jest",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:32"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "jest-environment-node",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:49"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "jest-mock-extended",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:50"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "slugify",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:25"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "ts-jest",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:54"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:17"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.aspnetcoremodule",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:17"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.aspnetcoremodulev2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:18"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.google",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:29"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.microsoftaccount",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:30"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.openidconnect",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:20"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.twitter",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:32"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.mvc",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:35"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.server.iis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:37"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.entityframeworkcore.inmemory",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:40"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.entityframeworkcore.sqlserver",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:41"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.extensions.configuration.binder",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:26"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.extensions.configuration.usersecrets",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:29"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.extensions.logging",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:30"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.extensions.logging.testing",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/MusicStore.Test.csproj:13"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "beyondcode/laravel-dump-server",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:17"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "bootstrap",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:14"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "cross-env",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:5"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "fideloper/proxy",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:12"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "filp/whoops",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:18"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "fzaninotto/faker",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:19"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "jquery",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:16"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "laravel-mix",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:5"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "laravel/tinker",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:14"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "lodash",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:18"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "nunomaduro/collision",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:21"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "popper.js",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:19"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "sass",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:21"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "sass-loader",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:22"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "vue",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:23"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "faraday",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:14"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "faraday-http-cache",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:15"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "glorify",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:10"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:13"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "newrelic_rpm",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:12"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "rack-cache",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:7"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "rdoc",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:11"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "sass",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:6"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "sinatra",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:5"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "slim",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:9"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "unicorn",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:8"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/bytedance/sonic/loader",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:18"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/cloudwego/base64x",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:19"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/cloudwego/iasm",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:20"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/davecgh/go-spew",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:21"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/gabriel-vasile/mimetype",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:22"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/gin-gonic/gin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:6"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/go-playground/locales",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:24"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/go-playground/validator/v10",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:7"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/gosimple/slug",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:9"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/jinzhu/now",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:29"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/mattn/go-sqlite3",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:34"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/modern-go/reflect2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:36"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "golang.org/x/text",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:44"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "gopkg.in/yaml.v3",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:46"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "gorm.io/driver/sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:12"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@angular/cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/angular/package.json:26"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@angular/compiler-cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/angular/package.json:27"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@rollup/plugin-babel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/preact/package.json:20"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@tsconfig/ember",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:46"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@vitejs/plugin-vue",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/vue/package.json:18"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "broccoli-asset-rev",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:51"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ember-cli-htmlbars",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:57"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ember-load-initializers",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:61"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ember-modifier",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:62"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ember-qunit-nice-errors",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:98"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "grunt-template-jasmine-requirejs",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/angularjs_require/test/package.json:6"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "html-webpack-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/react-redux/package.json:23"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ractive",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/ractive/package.json:5"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "react-router-dom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/react-redux/package.json:38"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "webpack",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/react-redux/package.json:11"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "cross-env",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:6"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "history",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:10"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "marked",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:11"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-dom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:14"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-redux",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-router",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:16"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-router-dom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:17"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-router-redux",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:18"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-scripts",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:7"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "redux",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "redux-devtools-extension",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:20"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "redux-logger",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:21"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "superagent",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:22"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "superagent-promise",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:23"
+    }
+   ]
+  },
+  "containerized": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".devcontainer/Dockerfile"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "musicstore",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "laravel58",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "sinatra",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "golang-example",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "todomvc",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    }
+   ]
+  },
+  "ci": {
+   "pct": 80.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/deploy-and-test-cluster.yml"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "musicstore",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": ".travis.yml"
+    },
+    {
+     "app": "laravel58",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "sinatra",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "golang-example",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/ci.yml"
+    },
+    {
+     "app": "todomvc",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": ".travis.yml"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    }
+   ]
+  },
+  "runtime_version": {
+   "pct": 80.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "java 17",
+     "got": "java 17",
+     "ok": true,
+     "review": null,
+     "source": "build.gradle"
+    },
+    {
+     "app": "musicstore",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "netcoreapp3.0",
+     "got": "netcoreapp3.0",
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/MusicStore.Test.csproj"
+    },
+    {
+     "app": "laravel58",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "php 7.1",
+     "got": "php 7.1",
+     "ok": true,
+     "review": null,
+     "source": "composer.json"
+    },
+    {
+     "app": "golang-example",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "go 1.21",
+     "got": null,
+     "ok": false,
+     "review": null,
+     "source": "go.mod"
+    },
+    {
+     "app": "todomvc",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "node 20",
+     "got": "node 20",
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    }
+   ]
+  },
+  "license": {
+   "pct": 66.67,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "license",
+     "key": "license",
+     "expected": "apache",
+     "got": "apache",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "license",
+     "key": "license",
+     "expected": "bsd",
+     "got": "bsd",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "musicstore",
+     "type": "license",
+     "key": "license",
+     "expected": "apache",
+     "got": "apache",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "golang-example",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": null,
+     "ok": false,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "todomvc",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": null,
+     "ok": false,
+     "review": null,
+     "source": "license.md"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.md"
+    }
+   ]
+  },
+  "capability_route": {
+   "pct": 90.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "API_ONLY",
+     "got": "API_ONLY",
+     "ok": true,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "API_ONLY",
+     "got": "API_ONLY",
+     "ok": true,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "musicstore",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "laravel58",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "sinatra",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "API_ONLY",
+     "got": "API_ONLY",
+     "ok": true,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "golang-example",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "API_ONLY",
+     "got": "HEADLESS_BATCH",
+     "ok": false,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "todomvc",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    }
+   ]
+  }
+ },
+ "variation": {
+  "p2_dispositions": {
+   "Refactor": 4,
+   "Replatform": 4,
+   "Retain": 2
+  },
+  "p3_distinct_boundary_sets": 8,
+  "p3_apps": 8
+ },
+ "pass": true,
+ "confidence": {
+  "confidence_score": 0.0,
+  "weakest": "C3",
+  "assessed": [
+   "C1",
+   "C2"
+  ],
+  "not_assessed": [
+   "C3",
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8",
+   "C9"
+  ],
+  "weakest_assessed": "C2",
+  "components": [
+   {
+    "id": "C1",
+    "name": "Integrity",
+    "assessed": true,
+    "lower_bound": 98.5,
+    "reason": "",
+    "measures": [
+     {
+      "name": "schema valid after repair",
+      "k": 253,
+      "n": 253,
+      "lower_bound": 98.5
+     },
+     {
+      "name": "evidence ids resolve",
+      "k": 14169,
+      "n": 14169,
+      "lower_bound": 99.97
+     },
+     {
+      "name": "cited paths exist",
+      "k": 888,
+      "n": 888,
+      "lower_bound": 99.57
+     },
+     {
+      "name": "A9 function names exist",
+      "k": 370,
+      "n": 370,
+      "lower_bound": 98.97
+     }
+    ]
+   },
+   {
+    "id": "C2",
+    "name": "Factual accuracy",
+    "assessed": true,
+    "lower_bound": 94.24,
+    "reason": "",
+    "measures": [
+     {
+      "name": "golden facts agree",
+      "k": 304,
+      "n": 314,
+      "lower_bound": 94.24
+     }
+    ]
+   },
+   {
+    "id": "C3",
+    "name": "Claim support",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "claim-support verifier not built (stack PR 6)",
+    "measures": []
+   },
+   {
+    "id": "C4",
+    "name": "Decision correctness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no expert decision labels (decision 2: skipped)",
+    "measures": []
+   },
+   {
+    "id": "C5",
+    "name": "Stability",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no repeated runs (stack PR 4)",
+    "measures": []
+   },
+   {
+    "id": "C6",
+    "name": "Calibration",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no confidence field on decisions (stack PR 5)",
+    "measures": []
+   },
+   {
+    "id": "C7",
+    "name": "Execution proof",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "P5 runtime differential NOT_RUN; sandbox deferred (decision 1)",
+    "measures": []
+   },
+   {
+    "id": "C8",
+    "name": "Robustness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "adversarial suite not built (stack PR 8)",
+    "measures": []
+   },
+   {
+    "id": "C9",
+    "name": "Human acceptance",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "all reviews were by scripted actors",
+    "measures": [
+     {
+      "name": "human reviews approved",
+      "k": 0,
+      "n": 0,
+      "lower_bound": null
+     }
+    ]
+   }
+  ]
+ }
+}

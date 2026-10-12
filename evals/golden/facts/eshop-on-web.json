@@ -1,0 +1,319 @@
+{
+ "repo": "eshop-on-web",
+ "commit": "4da8212117e87d808d4bbc7da6286fd2147ce606",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "csharp",
+   "source": "scc",
+   "snippet": "scc: csharp 8656, javascript 0",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "aspnetcore",
+   "expected": "microsoft.aspnetcore.mvc.testing",
+   "source": "tests/PublicApiIntegrationTests/PublicApiIntegrationTests.csproj:22",
+   "snippet": "Microsoft.AspNetCore.Mvc.Testing",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "entity-framework",
+   "expected": "microsoft.entityframeworkcore.inmemory",
+   "source": "tests/IntegrationTests/IntegrationTests.csproj:9",
+   "snippet": "Microsoft.EntityFrameworkCore.InMemory",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "mstest.testadapter",
+   "expected": true,
+   "source": "tests/PublicApiIntegrationTests/PublicApiIntegrationTests.csproj:24",
+   "snippet": "MSTest.TestAdapter",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "*.csproj",
+   "expected": true,
+   "source": "tests/UnitTests/UnitTests.csproj",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "tests/UnitTests/Web/Extensions/CacheHelpersTests/GenerateBrandsCacheKey.cs",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlserver",
+   "expected": true,
+   "source": "docker-compose.yml:10",
+   "snippet": "web/dockerfile\n    depends_on:\n      - \"sqlserver\"\n  eshoppublicapi:\n    image: ${docker_",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "src/Infrastructure/Data/CatalogContext.cs:14",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Basket",
+   "expected": true,
+   "source": "src/Infrastructure/Data/CatalogContext.cs:14",
+   "snippet": "DbSet<Basket>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "BasketItem",
+   "expected": true,
+   "source": "src/Infrastructure/Data/CatalogContext.cs:20",
+   "snippet": "DbSet<BasketItem>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CatalogBrand",
+   "expected": true,
+   "source": "src/Infrastructure/Data/CatalogContext.cs:16",
+   "snippet": "DbSet<CatalogBrand>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CatalogItem",
+   "expected": true,
+   "source": "src/Infrastructure/Data/CatalogContext.cs:15",
+   "snippet": "DbSet<CatalogItem>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CatalogType",
+   "expected": true,
+   "source": "src/Infrastructure/Data/CatalogContext.cs:17",
+   "snippet": "DbSet<CatalogType>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Order",
+   "expected": true,
+   "source": "src/Infrastructure/Data/CatalogContext.cs:18",
+   "snippet": "DbSet<Order>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "OrderItem",
+   "expected": true,
+   "source": "src/Infrastructure/Data/CatalogContext.cs:19",
+   "snippet": "DbSet<OrderItem>",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/[controller]",
+   "expected": true,
+   "source": "src/Web/Controllers/UserController.cs:15",
+   "snippet": "[Route(\"[controller]\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/[controller]/[action]",
+   "expected": true,
+   "source": "src/Web/Controllers/ManageController.cs:17",
+   "snippet": "[Route(\"[controller]/[action]\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/[controller]/[action]",
+   "expected": true,
+   "source": "src/Web/Controllers/Api/BaseApiController.cs:6",
+   "snippet": "[Route(\"api/[controller]/[action]\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/authenticate",
+   "expected": true,
+   "source": "src/PublicApi/AuthEndpoints/AuthenticateEndpoint.cs:29",
+   "snippet": "[HttpPost(\"api/authenticate\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/logout",
+   "expected": true,
+   "source": "src/Web/Controllers/UserController.cs:41",
+   "snippet": "[Route(\"Logout\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ardalis.apiendpoints",
+   "expected": true,
+   "source": "src/PublicApi/PublicApi.csproj:12",
+   "snippet": "Ardalis.ApiEndpoints",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ardalis.guardclauses",
+   "expected": true,
+   "source": "src/ApplicationCore/ApplicationCore.csproj:9",
+   "snippet": "Ardalis.GuardClauses",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ardalis.specification.entityframeworkcore",
+   "expected": true,
+   "source": "src/Infrastructure/Infrastructure.csproj:9",
+   "snippet": "Ardalis.Specification.EntityFrameworkCore",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "automapper.extensions.microsoft.dependencyinjection",
+   "expected": true,
+   "source": "src/Web/Web.csproj:18",
+   "snippet": "AutoMapper.Extensions.Microsoft.DependencyInjection",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "azure.identity",
+   "expected": true,
+   "source": "src/Web/Web.csproj:20",
+   "snippet": "Azure.Identity",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "coverlet.collector",
+   "expected": true,
+   "source": "tests/PublicApiIntegrationTests/PublicApiIntegrationTests.csproj:26",
+   "snippet": "coverlet.collector",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "fluentvalidation",
+   "expected": true,
+   "source": "src/BlazorShared/BlazorShared.csproj:10",
+   "snippet": "FluentValidation",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.authentication.jwtbearer",
+   "expected": true,
+   "source": "src/Web/Web.csproj:31",
+   "snippet": "Microsoft.AspNetCore.Authentication.JwtBearer",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.entityframeworkcore.inmemory",
+   "expected": true,
+   "source": "tests/IntegrationTests/IntegrationTests.csproj:9",
+   "snippet": "Microsoft.EntityFrameworkCore.InMemory",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.net.test.sdk",
+   "expected": true,
+   "source": "tests/UnitTests/UnitTests.csproj:12",
+   "snippet": "Microsoft.NET.Test.Sdk",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.visualstudio.azure.containers.tools.targets",
+   "expected": true,
+   "source": "src/PublicApi/PublicApi.csproj:28",
+   "snippet": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "mstest.testadapter",
+   "expected": true,
+   "source": "tests/PublicApiIntegrationTests/PublicApiIntegrationTests.csproj:24",
+   "snippet": "MSTest.TestAdapter",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "swashbuckle.aspnetcore",
+   "expected": true,
+   "source": "src/PublicApi/PublicApi.csproj:15",
+   "snippet": "Swashbuckle.AspNetCore",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.identitymodel.tokens.jwt",
+   "expected": true,
+   "source": "src/Web/Web.csproj:36",
+   "snippet": "System.IdentityModel.Tokens.Jwt",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "xunit.runner.console",
+   "expected": true,
+   "source": "tests/UnitTests/UnitTests.csproj:20",
+   "snippet": "xunit.runner.console",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "src/Web/Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/dotnetcore.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE",
+   "snippet": "mit license\n\n\n\ncopyright (c) .net foundation and contributors\n\n\n\npermission is hereby granted, free of charge, to any pe",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

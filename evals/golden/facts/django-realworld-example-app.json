@@ -1,0 +1,207 @@
+{
+ "repo": "django-realworld-example-app",
+ "commit": "29c9d42831fa0cfc5a4aa7561f674396eacf20a2",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "python",
+   "source": "scc",
+   "snippet": "scc: python 1047",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "django",
+   "expected": "django",
+   "source": "requirements.txt:1",
+   "snippet": "Django",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "requirements.txt",
+   "expected": true,
+   "source": "requirements.txt",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": false,
+   "source": "no test code found",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlite",
+   "expected": true,
+   "source": "conduit/settings.py:88",
+   "snippet": "{\n        'engine': 'django.db.backends.sqlite3',\n        'name': os.path.join(base_di",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "conduit/apps/core/models.py:4",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "TimestampedModel",
+   "expected": true,
+   "source": "conduit/apps/core/models.py:4",
+   "snippet": "class TimestampedModel(models.Model)",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/admin",
+   "expected": true,
+   "source": "conduit/urls.py:20",
+   "snippet": "url(r'^admin/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api",
+   "expected": true,
+   "source": "conduit/urls.py:22",
+   "snippet": "url(r'^api/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles",
+   "expected": true,
+   "source": "conduit/apps/articles/urls.py:18",
+   "snippet": "url(r'^articles/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles/feed",
+   "expected": true,
+   "source": "conduit/apps/articles/urls.py:16",
+   "snippet": "url(r'^articles/feed/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/profiles",
+   "expected": true,
+   "source": "conduit/apps/profiles/urls.py:6",
+   "snippet": "url(r'^profiles/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/tags",
+   "expected": true,
+   "source": "conduit/apps/articles/urls.py:27",
+   "snippet": "url(r'^tags/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/user",
+   "expected": true,
+   "source": "conduit/apps/authentication/urls.py:8",
+   "snippet": "url(r'^user/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users",
+   "expected": true,
+   "source": "conduit/apps/authentication/urls.py:9",
+   "snippet": "url(r'^users/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users/login",
+   "expected": true,
+   "source": "conduit/apps/authentication/urls.py:10",
+   "snippet": "url(r'^users/login/",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django",
+   "expected": true,
+   "source": "requirements.txt:1",
+   "snippet": "Django",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django-cors-middleware",
+   "expected": true,
+   "source": "requirements.txt:2",
+   "snippet": "django-cors-middleware",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django-extensions",
+   "expected": true,
+   "source": "requirements.txt:3",
+   "snippet": "django-extensions",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "djangorestframework",
+   "expected": true,
+   "source": "requirements.txt:4",
+   "snippet": "djangorestframework",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "pyjwt",
+   "expected": true,
+   "source": "requirements.txt:5",
+   "snippet": "PyJWT",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "six",
+   "expected": true,
+   "source": "requirements.txt:6",
+   "snippet": "six",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "API_ONLY",
+   "source": "routes without templates",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

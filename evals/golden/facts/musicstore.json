@@ -1,0 +1,271 @@
+{
+ "repo": "musicstore",
+ "commit": "0abdfec1e87aeab68bc5e8502ec73968a4b8c7ef",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "csharp",
+   "source": "scc",
+   "snippet": "scc: csharp 6763, javascript 0",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "aspnetcore",
+   "expected": "microsoft.aspnetcore.authentication.core",
+   "source": "test/MusicStore.Test/MusicStore.Test.csproj:12",
+   "snippet": "Microsoft.AspNetCore.Authentication.Core",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "entity-framework",
+   "expected": "microsoft.entityframeworkcore.inmemory",
+   "source": "samples/MusicStore/MusicStore.csproj:40",
+   "snippet": "Microsoft.EntityFrameworkCore.InMemory",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "*.csproj",
+   "expected": true,
+   "source": "test/MusicStore.Test/MusicStore.Test.csproj",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "test/MusicStore.Test/CartSummaryComponentTest.cs",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlserver",
+   "expected": true,
+   "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:33",
+   "snippet": "System.Data.SqlClient",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "samples/MusicStore/Models/MusicStoreContext.cs:18",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Album",
+   "expected": true,
+   "source": "samples/MusicStore/Models/MusicStoreContext.cs:18",
+   "snippet": "DbSet<Album>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Artist",
+   "expected": true,
+   "source": "samples/MusicStore/Models/MusicStoreContext.cs:19",
+   "snippet": "DbSet<Artist>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CartItem",
+   "expected": true,
+   "source": "samples/MusicStore/Models/MusicStoreContext.cs:22",
+   "snippet": "DbSet<CartItem>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Genre",
+   "expected": true,
+   "source": "samples/MusicStore/Models/MusicStoreContext.cs:21",
+   "snippet": "DbSet<Genre>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Order",
+   "expected": true,
+   "source": "samples/MusicStore/Models/MusicStoreContext.cs:20",
+   "snippet": "DbSet<Order>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "OrderDetail",
+   "expected": true,
+   "source": "samples/MusicStore/Models/MusicStoreContext.cs:23",
+   "snippet": "DbSet<OrderDetail>",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:17",
+   "snippet": "Microsoft.AspNetCore",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.aspnetcoremodule",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:17",
+   "snippet": "Microsoft.AspNetCore.AspNetCoreModule",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.aspnetcoremodulev2",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:18",
+   "snippet": "Microsoft.AspNetCore.AspNetCoreModuleV2",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.authentication.google",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:29",
+   "snippet": "Microsoft.AspNetCore.Authentication.Google",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.authentication.microsoftaccount",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:30",
+   "snippet": "Microsoft.AspNetCore.Authentication.MicrosoftAccount",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.authentication.openidconnect",
+   "expected": true,
+   "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:20",
+   "snippet": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.authentication.twitter",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:32",
+   "snippet": "Microsoft.AspNetCore.Authentication.Twitter",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.mvc",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:35",
+   "snippet": "Microsoft.AspNetCore.Mvc",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnetcore.server.iis",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:37",
+   "snippet": "Microsoft.AspNetCore.Server.IIS",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.entityframeworkcore.inmemory",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:40",
+   "snippet": "Microsoft.EntityFrameworkCore.InMemory",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.entityframeworkcore.sqlserver",
+   "expected": true,
+   "source": "samples/MusicStore/MusicStore.csproj:41",
+   "snippet": "Microsoft.EntityFrameworkCore.SqlServer",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.extensions.configuration.binder",
+   "expected": true,
+   "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:26",
+   "snippet": "Microsoft.Extensions.Configuration.Binder",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.extensions.configuration.usersecrets",
+   "expected": true,
+   "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:29",
+   "snippet": "Microsoft.Extensions.Configuration.UserSecrets",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.extensions.logging",
+   "expected": true,
+   "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:30",
+   "snippet": "Microsoft.Extensions.Logging",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.extensions.logging.testing",
+   "expected": true,
+   "source": "test/MusicStore.Test/MusicStore.Test.csproj:13",
+   "snippet": "Microsoft.Extensions.Logging.Testing",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".travis.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "netcoreapp3.0",
+   "source": "test/MusicStore.Test/MusicStore.Test.csproj",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "apache",
+   "source": "LICENSE.txt",
+   "snippet": "apache license\n                           version 2.0, january 2004",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

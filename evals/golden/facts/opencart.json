@@ -1,0 +1,239 @@
+{
+ "repo": "opencart",
+ "commit": "5fe7827555dac90d8c08aaaacd3f6e3c2f9a7cb3",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "php",
+   "source": "scc",
+   "snippet": "scc: php 96500, javascript 69875, typescript 76",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "phpspec/prophecy-phpunit",
+   "expected": true,
+   "source": "tools/daux.io/composer.json:46",
+   "snippet": "phpspec/prophecy-phpunit",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "composer.json",
+   "expected": true,
+   "source": "composer.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "upload/assets/curlytag/package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "upload/extension/opencart/catalog/model/module/latest.php",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "docker-compose.yml:148",
+   "snippet": ": \"3\"\n    networks:\n      - opencart\n\n  postgres:\n    container_name: opencart-postgres",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "mysql",
+   "expected": true,
+   "source": "docker-compose.yml:82",
+   "snippet": "alhost/}\n      - db_driver=${db_driver:-mysqli}\n      - db_hostname=${db_hostname:-my",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": "docker-compose.yml:175",
+   "snippet": ": \"3\"\n    networks:\n      - opencart\n\n  redis:\n    container_name: opencart-redis",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "docker-compose.yml:148",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@stylistic/eslint-plugin",
+   "expected": true,
+   "source": "upload/assets/curlytag/package.json:48",
+   "snippet": "@stylistic/eslint-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@swissquote/crafty",
+   "expected": true,
+   "source": "tools/daux.io/package.json:8",
+   "snippet": "@swissquote/crafty",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "aws/aws-sdk-php",
+   "expected": true,
+   "source": "composer.json:29",
+   "snippet": "aws/aws-sdk-php",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "guzzlehttp/guzzle",
+   "expected": true,
+   "source": "tools/daux.io/composer.json:22",
+   "snippet": "guzzlehttp/guzzle",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "katex",
+   "expected": true,
+   "source": "tools/daux.io/package.json:12",
+   "snippet": "katex",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "league/commonmark",
+   "expected": true,
+   "source": "tools/daux.io/composer.json:23",
+   "snippet": "league/commonmark",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "phpspec/prophecy-phpunit",
+   "expected": true,
+   "source": "tools/daux.io/composer.json:46",
+   "snippet": "phpspec/prophecy-phpunit",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "preact",
+   "expected": true,
+   "source": "tools/daux.io/package.json:15",
+   "snippet": "preact",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "remixicon",
+   "expected": true,
+   "source": "upload/assets/curlytag/package.json:57",
+   "snippet": "remixicon",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "scrivo/highlight.php",
+   "expected": true,
+   "source": "tools/daux.io/composer.json:25",
+   "snippet": "scrivo/highlight.php",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "scssphp/scssphp",
+   "expected": true,
+   "source": "composer.json:26",
+   "snippet": "scssphp/scssphp",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "symfony/console",
+   "expected": true,
+   "source": "tools/daux.io/composer.json:26",
+   "snippet": "symfony/console",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "testcafe",
+   "expected": true,
+   "source": "tools/daux.io/package.json:17",
+   "snippet": "testcafe",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "vite-plus",
+   "expected": true,
+   "source": "upload/assets/curlytag/package.json:59",
+   "snippet": "vite-plus",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "webpack",
+   "expected": true,
+   "source": "tools/daux.io/package.json:18",
+   "snippet": "webpack",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "upload/assets/curlytag/.devcontainer/Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": "upload/assets/curlytag/.github/workflows/ci.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "php 8.0",
+   "source": "composer.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "gpl",
+   "source": "LICENSE.md",
+   "snippet": "gnu general public license version 3 (gplv3)\ntue, 2007-10-23 03:13  nelson \ngnu general public license\nversion 3, 29 jun",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

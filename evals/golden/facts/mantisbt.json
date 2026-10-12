@@ -1,0 +1,207 @@
+{
+ "repo": "mantisbt",
+ "commit": "5fe206ebf6c43d99fcf404c9e2323a0d8f680818",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "php",
+   "source": "scc",
+   "snippet": "scc: php 84706, javascript 7474",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "phpunit/phpunit",
+   "expected": true,
+   "source": "composer.json:21",
+   "snippet": "phpunit/phpunit",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "composer.json",
+   "expected": true,
+   "source": "composer.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "login_cookie_test.php",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": "javascript_config.php:4",
+   "snippet": "m\n\n# mantisbt is free software: you can redistribute it and/or modify\n# it under the",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "javascript_config.php:4",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@redocly/cli",
+   "expected": true,
+   "source": "package.json:11",
+   "snippet": "@redocly/cli",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@scalar/api-reference",
+   "expected": true,
+   "source": "tools/scalar/package.json:4",
+   "snippet": "@scalar/api-reference",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@usebruno/cli",
+   "expected": true,
+   "source": "tools/bruno/package.json:4",
+   "snippet": "@usebruno/cli",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "adodb/adodb-php",
+   "expected": true,
+   "source": "composer.json:13",
+   "snippet": "adodb/adodb-php",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "dapphp/securimage",
+   "expected": true,
+   "source": "composer.json:17",
+   "snippet": "dapphp/securimage",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ezyang/htmlpurifier",
+   "expected": true,
+   "source": "composer.json:16",
+   "snippet": "ezyang/htmlpurifier",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "guzzlehttp/guzzle",
+   "expected": true,
+   "source": "composer.json:11",
+   "snippet": "guzzlehttp/guzzle",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "openapi-to-postmanv2",
+   "expected": true,
+   "source": "package.json:12",
+   "snippet": "openapi-to-postmanv2",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "parsedown/parsedown",
+   "expected": true,
+   "source": "composer.json:15",
+   "snippet": "parsedown/parsedown",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "phpmailer/phpmailer",
+   "expected": true,
+   "source": "composer.json:14",
+   "snippet": "phpmailer/phpmailer",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "phpunit/phpunit",
+   "expected": true,
+   "source": "composer.json:21",
+   "snippet": "phpunit/phpunit",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "slim/slim",
+   "expected": true,
+   "source": "composer.json:10",
+   "snippet": "slim/slim",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "vboctor/disposable_email_checker",
+   "expected": true,
+   "source": "composer.json:12",
+   "snippet": "vboctor/disposable_email_checker",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "yaml",
+   "expected": true,
+   "source": "package.json:4",
+   "snippet": "yaml",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "docbook/Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/documentation.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "php 8.1",
+   "source": "composer.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

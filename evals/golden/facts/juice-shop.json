@@ -1,0 +1,359 @@
+{
+ "repo": "juice-shop",
+ "commit": "5a21ff87cac57bcc5c1722ac7ed4f8058dd35bbc",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "typescript",
+   "source": "scc",
+   "snippet": "scc: typescript 54902, javascript 325, python 19",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "express",
+   "expected": "express",
+   "source": "package.json:110",
+   "snippet": "express",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "angular",
+   "expected": "@angular/core",
+   "source": "frontend/package.json:28",
+   "snippet": "@angular/core",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "test/server/accuracy.unit.test.ts",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlite",
+   "expected": true,
+   "source": "infrastructure/docker-compose.yml:35",
+   "snippet": "- juice-shop-data:/juice-shop/data/sqlite\n    networks:\n      - juice-shop-net",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "mongodb",
+   "expected": true,
+   "source": "infrastructure/docker-compose.yml:32",
+   "snippet": "condition: service_healthy\n      mongo:\n        condition: service_healthy",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": "infrastructure/docker-compose.yml:28",
+   "snippet": "nt:\n      - node_env=production\n      - redis_url=redis://redis:6379\n    depends_on:",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "infrastructure/docker-compose.yml:35",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/basketitems/*",
+   "expected": true,
+   "source": "server.ts:454",
+   "snippet": "app.put('/api/BasketItems/:id",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/cards",
+   "expected": true,
+   "source": "server.ts:466",
+   "snippet": "app.post('/api/Cards",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/challenges",
+   "expected": true,
+   "source": "server.ts:401",
+   "snippet": "app.post('/api/Challenges",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/quantitys/*",
+   "expected": true,
+   "source": "server.ts:457",
+   "snippet": "app.delete('/api/Quantitys/:id",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/securityquestions",
+   "expected": true,
+   "source": "server.ts:420",
+   "snippet": "app.post('/api/SecurityQuestions",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/file-upload",
+   "expected": true,
+   "source": "server.ts:337",
+   "snippet": "app.post('/file-upload",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/profile",
+   "expected": true,
+   "source": "server.ts:694",
+   "snippet": "app.get('/profile",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/profile/image/file",
+   "expected": true,
+   "source": "server.ts:338",
+   "snippet": "app.post('/profile/image/file",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/rest/2fa/setup",
+   "expected": true,
+   "source": "server.ts:493",
+   "snippet": "app.post('/rest/2fa/setup",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/rest/continue-code/apply/*",
+   "expected": true,
+   "source": "server.ts:642",
+   "snippet": "app.put('/rest/continue-code/apply/:continueCode",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/rest/country-mapping",
+   "expected": true,
+   "source": "server.ts:646",
+   "snippet": "app.get('/rest/country-mapping",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/rest/deluxe-membership",
+   "expected": true,
+   "source": "server.ts:656",
+   "snippet": "app.get('/rest/deluxe-membership",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/rest/order-history/*/delivery-status",
+   "expected": true,
+   "source": "server.ts:653",
+   "snippet": "app.put('/rest/order-history/:id/delivery-status",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/rest/products/*/reviews",
+   "expected": true,
+   "source": "server.ts:660",
+   "snippet": "app.get('/rest/products/:id/reviews",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/rest/wallet/balance",
+   "expected": true,
+   "source": "server.ts:654",
+   "snippet": "app.get('/rest/wallet/balance",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@angular/cli",
+   "expected": true,
+   "source": "frontend/package.json:24",
+   "snippet": "@angular/cli",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@angular/compiler-cli",
+   "expected": true,
+   "source": "frontend/package.json:27",
+   "snippet": "@angular/compiler-cli",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@types/download",
+   "expected": true,
+   "source": "package.json:170",
+   "snippet": "@types/download",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@types/pdfkit",
+   "expected": true,
+   "source": "package.json:187",
+   "snippet": "@types/pdfkit",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "check-dependencies",
+   "expected": true,
+   "source": "package.json:99",
+   "snippet": "check-dependencies",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "clarinet",
+   "expected": true,
+   "source": "package.json:100",
+   "snippet": "clarinet",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "express-rate-limit",
+   "expected": true,
+   "source": "package.json:113",
+   "snippet": "express-rate-limit",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "express-security.txt",
+   "expected": true,
+   "source": "package.json:115",
+   "snippet": "express-security.txt",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "globals",
+   "expected": true,
+   "source": "package.json:202",
+   "snippet": "globals",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jwt-decode",
+   "expected": true,
+   "source": "frontend/package.json:52",
+   "snippet": "jwt-decode",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "median",
+   "expected": true,
+   "source": "package.json:133",
+   "snippet": "median",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ngy-cookie",
+   "expected": true,
+   "source": "frontend/package.json:58",
+   "snippet": "ngy-cookie",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "pug",
+   "expected": true,
+   "source": "package.json:143",
+   "snippet": "pug",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "snarkdown",
+   "expected": true,
+   "source": "frontend/package.json:61",
+   "snippet": "snarkdown",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "swagger-ui-express",
+   "expected": true,
+   "source": "package.json:153",
+   "snippet": "swagger-ui-express",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/ci.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "node 22",
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE",
+   "snippet": "copyright (c) 2014-2026 bjoern kimminich & the owasp juice shop contributors\n\npermission is hereby granted, free of char",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

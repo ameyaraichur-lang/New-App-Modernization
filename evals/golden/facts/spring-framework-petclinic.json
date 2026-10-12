@@ -1,0 +1,391 @@
+{
+ "repo": "spring-framework-petclinic",
+ "commit": "cf392920cdbe9cd07689f1f4b603271940bac957",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "java",
+   "source": "scc",
+   "snippet": "scc: java 2291",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "spring-mvc",
+   "expected": "org.springframework:spring-webmvc",
+   "source": "pom.xml:179",
+   "snippet": "org.springframework:spring-webmvc",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "org.junit.jupiter:junit-jupiter-engine",
+   "expected": true,
+   "source": "pom.xml:279",
+   "snippet": "org.junit.jupiter:junit-jupiter-engine",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pom.xml",
+   "expected": true,
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "src/test/java/org/springframework/samples/petclinic/web/CrashControllerTests.java",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "h2",
+   "expected": true,
+   "source": "pom.xml:53",
+   "snippet": "com.h2database:h2",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "mysql",
+   "expected": true,
+   "source": "pom.xml:575",
+   "snippet": "mysql:mysql-connector-java",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "pom.xml:69",
+   "snippet": "org.postgresql:postgresql",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/model/Owner.java:43",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Owner",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/model/Owner.java:43",
+   "snippet": "@Entity\n@Table(name = \"owners\")\npublic class Owner",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Pet",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/model/Pet.java:44",
+   "snippet": "@Entity\n@Table(name = \"pets\")\npublic class Pet",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "PetType",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/model/PetType.java:25",
+   "snippet": "@Entity\n@Table(name = \"types\")\npublic class PetType",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Specialty",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/model/Specialty.java:26",
+   "snippet": "@Entity\n@Table(name = \"specialties\")\npublic class Specialty",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Vet",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/model/Vet.java:42",
+   "snippet": "@Entity\n@Table(name = \"vets\")\npublic class Vet",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Visit",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/model/Visit.java:33",
+   "snippet": "@Entity\n@Table(name = \"visits\")\npublic class Visit",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/oups",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/CrashController.java:32",
+   "snippet": "@GetMapping(value = \"/oups\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:76",
+   "snippet": "@GetMapping(value = \"/owners\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/*",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:125",
+   "snippet": "@GetMapping(\"/owners/{ownerId}\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/*/edit",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:101",
+   "snippet": "@GetMapping(value = \"/owners/{ownerId}/edit\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/*/pets/*/visits",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/VisitController.java:85",
+   "snippet": "@GetMapping(value = \"/owners/*/pets/{petId}/visits\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/*/pets/*/visits/new",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/VisitController.java:69",
+   "snippet": "@GetMapping(value = \"/owners/*/pets/{petId}/visits/new\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/find",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:70",
+   "snippet": "@GetMapping(value = \"/owners/find\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/new",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:53",
+   "snippet": "@GetMapping(value = \"/owners/new\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/pets/*/edit",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/PetController.java:92",
+   "snippet": "@GetMapping(value = \"/pets/{petId}/edit\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/pets/new",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/PetController.java:69",
+   "snippet": "@GetMapping(value = \"/pets/new\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/vets",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/VetController.java:42",
+   "snippet": "@GetMapping(\"/vets\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/vets.json",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/VetController.java:51",
+   "snippet": "@GetMapping(value = \"/vets.json\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/vets.xml",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/web/VetController.java:58",
+   "snippet": "@GetMapping(value = \"/vets.xml\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.github.ben-manes.caffeine:caffeine",
+   "expected": true,
+   "source": "pom.xml:54",
+   "snippet": "com.github.ben-manes.caffeine:caffeine",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.jayway.jsonpath:json-path",
+   "expected": true,
+   "source": "pom.xml:62",
+   "snippet": "com.jayway.jsonpath:json-path",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jakarta.activation:jakarta.activation-api",
+   "expected": true,
+   "source": "pom.xml:313",
+   "snippet": "jakarta.activation:jakarta.activation-api",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.apache.tomcat:tomcat-jasper-el",
+   "expected": true,
+   "source": "pom.xml:121",
+   "snippet": "org.apache.tomcat:tomcat-jasper-el",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.glassfish.jaxb:jaxb-runtime",
+   "expected": true,
+   "source": "pom.xml:41",
+   "snippet": "org.glassfish.jaxb:jaxb-runtime",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.glassfish.web:jakarta.servlet.jsp.jstl",
+   "expected": true,
+   "source": "pom.xml:127",
+   "snippet": "org.glassfish.web:jakarta.servlet.jsp.jstl",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.hibernate.orm:hibernate-core",
+   "expected": true,
+   "source": "pom.xml:238",
+   "snippet": "org.hibernate.orm:hibernate-core",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.hibernate.orm:hibernate-jcache",
+   "expected": true,
+   "source": "pom.xml:248",
+   "snippet": "org.hibernate.orm:hibernate-jcache",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.hsqldb:hsqldb",
+   "expected": true,
+   "source": "pom.xml:52",
+   "snippet": "org.hsqldb:hsqldb",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.junit.jupiter:junit-jupiter-engine",
+   "expected": true,
+   "source": "pom.xml:279",
+   "snippet": "org.junit.jupiter:junit-jupiter-engine",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.postgresql:postgresql",
+   "expected": true,
+   "source": "pom.xml:69",
+   "snippet": "org.postgresql:postgresql",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework:spring-context-support",
+   "expected": true,
+   "source": "pom.xml:185",
+   "snippet": "org.springframework:spring-context-support",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework:spring-jdbc",
+   "expected": true,
+   "source": "pom.xml:169",
+   "snippet": "org.springframework:spring-jdbc",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "tools.jackson.core:jackson-core",
+   "expected": true,
+   "source": "pom.xml:141",
+   "snippet": "tools.jackson.core:jackson-core",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "tools.jackson:jackson-bom",
+   "expected": true,
+   "source": "pom.xml:97",
+   "snippet": "tools.jackson:jackson-bom",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/maven-build-main.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "java 17",
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "apache",
+   "source": "LICENSE.txt",
+   "snippet": "apache license\n                           version 2.0, january 2004",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

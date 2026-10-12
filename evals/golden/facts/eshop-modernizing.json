@@ -1,0 +1,311 @@
+{
+ "repo": "eshop-modernizing",
+ "commit": "63bc9ec4414d7e281dc9f9d7bdcf70030950457d",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "csharp",
+   "source": "scc",
+   "snippet": "scc: csharp 12068, javascript 8380, ruby 90",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "aspnetcore",
+   "expected": "microsoft.aspnetcore",
+   "source": "eShopLegacyMVCSolution/eShopPorted/eShopPorted.csproj:7",
+   "snippet": "Microsoft.AspNetCore",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "aspnet-mvc",
+   "expected": "microsoft.aspnet.mvc",
+   "source": "eShopModernizedMVCSolution/src/eShopModernizedMVC/packages.config:22",
+   "snippet": "Microsoft.AspNet.Mvc",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "entity-framework",
+   "expected": "entityframework",
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:9",
+   "snippet": "EntityFramework",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "*.csproj",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/eShopModernizedWebForms.csproj",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": false,
+   "source": "no test code found",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlserver",
+   "expected": true,
+   "source": "docker-compose.yml:30",
+   "snippet": "sql.data:\n    image: microsoft/mssql-server-windows-developer",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Web.config:73",
+   "snippet": "store\"\n             type=\"microsoft.web.redis.redissessionstateprovider\"",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Models/CatalogDBContext.cs:14",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CatalogBrand",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Models/CatalogDBContext.cs:16",
+   "snippet": "DbSet<CatalogBrand>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CatalogItem",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Models/CatalogDBContext.cs:14",
+   "snippet": "DbSet<CatalogItem>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CatalogItemsStock",
+   "expected": true,
+   "source": "eShopModernizedNTier/src/eShopWCFService/EntityModel.cs:20",
+   "snippet": "DbSet<CatalogItemsStock>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CatalogType",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Models/CatalogDBContext.cs:18",
+   "snippet": "DbSet<CatalogType>",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "DiscountItem",
+   "expected": true,
+   "source": "eShopModernizedNTier/src/eShopWCFService/EntityModel.cs:22",
+   "snippet": "DbSet<DiscountItem>",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api",
+   "expected": true,
+   "source": "eShopLegacyMVCSolution/src/eShopLegacyMVC/Controllers/Api/CatalogController.cs:5",
+   "snippet": "[Route(\"api\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/[controller]",
+   "expected": true,
+   "source": "eShopLegacyMVCSolution/eShopPorted/Controllers/Api/BrandsController.cs:8",
+   "snippet": "[Route(\"api/[controller]\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/items/*/pic",
+   "expected": true,
+   "source": "eShopLegacyMVCSolution/src/eShopLegacyMVC/Controllers/PicController.cs:24",
+   "snippet": "[Route(\"items/{catalogItemId:int}/pic\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/uploadimage",
+   "expected": true,
+   "source": "eShopModernizedMVCSolution/src/eShopModernizedMVC/Controllers/PicController.cs:26",
+   "snippet": "[Route(\"uploadimage\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnet.webapi.client",
+   "expected": true,
+   "source": "eShopModernizedNTier/src/eShopWinForms/eShopWinForms.csproj:23",
+   "snippet": "Microsoft.AspNet.WebApi.Client",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.extensions.primitives",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:51",
+   "snippet": "Microsoft.Extensions.Primitives",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.identitymodel.protocol.extensions",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:55",
+   "snippet": "Microsoft.IdentityModel.Protocol.Extensions",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.owin.security.cookies",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:64",
+   "snippet": "Microsoft.Owin.Security.Cookies",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.web.redissessionstateprovider",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:69",
+   "snippet": "Microsoft.Web.RedisSessionStateProvider",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.windowsazure.configurationmanager",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:71",
+   "snippet": "Microsoft.WindowsAzure.ConfigurationManager",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.collections.concurrent",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:83",
+   "snippet": "System.Collections.Concurrent",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.diagnostics.performancecounter",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:92",
+   "snippet": "System.Diagnostics.PerformanceCounter",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.io",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:99",
+   "snippet": "System.IO",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.linq.queryable",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:107",
+   "snippet": "System.Linq.Queryable",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.runtime",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:119",
+   "snippet": "System.Runtime",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.runtime.numerics",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:125",
+   "snippet": "System.Runtime.Numerics",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.security.cryptography.primitives",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:128",
+   "snippet": "System.Security.Cryptography.Primitives",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.threading.channels",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:137",
+   "snippet": "System.Threading.Channels",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "system.threading.timer",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:142",
+   "snippet": "System.Threading.Timer",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "net4.7.2",
+   "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/eShopModernizedWebForms.csproj",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE",
+   "snippet": "mit license\n\n\n\ncopyright (c) .net foundation and contributors\n\n\n\npermission is hereby granted, free of charge, to any pe",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

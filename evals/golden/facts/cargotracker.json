@@ -1,0 +1,327 @@
+{
+ "repo": "cargotracker",
+ "commit": "4d26b8fd59a7f0bac6e42d5d19a8cd1b379353b5",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "javascript",
+   "source": "scc",
+   "snippet": "scc: javascript 16477, java 6707",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "jakarta-ee",
+   "expected": "jakarta.platform:jakarta.jakartaee-api",
+   "source": "pom.xml:69",
+   "snippet": "jakarta.platform:jakarta.jakartaee-api",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "io.openliberty.arquillian:arquillian-liberty-managed-jakarta-junit5",
+   "expected": true,
+   "source": "pom.xml:440",
+   "snippet": "io.openliberty.arquillian:arquillian-liberty-managed-jakarta-junit5",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pom.xml",
+   "expected": true,
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "src/test/java/org/eclipse/cargotracker/interfaces/booking/facade/internal/assembler/LocationDtoAssemblerTest.java",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "docker-compose.yml:4",
+   "snippet": "./mvnw clean package -pcloud\n#      -dpostgresqljdbcurl=\"jdbc:postgresql://postgres:54",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "h2",
+   "expected": true,
+   "source": "pom.xml:161",
+   "snippet": "com.h2database:h2",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/domain/model/voyage/CarrierMovement.java:18",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "ApplicationSettings",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/application/util/ApplicationSettings.java:11",
+   "snippet": "@Entity\npublic class ApplicationSettings",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Cargo",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/domain/model/cargo/Cargo.java:52",
+   "snippet": "ame = \"Cargo.findByTrackingId\",\n    query = \"Select c from Cargo c where c.trackingId = :trackingId\")\npublic class Cargo",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CarrierMovement",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/domain/model/voyage/CarrierMovement.java:18",
+   "snippet": "@Entity\n@Table(name = \"carrier_movement\")\npublic class CarrierMovement",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "HandlingEvent",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/domain/model/handling/HandlingEvent.java:38",
+   "snippet": "ckingId\",\n    query = \"Select e from HandlingEvent e where e.cargo.trackingId = :trackingId\")\npublic class HandlingEvent",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Leg",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/domain/model/cargo/Leg.java:17",
+   "snippet": "@Entity\npublic class Leg",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Location",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/domain/model/location/Location.java:19",
+   "snippet": " = \"Location.findByUnLocode\",\n    query = \"Select l from Location l where l.unLocode = :unLocode\")\npublic class Location",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Voyage",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/domain/model/voyage/Voyage.java:16",
+   "snippet": "ber\")\n@NamedQuery(name = \"Voyage.findAll\", query = \"Select v from Voyage v order by v.voyageNumber\")\npublic class Voyage",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/cargo",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/interfaces/booking/sse/RealtimeCargoTrackingService.java:25",
+   "snippet": "@Path(\"/cargo\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/graph-traversal",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/pathfinder/api/GraphTraversalService.java:21",
+   "snippet": "@Path(\"/graph-traversal\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/handling",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/interfaces/handling/rest/HandlingReportService.java:25",
+   "snippet": "@Path(\"/handling\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/reports",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/cargotracker/interfaces/handling/rest/HandlingReportService.java:31",
+   "snippet": "@Path(\"/reports\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/shortest-path",
+   "expected": true,
+   "source": "src/main/java/org/eclipse/pathfinder/api/GraphTraversalService.java:34",
+   "snippet": "@Path(\"/shortest-path\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.h2database:h2",
+   "expected": true,
+   "source": "pom.xml:161",
+   "snippet": "com.h2database:h2",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "fish.payara.arquillian:payara-client-ee9",
+   "expected": true,
+   "source": "pom.xml:192",
+   "snippet": "fish.payara.arquillian:payara-client-ee9",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "fish.payara.extras:payara-micro",
+   "expected": true,
+   "source": "pom.xml:178",
+   "snippet": "fish.payara.extras:payara-micro",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "io.openliberty.arquillian:arquillian-liberty-managed-jakarta-junit5",
+   "expected": true,
+   "source": "pom.xml:440",
+   "snippet": "io.openliberty.arquillian:arquillian-liberty-managed-jakarta-junit5",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.assertj:assertj-core",
+   "expected": true,
+   "source": "pom.xml:95",
+   "snippet": "org.assertj:assertj-core",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.glassfish.jersey.core:jersey-server",
+   "expected": true,
+   "source": "pom.xml:83",
+   "snippet": "org.glassfish.jersey.core:jersey-server",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.glassfish.jersey.inject:jersey-hk2",
+   "expected": true,
+   "source": "pom.xml:251",
+   "snippet": "org.glassfish.jersey.inject:jersey-hk2",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.glassfish.jersey.media:jersey-media-multipart",
+   "expected": true,
+   "source": "pom.xml:257",
+   "snippet": "org.glassfish.jersey.media:jersey-media-multipart",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.hsqldb:hsqldb",
+   "expected": true,
+   "source": "pom.xml:427",
+   "snippet": "org.hsqldb:hsqldb",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.jboss.arquillian.container:arquillian-glassfish-managed-6",
+   "expected": true,
+   "source": "pom.xml:243",
+   "snippet": "org.jboss.arquillian.container:arquillian-glassfish-managed-6",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.jboss.arquillian.jakarta:arquillian-jakarta-bom",
+   "expected": true,
+   "source": "pom.xml:45",
+   "snippet": "org.jboss.arquillian.jakarta:arquillian-jakarta-bom",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.jboss.arquillian.junit5:arquillian-junit5-container",
+   "expected": true,
+   "source": "pom.xml:102",
+   "snippet": "org.jboss.arquillian.junit5:arquillian-junit5-container",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.jboss.arquillian:arquillian-bom",
+   "expected": true,
+   "source": "pom.xml:38",
+   "snippet": "org.jboss.arquillian:arquillian-bom",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.junit:junit-bom",
+   "expected": true,
+   "source": "pom.xml:59",
+   "snippet": "org.junit:junit-bom",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.primefaces:primefaces",
+   "expected": true,
+   "source": "pom.xml:75",
+   "snippet": "org.primefaces:primefaces",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/main.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "java 11",
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE.md",
+   "snippet": "the mit license (mit)\n\ncopyright (c) 2020 eclipse foundation\n\npermission is hereby granted, free of charge, to any perso",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

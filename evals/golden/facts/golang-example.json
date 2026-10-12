@@ -1,0 +1,367 @@
+{
+ "repo": "golang-example",
+ "commit": "626c372d259472148d93303f74aa9b9a1cdcef24",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "go",
+   "source": "scc",
+   "snippet": "scc: go 3353",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "gin",
+   "expected": "github.com/gin-gonic/gin",
+   "source": "go.mod:6",
+   "snippet": "github.com/gin-gonic/gin",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "go.mod",
+   "expected": true,
+   "source": "go.mod",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "users/unit_test.go",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlite",
+   "expected": true,
+   "source": ".env.example:5",
+   "snippet": "n_mode=debug\n\n# database configuration (sqlite)\ndb_path=./data/gorm.db\n\n# test databas",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "users/models.go:36",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "ArticleModel",
+   "expected": true,
+   "source": "articles/models.go:11",
+   "snippet": "type ArticleModel struct {\n\tgorm.Model",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "ArticleUserModel",
+   "expected": true,
+   "source": "articles/models.go:23",
+   "snippet": "type ArticleUserModel struct {\n\tgorm.Model",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CommentModel",
+   "expected": true,
+   "source": "articles/models.go:45",
+   "snippet": "type CommentModel struct {\n\tgorm.Model",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "FavoriteModel",
+   "expected": true,
+   "source": "articles/models.go:31",
+   "snippet": "type FavoriteModel struct {\n\tgorm.Model",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "FollowModel",
+   "expected": true,
+   "source": "users/models.go:36",
+   "snippet": "type FollowModel struct {\n\tgorm.Model",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "TagModel",
+   "expected": true,
+   "source": "articles/models.go:39",
+   "snippet": "type TagModel struct {\n\tgorm.Model",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/*/comments",
+   "expected": true,
+   "source": "articles/routers.go:22",
+   "snippet": ".POST(\"/:slug/comments\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/*/comments/*",
+   "expected": true,
+   "source": "articles/routers.go:23",
+   "snippet": ".DELETE(\"/:slug/comments/:id\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/*/favorite",
+   "expected": true,
+   "source": "articles/routers.go:20",
+   "snippet": ".POST(\"/:slug/favorite\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/*/follow",
+   "expected": true,
+   "source": "users/routers.go:28",
+   "snippet": ".POST(\"/:username/follow\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api",
+   "expected": true,
+   "source": "hello.go:41",
+   "snippet": ".Group(\"/api\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/ping",
+   "expected": true,
+   "source": "hello.go:54",
+   "snippet": ".Group(\"/api/ping\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles",
+   "expected": true,
+   "source": "hello.go:44",
+   "snippet": ".Group(\"/articles\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/feed",
+   "expected": true,
+   "source": "articles/routers.go:14",
+   "snippet": ".GET(\"/feed\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/login",
+   "expected": true,
+   "source": "users/routers.go:13",
+   "snippet": ".POST(\"/login\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/profiles",
+   "expected": true,
+   "source": "hello.go:46",
+   "snippet": ".Group(\"/profiles\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/tags",
+   "expected": true,
+   "source": "hello.go:45",
+   "snippet": ".Group(\"/tags\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/user",
+   "expected": true,
+   "source": "hello.go:49",
+   "snippet": ".Group(\"/user\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users",
+   "expected": true,
+   "source": "hello.go:42",
+   "snippet": ".Group(\"/users\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/bytedance/sonic/loader",
+   "expected": true,
+   "source": "go.mod:18",
+   "snippet": "github.com/bytedance/sonic/loader",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/cloudwego/base64x",
+   "expected": true,
+   "source": "go.mod:19",
+   "snippet": "github.com/cloudwego/base64x",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/cloudwego/iasm",
+   "expected": true,
+   "source": "go.mod:20",
+   "snippet": "github.com/cloudwego/iasm",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/davecgh/go-spew",
+   "expected": true,
+   "source": "go.mod:21",
+   "snippet": "github.com/davecgh/go-spew",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/gabriel-vasile/mimetype",
+   "expected": true,
+   "source": "go.mod:22",
+   "snippet": "github.com/gabriel-vasile/mimetype",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/gin-gonic/gin",
+   "expected": true,
+   "source": "go.mod:6",
+   "snippet": "github.com/gin-gonic/gin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/go-playground/locales",
+   "expected": true,
+   "source": "go.mod:24",
+   "snippet": "github.com/go-playground/locales",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/go-playground/validator/v10",
+   "expected": true,
+   "source": "go.mod:7",
+   "snippet": "github.com/go-playground/validator/v10",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/gosimple/slug",
+   "expected": true,
+   "source": "go.mod:9",
+   "snippet": "github.com/gosimple/slug",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/jinzhu/now",
+   "expected": true,
+   "source": "go.mod:29",
+   "snippet": "github.com/jinzhu/now",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/mattn/go-sqlite3",
+   "expected": true,
+   "source": "go.mod:34",
+   "snippet": "github.com/mattn/go-sqlite3",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/modern-go/reflect2",
+   "expected": true,
+   "source": "go.mod:36",
+   "snippet": "github.com/modern-go/reflect2",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "golang.org/x/text",
+   "expected": true,
+   "source": "go.mod:44",
+   "snippet": "golang.org/x/text",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "gopkg.in/yaml.v3",
+   "expected": true,
+   "source": "go.mod:46",
+   "snippet": "gopkg.in/yaml.v3",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "gorm.io/driver/sqlite",
+   "expected": true,
+   "source": "go.mod:12",
+   "snippet": "gorm.io/driver/sqlite",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/ci.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "go 1.21",
+   "source": "go.mod",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE",
+   "snippet": "mit license\n\ncopyright (c) 2017 wangzitian0\n\npermission is hereby granted, free of charge, to any person obtaining a cop",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "API_ONLY",
+   "source": "routes without templates",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

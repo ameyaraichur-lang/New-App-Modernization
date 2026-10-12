@@ -1,0 +1,383 @@
+{
+ "repo": "spring-petclinic",
+ "commit": "500158f732419217507c7656904b8e6aa1bcc0d6",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "java",
+   "source": "scc",
+   "snippet": "scc: java 2542",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "spring-boot",
+   "expected": "org.springframework.boot:spring-boot-starter-cache",
+   "source": "build.gradle:34",
+   "snippet": "org.springframework.boot:spring-boot-starter-cache",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "org.testcontainers:testcontainers-junit-jupiter",
+   "expected": true,
+   "source": "build.gradle:55",
+   "snippet": "org.testcontainers:testcontainers-junit-jupiter",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "build.gradle",
+   "expected": true,
+   "source": "build.gradle",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pom.xml",
+   "expected": true,
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "src/test/java/org/springframework/samples/petclinic/MySqlIntegrationTests.java",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "docker-compose.yml:14",
+   "snippet": "- \"./conf.d:/etc/mysql/conf.d:ro\"\n  postgres:\n    image: postgres:18.4\n    ports:",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "mysql",
+   "expected": true,
+   "source": "docker-compose.yml:2",
+   "snippet": "services:\n  mysql:\n    image: mysql:9.7\n    ports:",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "h2",
+   "expected": true,
+   "source": "src/main/resources/application.properties:2",
+   "snippet": "abase init, supports mysql too\ndatabase=h2\nspring.sql.init.schema-locations=classp",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/vet/Specialty.java:28",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Owner",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java:48",
+   "snippet": "@Entity\n@Table(name = \"owners\")\npublic class Owner",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Pet",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java:44",
+   "snippet": "@Entity\n@Table(name = \"pets\")\npublic class Pet",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "PetType",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java:26",
+   "snippet": "@Entity\n@Table(name = \"types\")\npublic class PetType",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Specialty",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/vet/Specialty.java:28",
+   "snippet": "@Entity\n@Table(name = \"specialties\")\npublic class Specialty",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Vet",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java:43",
+   "snippet": "@Entity\n@Table(name = \"vets\")\npublic class Vet",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Visit",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/Visit.java:35",
+   "snippet": "@Entity\n@Table(name = \"visits\")\npublic class Visit",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/oups",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/system/CrashController.java:31",
+   "snippet": "@GetMapping(\"/oups\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:94",
+   "snippet": "@GetMapping(\"/owners\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/*",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:178",
+   "snippet": "@GetMapping(\"/owners/{ownerId}\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/*/edit",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:148",
+   "snippet": "@GetMapping(\"/owners/{ownerId}/edit\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/*/pets/*/visits/new",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java:90",
+   "snippet": "@GetMapping(\"/owners/{ownerId}/pets/{petId}/visits/new\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/find",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:89",
+   "snippet": "@GetMapping(\"/owners/find\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/owners/new",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:72",
+   "snippet": "@GetMapping(\"/owners/new\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/pets/*/edit",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java:139",
+   "snippet": "@GetMapping(\"/pets/{petId}/edit\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/pets/new",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java:100",
+   "snippet": "@GetMapping(\"/pets/new\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/vets",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java:72",
+   "snippet": "@GetMapping({ \"/vets\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/vets.html",
+   "expected": true,
+   "source": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java:45",
+   "snippet": "@GetMapping(\"/vets.html\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.github.ben-manes.caffeine:caffeine",
+   "expected": true,
+   "source": "build.gradle:45",
+   "snippet": "com.github.ben-manes.caffeine:caffeine",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.puppycrawl.tools:checkstyle",
+   "expected": true,
+   "source": "pom.xml:30",
+   "snippet": "com.puppycrawl.tools:checkstyle",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.postgresql:postgresql",
+   "expected": true,
+   "source": "build.gradle:48",
+   "snippet": "org.postgresql:postgresql",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-devtools",
+   "expected": true,
+   "source": "pom.xml:117",
+   "snippet": "org.springframework.boot:spring-boot-devtools",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-docker-compose",
+   "expected": true,
+   "source": "build.gradle:54",
+   "snippet": "org.springframework.boot:spring-boot-docker-compose",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-cache",
+   "expected": true,
+   "source": "build.gradle:34",
+   "snippet": "org.springframework.boot:spring-boot-starter-cache",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-cache-test",
+   "expected": true,
+   "source": "pom.xml:168",
+   "snippet": "org.springframework.boot:spring-boot-starter-cache-test",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-data-jpa-test",
+   "expected": true,
+   "source": "build.gradle:50",
+   "snippet": "org.springframework.boot:spring-boot-starter-data-jpa-test",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-restclient-test",
+   "expected": true,
+   "source": "build.gradle:51",
+   "snippet": "org.springframework.boot:spring-boot-starter-restclient-test",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-thymeleaf",
+   "expected": true,
+   "source": "build.gradle:36",
+   "snippet": "org.springframework.boot:spring-boot-starter-thymeleaf",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-validation",
+   "expected": true,
+   "source": "build.gradle:38",
+   "snippet": "org.springframework.boot:spring-boot-starter-validation",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-validation-test",
+   "expected": true,
+   "source": "pom.xml:143",
+   "snippet": "org.springframework.boot:spring-boot-starter-validation-test",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-testcontainers",
+   "expected": true,
+   "source": "build.gradle:53",
+   "snippet": "org.springframework.boot:spring-boot-testcontainers",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.testcontainers:testcontainers-mysql",
+   "expected": true,
+   "source": "build.gradle:56",
+   "snippet": "org.testcontainers:testcontainers-mysql",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.webjars.npm:bootstrap",
+   "expected": true,
+   "source": "build.gradle:43",
+   "snippet": "org.webjars.npm:bootstrap",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": ".devcontainer/Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/deploy-and-test-cluster.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "java 17",
+   "source": "build.gradle",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "apache",
+   "source": "LICENSE.txt",
+   "snippet": "apache license\n                           version 2.0, january 2004",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

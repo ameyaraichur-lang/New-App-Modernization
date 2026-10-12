@@ -1,0 +1,495 @@
+{
+ "repo": "djangoproject",
+ "commit": "4b2a648aa6ed2f0681a4d777d0de7d812bdf8f26",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "python",
+   "source": "scc",
+   "snippet": "scc: python 43148, javascript 747",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "django",
+   "expected": "django",
+   "source": "pyproject.toml:2",
+   "snippet": "django",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pyproject.toml",
+   "expected": true,
+   "source": "pyproject.toml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "members/test_admin.py",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "docker-compose.yml:19",
+   "snippet": "- sql_engine=django.db.backends.postgresql\n            - sql_database=djangoproj",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "tracdb/models.py:79",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "ActionItem",
+   "expected": true,
+   "source": "foundation/models.py:307",
+   "snippet": "class ActionItem(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "ApprovedGrant",
+   "expected": true,
+   "source": "foundation/models.py:126",
+   "snippet": "class ApprovedGrant(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "DocumentRelease",
+   "expected": true,
+   "source": "docs/models.py:98",
+   "snippet": "class DocumentRelease(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Entry",
+   "expected": true,
+   "source": "blog/models.py:177",
+   "snippet": "class Entry(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "FeedItem",
+   "expected": true,
+   "source": "aggregator/models.py:123",
+   "snippet": "class FeedItem(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "IndividualMember",
+   "expected": true,
+   "source": "members/models.py:43",
+   "snippet": "class IndividualMember(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "LocalDjangoCommunity",
+   "expected": true,
+   "source": "aggregator/models.py:214",
+   "snippet": "class LocalDjangoCommunity(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Meeting",
+   "expected": true,
+   "source": "foundation/models.py:74",
+   "snippet": "class Meeting(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "NonBoardAttendee",
+   "expected": true,
+   "source": "foundation/models.py:57",
+   "snippet": "class NonBoardAttendee(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Office",
+   "expected": true,
+   "source": "foundation/models.py:17",
+   "snippet": "class Office(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "ReleaseChecklist",
+   "expected": true,
+   "source": "checklists/models.py:122",
+   "snippet": "class ReleaseChecklist(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Releaser",
+   "expected": true,
+   "source": "checklists/models.py:106",
+   "snippet": "class Releaser(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Revision",
+   "expected": true,
+   "source": "tracdb/models.py:242",
+   "snippet": "class Revision(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "SecurityIssue",
+   "expected": true,
+   "source": "checklists/models.py:479",
+   "snippet": "class SecurityIssue(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Team",
+   "expected": true,
+   "source": "members/models.py:69",
+   "snippet": "class Team(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Term",
+   "expected": true,
+   "source": "foundation/models.py:29",
+   "snippet": "class Term(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Testimonial",
+   "expected": true,
+   "source": "fundraising/models.py:140",
+   "snippet": "class Testimonial(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "TicketChange",
+   "expected": true,
+   "source": "tracdb/models.py:150",
+   "snippet": "class TicketChange(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Version",
+   "expected": true,
+   "source": "tracdb/models.py:188",
+   "snippet": "class Version(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Wiki",
+   "expected": true,
+   "source": "tracdb/models.py:262",
+   "snippet": "class Wiki(models.Model)",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/.well-known/security.txt",
+   "expected": true,
+   "source": "djangoproject/tests.py:250",
+   "snippet": ".get(\"/.well-known/security.txt\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/403",
+   "expected": true,
+   "source": "legacy/tests.py:17",
+   "snippet": ".get(\"/403/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/bouncing",
+   "expected": true,
+   "source": "tracdb/urls.py:6",
+   "snippet": "path(\"bouncing/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/comments",
+   "expected": true,
+   "source": "legacy/tests.py:9",
+   "snippet": ".get(\"/comments/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/developer-members",
+   "expected": true,
+   "source": "members/urls.py:15",
+   "snippet": "path(\n        \"developer-members/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/donation-session",
+   "expected": true,
+   "source": "fundraising/urls.py:8",
+   "snippet": "path(\"donation-session\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/fundraising",
+   "expected": true,
+   "source": "foundation/tests.py:143",
+   "snippet": ".get(\"/fundraising/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/local",
+   "expected": true,
+   "source": "aggregator/urls.py:13",
+   "snippet": "path(\n        \"local/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/metric",
+   "expected": true,
+   "source": "dashboard/urls.py:7",
+   "snippet": "path(\"metric/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/metric/*",
+   "expected": true,
+   "source": "dashboard/urls.py:8",
+   "snippet": "path(\"metric/<slug:metric_slug>/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/security/issue/*",
+   "expected": true,
+   "source": "checklists/urls.py:14",
+   "snippet": "path(\"security/issue/<str:cve_id>/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/sent",
+   "expected": true,
+   "source": "contact/urls.py:8",
+   "snippet": "path(\n        \"sent/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/sponsor/plans/fellow",
+   "expected": true,
+   "source": "contact/tests.py:224",
+   "snippet": ".post(\n                \"/sponsor/plans/fellow/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/teams",
+   "expected": true,
+   "source": "members/urls.py:48",
+   "snippet": "path(\"teams/\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/update-card",
+   "expected": true,
+   "source": "fundraising/urls.py:15",
+   "snippet": "path(\"update-card/\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django",
+   "expected": true,
+   "source": "pyproject.toml:2",
+   "snippet": "django",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django-hosts",
+   "expected": true,
+   "source": "pyproject.toml:16",
+   "snippet": "django-hosts",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django-money",
+   "expected": true,
+   "source": "pyproject.toml:17",
+   "snippet": "django-money",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django-read-only",
+   "expected": true,
+   "source": "pyproject.toml:19",
+   "snippet": "django-read-only",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django-recaptcha",
+   "expected": true,
+   "source": "pyproject.toml:20",
+   "snippet": "django-recaptcha",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django-registration-redux",
+   "expected": true,
+   "source": "pyproject.toml:21",
+   "snippet": "django-registration-redux",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "docutils",
+   "expected": true,
+   "source": "pyproject.toml:22",
+   "snippet": "docutils",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jinja2",
+   "expected": true,
+   "source": "pyproject.toml:24",
+   "snippet": "jinja2",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "pygments",
+   "expected": true,
+   "source": "pyproject.toml:28",
+   "snippet": "pygments",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "pykismet3",
+   "expected": true,
+   "source": "pyproject.toml:29",
+   "snippet": "pykismet3",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "pymdown-extensions",
+   "expected": true,
+   "source": "pyproject.toml:30",
+   "snippet": "pymdown-extensions",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "requests",
+   "expected": true,
+   "source": "pyproject.toml:32",
+   "snippet": "requests",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "sorl-thumbnail",
+   "expected": true,
+   "source": "pyproject.toml:33",
+   "snippet": "sorl-thumbnail",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "stripe",
+   "expected": true,
+   "source": "pyproject.toml:35",
+   "snippet": "stripe",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "time-machine",
+   "expected": true,
+   "source": "pyproject.toml:36",
+   "snippet": "time-machine",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/django-main.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "python 3.12",
+   "source": "pyproject.toml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "bsd",
+   "source": "LICENSE",
+   "snippet": "copyright (c) django software foundation and individual contributors.\nall rights reserved.\n\nredistribution and use in so",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

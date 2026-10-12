@@ -1,0 +1,239 @@
+{
+ "repo": "todomvc",
+ "commit": "ff43b02e59dfa604386bb382034b2cd07c2bcd8a",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "javascript",
+   "source": "scc",
+   "snippet": "scc: javascript 224318, typescript 1850, java 586",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "express",
+   "expected": "express",
+   "source": "package.json:26",
+   "snippet": "express",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "react",
+   "expected": "react",
+   "source": "examples/typescript-react/package.json:9",
+   "snippet": "react",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "angular",
+   "expected": "angular",
+   "source": "examples/typescript-angular/package.json:7",
+   "snippet": "angular",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "vue",
+   "expected": "vue",
+   "source": "examples/vue/package.json:2",
+   "snippet": "vue",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pom.xml",
+   "expected": true,
+   "source": "examples/duel/pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "tests/cya.js",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": false,
+   "source": "no entities, .sql, migrations or datastore",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@angular/cli",
+   "expected": true,
+   "source": "examples/angular/package.json:26",
+   "snippet": "@angular/cli",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@angular/compiler-cli",
+   "expected": true,
+   "source": "examples/angular/package.json:27",
+   "snippet": "@angular/compiler-cli",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@rollup/plugin-babel",
+   "expected": true,
+   "source": "examples/preact/package.json:20",
+   "snippet": "@rollup/plugin-babel",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@tsconfig/ember",
+   "expected": true,
+   "source": "examples/emberjs/todomvc/package.json:46",
+   "snippet": "@tsconfig/ember",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@vitejs/plugin-vue",
+   "expected": true,
+   "source": "examples/vue/package.json:18",
+   "snippet": "@vitejs/plugin-vue",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "broccoli-asset-rev",
+   "expected": true,
+   "source": "examples/emberjs/todomvc/package.json:51",
+   "snippet": "broccoli-asset-rev",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ember-cli-htmlbars",
+   "expected": true,
+   "source": "examples/emberjs/todomvc/package.json:57",
+   "snippet": "ember-cli-htmlbars",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ember-load-initializers",
+   "expected": true,
+   "source": "examples/emberjs/todomvc/package.json:61",
+   "snippet": "ember-load-initializers",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ember-modifier",
+   "expected": true,
+   "source": "examples/emberjs/todomvc/package.json:62",
+   "snippet": "ember-modifier",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ember-qunit-nice-errors",
+   "expected": true,
+   "source": "examples/emberjs/todomvc/package.json:98",
+   "snippet": "ember-qunit-nice-errors",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "grunt-template-jasmine-requirejs",
+   "expected": true,
+   "source": "examples/angularjs_require/test/package.json:6",
+   "snippet": "grunt-template-jasmine-requirejs",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "html-webpack-plugin",
+   "expected": true,
+   "source": "examples/react-redux/package.json:23",
+   "snippet": "html-webpack-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ractive",
+   "expected": true,
+   "source": "examples/ractive/package.json:5",
+   "snippet": "ractive",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "react-router-dom",
+   "expected": true,
+   "source": "examples/react-redux/package.json:38",
+   "snippet": "react-router-dom",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "webpack",
+   "expected": true,
+   "source": "examples/react-redux/package.json:11",
+   "snippet": "webpack",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".travis.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "node 20",
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "license.md",
+   "snippet": "everything in this repo is mit license unless otherwise specified.\n\ncopyright (c) addy osmani, sindre sorhus, pascal har",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}
