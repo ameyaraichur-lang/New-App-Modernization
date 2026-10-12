@@ -12,7 +12,7 @@ Scope: Wave 1 (measure) and Wave 2 (close the loops in P1–P4) of
 | 3 | Confidence definition | Assurance coverage; unverifiable items go to a human | New gate rule: an item crosses a release gate only if execution-verified, verifier-entailed, or human-confirmed; anything else becomes a review question and the gate waits |
 | 4 | Corpus | ~30 open-source repos with a held-out split; ~40 tool-derived facts per repo, spot-checked by you | Corpus and golden-facts PRs come first; one spot-check task for you |
 | 5 | Budget | No token cap; full eval on prompt/model change + weekly | Self-consistency and verifier run at full strength; no cost-optimization PR in this stack |
-| 6 | Landing | Stacked PRs; agent merges each to `main` when green; live corpus run on every PR | Merge rule below; each PR carries its live e2e + eval report |
+| 6 | Landing | Stacked PRs; agent merges each to `main` when green; live corpus run on every PR; plan approved with an added PR moving all P1–P4 roles to L2 | Merge rule below; each PR carries its live e2e + eval report |
 
 **What decision 2 means in practice.** Because no expert labels exist, P2 routes, P3
 boundaries and P4 plans can never be "verified" by the eval. Under the assurance rule they
@@ -135,13 +135,21 @@ P2.A6, P3.A1/A2/A3, P4.A3 author their structural fields; the deterministic engi
 and is the fallback.
 *Done when:* ≥ 95 % first-pass validity for those roles, C1 unchanged.
 
-**PR 16 — `feat(agents)`: self-consistency for routes and boundaries.**
+**PR 16 — `feat(agents)`: every P1–P4 role at L2.**
+The 24 roles still at L1 get at least one model-authored decision field that a named downstream
+agent or gate consumes, declared in the contract (`consumed_by`) and passed through the
+consumer's inputs (e.g. P1.A3 entities → P3.A3 schemas, P1.A6 control findings → P3.A4 threats,
+P4.A7 tests → P4.A9 coverage check).
+*Done when:* a lineage test proves, for each of the 31 non-critic roles, that a model-authored
+field reaches its declared consumer; C1 unchanged.
+
+**PR 17 — `feat(agents)`: self-consistency for routes and boundaries.**
 k = 3 independent candidates for P2.A6 and P3.A2; agreement publishes, disagreement becomes a
 review question listing the options and evidence.
 *Done when:* C5 route agreement ≥ 90 % on the stability harness; every disagreement reaches a
 reviewer.
 
-**PR 17 — `test(e2e)`: wave report.**
+**PR 18 — `test(e2e)`: wave report.**
 Full live corpus run + stability run; reports for tune and held-out splits; roadmap §4 updated
 with measured values.
 *Done when:* report merged; held-out numbers published separately.
@@ -150,7 +158,7 @@ with measured values.
 
 | Measure | Today | After this stack |
 |---|---|---|
-| Agentic level | 19 % (39 / 203) | ≈ 27 % (54 / 203): 4 critics at L4, 7 decision roles at L2; the other 24 P1–P4 roles stay at L1; P5–P9 unchanged |
+| Agentic level | 19 % (39 / 203) | 38 % (78 / 203): all 35 P1–P4 roles at target — 4 critics at L4, 31 roles at L2; P5–P9 unchanged |
 | Assurance coverage of released items | not enforced | 100 % (enforced by PR 7) |
 | C1 integrity, C2 facts, C3 support, C5 stability, C6 calibration (facts), C8 robustness | partly measured | all measured with bounds |
 | C4 decision correctness | unmeasured | still not assessed (decision 2) |
