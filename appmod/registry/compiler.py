@@ -14,7 +14,7 @@ import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 import openpyxl
 
@@ -190,7 +190,7 @@ _TYPE_MAP = {
 FIELD_RE = re.compile(r"^([a-z_][a-z0-9_.]*)(\[\])?(?::([a-z]+(?:\|null)?))?$")
 
 
-def parse_payload_fields(raw: str) -> list[dict[str, str]]:
+def parse_payload_fields(raw: str) -> list[dict[str, Any]]:
     """Extract typed field lists from contract definitions.
 
     Accepts both blueprint notations:
@@ -200,7 +200,7 @@ def parse_payload_fields(raw: str) -> list[dict[str, str]]:
     field grammar and are intentionally dropped — the raw definition is kept
     alongside for consumers that need the prose.
     """
-    fields: list[dict[str, str]] = []
+    fields: list[dict[str, Any]] = []
     for part in (raw or "").split(";"):
         part = part.strip().rstrip(".")
         m = FIELD_RE.match(part)
@@ -462,9 +462,9 @@ def compile_phase(blueprint_dir: Path, phase: int) -> dict[str, Any]:
             rec.get("Failure handling", rec.get("Failure behavior", "")),
         )
         # Agent payload rows look like 'A1 primary result'
-        m = re.match(r"^(A\d+)\s+(primary result|payload)$", name)
-        if m:
-            agent_payloads[m.group(1)] = {
+        pm = re.match(r"^(A\d+)\s+(primary result|payload)$", name)
+        if pm:
+            agent_payloads[pm.group(1)] = {
                 "fields": parse_payload_fields(definition),
                 "raw": definition,
                 "producer_consumer": producer,

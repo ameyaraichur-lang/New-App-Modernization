@@ -2,7 +2,7 @@
 
 import pytest
 
-from appmod.store.artifact_store import ArtifactStore, ArtifactStoreError
+from appmod.store.artifact_store import ArtifactStoreError
 
 
 def base_artifact(n=1, parents=None):

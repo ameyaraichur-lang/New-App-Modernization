@@ -1,8 +1,12 @@
 """Shared fixtures: compiled registry (module-scoped)."""
 
-from pathlib import Path
+import os
 
-import pytest
+if os.environ.get("APPMOD_LIVE") != "1":
+    os.environ.setdefault("APPMOD_LLM_MODE", "off")
+    os.environ.setdefault("APPMOD_ANALYZERS", "off")
+
+import pytest  # noqa: E402
 
 from appmod.registry.compiler import resolve_registry
 

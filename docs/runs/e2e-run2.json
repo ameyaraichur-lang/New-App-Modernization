@@ -1,0 +1,5432 @@
+{
+  "label": "run2",
+  "job_id": "job-1791605204-92d529",
+  "job_status": "COMPLETED",
+  "job_error": null,
+  "elapsed_s": 3781,
+  "cache_mode": "record",
+  "apps": [
+    "spring-petclinic",
+    "microblog",
+    "node-express-realworld-example-app",
+    "django-realworld-example-app"
+  ],
+  "app_facts": {
+    "microblog": {
+      "loc": 2553,
+      "code_loc": 1889,
+      "files": 72,
+      "primary_language": "python",
+      "route": "UI",
+      "dependencies": 54,
+      "p1_release": "READY_FOR_PORTFOLIO_DECISION",
+      "disposition": "Refactor",
+      "authorized": true
+    },
+    "node-express-realworld-example-app": {
+      "loc": 12891,
+      "code_loc": 2580,
+      "files": 64,
+      "primary_language": "typescript",
+      "route": "API_ONLY",
+      "dependencies": 39,
+      "p1_release": "READY_FOR_PORTFOLIO_DECISION",
+      "disposition": "Refactor",
+      "authorized": true
+    },
+    "django-realworld-example-app": {
+      "loc": 1847,
+      "code_loc": 1815,
+      "files": 47,
+      "primary_language": "python",
+      "route": "API_ONLY",
+      "dependencies": 6,
+      "p1_release": "READY_FOR_PORTFOLIO_DECISION",
+      "disposition": "Refactor",
+      "authorized": true
+    },
+    "spring-petclinic": {
+      "loc": 16479,
+      "code_loc": 4698,
+      "files": 118,
+      "primary_language": "java",
+      "route": "UI",
+      "dependencies": 47,
+      "p1_release": "READY_FOR_PORTFOLIO_DECISION",
+      "disposition": "Refactor",
+      "authorized": true
+    }
+  },
+  "summary": {
+    "expected": 119,
+    "succeeded": 119,
+    "success_rate": 100.0,
+    "threshold": 97.0,
+    "by_phase": {
+      "1": {
+        "ok": 44,
+        "total": 44
+      },
+      "2": {
+        "ok": 7,
+        "total": 7
+      },
+      "3": {
+        "ok": 32,
+        "total": 32
+      },
+      "4": {
+        "ok": 36,
+        "total": 36
+      }
+    },
+    "enriched": 119,
+    "repairs": 3,
+    "failovers": 0,
+    "tool_calls": 2046,
+    "evidence_cited": 1226,
+    "llm_findings": 738,
+    "tokens": {
+      "input": 9095568,
+      "output": 457565,
+      "reasoning": 23262
+    },
+    "llm_job_totals": {
+      "enabled": true,
+      "calls": 526,
+      "input_tokens": 6974514,
+      "output_tokens": 337210,
+      "reasoning_tokens": 21023,
+      "failovers": 0,
+      "cached": 0,
+      "tool_calls": 2169
+    }
+  },
+  "gates": [
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "status": "COMPLETED",
+      "decision": "READY_FOR_PORTFOLIO_DECISION",
+      "note": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "status": "COMPLETED",
+      "decision": "READY_FOR_PORTFOLIO_DECISION",
+      "note": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "status": "COMPLETED",
+      "decision": "READY_FOR_PORTFOLIO_DECISION",
+      "note": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "status": "COMPLETED",
+      "decision": "READY_FOR_PORTFOLIO_DECISION",
+      "note": ""
+    },
+    {
+      "phase": 2,
+      "app": "PF1",
+      "status": "COMPLETED",
+      "decision": "AUTHORIZED",
+      "note": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "status": "COMPLETED",
+      "decision": "CONDITIONAL_PLANNING",
+      "note": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "status": "COMPLETED",
+      "decision": "CONDITIONAL_PLANNING",
+      "note": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "status": "COMPLETED",
+      "decision": "CONDITIONAL_PLANNING",
+      "note": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "status": "COMPLETED",
+      "decision": "CONDITIONAL_PLANNING",
+      "note": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "status": "COMPLETED",
+      "decision": "SCOPED_PREPARATION",
+      "note": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "status": "COMPLETED",
+      "decision": "SCOPED_PREPARATION",
+      "note": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "status": "COMPLETED",
+      "decision": "SCOPED_PREPARATION",
+      "note": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "status": "COMPLETED",
+      "decision": "SCOPED_PREPARATION",
+      "note": ""
+    }
+  ],
+  "reviews": [
+    {
+      "review_id": "rev-664c02b0b0",
+      "job_id": "job-1791605204-92d529",
+      "phase": 1,
+      "app": "microblog",
+      "gate": "G2",
+      "candidate_hash": "654ec7f47c4de8ede4c24c8009f180546d3c28852966fdea16ca320bca917b97",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed READY_FOR_PORTFOLIO_DRAFT [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:17:07Z",
+      "decided_at": "2026-10-10T04:17:08Z"
+    },
+    {
+      "review_id": "rev-e6bb04f903",
+      "job_id": "job-1791605204-92d529",
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "gate": "G2",
+      "candidate_hash": "185fddc40cf9d106f752402d501b72b1878159025e2a5ed4391afb321bcbe7e6",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed READY_FOR_PORTFOLIO_DRAFT [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:19:42Z",
+      "decided_at": "2026-10-10T04:19:44Z"
+    },
+    {
+      "review_id": "rev-c6c343063d",
+      "job_id": "job-1791605204-92d529",
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "gate": "G2",
+      "candidate_hash": "ff40957789aeef7ece7a44b3262d64f150b257fdafd2712114567f061afc9896",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed READY_FOR_PORTFOLIO_DRAFT [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:20:15Z",
+      "decided_at": "2026-10-10T04:20:18Z"
+    },
+    {
+      "review_id": "rev-ca1bd6a7d6",
+      "job_id": "job-1791605204-92d529",
+      "phase": 1,
+      "app": "microblog",
+      "gate": "G2",
+      "candidate_hash": "010cb31bf4b30a1d29a05dabb0a6c27e33b7dad651bb4b73f9379502273e7b44",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed READY_FOR_PORTFOLIO_DECISION [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:20:57Z",
+      "decided_at": "2026-10-10T04:20:57Z"
+    },
+    {
+      "review_id": "rev-a766f53cd3",
+      "job_id": "job-1791605204-92d529",
+      "phase": 1,
+      "app": "spring-petclinic",
+      "gate": "G2",
+      "candidate_hash": "556a2eab42cebb632eb11afce31c1a3957395e544bfd690d67d211a85e515f2c",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed READY_FOR_PORTFOLIO_DRAFT [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:22:41Z",
+      "decided_at": "2026-10-10T04:22:42Z"
+    },
+    {
+      "review_id": "rev-a96790ba41",
+      "job_id": "job-1791605204-92d529",
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "gate": "G2",
+      "candidate_hash": "c1c467c1e7a3a3d2751e0f47496dd543db26b651d2f5e25d6e3b35eef745d029",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed READY_FOR_PORTFOLIO_DECISION [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:23:25Z",
+      "decided_at": "2026-10-10T04:23:28Z"
+    },
+    {
+      "review_id": "rev-33d90a535d",
+      "job_id": "job-1791605204-92d529",
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "gate": "G2",
+      "candidate_hash": "4ba2ca53890c786e7f2c3e1f2c9f3cdffc0a9b1a33564eb21d5ddf0f9edca830",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed READY_FOR_PORTFOLIO_DECISION [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:24:03Z",
+      "decided_at": "2026-10-10T04:24:04Z"
+    },
+    {
+      "review_id": "rev-f9adae370f",
+      "job_id": "job-1791605204-92d529",
+      "phase": 1,
+      "app": "spring-petclinic",
+      "gate": "G2",
+      "candidate_hash": "1afed5b98f1ccebd32048c23665610f0f97ef7036e7e4b572408ef0ed1d55b2c",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed READY_FOR_PORTFOLIO_DECISION [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:28:34Z",
+      "decided_at": "2026-10-10T04:28:35Z"
+    },
+    {
+      "review_id": "rev-adfe252a57",
+      "job_id": "job-1791605204-92d529",
+      "phase": 2,
+      "app": "PF1",
+      "gate": "G2",
+      "candidate_hash": "43294c3a2550e8d05d9d3b71f1f314654a8f06f8440ee9759ab1e021fba205f6",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed AUTHORIZED [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:37:50Z",
+      "decided_at": "2026-10-10T04:37:50Z"
+    },
+    {
+      "review_id": "rev-e33be40c75",
+      "job_id": "job-1791605204-92d529",
+      "phase": 3,
+      "app": "microblog",
+      "gate": "G2",
+      "candidate_hash": "1bdd27f6703b0af7a2747f2041e8fb26576e08ef78a7baa30977c9225b50f6a3",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed CONDITIONAL_PLANNING [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:53:45Z",
+      "decided_at": "2026-10-10T04:53:46Z"
+    },
+    {
+      "review_id": "rev-1ea905cec3",
+      "job_id": "job-1791605204-92d529",
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "gate": "G2",
+      "candidate_hash": "482a3d1a153c25883e6e58a9b07ad663de42838e9d64c832bc77606ccc2b8836",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed CONDITIONAL_PLANNING [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:53:48Z",
+      "decided_at": "2026-10-10T04:53:49Z"
+    },
+    {
+      "review_id": "rev-59cd526b2f",
+      "job_id": "job-1791605204-92d529",
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "gate": "G2",
+      "candidate_hash": "b1443d5f1e30e1df4e0297815b81fa2e5d24fa934907215ea38cb320b959b17f",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed CONDITIONAL_PLANNING [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:54:14Z",
+      "decided_at": "2026-10-10T04:54:16Z"
+    },
+    {
+      "review_id": "rev-d4be4d9d8a",
+      "job_id": "job-1791605204-92d529",
+      "phase": 4,
+      "app": "microblog",
+      "gate": "G2",
+      "candidate_hash": "64998e6f627be764092ef3fc7a87031107ef330eb4935ffa34decea6f364fdef",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed SCOPED_PREPARATION [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:57:30Z",
+      "decided_at": "2026-10-10T04:57:33Z"
+    },
+    {
+      "review_id": "rev-0b2df926a6",
+      "job_id": "job-1791605204-92d529",
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "gate": "G2",
+      "candidate_hash": "44cd40beb9c386fe77cb2f5d12ae3dee575f587733943dae8c026cb120adb5ac",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed SCOPED_PREPARATION [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:57:36Z",
+      "decided_at": "2026-10-10T04:57:39Z"
+    },
+    {
+      "review_id": "rev-fae00beafe",
+      "job_id": "job-1791605204-92d529",
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "gate": "G2",
+      "candidate_hash": "285efd52e727918bed88376bb60c30d30730155dfec50b661430e109c633fc2c",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed SCOPED_PREPARATION [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T04:57:59Z",
+      "decided_at": "2026-10-10T04:58:00Z"
+    },
+    {
+      "review_id": "rev-7e6190defe",
+      "job_id": "job-1791605204-92d529",
+      "phase": 3,
+      "app": "spring-petclinic",
+      "gate": "G2",
+      "candidate_hash": "9ae5c5c45c062638ae6b92f4a5c01d888a526a71fc19b04e27766c3ef70c4b37",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed CONDITIONAL_PLANNING [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T05:05:04Z",
+      "decided_at": "2026-10-10T05:05:06Z"
+    },
+    {
+      "review_id": "rev-4765f5a5e8",
+      "job_id": "job-1791605204-92d529",
+      "phase": 4,
+      "app": "spring-petclinic",
+      "gate": "G2",
+      "candidate_hash": "146b78f11ee40bd240b9884b30ab684a065b017a8396b6991fc5f75538dd6373",
+      "status": "DECIDED",
+      "decision": "approve",
+      "reviewer": "scripted-reviewer",
+      "comment": "approve proposed SCOPED_PREPARATION [scripted e2e harness \u2014 automation, not a human]",
+      "created_at": "2026-10-10T05:09:34Z",
+      "decided_at": "2026-10-10T05:09:34Z"
+    }
+  ],
+  "questions": [
+    {
+      "app": "microblog",
+      "question": "Before A5 derives a route for microblog, what specific outcome must the change achieve, and which deployment or compatibility constraints would rule out an otherwise technically feasible route? Please point to any approved decision criteria.",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "microblog",
+      "question": "Does microblog commit a975ef64864354867c88e0ed3a17ba7d17dca752 match the deployment we should assess? If not, which deployed revision and environment-specific differences should supplement this read-only baseline?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "microblog",
+      "question": "For microblog at the pinned baseline, which concrete user scenarios and existing-data behaviors must remain unchanged, and what acceptance examples or test records demonstrate each expectation?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "microblog",
+      "question": "What is the business criticality of this application?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "microblog",
+      "question": "Which compliance obligations apply?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "microblog",
+      "question": "Which microblog runtime services, datasets, or integrations sit outside the supplied repository, if any, and what approved inventories or redacted configuration references can identify those dependencies without exposing secrets?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "microblog",
+      "question": "Who owns the data and the roadmap?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "node-express-realworld-example-app",
+      "question": "Before A5 derives the route for node-express-realworld-example-app, what concrete outcome should this engagement support, and which existing API behaviors or consumer contracts must be preserved? Please provide approved requirements and acceptance tests rather than proposed requirements alone.",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "node-express-realworld-example-app",
+      "question": "Does the assessed node-express-realworld-example-app baseline use only disposable example data, or must any existing datasets be preserved? If preservation is required, please identify the actual stores and provide approved retention, deletion, migration, and restore acceptance criteria with an attributable approver.",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "node-express-realworld-example-app",
+      "question": "For node-express-realworld-example-app, is commit 30b68e1e881462b2f4164ea09ab4c4f5699c7b0b the baseline stakeholders want assessed, and does it represent a demonstration, a maintained service, or a deployed workload? If deployed behavior differs, which version and approved change record explain the difference?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "node-express-realworld-example-app",
+      "question": "For the read-only node-express-realworld-example-app assessment, which deployment manifests, runtime configuration descriptions, and external-service contracts outside the pinned repository are approved for review, if any? Who can supply the authorized evidence links without credentials or secrets?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "node-express-realworld-example-app",
+      "question": "What is the business criticality of this application?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "node-express-realworld-example-app",
+      "question": "Which compliance obligations apply?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "node-express-realworld-example-app",
+      "question": "Who owns the data and the roadmap?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "django-realworld-example-app",
+      "question": "For django-realworld-example-app, does pinned commit 29c9d42831fa0cfc5a4aa7561f674396eacf20a2 represent the version you want assessed, a learning/demo baseline, or a deployed service? If it represents a deployment, which environment and release correspond to it, and what configuration differences must discovery account for?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "django-realworld-example-app",
+      "question": "If django-realworld-example-app has data outside this read-only repository, which exact datasets or stores must be retained during a change, and which may be reset as demonstration data? Please identify any required restore or migration acceptance checks.",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "django-realworld-example-app",
+      "question": "The intake leaves the route for django-realworld-example-app to A5. Before that route is evaluated, are there fixed hosting targets, prohibited platform changes, or dependencies outside the supplied repository that constrain the choice? Please name each constraint and provide its approval source, or explicitly confirm that none are known.",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "django-realworld-example-app",
+      "question": "What is the business criticality of this application?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "django-realworld-example-app",
+      "question": "Which compliance obligations apply?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "django-realworld-example-app",
+      "question": "Which existing clients, demonstrations, or tests must continue to work against django-realworld-example-app after a change? Please supply the exact workflows or interface contracts and the approved evidence that would demonstrate acceptance.",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "django-realworld-example-app",
+      "question": "Who owns the data and the roadmap?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "spring-petclinic",
+      "question": "Does the spring-petclinic deployment rely on any services, scheduled jobs, exports or downstream consumers configured outside this read-only repository; if so, which interfaces and coordinating teams must be included in change validation?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "spring-petclinic",
+      "question": "For spring-petclinic at commit 500158f732419217507c7656904b8e6aa1bcc0d6, is the intended modernization subject a demonstration, a pilot or an operating service, and which deployed instance and configuration should this repository snapshot represent?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "spring-petclinic",
+      "question": "For the spring-petclinic environment you identify, is its data disposable demonstration data or retained operational data; if retained, which datasets must survive migration and what reconciliation evidence would demonstrate a successful transfer?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "spring-petclinic",
+      "question": "What is the business criticality of this application?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "spring-petclinic",
+      "question": "Which compliance obligations apply?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "spring-petclinic",
+      "question": "Which spring-petclinic user journeys must remain behaviorally unchanged after modernization, and can you provide an approved acceptance example for each, including any intentionally permitted changes?",
+      "source": "llm-drafted",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    },
+    {
+      "app": "spring-petclinic",
+      "question": "Who owns the data and the roadmap?",
+      "source": "seed",
+      "status": "ANSWERED",
+      "respondent": "scripted-stakeholder"
+    }
+  ],
+  "health": {
+    "astra": {
+      "configured": true,
+      "llm_mode": "auto",
+      "cache": "record",
+      "tiers": {
+        "reasoning": "gpt-6-astra",
+        "coding": "gpt-5.3-codex-PlayWright",
+        "fast": "gpt-4.1-mini",
+        "fallback": "gpt-5.4"
+      },
+      "embedding": "text-embedding-ada-002"
+    },
+    "analyzers": {
+      "tools": {
+        "scc": {
+          "available": true,
+          "version": "scc version 4.1.0"
+        },
+        "syft": {
+          "available": true,
+          "version": "syft 1.54.1"
+        },
+        "osv-scanner": {
+          "available": true,
+          "version": "osv-scanner version: 2.6.0"
+        },
+        "gitleaks": {
+          "available": true,
+          "version": "gitleaks version 8.30.1"
+        },
+        "semgrep": {
+          "available": true,
+          "version": "1.180.0"
+        }
+      },
+      "tools_dir": "/Users/ameyar/App Mod New (1-6)/New-App-Modernization/.tools/bin"
+    }
+  },
+  "agents": [
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A1",
+      "name": "Repo Intelligence Agent",
+      "artifact": "P1/spring-petclinic/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 37,
+      "tools_used": [
+        "grep",
+        "list_dependencies",
+        "list_dir",
+        "loc_metrics",
+        "read_file",
+        "repo_summary",
+        "sbom_packages"
+      ],
+      "evidence_available": 43,
+      "evidence_cited": 26,
+      "tokens": {
+        "input": 175809,
+        "output": 6523,
+        "reasoning": 108
+      },
+      "latency_ms": 131562,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Inspected the pinned repository, application entry point, feature packages, Maven/Gradle builds, CI, representative tests, templates and database configuration. The application is an executable Spring Boot MVC/JPA application, not the library-style repository suggested by the seed entry-point heuristic. Approved scc and Syft tools supplied code metrics and a source-level SBOM; dependency versions ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A2",
+      "name": "Architecture Agent",
+      "artifact": "P1/spring-petclinic/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 26,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 33,
+      "evidence_cited": 21,
+      "tokens": {
+        "input": 124751,
+        "output": 5607,
+        "reasoning": 120
+      },
+      "latency_ms": 127027,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Reconstructed a static-only C4 architecture from application code, templates, persistence mappings, build manifests, and A1/A4 evidence. The repository describes one Spring Boot application containing owner/pet/visit workflows and a veterinarian directory, with server-rendered views and profile-selected relational persistence. The dependency graph is anchored to commit 500158f732419217507c7656904b",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A3",
+      "name": "Data Intelligence Agent",
+      "artifact": "P1/spring-petclinic/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 29,
+      "tools_used": [
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 35,
+      "evidence_cited": 19,
+      "tokens": {
+        "input": 98483,
+        "output": 5501,
+        "reasoning": 59
+      },
+      "latency_ms": 117643,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Inspected datasource configuration, all three database schemas, JPA mappings, repositories, controllers, cache configuration and API test references. The repository defines a seven-table relational model with H2 as the default database selection and optional MySQL/PostgreSQL profiles, plus a veterinarian query cache. Observed source-level flows connect owner, pet and visit form submissions to aggr",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A4",
+      "name": "Infrastructure & Runtime Profiler Agent",
+      "artifact": "P1/spring-petclinic/A4",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 13,
+      "tools_used": [
+        "grep",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 16,
+      "evidence_cited": 10,
+      "tokens": {
+        "input": 27003,
+        "output": 1299,
+        "reasoning": 0
+      },
+      "latency_ms": 20462,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The spring-petclinic repository includes five infrastructure/CI descriptor files indicating basic runtime and build environments, with Dockerfiles, GitHub workflows for Gradle and Maven builds, Kubernetes manifests for deployment, and a docker-compose file defining MySQL and Postgres database services. The Kubernetes deployment specifies a single petclinic workload container with readiness and liv",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A5",
+      "name": "Journey Intelligence Agent",
+      "artifact": "P1/spring-petclinic/A5",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 7,
+      "tools_used": [
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 6,
+      "tokens": {
+        "input": 29804,
+        "output": 1353,
+        "reasoning": 0
+      },
+      "latency_ms": 22348,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The spring-petclinic application exposes a UI workload with multiple user journeys primarily around owner and pet management, including creation, update, search, and display workflows. These journeys are backed by the OwnerController and PetController classes, which map routes to Spring MVC UI templates and handle form submissions and validations. The only persona identified is an inferred end-use",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A6",
+      "name": "Compliance Agent",
+      "artifact": "P1/spring-petclinic/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 25,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "read_file",
+        "sbom_packages",
+        "secret_scan",
+        "static_analysis",
+        "vulnerability_scan"
+      ],
+      "evidence_available": 33,
+      "evidence_cited": 23,
+      "tokens": {
+        "input": 117661,
+        "output": 6084,
+        "reasoning": 63
+      },
+      "latency_ms": 117015,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "After consuming A1@v1 and A4@v1, I ran OSV, gitleaks and Semgrep and checked the relevant source, deployment descriptors and license evidence. OSV reproduced 16 dependency advisories (5 critical, 6 high, 5 medium); these are package matches, not demonstrated exploits. Gitleaks reported zero findings, but manual configuration review identified committed demonstration database credentials and permis",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A7",
+      "name": "UX Evaluator Agent",
+      "artifact": "P1/spring-petclinic/A7",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 5,
+      "tools_used": [
+        "grep",
+        "read_file"
+      ],
+      "evidence_available": 11,
+      "evidence_cited": 5,
+      "tokens": {
+        "input": 18816,
+        "output": 781,
+        "reasoning": 0
+      },
+      "latency_ms": 16609,
+      "llm_findings": 2,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "The UI heuristic evaluation against the criterion 'template-form-labels' found that only 4 out of 12 assessed templates contain accessible label or aria-label markup, specifically visible in form input and select field fragments using proper <label> tags. No aria-label attributes were found in templates. The assessment coverage is partial and based on heuristic scanning of HTML templates without a",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A8",
+      "name": "Stakeholder Elicitation Agent",
+      "artifact": "P1/spring-petclinic/A8",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 2,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 3,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 13758,
+        "output": 1487,
+        "reasoning": 0
+      },
+      "latency_ms": 71538,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed A1, A4 and A5 and drafted six application-specific follow-up prompts. The supplied response register attributes seven entries to scripted-stakeholder at 2026-10-10T04:22:42Z, but each explicitly identifies automation rather than a human; these are not accepted as human-confirmed requirements or ownership evidence. Their substantive answers remain hypothetical pending authorized human conf",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A9",
+      "name": "Business Process Agent",
+      "artifact": "P1/spring-petclinic/A9",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 19,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "read_file"
+      ],
+      "evidence_available": 29,
+      "evidence_cited": 14,
+      "tokens": {
+        "input": 98420,
+        "output": 5439,
+        "reasoning": 64
+      },
+      "latency_ms": 232118,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reconstructed six source-level process maps covering owner registration/maintenance, owner discovery and record review, pet registration/maintenance, visit booking, and veterinarian directory access. Reviewed the published architecture artifact before synthesis and inspected controllers, validators, domain models, repositories, templates, schema evidence, and visit test source. The maps include de",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A10",
+      "name": "Synthesis Discovery Agent",
+      "artifact": "P1/spring-petclinic/A10",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 18,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 30,
+      "evidence_cited": 11,
+      "tokens": {
+        "input": 121577,
+        "output": 6045,
+        "reasoning": 204
+      },
+      "latency_ms": 117138,
+      "llm_findings": 10,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "low",
+      "summary": "Discovery synthesis report v1 uses G1@v2, manifest hash 82f30c4496e0c6c0077b01f96e767526f43619fdd422d933a64231ded06d733a, while explicitly separating supplemental artifacts absent from that seal [art:P1/spring-petclinic/G1@v2]. Technical evidence describes a single Spring Boot application with owner/pet/visit persistence, a veterinarian directory, database-profile alternatives and repository deplo",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "spring-petclinic",
+      "agent": "A11",
+      "name": "Risk Scoring Agent",
+      "artifact": "P1/spring-petclinic/A11",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 13,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 26,
+      "evidence_cited": 9,
+      "tokens": {
+        "input": 77561,
+        "output": 3488,
+        "reasoning": 89
+      },
+      "latency_ms": 161642,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed G0, A10, G1 and supporting architecture, data, security and stakeholder artifacts. G0 names pilot-default-1.0.0 but does not supply its scoring anchors, applicability rules or threshold policy, so final numeric scoring is blocked and the seed's mid-band scores are not validated. The evidence supports a qualitative risk register covering technical coupling, dependency/control weaknesses, i",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A1",
+      "name": "Repo Intelligence Agent",
+      "artifact": "P1/microblog/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 43,
+      "tools_used": [
+        "list_dependencies",
+        "list_dir",
+        "loc_metrics",
+        "read_file",
+        "repo_summary",
+        "sbom_packages"
+      ],
+      "evidence_available": 49,
+      "evidence_cited": 19,
+      "tokens": {
+        "input": 141103,
+        "output": 6672,
+        "reasoning": 171
+      },
+      "latency_ms": 130600,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Inspected the pinned microblog snapshot, application entry points, Flask blueprints, models, integrations, deployment configuration, tests and documentation; also ran the approved scc and Syft static tools. Direct source evidence corrects the seed's library-style inference: this is a Flask web application with a Gunicorn entry point and a separate RQ worker. The inventory and module/dependency map",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A2",
+      "name": "Architecture Agent",
+      "artifact": "P1/microblog/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 20,
+      "tools_used": [
+        "get_artifact",
+        "read_file"
+      ],
+      "evidence_available": 27,
+      "evidence_cited": 16,
+      "tokens": {
+        "input": 65717,
+        "output": 5540,
+        "reasoning": 69
+      },
+      "latency_ms": 116535,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Reconstructed a static-only C4 architecture and dependency-graph snapshot for commit a975ef64864354867c88e0ed3a17ba7d17dca752 using A1/A4 evidence and direct inspection of application, integration and deployment files. The application has one Flask composition root with web, authentication and API blueprints, plus a separately defined RQ worker sharing application models and persistence. Traced so",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A3",
+      "name": "Data Intelligence Agent",
+      "artifact": "P1/microblog/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 22,
+      "tools_used": [
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 28,
+      "evidence_cited": 19,
+      "tokens": {
+        "input": 74688,
+        "output": 6174,
+        "reasoning": 137
+      },
+      "latency_ms": 132271,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Repository inspection identified six relational application tables, an optional Elasticsearch post index, and Redis/RQ job metadata, with source-level producer/consumer paths. Route handlers establish an unversioned /api user/token interface plus session-authenticated web and JSON interfaces; outbound dependencies include translation, email, search, job queuing and browser asset/avatar services. N",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A4",
+      "name": "Infrastructure & Runtime Profiler Agent",
+      "artifact": "P1/microblog/A4",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 7,
+      "tools_used": [
+        "grep",
+        "list_dependencies",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 10,
+      "evidence_cited": 8,
+      "tokens": {
+        "input": 21049,
+        "output": 1055,
+        "reasoning": 0
+      },
+      "latency_ms": 23589,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The microblog application has two infrastructure descriptor files (Dockerfile and Procfile) documenting its runtime setup. The Dockerfile defines a Python-based container image with exposed port 5000 and an entrypoint script, while the Procfile specifies commands for web and worker processes. Dependencies are well-documented in requirements.txt. Logging is configured with file rotation but no runt",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A5",
+      "name": "Journey Intelligence Agent",
+      "artifact": "P1/microblog/A5",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 9,
+      "tools_used": [
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 11,
+      "evidence_cited": 7,
+      "tokens": {
+        "input": 25263,
+        "output": 2079,
+        "reasoning": 0
+      },
+      "latency_ms": 27908,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The microblog application is a UI-capable Flask-based web app with some API endpoints primarily for user management and authentication. User journeys are mapped from the URL routes in the authentication and API modules, mostly covering login, registration, password reset, user profile, followers, and token management. Templates for UI interaction are available, confirming the UI nature. No analyti",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A6",
+      "name": "Compliance Agent",
+      "artifact": "P1/microblog/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 27,
+      "tools_used": [
+        "get_artifact",
+        "read_file",
+        "sbom_packages",
+        "secret_scan",
+        "static_analysis",
+        "vulnerability_scan"
+      ],
+      "evidence_available": 35,
+      "evidence_cited": 27,
+      "tokens": {
+        "input": 120400,
+        "output": 6109,
+        "reasoning": 306
+      },
+      "latency_ms": 138448,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Assessed the read-only microblog repository after the versioned A1/A4 outputs were available, correlating their inventory and infrastructure evidence with direct source review. Gitleaks returned zero findings, OSV returned 188 raw advisory records, and Semgrep returned 12 findings with seven reported errors; the seed separately records 127 distinct advisories, including 30 critical/high. Source re",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A7",
+      "name": "UX Evaluator Agent",
+      "artifact": "P1/microblog/A7",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 7,
+      "tools_used": [
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 13,
+      "evidence_cited": 5,
+      "tokens": {
+        "input": 23009,
+        "output": 871,
+        "reasoning": 0
+      },
+      "latency_ms": 16368,
+      "llm_findings": 2,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "The UX evaluation of the microblog application UI was conducted focusing on form labels and accessibility heuristics. From the heuristic analysis of 18 templates, only 5 templates have label or aria-label markup, indicating partial adherence to accessibility best practices. Key form templates like login and profile editing utilize the bootstrap_wtf.html macros that include label rendering for fiel",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A8",
+      "name": "Stakeholder Elicitation Agent",
+      "artifact": "P1/microblog/A8",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 2,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 1,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 4,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 8593,
+        "output": 1300,
+        "reasoning": 0
+      },
+      "latency_ms": 31237,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed A5's route and journey evidence and drafted six targeted follow-up prompts for microblog. A5 documents UI and API surfaces but provides no behavioral analytics to establish actual usage or friction. The seed records seven answers attributed to scripted-stakeholder at 2026-10-10T04:17:08Z, each explicitly marked automation rather than a human; these are not treated here as validated human ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A9",
+      "name": "Business Process Agent",
+      "artifact": "P1/microblog/A9",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 19,
+      "tools_used": [
+        "get_artifact",
+        "read_file"
+      ],
+      "evidence_available": 29,
+      "evidence_cited": 12,
+      "tokens": {
+        "input": 70118,
+        "output": 6764,
+        "reasoning": 108
+      },
+      "latency_ms": 135906,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reconstructed ten grouped as-is process maps from the web/API controllers, forms, models and background worker, after consuming the published A1 module and A2 architecture evidence. The maps identify entry events, decisions, persistence, integration handoffs and end states; the rule catalogue records implementation behavior rather than owner-approved policy. Important exceptions include unread-mes",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A10",
+      "name": "Synthesis Discovery Agent",
+      "artifact": "P1/microblog/A10",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 19,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 31,
+      "evidence_cited": 10,
+      "tokens": {
+        "input": 130910,
+        "output": 5693,
+        "reasoning": 338
+      },
+      "latency_ms": 131380,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Discovery synthesis revision 1 is anchored to G1 v2, manifest hash fcb94694d91a939eeeee79b8a2b09c63b4dff3a1cf33289104abee5d10658749; the manifest omits A1, A2, A4 and A5, so their retrieved v1 records are explicitly supplemental rather than silently treated as sealed inputs (art:P1/microblog/G1@v2). Technical evidence describes a Flask web/API application with shared relational models and backgrou",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "microblog",
+      "agent": "A11",
+      "name": "Risk Scoring Agent",
+      "artifact": "P1/microblog/A11",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 11,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 24,
+      "evidence_cited": 9,
+      "tokens": {
+        "input": 52761,
+        "output": 3065,
+        "reasoning": 57
+      },
+      "latency_ms": 65452,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "low",
+      "summary": "Reviewed G0 v1, G1 v2, A10 v2 and supporting discovery artifacts for microblog. G0 identifies pilot-default-1.0.0 but supplies no scoring anchors, applicability rules or threshold policy, so the seed's default mid-band values cannot support final scoring. The qualitative register identifies technical coupling, dependency and configuration security concerns, and cross-store data consistency risks, ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A1",
+      "name": "Repo Intelligence Agent",
+      "artifact": "P1/node-express-realworld-example-app/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 40,
+      "tools_used": [
+        "grep",
+        "list_dependencies",
+        "list_dir",
+        "loc_metrics",
+        "read_file",
+        "repo_summary",
+        "sbom_packages"
+      ],
+      "evidence_available": 45,
+      "evidence_cited": 18,
+      "tokens": {
+        "input": 141883,
+        "output": 5743,
+        "reasoning": 95
+      },
+      "latency_ms": 116451,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Inspected the pinned repository's entry point, feature services/controllers, Prisma schema, tests, dependency manifests, build targets, Dockerfile and README, and obtained approved scc and Syft results. The application is a TypeScript Express API with Prisma/PostgreSQL persistence and Nx/esbuild/Jest tooling. Static review identified sensitive-data exposure in favorite responses, a fallback JWT si",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A2",
+      "name": "Architecture Agent",
+      "artifact": "P1/node-express-realworld-example-app/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 29,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 35,
+      "evidence_cited": 18,
+      "tokens": {
+        "input": 98173,
+        "output": 5479,
+        "reasoning": 102
+      },
+      "latency_ms": 224384,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Reconstructed a static C4 architecture from the Express entry point, four route/service modules, Prisma schema/client, and Nx/Docker configuration, incorporating A1 and A4 evidence. The code defines one API application with in-process article, authentication, profile and tag components sharing PostgreSQL persistence, not independently deployed services. The dependency graph is version 1, anchored ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A3",
+      "name": "Data Intelligence Agent",
+      "artifact": "P1/node-express-realworld-example-app/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 30,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 36,
+      "evidence_cited": 24,
+      "tokens": {
+        "input": 121462,
+        "output": 5706,
+        "reasoning": 56
+      },
+      "latency_ms": 116356,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Repository inspection establishes a Prisma/PostgreSQL data model with four domain entities and three many-to-many association tables, plus four SQL migration scripts. Express controllers and services expose the RealWorld-style JSON API under /api and provide observable code-level lineage for users, articles, comments, tags, favorites and follows. Migration history includes a destructive tag-associ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A4",
+      "name": "Infrastructure & Runtime Profiler Agent",
+      "artifact": "P1/node-express-realworld-example-app/A4",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 5,
+      "tools_used": [
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 7,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 16796,
+        "output": 921,
+        "reasoning": 0
+      },
+      "latency_ms": 17566,
+      "llm_findings": 4,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The node-express-realworld-example-app repository includes one Dockerfile as the infrastructure descriptor, specifying a Node.js Alpine-based container with application setup and startup instructions. No live runtime telemetry or monitoring data is available for utilization assessment, and no evidence was found concerning documented or tested recovery objectives, RTO, RPO, or restore procedures. H",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A5",
+      "name": "Journey Intelligence Agent",
+      "artifact": "P1/node-express-realworld-example-app/A5",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 10,
+      "tools_used": [
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 12,
+      "evidence_cited": 11,
+      "tokens": {
+        "input": 32593,
+        "output": 1686,
+        "reasoning": 0
+      },
+      "latency_ms": 25337,
+      "llm_findings": 4,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The application node-express-realworld-example-app is an API_ONLY workload, with 20 mapped HTTP endpoints representing various article and user account related actions. These endpoints define clear service-consumer journeys such as article listing, creation, update, deletion, commenting, favoriting, and user authentication operations. There is no evidence of UI workload. No behavioral analytics da",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A6",
+      "name": "Compliance Agent",
+      "artifact": "P1/node-express-realworld-example-app/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 19,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "read_file",
+        "repo_summary",
+        "sbom_packages",
+        "secret_scan",
+        "static_analysis",
+        "vulnerability_scan"
+      ],
+      "evidence_available": 27,
+      "evidence_cited": 17,
+      "tokens": {
+        "input": 77042,
+        "output": 4721,
+        "reasoning": 166
+      },
+      "latency_ms": 98289,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Assessed the pinned repository after A1@v1 and A4@v1 were published, using all three required scanners and direct source/configuration review. Gitleaks reported no findings and Semgrep reported one missing-USER finding; manual review additionally established a known JWT signing-key fallback and a likely sensitive-data disclosure in favorite responses. Dependency advisories require remediation, wit",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A7",
+      "name": "UX Evaluator Agent",
+      "artifact": "P1/node-express-realworld-example-app/A7",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 5,
+      "tools_used": [
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 11,
+      "evidence_cited": 6,
+      "tokens": {
+        "input": 21028,
+        "output": 714,
+        "reasoning": 0
+      },
+      "latency_ms": 17508,
+      "llm_findings": 2,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "This application is API-only with no frontend UI components or templates. The code is fully backend Express routes implementing RESTful API endpoints for articles and comments. There is no rendered HTML or forms to evaluate for accessibility or usability heuristics. The seed correctly reflects 0/0 templates with label markup. This justifies the API_ONLY route classification and marks the UX review",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A8",
+      "name": "Stakeholder Elicitation Agent",
+      "artifact": "P1/node-express-realworld-example-app/A8",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 2,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 3,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 13561,
+        "output": 1692,
+        "reasoning": 0
+      },
+      "latency_ms": 33614,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed A1, A4 and A5 and drafted seven application-specific follow-up prompts. The seed records seven answers attributed to scripted-stakeholder at 2026-10-10T04:19:44Z, but each explicitly identifies automation rather than a human; these remain simulated examples, not validated requirements or ownership evidence. No attributable human confirmation is established by the supplied snapshot. Techni",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A9",
+      "name": "Business Process Agent",
+      "artifact": "P1/node-express-realworld-example-app/A9",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 18,
+      "tools_used": [
+        "get_artifact",
+        "read_file"
+      ],
+      "evidence_available": 27,
+      "evidence_cited": 15,
+      "tokens": {
+        "input": 103694,
+        "output": 6012,
+        "reasoning": 138
+      },
+      "latency_ms": 243326,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reconstructed source-level process maps for account access, article publication/discovery, comments, favorites, profiles/following and tags after consuming the published A1 and A2 artifacts. Controller, service, authentication, mapper and Prisma schema reads establish decision branches and component links, but not executed production behavior. The route seed resolves to 19 feature endpoints under ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A10",
+      "name": "Synthesis Discovery Agent",
+      "artifact": "P1/node-express-realworld-example-app/A10",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 20,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 32,
+      "evidence_cited": 10,
+      "tokens": {
+        "input": 118838,
+        "output": 5669,
+        "reasoning": 288
+      },
+      "latency_ms": 115854,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Discovery report v1 for node-express-realworld-example-app is anchored to G1@v2, manifest f7e77a5730b16b9dd7f0e8009db25144934d466cb25481d426d0eca1e7623b3e; its explicit references cover A3/A6/A7/A9@v1 and A8@v2, not all required inputs (art:P1/node-express-realworld-example-app/G1@v2). Supplementary A1/A2/A4/A5@v1 establish a TypeScript Express/Prisma backend and API-only experience, rather than a",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "node-express-realworld-example-app",
+      "agent": "A11",
+      "name": "Risk Scoring Agent",
+      "artifact": "P1/node-express-realworld-example-app/A11",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 14,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 27,
+      "evidence_cited": 10,
+      "tokens": {
+        "input": 65843,
+        "output": 3294,
+        "reasoning": 123
+      },
+      "latency_ms": 70363,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed G0, A10, the sealed G1 manifest and supporting technical, data, security, operational and stakeholder artifacts. G0 supplies a policy version identifier but not the approved scoring rubric, applicability rules or thresholds, so final numeric scoring is blocked and the seed's mid-band values are not validated. The qualitative register preserves technical debt, conditional security exposure",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A1",
+      "name": "Repo Intelligence Agent",
+      "artifact": "P1/django-realworld-example-app/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 39,
+      "tools_used": [
+        "grep",
+        "list_dependencies",
+        "list_dir",
+        "loc_metrics",
+        "read_file",
+        "repo_summary",
+        "sbom_packages"
+      ],
+      "evidence_available": 45,
+      "evidence_cited": 13,
+      "tokens": {
+        "input": 88244,
+        "output": 6305,
+        "reasoning": 142
+      },
+      "latency_ms": 131560,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Inspected the pinned repository at commit 29c9d42831fa0cfc5a4aa7561f674396eacf20a2, including entry points, settings, dependency manifest, application packages, routes, serializers and models (ev-9a692d01d080; ev-a72308d1fbc8; ev-b1c4f37d3247). The application is a Django/DRF API organized into authentication, profiles, articles and shared core modules, with SQLite configured locally (ev-254f0e394",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A2",
+      "name": "Architecture Agent",
+      "artifact": "P1/django-realworld-example-app/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 23,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 30,
+      "evidence_cited": 19,
+      "tokens": {
+        "input": 75083,
+        "output": 5351,
+        "reasoning": 84
+      },
+      "latency_ms": 120248,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Reconstructed a static C4 view of a Django/DRF application with authentication, profiles, articles and shared-core components using A1/A4 evidence and direct source inspection. The repository configures one WSGI application and one SQLite database; the domain apps share routing, ORM relationships, serializers and signal-driven lifecycle behavior rather than independent service interfaces. The depe",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A3",
+      "name": "Data Intelligence Agent",
+      "artifact": "P1/django-realworld-example-app/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 23,
+      "tools_used": [
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 29,
+      "evidence_cited": 15,
+      "tokens": {
+        "input": 83191,
+        "output": 5284,
+        "reasoning": 59
+      },
+      "latency_ms": 101064,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Inspected Django settings, domain models, migrations, URL mappings, serializers, views and signals to inventory the configured SQLite estate and source-level API/data flows. Five concrete domain models and three domain many-to-many relationships are defined; the shared timestamp model is abstract. The API catalogue records unversioned /api routes, JSON contracts, local JWT authentication and an ex",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A4",
+      "name": "Infrastructure & Runtime Profiler Agent",
+      "artifact": "P1/django-realworld-example-app/A4",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 5,
+      "tools_used": [
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 16286,
+        "output": 544,
+        "reasoning": 0
+      },
+      "latency_ms": 14036,
+      "llm_findings": 2,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The django-realworld-example-app is a Django 1.10 based web application using SQLite as its database, with no Dockerfile, CI, or IaC descriptors present, so the hosting model is code-inferred only. There is no runtime telemetry or backup/restore evidence available in the repository, thus utilization and recovery objectives cannot be assessed. This creates a significant gap in understanding runtime",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A5",
+      "name": "Journey Intelligence Agent",
+      "artifact": "P1/django-realworld-example-app/A5",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 10,
+      "tools_used": [
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 12,
+      "evidence_cited": 8,
+      "tokens": {
+        "input": 27005,
+        "output": 1257,
+        "reasoning": 0
+      },
+      "latency_ms": 23340,
+      "llm_findings": 4,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The django-realworld-example-app is an API-only workload with 18 HTTP API endpoints serving functionalities related to articles, authentication, and profiles. These endpoints expose create, retrieve, update, and delete operations via DRF viewsets and APIViews, supporting typical user actions such as reading articles, posting comments, user registration, login, and profile follow/unfollow. There is",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A6",
+      "name": "Compliance Agent",
+      "artifact": "P1/django-realworld-example-app/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 20,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file",
+        "sbom_packages",
+        "secret_scan",
+        "static_analysis",
+        "vulnerability_scan"
+      ],
+      "evidence_available": 28,
+      "evidence_cited": 19,
+      "tokens": {
+        "input": 76826,
+        "output": 5880,
+        "reasoning": 245
+      },
+      "latency_ms": 124065,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "After A1 and A4 version 1 were available, I ran OSV, gitleaks and Semgrep and inspected settings, authentication, article authorization, routes and dependency metadata. Static evidence establishes missing ownership checks, a committed key used for JWT signing, development-only settings, incomplete password-policy enforcement and absent application throttling. Dependency alerts are recorded as scan",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A7",
+      "name": "UX Evaluator Agent",
+      "artifact": "P1/django-realworld-example-app/A7",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 5,
+      "tools_used": [
+        "grep",
+        "list_dir"
+      ],
+      "evidence_available": 9,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 15553,
+        "output": 598,
+        "reasoning": 0
+      },
+      "latency_ms": 45019,
+      "llm_findings": 2,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The application serves as an API-only backend, confirmed by route analysis and lack of HTML templates containing form label or aria-label markup, limiting accessibility UI evaluation. No evidence of UI forms was found, and a full accessibility evaluation for UI is not applicable but remains unassessed. The evaluation is scoped to API developer experience with heuristic criteria for UI forms marked",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A8",
+      "name": "Stakeholder Elicitation Agent",
+      "artifact": "P1/django-realworld-example-app/A8",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 2,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 3,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 12577,
+        "output": 1486,
+        "reasoning": 0
+      },
+      "latency_ms": 32034,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed A1, A4 and A5 and drafted six application-specific follow-up prompts. The seed records seven answers attributed to scripted-stakeholder at 2026-10-10T04:20:18Z, but the answers explicitly identify automation rather than a human; their requirement and ownership assertions remain unverified, notwithstanding the seed labels. No new human responses or approved requirements were established. T",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A9",
+      "name": "Business Process Agent",
+      "artifact": "P1/django-realworld-example-app/A9",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 20,
+      "tools_used": [
+        "get_artifact",
+        "read_file"
+      ],
+      "evidence_available": 30,
+      "evidence_cited": 10,
+      "tokens": {
+        "input": 82289,
+        "output": 5584,
+        "reasoning": 57
+      },
+      "latency_ms": 118536,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reconstructed eight source-level process maps from controllers, serializers, models, signals and routes after reviewing the published Architecture artifact. The maps link API activities to authentication, profiles, articles and shared framework components, with explicit decision branches and exception outcomes. The rule catalogue separates implemented checks from probable intent and identifies own",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A10",
+      "name": "Synthesis Discovery Agent",
+      "artifact": "P1/django-realworld-example-app/A10",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 18,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 30,
+      "evidence_cited": 11,
+      "tokens": {
+        "input": 112466,
+        "output": 5869,
+        "reasoning": 224
+      },
+      "latency_ms": 117436,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Discovery synthesis revision 1 is anchored to G1 v2, manifest dbca02fd7feb3ec7bf85e57f07d37b8095323ec1a433f139aa7122245f20533f; its explicit references omit A1, A2, A4 and A5, so those retrieved versions are supplemental rather than asserted sealed inputs [art:P1/django-realworld-example-app/G1@v2]. Technical evidence describes a nonempty, legacy Django/DRF application with shared relational model",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 1,
+      "app": "django-realworld-example-app",
+      "agent": "A11",
+      "name": "Risk Scoring Agent",
+      "artifact": "P1/django-realworld-example-app/A11",
+      "status": "PARTIAL",
+      "version": 2,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 12,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 25,
+      "evidence_cited": 9,
+      "tokens": {
+        "input": 74137,
+        "output": 3579,
+        "reasoning": 75
+      },
+      "latency_ms": 75894,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed G0, A10, G1 and supporting inventory, security, data, operations and stakeholder artifacts. G0 supplies a policy-version identifier but not the approved scoring rubric, applicability rules or thresholds, so the seed's default scores cannot be validated and final numeric scoring is blocked. The qualitative register identifies legacy upgrade and compatibility risks, static authorization and",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 2,
+      "app": "PF1",
+      "agent": "A1",
+      "name": "Business Value & Market Agent",
+      "artifact": "P2/PF1/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 8,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 26,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 50,
+      "evidence_cited": 17,
+      "tokens": {
+        "input": 299763,
+        "output": 4019,
+        "reasoning": 160
+      },
+      "latency_ms": 97750,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed Phase 1 inventory, interface, journey and stakeholder artifacts for all four applications and process evidence for microblog. Mapped implemented capabilities to potential business outcomes, but no attributable human-approved priorities or value-scoring rubric were established. The supplied scores are retained solely as provisional internal benchmark carry-forwards, not validated business-",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 2,
+      "app": "PF1",
+      "agent": "A2",
+      "name": "Technical Complexity & Impact Agent",
+      "artifact": "P2/PF1/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 8,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 28,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts",
+        "read_file"
+      ],
+      "evidence_available": 50,
+      "evidence_cited": 20,
+      "tokens": {
+        "input": 257200,
+        "output": 6249,
+        "reasoning": 113
+      },
+      "latency_ms": 245242,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed pinned Phase 1 code, architecture, data and infrastructure artifacts for all four applications, and directly checked the Node and Django dependency manifests. Established application-local persistence and integration dependencies, modernization drivers, test limitations and change-propagation paths. The seed's source-family group is an investigation candidate, not evidence of a portfolio-",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 2,
+      "app": "PF1",
+      "agent": "A3",
+      "name": "Cost Estimation Agent",
+      "artifact": "P2/PF1/A3",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 7,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 5,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 35556,
+        "output": 830,
+        "reasoning": 0
+      },
+      "latency_ms": 14966,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Cost estimation for the PF1 portfolio applications spring-petclinic, microblog, node-express-realworld-example-app, and django-realworld-example-app was reviewed. Cost scenarios based on the pilot-default rate card were provided, with low, base, and high estimates per migration option, reflecting complexity band assumptions. Sensitivity to complexity band variation (\u00b11 band \u2248 \u00b11x base rate) was id",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 2,
+      "app": "PF1",
+      "agent": "A4",
+      "name": "Portfolio Rationalization Agent",
+      "artifact": "P2/PF1/A4",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 7,
+      "tools_used": [
+        "get_artifact",
+        "list_dependencies"
+      ],
+      "evidence_available": 10,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 40648,
+        "output": 873,
+        "reasoning": 0
+      },
+      "latency_ms": 13558,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The portfolio contains four applications from similar product families with overlapping capabilities: spring-petclinic and microblog focus on UI with Java and Python respectively, while node-express-realworld-example-app and django-realworld-example-app provide API-only capabilities with TypeScript and Python. Each app supports unique and common business capabilities but no confirmed usage, consum",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 2,
+      "app": "PF1",
+      "agent": "A5",
+      "name": "Readiness Assessment Agent",
+      "artifact": "P2/PF1/A5",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 3,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 4,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 13742,
+        "output": 618,
+        "reasoning": 0
+      },
+      "latency_ms": 9715,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "All four applications spring-petclinic, microblog, node-express-realworld-example-app and django-realworld-example-app are assessed as READY for target-design planning based on accepted phase 1 evidence. The phase 2 A2 technical constraints and A4 proposed rationalization confirm preservation of all apps with no retirements proposed. There are no unresolved blockers or refuted readiness conditions",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 2,
+      "app": "PF1",
+      "agent": "A6",
+      "name": "Modernization Strategy Agent",
+      "artifact": "P2/PF1/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 24,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts",
+        "read_file"
+      ],
+      "evidence_available": 36,
+      "evidence_cited": 16,
+      "tokens": {
+        "input": 168863,
+        "output": 7810,
+        "reasoning": 2076
+      },
+      "latency_ms": 181405,
+      "llm_findings": 11,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "low",
+      "summary": "I reviewed the G1-sealed A1\u2013A5 snapshot, all four dependency manifests, and Phase 1 security evidence. Targeted Refactor is the provisional preference for each application: the evidence supports preserving existing application boundaries while correcting source-level security, compatibility and reliability problems, rather than selecting an R from UI/API shape. All approvals remain PENDING, consol",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 2,
+      "app": "PF1",
+      "agent": "A7",
+      "name": "Decision Consolidator Agent",
+      "artifact": "P2/PF1/A7",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 15,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 28,
+      "evidence_cited": 13,
+      "tokens": {
+        "input": 74119,
+        "output": 4979,
+        "reasoning": 152
+      },
+      "latency_ms": 102349,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reconciled all four application IDs against A6, G1's sealed A1\u2013A5 references, and the Phase 1 gate records. Recommend conditional Refactor candidates in one W1 planning group, with execution unscheduled and all approvals pending. Verified the direct-option scenario subtotal, while preserving unknown cost units, shared-cost treatment, capacity and runtime dependencies. Identified an A6 input-manife",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "agent": "A1",
+      "name": "Target Architecture Agent",
+      "artifact": "P3/spring-petclinic/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 9,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 51,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 69,
+      "evidence_cited": 27,
+      "tokens": {
+        "input": 280569,
+        "output": 10732,
+        "reasoning": 1407
+      },
+      "latency_ms": 481992,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Investigated the authorized Refactor intake, Phase 2 decision and cost evidence, Phase 1 architecture/data/security/runtime/requirements artifacts, and the repository at commit 500158f732419217507c7656904b8e6aa1bcc0d6. The proposed foundation is a single deployable, feature-modular Spring MVC/Thymeleaf/JPA application with explicit in-process workflow boundaries, rather than extracted services. Bo",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "agent": "A2",
+      "name": "Monolith Decomposition Agent",
+      "artifact": "P3/spring-petclinic/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 24,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 29,
+      "evidence_cited": 14,
+      "tokens": {
+        "input": 104203,
+        "output": 4797,
+        "reasoning": 51
+      },
+      "latency_ms": 117616,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Source inspection supports retaining one executable modular monolith with owner-care and veterinarian-directory feature boundaries, a small shared model, and a technical application shell. Owner, pet and visit writes are coupled through cascading persistence and owner-scoped validation; separating their services or databases would disrupt existing consistency contracts. The proposed ownership map ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "agent": "A3",
+      "name": "Schema Alignment & Data Architecture Agent",
+      "artifact": "P3/spring-petclinic/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 22,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 27,
+      "evidence_cited": 18,
+      "tokens": {
+        "input": 103543,
+        "output": 6722,
+        "reasoning": 129
+      },
+      "latency_ms": 153986,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Inspected all seeded SQL files, entity mappings, pet validation and persistence code, the concurrency test, datasource configuration, and the A1/A2/A4 target inputs. The proposed architecture preserves one relational store with owner-care and veterinarian-directory logical ownership; no boundary change or data migration was executed. Cross-profile differences in text limits, case comparison, uniqu",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "agent": "A4",
+      "name": "Security Architecture Agent",
+      "artifact": "P3/spring-petclinic/A4",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 18,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "read_file"
+      ],
+      "evidence_available": 23,
+      "evidence_cited": 13,
+      "tokens": {
+        "input": 74728,
+        "output": 7246,
+        "reasoning": 84
+      },
+      "latency_ms": 152501,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Modeled the proposed single-application Refactor target using the A1 blueprint, P1 security/data artifacts and direct inspection of controllers, repository queries, datasource properties and the Kubernetes example. Established concrete risks around absent visible principal checks, broad management exposure, reusable demo credentials, input binding and supply-chain findings, without treating scanne",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "agent": "A5",
+      "name": "UI Architecture Agent",
+      "artifact": "P3/spring-petclinic/A5",
+      "status": "SKIPPED_APPROVED",
+      "version": 1,
+      "enriched": true,
+      "mode": "review",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 10,
+      "tools_used": [
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 9,
+      "evidence_cited": 6,
+      "tokens": {
+        "input": 24413,
+        "output": 816,
+        "reasoning": 0
+      },
+      "latency_ms": 16603,
+      "llm_findings": 4,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The deterministic seed for the spring-petclinic application in phase 3 correctly marks the UI architecture as not applicable, indicating a headless or API-only route with no UI or BFF demand. This matches the evidence from the repository where UI templates and traditional MVC web controller annotations (such as @Controller or @RestController) are absent or not mapped to an API UI layer, consistent",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "agent": "A6",
+      "name": "Interface & Integration Contract Agent",
+      "artifact": "P3/spring-petclinic/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 26,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 33,
+      "evidence_cited": 18,
+      "tokens": {
+        "input": 134365,
+        "output": 8829,
+        "reasoning": 302
+      },
+      "latency_ms": 190167,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Inspected all application controllers, form fields, validators, repositories, veterinarian response types, selected test sources and deployment properties against A1\u2013A5. Established 17 distinct application HTTP method/path contracts, including the owner prefix omitted from seeded pet paths, plus the configured relational integration. Proposed retaining synchronous MVC and in-process feature workfl",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "agent": "A7",
+      "name": "Cloud Platform & Capacity Agent",
+      "artifact": "P3/spring-petclinic/A7",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 9,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 14,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 56840,
+        "output": 1011,
+        "reasoning": 0
+      },
+      "latency_ms": 16950,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The platform blueprint specifies a local pilot environment as the hosting choice, with production platform selection deferred to a later phase. The capacity model remains provisional and unset due to the absence of runtime telemetry in the initial phases. The bill of materials consists of a single application runtime stack based on the target Java 21 and Spring Boot 3.x environment. Observability ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "spring-petclinic",
+      "agent": "A8",
+      "name": "Architecture Consolidator Agent",
+      "artifact": "P3/spring-petclinic/A8",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 29,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 41,
+      "evidence_cited": 11,
+      "tokens": {
+        "input": 124001,
+        "output": 6912,
+        "reasoning": 290
+      },
+      "latency_ms": 636577,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Consolidated a proposed revision-r1 architecture and Phase 4 planning handoff from the exact A1\u2013A7 v1 snapshot sealed by G1, with G0 and Phase 2 authority checked separately. The substantive designs largely align around a single deployable application, feature-local workflows and the existing relational store, but the UI skip, stack selection, contract registry and platform coverage remain unresol",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "agent": "A1",
+      "name": "Target Architecture Agent",
+      "artifact": "P3/microblog/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 9,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 47,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 66,
+      "evidence_cited": 21,
+      "tokens": {
+        "input": 236103,
+        "output": 11513,
+        "reasoning": 1052
+      },
+      "latency_ms": 266171,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Investigated the authorized Refactor intake, Phase 2 decision and cost artifacts, Phase 1 evidence manifest, and the actual Flask application, models, integrations, deployment scripts and tests. Proposed a modular-monolith foundation retaining the web/API, shared relational data and separate RQ worker boundaries, with internal separation of workflow and integration responsibilities rather than bus",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "agent": "A2",
+      "name": "Monolith Decomposition Agent",
+      "artifact": "P3/microblog/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 22,
+      "tools_used": [
+        "get_artifact",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 26,
+      "evidence_cited": 18,
+      "tokens": {
+        "input": 89295,
+        "output": 5759,
+        "reasoning": 118
+      },
+      "latency_ms": 125102,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Source inspection supports a modular Flask monolith with its existing web and RQ worker process boundaries, not new business microservices. The proposed map assigns logical write ownership for accounts, posts/follows, messages, notifications and export tasks while retaining one relational schema and coordinated release. Communication is mapped to in-process workflows, existing RQ commands, SQL not",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "agent": "A3",
+      "name": "Schema Alignment & Data Architecture Agent",
+      "artifact": "P3/microblog/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 16,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 21,
+      "evidence_cited": 12,
+      "tokens": {
+        "input": 83413,
+        "output": 7168,
+        "reasoning": 419
+      },
+      "latency_ms": 175528,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed the A1 target, A2 boundaries and A4 security inputs, then verified the ORM entities, migration history, API representations, messaging transactions, search adapter and export worker. The proposed design retains one authoritative relational schema with field-level logical ownership matching A2; search and Redis remain non-authoritative projections or transport. Defined additive schema chan",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "agent": "A4",
+      "name": "Security Architecture Agent",
+      "artifact": "P3/microblog/A4",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 24,
+      "tools_used": [
+        "get_artifact",
+        "list_dir",
+        "read_file",
+        "repo_summary",
+        "secret_scan"
+      ],
+      "evidence_available": 29,
+      "evidence_cited": 15,
+      "tokens": {
+        "input": 119592,
+        "output": 7253,
+        "reasoning": 83
+      },
+      "latency_ms": 158865,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed the proposed Refactor modular-monolith blueprint, P1 security findings, and source authentication, API, worker, configuration, container and Nginx code. Defined a source-grounded STRIDE model and proposed controls with linked validation criteria, trust boundaries and phase-level responsibilities. Confirmed a signing-key fallback, directly stored bearer tokens, incomplete JSON validation a",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "agent": "A5",
+      "name": "UI Architecture Agent",
+      "artifact": "P3/microblog/A5",
+      "status": "SKIPPED_APPROVED",
+      "version": 1,
+      "enriched": true,
+      "mode": "review",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 6,
+      "tools_used": [
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 11,
+      "evidence_cited": 6,
+      "tokens": {
+        "input": 28059,
+        "output": 551,
+        "reasoning": 0
+      },
+      "latency_ms": 42813,
+      "llm_findings": 4,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The microblog application has a server-rendered UI based on Flask templates with user-facing routes such as '/' and '/index' that require authentication and render posts and forms. The presence of templates and route handlers indicate UI applicability. However, the deterministic seed marked this phase as SKIPPED_APPROVED for UI with justification 'headless/API-only route'. This is contradicted by ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "agent": "A6",
+      "name": "Interface & Integration Contract Agent",
+      "artifact": "P3/microblog/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 25,
+      "tools_used": [
+        "get_artifact",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 32,
+      "evidence_cited": 16,
+      "tokens": {
+        "input": 119274,
+        "output": 8773,
+        "reasoning": 295
+      },
+      "latency_ms": 199393,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Verified effective API and browser routes, payload serializers, authentication, queue dispatch, and outbound providers directly in the repository, and aligned proposed contracts with A1\u2013A4. The target retains a modular monolith, the existing Redis/RQ worker, and provider adapters rather than adding an API gateway or event broker. The registry distinguishes unversioned legacy wire contracts from pr",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "agent": "A7",
+      "name": "Cloud Platform & Capacity Agent",
+      "artifact": "P3/microblog/A7",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 14,
+      "evidence_cited": 5,
+      "tokens": {
+        "input": 66555,
+        "output": 1305,
+        "reasoning": 0
+      },
+      "latency_ms": 19234,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "For the microblog application in Phase 3, the platform blueprint specifies a local pilot environment for hosting with production platform selection deferred to later phases. The capacity model remains provisional due to the lack of runtime telemetry data. The bill of materials includes the app runtime based on the Python 3.12 and Flask stack as inferred from upstream artifacts. Observability desig",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "microblog",
+      "agent": "A8",
+      "name": "Architecture Consolidator Agent",
+      "artifact": "P3/microblog/A8",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 32,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 44,
+      "evidence_cited": 18,
+      "tokens": {
+        "input": 155730,
+        "output": 6932,
+        "reasoning": 165
+      },
+      "latency_ms": 133894,
+      "llm_findings": 10,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed the G1-sealed A1\u2013A7 v1 artifacts, G0 intake, and Phase 2 G2/A7 authority and conditions. The candidate is a Refactor modular monolith with retained browser/API adapters, one authoritative relational store, and an existing Redis/RQ worker, but UI applicability, contract semantics, platform coverage, and structured traceability remain inconsistent. The handoff below indexes the versioned ar",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "agent": "A1",
+      "name": "Target Architecture Agent",
+      "artifact": "P3/node-express-realworld-example-app/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 9,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 45,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 60,
+      "evidence_cited": 20,
+      "tokens": {
+        "input": 211558,
+        "output": 11175,
+        "reasoning": 1274
+      },
+      "latency_ms": 264327,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Proposed a Refactor foundation blueprint for the authorized application, using the matching Phase 2/Phase 3 candidate hash, versioned Phase 1 artifacts, and direct inspection of source, schema, build, container and test configuration at commit 30b68e1e881462b2f4164ea09ab4c4f5699c7b0b. The preferred target is a typed Express modular monolith on the seed's candidate Node 24 baseline, retaining Postg",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "agent": "A2",
+      "name": "Monolith Decomposition Agent",
+      "artifact": "P3/node-express-realworld-example-app/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 25,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 30,
+      "evidence_cited": 17,
+      "tokens": {
+        "input": 91171,
+        "output": 5248,
+        "reasoning": 144
+      },
+      "latency_ms": 117846,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Code inspection supports retaining one Express/Prisma deployable with explicit in-process account, social-profile and content boundaries, backed by one PostgreSQL schema. Article, comment, favorite, tag and feed operations share relational queries and mutation semantics that do not justify network-service extraction. The boundary map assigns proposed logical data ownership, identifies transition u",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "agent": "A3",
+      "name": "Schema Alignment & Data Architecture Agent",
+      "artifact": "P3/node-express-realworld-example-app/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 21,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 26,
+      "evidence_cited": 13,
+      "tokens": {
+        "input": 86257,
+        "output": 6004,
+        "reasoning": 56
+      },
+      "latency_ms": 129183,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Inspected the Prisma schema, all four historical migrations, and account, article, favorite and follow persistence code, and consumed A1, A2 and A4 target inputs. The proposed design retains one PostgreSQL system of record with A2's logical ownership boundaries, explicit public projections and transaction-scoped writes. Historical tag conversion requires special handling because its SQL drops asso",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "agent": "A4",
+      "name": "Security Architecture Agent",
+      "artifact": "P3/node-express-realworld-example-app/A4",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 25,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file",
+        "repo_summary",
+        "secret_scan",
+        "static_analysis"
+      ],
+      "evidence_available": 30,
+      "evidence_cited": 17,
+      "tokens": {
+        "input": 97753,
+        "output": 7396,
+        "reasoning": 194
+      },
+      "latency_ms": 177790,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed the proposed single-deployable Refactor architecture, P1 security and data artifacts, and the actual authentication, article, Prisma, server and container code. Confirmed a JWT fallback configuration, long-lived tokens, unsafe favorite-response relation serialization, incomplete comment resource scoping, and a missing container USER directive; a zero-finding secret scan does not negate th",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "agent": "A5",
+      "name": "UI Architecture Agent",
+      "artifact": "P3/node-express-realworld-example-app/A5",
+      "status": "SKIPPED_APPROVED",
+      "version": 1,
+      "enriched": true,
+      "mode": "review",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "grep",
+        "list_dir",
+        "read_file"
+      ],
+      "evidence_available": 10,
+      "evidence_cited": 6,
+      "tokens": {
+        "input": 25079,
+        "output": 609,
+        "reasoning": 0
+      },
+      "latency_ms": 12541,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The node-express-realworld-example-app is purely API-driven with no traditional UI rendering found. No Express route uses template rendering or serves HTML; all routes produce JSON responses consistent with a headless API service. This confirms the deterministic seed that UI is not applicable and that it is a headless/API-only service with no UI or BFF demand. The architecture boundaries and secur",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "agent": "A6",
+      "name": "Interface & Integration Contract Agent",
+      "artifact": "P3/node-express-realworld-example-app/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 30,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 37,
+      "evidence_cited": 20,
+      "tokens": {
+        "input": 166068,
+        "output": 9821,
+        "reasoning": 331
+      },
+      "latency_ms": 206267,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Verified the mounted /api contracts from all four controllers, their service implementations, authentication middleware, serializers and PostgreSQL configuration. Defined a proposed versioned contract baseline that retains synchronous HTTP and in-process module calls, with no justified broker, BFF or dual-write bridge. Specified payload ownership, authorization, compatibility tests, transaction bo",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "agent": "A7",
+      "name": "Cloud Platform & Capacity Agent",
+      "artifact": "P3/node-express-realworld-example-app/A7",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 12,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 39073,
+        "output": 1072,
+        "reasoning": 0
+      },
+      "latency_ms": 15937,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The platform design for node-express-realworld-example-app targets a local pilot environment with pre-provisioned hosting. The runtime BOM identifies a single instance on Node.js 24 LTS with Express 5.x candidate and Prisma for PostgreSQL. Capacity modeling remains provisional due to lack of runtime telemetry in phase 1. Observability includes availability and latency_p95 SLIs but lacks defined ta",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "node-express-realworld-example-app",
+      "agent": "A8",
+      "name": "Architecture Consolidator Agent",
+      "artifact": "P3/node-express-realworld-example-app/A8",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 33,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 46,
+      "evidence_cited": 15,
+      "tokens": {
+        "input": 171753,
+        "output": 7045,
+        "reasoning": 544
+      },
+      "latency_ms": 162542,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed the G1-sealed A1\u2013A7 v1 artifacts, targeted design fields, and Phase 2 authority and conditions. The candidate coherently proposes a single modular Express application with shared PostgreSQL, typed in-process boundaries, restricted response projections and transaction-scoped mutations, but its sealed status does not establish complete design or release readiness. The seed's boundary failur",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "agent": "A1",
+      "name": "Target Architecture Agent",
+      "artifact": "P3/django-realworld-example-app/A1",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 9,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 49,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dependencies",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 67,
+      "evidence_cited": 26,
+      "tokens": {
+        "input": 239793,
+        "output": 12400,
+        "reasoning": 1808
+      },
+      "latency_ms": 290618,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "The Phase 3 intake and Phase 2 authorization record agree on the Refactor route and candidate hash; this does not establish owner approval of a target stack or permission to release. Repository inspection supports a proposed modular Django/DRF monolith retaining authentication, profiles, articles, core and the shared relational model. I refined the seed into a candidate Python 3.12/Django 5.2 stac",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "agent": "A2",
+      "name": "Monolith Decomposition Agent",
+      "artifact": "P3/django-realworld-example-app/A2",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 26,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 31,
+      "evidence_cited": 14,
+      "tokens": {
+        "input": 87000,
+        "output": 4792,
+        "reasoning": 157
+      },
+      "latency_ms": 110950,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Inspected models, serializers, views, signals, routing and configuration and reconciled the proposal with the A1 foundation and matching Phase 2/Phase 3 route records. Recommend retaining one Django modular monolith with explicit identity, profile/social, content and shared-infrastructure boundaries rather than extracting services. The map assigns logical data ownership, identifies cross-module tr",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "agent": "A3",
+      "name": "Schema Alignment & Data Architecture Agent",
+      "artifact": "P3/django-realworld-example-app/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 22,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dir",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 27,
+      "evidence_cited": 17,
+      "tokens": {
+        "input": 100352,
+        "output": 7801,
+        "reasoning": 233
+      },
+      "latency_ms": 172151,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Inspected the model definitions, historical migrations, serializers, lifecycle hooks and mutation paths, and consumed the A1, A2 and A4 target inputs. The proposed data architecture retains one relational system of record with authentication, profiles and articles as logical owners, without moving ownership or introducing distributed writes. The design specifies schema preservation, atomic local c",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "agent": "A4",
+      "name": "Security Architecture Agent",
+      "artifact": "P3/django-realworld-example-app/A4",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 22,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "read_file"
+      ],
+      "evidence_available": 27,
+      "evidence_cited": 15,
+      "tokens": {
+        "input": 89607,
+        "output": 6980,
+        "reasoning": 188
+      },
+      "latency_ms": 148533,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Modeled the proposed Refactor modular monolith using the P3 blueprint, P1 security/data artifacts, and direct inspection of authentication, authorization, serializers, routes and settings. Confirmed source-level missing owner/parent checks, a literal signing secret, weakly specified JWT verification, and development-oriented configuration; exploitability in a deployed environment was not tested. D",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "agent": "A5",
+      "name": "UI Architecture Agent",
+      "artifact": "P3/django-realworld-example-app/A5",
+      "status": "SKIPPED_APPROVED",
+      "version": 1,
+      "enriched": true,
+      "mode": "review",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "grep",
+        "list_dir"
+      ],
+      "evidence_available": 7,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 22499,
+        "output": 476,
+        "reasoning": 0
+      },
+      "latency_ms": 16633,
+      "llm_findings": 2,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The django-realworld-example-app is headless/API-only with no frontend UI implemented, as confirmed by the deterministic seed and absence of HTML template or static resource directories. The code structure is modular with backend domain boundaries but no separate UI components, confirming the skip of UI architecture and BFF design. This matches the approved skip justification of headless/API-only ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "agent": "A6",
+      "name": "Interface & Integration Contract Agent",
+      "artifact": "P3/django-realworld-example-app/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 24,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_dependencies",
+        "read_file",
+        "repo_summary"
+      ],
+      "evidence_available": 31,
+      "evidence_cited": 18,
+      "tokens": {
+        "input": 138928,
+        "output": 8262,
+        "reasoning": 230
+      },
+      "latency_ms": 201711,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Inspected the actual URL composition, handlers, serializers, renderers, authentication adapter, settings and relationship models, and reconciled them with P3 A1\u2013A5. Defined a proposed legacy-v1 contract baseline for the existing unversioned /api interface, with explicit payload ownership, authentication, compatibility tests and local transaction/retry semantics. Retained one synchronous modular mo",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "agent": "A7",
+      "name": "Cloud Platform & Capacity Agent",
+      "artifact": "P3/django-realworld-example-app/A7",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 10,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts",
+        "repo_summary"
+      ],
+      "evidence_available": 14,
+      "evidence_cited": 5,
+      "tokens": {
+        "input": 40172,
+        "output": 899,
+        "reasoning": 0
+      },
+      "latency_ms": 14619,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The target platform for django-realworld-example-app is a local pilot environment with pre-provisioned hosting, deferring production platform selection to later engagement phases. The integration topology is single-app with direct client calls, requiring no brokers. The BOM is minimal, comprising a single app runtime instance based on the target stack from Phase 1, with capacity provisional as run",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 3,
+      "app": "django-realworld-example-app",
+      "agent": "A8",
+      "name": "Architecture Consolidator Agent",
+      "artifact": "P3/django-realworld-example-app/A8",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 31,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 43,
+      "evidence_cited": 12,
+      "tokens": {
+        "input": 151944,
+        "output": 7477,
+        "reasoning": 569
+      },
+      "latency_ms": 154683,
+      "llm_findings": 10,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Consolidated a candidate architecture and proposed Phase 4 planning handoff against the exact A1\u2013A7 v1 snapshot sealed by P3 G1, and checked the matching Phase 2 route authority. The detailed designs generally align on a Refactor to one Django modular monolith, shared relational schema, local transactions and unchanged API transport except approved corrections. Sealing does not establish design co",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A1",
+      "name": "Wave Architecture Agent",
+      "artifact": "P4/spring-petclinic/A1",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 3,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 4,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 6141,
+        "output": 827,
+        "reasoning": 0
+      },
+      "latency_ms": 11629,
+      "llm_findings": 9,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Wave architecture planning for spring-petclinic established a logical wave calendar with one wave (W1) for the application, no fixed dates but logical ordering only. Capacity envelopes allow up to 4 parallel pilot resources. Budget references use pilot rate card cost scenarios. Environment timeline confirms local pilot environment is pre-provisioned. No infeasibilities currently identified. Replan",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A2",
+      "name": "Wave Specification Agent",
+      "artifact": "P4/spring-petclinic/A2",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 6,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 5,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 11936,
+        "output": 1084,
+        "reasoning": 0
+      },
+      "latency_ms": 14442,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "The wave planning for application spring-petclinic in phase 4 includes a single wave W1 with three stages: preparation, implementation, and validation. The component scope is the src directory, and the data plan routes batch processing if a data layer is present. The environment is a pre-provisioned local pilot owned by the pilot harness team. Entry criteria mandate a sealed baseline at gate P5.G1",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A3",
+      "name": "Task Generator Agent",
+      "artifact": "P4/spring-petclinic/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "coding",
+      "deployments": [
+        "gpt-5.3-codex-PlayWright"
+      ],
+      "turns": 9,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 22,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "repo_summary"
+      ],
+      "evidence_available": 30,
+      "evidence_cited": 9,
+      "tokens": {
+        "input": 119135,
+        "output": 4609,
+        "reasoning": 1555
+      },
+      "latency_ms": 85467,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "I generated a concrete, acyclic P5/P6 task DAG for spring-petclinic using the deterministic seed as the backbone and deepened it with repository and P3/P4 artifact evidence. The plan separates code-focused P5 work from data-focused P6 work, keeps Phase 7 absent, and preserves the seed dependency intent (baseline \u2192 code transformation \u2192 validation, with data routed from code work). I added explicit",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A4",
+      "name": "Runbook Generator Agent",
+      "artifact": "P4/spring-petclinic/A4",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 9,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 23170,
+        "output": 739,
+        "reasoning": 0
+      },
+      "latency_ms": 13460,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The draft runbook for the spring-petclinic pilot wave was established with three concrete steps aligned to key quality gates: sealing baseline (G1), applying lanes and integration (G2/G3), and validation (G4). Step-to-task links and role bindings were identified, linking code transformation and lane owner roles. All tool version bindings remain unresolved pending A6 confirmation, per the documente",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A5",
+      "name": "Resource Planner Agent",
+      "artifact": "P4/spring-petclinic/A5",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 2,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 3,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 6786,
+        "output": 651,
+        "reasoning": 0
+      },
+      "latency_ms": 10496,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Proposed staffing plan aligns each task with the owner_role defined in the task list from A3. No availability or skill data is available to refine assignments or identify capacity issues, so the assignments follow deterministic seed roles. No coverage gaps or recruitment needs are identified beyond what is documented in the seed. The capacity schedule is a single pilot wave. Access needs are noted",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A6",
+      "name": "Tool Selection Agent",
+      "artifact": "P4/spring-petclinic/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 13,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 21335,
+        "output": 1086,
+        "reasoning": 0
+      },
+      "latency_ms": 17897,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Tools and versions selection for all tasks in the spring-petclinic application phase P4 have been reviewed. Tasks include baseline characterization, code transformation, data migration preparation, validation, and security controls. No additional compatibility evidence was found, but the appmod tool is pinned and licensed internally. Operator competence is assured by pilot harness with evidence of",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A7",
+      "name": "Validation Planner Agent",
+      "artifact": "P4/spring-petclinic/A7",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 10,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 11,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 34413,
+        "output": 952,
+        "reasoning": 0
+      },
+      "latency_ms": 15013,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The validation plan for spring-petclinic refactor phase P4 establishes two main tests: baseline differential to verify preserved external behavior, and contract replay for endpoint equivalence. These tests trace back to the requirement of preserving external behavior from phase P3. The validation gate P5.G4 requires all criteria to pass or be approved as not applicable. Test data will use represen",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A8",
+      "name": "Rollback & Contingency Planner Agent",
+      "artifact": "P4/spring-petclinic/A8",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 13,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 1,
+      "tokens": {
+        "input": 26931,
+        "output": 917,
+        "reasoning": 0
+      },
+      "latency_ms": 15194,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The rollback and contingency plan for spring-petclinic includes code rollback via git revert to a sealed base prior to G3, with irreversible steps identified as any committed data writes in phase P6 which cannot be undone by feature-switch rollback. Release triggers a hold at required criterion FAIL in validation phase P5.G4, with human operator authority on rollback vs roll-forward decisions. Con",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "spring-petclinic",
+      "agent": "A9",
+      "name": "Planning Validation & Handoff Agent",
+      "artifact": "P4/spring-petclinic/A9",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 23,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 41,
+      "evidence_cited": 17,
+      "tokens": {
+        "input": 145050,
+        "output": 6286,
+        "reasoning": 230
+      },
+      "latency_ms": 129230,
+      "llm_findings": 12,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed the exact G1 v1 manifest, all eight planner artifacts, and P2/P3 authority and planning conditions. The sealed snapshot contains 12 tasks and 16 resolving, acyclic dependency edges, but sealing and plan-presence checks do not establish execution readiness. Confirmed missing A5 assignments for all eight L-tasks and identified incomplete task-level validation, recovery, runbook, context, ca",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A1",
+      "name": "Wave Architecture Agent",
+      "artifact": "P4/microblog/A1",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 3,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 2,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 4,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 4530,
+        "output": 543,
+        "reasoning": 0
+      },
+      "latency_ms": 7818,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Based on the deterministic seed and upstream artifact P4/microblog/G0, a logical wave architecture is proposed for the microblog application with one wave W1 including the microblog app. The calendar start date is marked as UNSET pending owner calendar input, with logical ordering only and no wall-clock commitment. Capacity assumes a pilot envelope with parallelism of 4. The environment timeline i",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A2",
+      "name": "Wave Specification Agent",
+      "artifact": "P4/microblog/A2",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 6,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 5,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 11538,
+        "output": 717,
+        "reasoning": 0
+      },
+      "latency_ms": 15790,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The wave specification for microblog includes wave W1 with stages preparation, implementation, and validation. The component scope covers app code, migrations, boot.sh, config.py, microblog.py, and tests.py. Data transition will use batch routing if the data layer is present, and environment readiness is based on local pilot pre-provisioned environments. Entry and exit criteria are defined around ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A3",
+      "name": "Task Generator Agent",
+      "artifact": "P4/microblog/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "coding",
+      "deployments": [
+        "gpt-5.3-codex-PlayWright"
+      ],
+      "turns": 9,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 17,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "repo_summary"
+      ],
+      "evidence_available": 20,
+      "evidence_cited": 12,
+      "tokens": {
+        "input": 60999,
+        "output": 4648,
+        "reasoning": 2013
+      },
+      "latency_ms": 69610,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "I verified the planning inputs and repository structure for microblog, then expanded the seed DAG into concrete L-T tasks aligned to scoped components and phase routing. Evidence confirms a single-wave plan (W1), explicit P5/P6 gate criteria, pre-provisioned local pilot environment, and a conditional P6 data route decided at P6 G0. Repository evidence shows meaningful change units in app modules, ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A4",
+      "name": "Runbook Generator Agent",
+      "artifact": "P4/microblog/A4",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 7,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 7,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 24452,
+        "output": 932,
+        "reasoning": 0
+      },
+      "latency_ms": 12225,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Draft runbook for microblog pilot wave includes three ordered steps: sealing the baseline (P5.G1), applying lanes and integrating (P5.G2/G3), and validating results (P5.G4). The runbook binds the code transformation task to step 2 and assigns lane owners as responsible roles. Notifications target pilot reviewers, and hypercare is identified as a future phase obligation. Unresolved tool version bin",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A5",
+      "name": "Resource Planner Agent",
+      "artifact": "P4/microblog/A5",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 13,
+      "evidence_cited": 5,
+      "tokens": {
+        "input": 25106,
+        "output": 1080,
+        "reasoning": 0
+      },
+      "latency_ms": 16522,
+      "llm_findings": 2,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Proposed staffing assignments are based on the A3 task list with roles assigned corresponding to owner_role from the seed data, including P5.A1, P5.A2, P6.A1-A8, and P5.A9. Skills, availability, and support roster data are unavailable, so the role assignments rely on task owner roles and inferred competence from the task descriptions. No coverage gaps or external commitments were detected and the ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A6",
+      "name": "Tool Selection Agent",
+      "artifact": "P4/microblog/A6",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 6,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts",
+        "list_dependencies"
+      ],
+      "evidence_available": 11,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 40036,
+        "output": 1039,
+        "reasoning": 0
+      },
+      "latency_ms": 14752,
+      "llm_findings": 4,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Task-to-tool mapping leverages the appmod kernel tool version 0.1.0 for all tasks, consistent with the seed. The appmod tool is internally licensed and pinned version. Dependencies for P5 tasks relate to Python Flask-based stack plus SQLAlchemy, Redis, RQ, and Elasticsearch components. Compatibility is grounded in pilot harness self-hosted environment and operator competence is from pilot harness ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A7",
+      "name": "Validation Planner Agent",
+      "artifact": "P4/microblog/A7",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 9,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 21898,
+        "output": 1084,
+        "reasoning": 0
+      },
+      "latency_ms": 16373,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The validation plan for the microblog application in Phase 4 (Planning) has been established. It includes key tests such as baseline differential and contract replay to ensure behavior preservation and endpoint equivalence. The plan covers requirement-to-test mappings, with the critical requirement being 'preserve external behaviour'. Gate criteria specify that all required criteria must pass or b",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A8",
+      "name": "Rollback & Contingency Planner Agent",
+      "artifact": "P4/microblog/A8",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 9,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 9,
+      "evidence_cited": 1,
+      "tokens": {
+        "input": 21750,
+        "output": 762,
+        "reasoning": 0
+      },
+      "latency_ms": 12069,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The rollback and contingency plan for the microblog app has been established based on the available evidence. Recovery procedures include a code revert to a sealed base state prior to a critical phase. Irreversible steps such as committed data writes are acknowledged, with triggers for holding release identified. Decision authority is assigned to a human operator to choose rollback vs. roll-forwar",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "microblog",
+      "agent": "A9",
+      "name": "Planning Validation & Handoff Agent",
+      "artifact": "P4/microblog/A9",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 25,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 45,
+      "evidence_cited": 18,
+      "tokens": {
+        "input": 128197,
+        "output": 5025,
+        "reasoning": 135
+      },
+      "latency_ms": 104677,
+      "llm_findings": 11,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed the exact G1 v1 A1\u2013A8 snapshot, P4 intake, and available P2/P3 authority, cost, design and handoff evidence. Confirmed structural coverage of 11 role-assigned, tool-bound tasks and a closed acyclic dependency graph, but not task-level test/recovery completeness or common-context provenance. The seed's entry counts remain valid structural counts; duplicated tests and recovery entries do no",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A1",
+      "name": "Wave Architecture Agent",
+      "artifact": "P4/node-express-realworld-example-app/A1",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 13,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 3,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 10873,
+        "output": 1010,
+        "reasoning": 0
+      },
+      "latency_ms": 15725,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "For the application node-express-realworld-example-app, a single wave W1 encompassing the app is planned. The calendar start date is unset and requires owner input. The pilot capacity envelope allows parallel processing of up to four units. Budget references are from Phase 2 cost scenarios with a pilot rate card. The local pilot environment is pre-provisioned. No infeasibilities were identified. R",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A2",
+      "name": "Wave Specification Agent",
+      "artifact": "P4/node-express-realworld-example-app/A2",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 17,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 15,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 12188,
+        "output": 1089,
+        "reasoning": 0
+      },
+      "latency_ms": 12712,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "The wave specification for node-express-realworld-example-app identifies a single wave W1 with stages preparation, implementation, and validation. Component scope, data plan, environment plan, entry and exit criteria, and interwave constraints are all specified or confirmed. Calendar details indicate logical ordering but lack a fixed start date. Environment timeline shows local pilot environment p",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A3",
+      "name": "Task Generator Agent",
+      "artifact": "P4/node-express-realworld-example-app/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "coding",
+      "deployments": [
+        "gpt-5.3-codex-PlayWright"
+      ],
+      "turns": 9,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 28,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "repo_summary"
+      ],
+      "evidence_available": 40,
+      "evidence_cited": 11,
+      "tokens": {
+        "input": 170618,
+        "output": 4731,
+        "reasoning": 1310
+      },
+      "latency_ms": 58455,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "I verified the seed DAG and deepened it using P4 A1/A2/G0 plus P3 architecture/contracts/security/data artifacts and direct repository evidence. The application is a single TypeScript/Nx Express service with Prisma schema/migrations and explicit auth/content/profile/tag route modules, so the modernization work can be decomposed into code-lane (P5) and data-lane (P6) tasks with acyclic dependencies",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A4",
+      "name": "Runbook Generator Agent",
+      "artifact": "P4/node-express-realworld-example-app/A4",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 5,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 4,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 7,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 18251,
+        "output": 645,
+        "reasoning": 0
+      },
+      "latency_ms": 9111,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Draft runbook for node-express-realworld-example-app pilot wave phase P5 is established with clearly ordered steps aligning to tasks and dependencies from P4 context manifest. Roles and gates are properly linked. Pending unresolved bindings note tool versions await A9 confirmation for release readiness.",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A5",
+      "name": "Resource Planner Agent",
+      "artifact": "P4/node-express-realworld-example-app/A5",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 1,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 10,
+      "evidence_cited": 4,
+      "tokens": {
+        "input": 30909,
+        "output": 2396,
+        "reasoning": 0
+      },
+      "latency_ms": 73637,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 1,
+      "confidence": "medium",
+      "summary": "Final role assignment proposal aligns tasks with owner roles from A3, reflecting task type and phase. Due to missing availability and skillset data from A1 and A2 artifacts, assignments are inferred from role ownership and task nature. No coverage gaps or resource conflicts found from seed and requested data. Gaps remain in detailed resource availability, skill competencies, and support roster dat",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A6",
+      "name": "Tool Selection Agent",
+      "artifact": "P4/node-express-realworld-example-app/A6",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts",
+        "list_dependencies"
+      ],
+      "evidence_available": 11,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 29585,
+        "output": 878,
+        "reasoning": 0
+      },
+      "latency_ms": 12587,
+      "llm_findings": 4,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Selected tools for node-express-realworld-example-app planning tasks leverage the internal licensed appmod kernel and repo scanner for baseline characterization. Tasks include baseline characterization, code transformation, data migration, validation, dependency/runtime alignment, authentication/config hardening, API-safe refactor, data-integrity code changes, test uplift, data transition decision",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A7",
+      "name": "Validation Planner Agent",
+      "artifact": "P4/node-express-realworld-example-app/A7",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 8,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 13,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 34999,
+        "output": 1061,
+        "reasoning": 0
+      },
+      "latency_ms": 14649,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The validation plan for node-express-realworld-example-app Phase 4 is based on a baseline differential test and contract replay tests for preserving external behavior. Tests will be executed in a local pilot environment with representative fixtures reused from baseline characterization. Key tasks include dependency alignment, auth hardening, API contract-safe refactor, data-integrity updates, and ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A8",
+      "name": "Rollback & Contingency Planner Agent",
+      "artifact": "P4/node-express-realworld-example-app/A8",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 4,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 17,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 15,
+      "evidence_cited": 1,
+      "tokens": {
+        "input": 14862,
+        "output": 1055,
+        "reasoning": 0
+      },
+      "latency_ms": 13478,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "The recovery planning for node-express-realworld-example-app has been established based on available partial evidence from task breakdown and deterministic seed. Recovery plans include git reversion to a sealed base pre-G3. A critical irreversible step is identified as any committed data write in phase P6. Trigger rules are set to halt release upon failing criteria at P5.G4, with operator (human) ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "node-express-realworld-example-app",
+      "agent": "A9",
+      "name": "Planning Validation & Handoff Agent",
+      "artifact": "P4/node-express-realworld-example-app/A9",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 23,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 41,
+      "evidence_cited": 15,
+      "tokens": {
+        "input": 150141,
+        "output": 4330,
+        "reasoning": 109
+      },
+      "latency_ms": 89090,
+      "llm_findings": 10,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Reviewed G1's exact v1 planner snapshot, all A1\u2013A8 payloads, P4 intake, P2 authorization and cost scenarios, and P3 conditional authority. Confirmed the missing L-T7 staffing assignment and identified additional runbook, validation, recovery, sequencing, and feasibility gaps that presence-only seed checks do not resolve. The candidate manifest and P5/P6 task routes are recorded below for review, n",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A1",
+      "name": "Wave Architecture Agent",
+      "artifact": "P4/django-realworld-example-app/A1",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 3,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 2,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 4,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 4594,
+        "output": 585,
+        "reasoning": 0
+      },
+      "latency_ms": 8318,
+      "llm_findings": 8,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Translated the approved strategic wave for the django-realworld-example-app into a logical wave architecture for phase 4 planning. Proposed calendar starts as UNSET pending owner calendar input. Capacity envelope is pilot with parallelism of 4. Budget references the P2 pilot rate card cost scenarios. Environment timeline shows local pilot environment as pre-provisioned. No infeasibilities detected",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A2",
+      "name": "Wave Specification Agent",
+      "artifact": "P4/django-realworld-example-app/A2",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 5,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 6,
+      "evidence_cited": 3,
+      "tokens": {
+        "input": 10795,
+        "output": 636,
+        "reasoning": 0
+      },
+      "latency_ms": 10647,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "The wave specification for django-realworld-example-app wave W1 is defined with stages preparation, implementation, and validation. The component scope includes conduit and manage.py. The data plan specifies batch routing if a data layer is present, to be confirmed later. The environment plan uses a local pilot environment that is pre-provisioned. Entry and exit criteria span from baseline sealed ",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A3",
+      "name": "Task Generator Agent",
+      "artifact": "P4/django-realworld-example-app/A3",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "coding",
+      "deployments": [
+        "gpt-5.3-codex-PlayWright"
+      ],
+      "turns": 9,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 21,
+      "tools_used": [
+        "get_artifact",
+        "grep",
+        "list_artifacts",
+        "list_dir",
+        "repo_summary"
+      ],
+      "evidence_available": 25,
+      "evidence_cited": 11,
+      "tokens": {
+        "input": 48534,
+        "output": 4184,
+        "reasoning": 1459
+      },
+      "latency_ms": 49194,
+      "llm_findings": 5,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "I deepened the seed DAG into concrete modernization tasks tied to the observed repository structure and legacy framework usage, while preserving acyclic dependencies and P5/P6 separation. Evidence confirms the app is an older Django/DRF stack with legacy URL patterns, JWT/auth implementation details, existing migrations, and no automated tests, so the plan emphasizes dependency uplift, compatibili",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A4",
+      "name": "Runbook Generator Agent",
+      "artifact": "P4/django-realworld-example-app/A4",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 5,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 21414,
+        "output": 745,
+        "reasoning": 0
+      },
+      "latency_ms": 12312,
+      "llm_findings": 7,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "Drafted runbook for pilot wave with three ordered steps including baseline sealing, integrating lanes, and validation. Steps linked to tasks and roles identified from the phase context. Declared unresolved bindings include tool versions pending confirmation by A6. Communication notification to pilot reviewer and hypercare obligation for future phase noted. No unknown gaps remain after evidence rev",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A5",
+      "name": "Resource Planner Agent",
+      "artifact": "P4/django-realworld-example-app/A5",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 7,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 12,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 24485,
+        "output": 1070,
+        "reasoning": 0
+      },
+      "latency_ms": 16382,
+      "llm_findings": 2,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "All tasks in the P4 A3 artifact for the django-realworld-example-app have been assigned to their respective owner roles as proposed in the deterministic seed. There is no detailed availability or skill data to refine assignments or identify gaps. The seed assignments are consistent with task owner roles and phases. No coverage or competency gaps are known from the available data, and no external c",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A6",
+      "name": "Tool Selection Agent",
+      "artifact": "P4/django-realworld-example-app/A6",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 6,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 10,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts",
+        "list_dependencies"
+      ],
+      "evidence_available": 12,
+      "evidence_cited": 2,
+      "tokens": {
+        "input": 24406,
+        "output": 1061,
+        "reasoning": 0
+      },
+      "latency_ms": 14382,
+      "llm_findings": 4,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "high",
+      "summary": "For the django-realworld-example-app in phase P4, tool selection identifies a consistent appmod kernel tool version 0.1.0 used across tasks, supporting build, test, migration, and scanning. The technology stack dependencies are documented from requirements.txt including Django and related libraries. No specific additional compatibility evidence or licensing constraints were found beyond internal l",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A7",
+      "name": "Validation Planner Agent",
+      "artifact": "P4/django-realworld-example-app/A7",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 7,
+      "repairs": 1,
+      "failover": false,
+      "tool_calls": 11,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 8,
+      "evidence_cited": 1,
+      "tokens": {
+        "input": 26330,
+        "output": 1255,
+        "reasoning": 0
+      },
+      "latency_ms": 20699,
+      "llm_findings": 3,
+      "validation_errors": [],
+      "rejections": 1,
+      "confidence": "high",
+      "summary": "The validation plan for django-realworld-example-app establishes two key tests: baseline differential to ensure behavior preservation, and contract replay for endpoint equivalence. These tests address the principal requirement to preserve external behavior. The plan specifies use of representative baseline fixtures for test data and a pre-provisioned local pilot environment. Acceptance gates requi",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A8",
+      "name": "Rollback & Contingency Planner Agent",
+      "artifact": "P4/django-realworld-example-app/A8",
+      "status": "COMPLETE",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "fast",
+      "deployments": [
+        "gpt-4.1-mini"
+      ],
+      "turns": 7,
+      "repairs": 1,
+      "failover": false,
+      "tool_calls": 27,
+      "tools_used": [
+        "get_artifact"
+      ],
+      "evidence_available": 19,
+      "evidence_cited": 1,
+      "tokens": {
+        "input": 35950,
+        "output": 1873,
+        "reasoning": 0
+      },
+      "latency_ms": 24092,
+      "llm_findings": 6,
+      "validation_errors": [],
+      "rejections": 1,
+      "confidence": "high",
+      "summary": "The rollback and contingency plan for the django-realworld-example-app defines recovery via git revert to a sealed base pre-G3. Any committed data writes during phase P6 are irreversible and cannot be undone by feature flags, enforcing cautious rollback decision-making. The release must be held if any required criterion at P5.G4 fails, with operator (human) as decision authority for rollback vs ro",
+      "error": null,
+      "success": true,
+      "reason": ""
+    },
+    {
+      "phase": 4,
+      "app": "django-realworld-example-app",
+      "agent": "A9",
+      "name": "Planning Validation & Handoff Agent",
+      "artifact": "P4/django-realworld-example-app/A9",
+      "status": "PARTIAL",
+      "version": 1,
+      "enriched": true,
+      "mode": "enrich",
+      "tier": "reasoning",
+      "deployments": [
+        "gpt-6-astra"
+      ],
+      "turns": 7,
+      "repairs": 0,
+      "failover": false,
+      "tool_calls": 24,
+      "tools_used": [
+        "get_artifact",
+        "list_artifacts"
+      ],
+      "evidence_available": 44,
+      "evidence_cited": 16,
+      "tokens": {
+        "input": 131826,
+        "output": 4523,
+        "reasoning": 80
+      },
+      "latency_ms": 94273,
+      "llm_findings": 10,
+      "validation_errors": [],
+      "rejections": 0,
+      "confidence": "medium",
+      "summary": "Validated the G1-sealed A1\u2013A8 v1 snapshot against task, runbook, resource, tool, validation and recovery artifacts, and inspected P2/P3 authority and planning conditions. The twelve-task DAG is closed and acyclic, with role assignments, tool selections and P5/P6 routes, but these structural passes do not establish task-level test/recovery coverage or execution feasibility. Duplicate test and recov",
+      "error": null,
+      "success": true,
+      "reason": ""
+    }
+  ]
+}

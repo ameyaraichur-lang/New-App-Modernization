@@ -32,19 +32,28 @@ class P4AgentRunner:
         self.brief = plan_brief or {}
         self._context_hash = ""
 
-    def run(self, agent_spec, inputs, policy):
-        return getattr(self, f"_run_{agent_spec['local_id'].lower()}")(agent_spec, inputs, policy)
+    accepts_context = True
+
+    def run(self, agent_spec, inputs, policy, context=None):
+        fn = getattr(self, f"_run_{agent_spec['local_id'].lower()}")
+        if agent_spec["local_id"] == "A9":
+            return fn(agent_spec, inputs, policy, context=context)
+        return fn(agent_spec, inputs, policy)
+
+    def fingerprint(self) -> str:
+        import hashlib
+        return "P4:" + hashlib.sha256(json.dumps(self.brief, sort_keys=True, default=str).encode()).hexdigest()[:16]
 
     def _tasks(self) -> list[dict[str, Any]]:
         app = self.brief.get("app_id", "app")
         return [
-            {"task_id": f"T1-baseline", "phase": "P5", "kind": "characterization",
+            {"task_id": "T1-baseline", "phase": "P5", "kind": "characterization",
              "owner_role": "P5.A1", "acceptance": "baseline sealed at G1"},
-            {"task_id": f"T2-code", "phase": "P5", "kind": "code transformation",
+            {"task_id": "T2-code", "phase": "P5", "kind": "code transformation",
              "owner_role": "P5.A2", "acceptance": "lane checks + integration"},
-            {"task_id": f"T3-data-auth", "phase": "P6", "kind": "data migration (if applicable)",
+            {"task_id": "T3-data-auth", "phase": "P6", "kind": "data migration (if applicable)",
              "owner_role": "P6.A1-A8", "acceptance": "P6 G3 release"},
-            {"task_id": f"T4-validate", "phase": "P5", "kind": "validation",
+            {"task_id": "T4-validate", "phase": "P5", "kind": "validation",
              "owner_role": "P5.A9", "acceptance": "PASS/FAIL evidence per criterion"},
         ]
 
@@ -100,7 +109,8 @@ class P4AgentRunner:
     # -- A3 Task Generator --------------------------------------------------------------
 
     def _run_a3(self, spec, inputs, policy):
-        import hashlib, json
+        import hashlib
+        import json
         tasks = self._tasks()
         self._context_hash = hashlib.sha256(
             json.dumps({"tasks": tasks, "brief": self.brief}, sort_keys=True).encode()
@@ -253,37 +263,67 @@ class P4AgentRunner:
 
     # -- A9 Planning Validation & Handoff --------------------------------------------------
 
-    def _run_a9(self, spec, inputs, policy):
-        available = {**inputs.get("G1", {}).get("payload", {}).get("evidence_manifest", {}).get("artifact_refs", {})}
-        # deterministic cross-plan checks over the sealed candidates
-        candidates = {
-            n: inputs.get(n) for n in ("A4", "A5", "A6", "A7", "A8")
-        } or {}
-        # note: A9's graph input is G1 only; use published artifacts via gate digest
-        digest = inputs.get("G1", {}).get("payload", {}).get("evidence_manifest", {}).get("snapshot_digest", {})
-        conflicts = []
-        coverage_ok = all(k in digest for k in ("A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8"))
-        if not coverage_ok:
-            conflicts.append({"conflict": "missing planner candidate in snapshot",
-                              "owner": "orchestrator"})
-        checks = [
-            {"check": "bidirectional task/requirement coverage", "result": "PASS" if coverage_ok else "FAIL"},
-            {"check": "context-hash consistency across planners", "result": "PASS"},
-            {"check": "tool/role binding by task_id", "result": "PASS"},
-            {"check": "recovery/validation threshold reconciliation", "result": "PASS"},
-            {"check": "phase routing (P5/P6; P7 absent)", "result": "PASS"},
-        ]
+    def _run_a9(self, spec, inputs, policy, context=None):
+        from appmod.phases.p3.engine import _payload, _sealed_artifacts
+        sealed = _sealed_artifacts(inputs, (context or {}).get("published", {}))
+        checks, conflicts = [], []
+
+        def add(check: str, ok: bool, detail: str, owner: str) -> None:
+            checks.append({"check": check, "result": "PASS" if ok else "FAIL", "detail": detail})
+            if not ok:
+                conflicts.append({"conflict": f"{check}: {detail}", "owner": owner})
+
+        planners = ("A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8")
+        missing = [p for p in planners if p not in sealed]
+        add("all-planner-candidates-sealed", not missing, f"missing {missing}" if missing else "8/8 sealed",
+            "orchestrator")
+        tasks = _payload(sealed.get("A3"), "tasks", []) or []
+        task_ids = [t.get("task_id") for t in tasks if isinstance(t, dict)]
+        cm = _payload(sealed.get("A3"), "context_manifest", {}) or {}
+        a3_hash = cm.get("context_hash", "") if isinstance(cm, dict) else ""
+        a4_hash = (sealed.get("A4", {}).get("scope") or {}).get("context_hash", "")
+        add("context-hash-consistency", bool(a3_hash) and a3_hash == a4_hash,
+            "A4 bound to A3 context" if a3_hash and a3_hash == a4_hash else "A4 context hash differs from A3",
+            "P4.A4")
+        assigned = {str(a.get("task")) for a in _payload(sealed.get("A5"), "assignments", []) or []
+                    if isinstance(a, dict)}
+        unowned = [t for t in task_ids if t not in assigned]
+        add("every-task-has-owner", not unowned, f"unassigned: {unowned[:10]}" if unowned
+            else f"{len(task_ids)} tasks assigned", "P4.A5")
+        bound = set()
+        for b in _payload(sealed.get("A6"), "tool_bindings", []) or []:
+            if isinstance(b, dict):
+                bound.update(str(t) for t in (b.get("tasks") or []))
+        unbound = [t for t in task_ids if t not in bound and "*" not in bound]
+        add("every-task-has-tool-binding", not unbound, f"unbound: {unbound[:10]}" if unbound
+            else "all tasks bound", "P4.A6")
+        tests = _payload(sealed.get("A7"), "tests", []) or []
+        add("validation-plan-present", bool(tests), f"{len(tests)} planned tests", "P4.A7")
+        recovery = _payload(sealed.get("A8"), "recovery_plans", []) or []
+        add("recovery-plan-present", bool(recovery), f"{len(recovery)} recovery plans", "P4.A8")
+        bad_phase = [t.get("task_id") for t in tasks if isinstance(t, dict) and t.get("phase") not in ("P5", "P6")]
+        add("phase-routing-p5-p6-only", not bad_phase, f"bad routing: {bad_phase}" if bad_phase
+            else "P5/P6 only; P7 absent", "P4.A3")
+        edges = _payload(sealed.get("A3"), "dependency_edges", []) or []
+        dangling = [e for e in edges if isinstance(e, dict)
+                    and (e.get("from") not in task_ids or e.get("to") not in task_ids)]
+        add("task-dag-closed", not dangling, f"{len(dangling)} dangling edges" if dangling
+            else f"{len(edges)} edges resolve", "P4.A3")
+        status = "FAILED" if missing else "PARTIAL" if conflicts else "COMPLETE"
         return AgentOutcome(
-            status="COMPLETE",
+            status=status,
             payload={
                 "validation_report": {"checks": checks,
                                       "limitations": "absence of a reported issue is not universal proof"},
-                "coverage": {"tasks": len(self._tasks()), "requirements": 1},
+                "coverage": {"tasks": len(task_ids), "planners_sealed": len(planners) - len(missing)},
                 "conflicts": conflicts,
                 "candidate_manifest": {"snapshot": "G1 sealed manifest"},
-                "handoffs": [{
-                    "phase": "P5", "tasks": ["T1-baseline", "T2-code", "T4-validate"],
-                }],
+                "handoffs": [
+                    {"phase": "P5", "tasks": [t.get("task_id") for t in tasks
+                                              if isinstance(t, dict) and t.get("phase") == "P5"]},
+                    {"phase": "P6", "tasks": [t.get("task_id") for t in tasks
+                                              if isinstance(t, dict) and t.get("phase") == "P6"]},
+                ],
                 "governance": {"approval": "G2 binds exact candidate hash"},
                 "revision_requests": [
                     {"finding": c["conflict"], "owner": c["owner"]} for c in conflicts

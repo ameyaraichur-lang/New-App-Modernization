@@ -19,7 +19,7 @@ class PolicyError(Exception):
 
 
 PILOT_DEFAULT_P1: dict[str, Any] = {
-    "policy_version": "pilot-default-1.0.0",
+    "policy_version": "pilot-default-1.1.0",
     "kind": "engagement-policy",
     "label": "PILOT DEFAULT — not owner-approved production policy",
     "scope": {"phases": [1, 2, 3, 4, 5, 6]},
@@ -32,6 +32,21 @@ PILOT_DEFAULT_P1: dict[str, Any] = {
         "scale": {"min": 1, "max": 5},
         "unknown_handling": "UNASSESSED dimensions are listed, not scored",
         "thresholds": {"high_risk": 4, "blocker": 5},
+        # Anchors per dimension: start at 1, add one point per matched driver, cap at 5.
+        "rubric": {
+            "technical": [
+                "code LOC > 5,000", "code LOC > 50,000", "no automated tests found",
+                "more than 40 declared dependencies", "end-of-life or unsupported runtime/framework",
+            ],
+            "security": [
+                "any known vulnerability (OSV)", "any medium-or-worse vulnerability",
+                "any high-or-worse vulnerability", "any critical vulnerability or hardcoded secret",
+            ],
+            "data": [
+                "has a persistent data layer (models, SQL or migrations)", "more than 10 model/entity files",
+                "raw SQL files or more than 20 migrations", "shared or legacy database engine evidence",
+            ],
+        },
     },
     "evidence": {
         "required_classes_for_decisions": ["OBSERVED", "DOCUMENTED", "HUMAN_CONFIRMED"],

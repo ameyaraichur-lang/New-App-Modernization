@@ -9,6 +9,7 @@ Events are JSONL; each line is self-describing and immutable once written.
 from __future__ import annotations
 
 import json
+import threading
 import time
 import uuid
 from pathlib import Path
@@ -24,11 +25,20 @@ class AuditJournal:
         self.root = Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
         self.path = self.root / f"audit-{int(time.time())}-{uuid.uuid4().hex[:6]}.jsonl"
+        self._lock = threading.Lock()
+        try:
+            from appmod.config import get_settings
+            self._secrets = get_settings().secret_values()
+        except Exception:
+            self._secrets = []
 
     def emit(self, kind: str, **fields: Any) -> dict[str, Any]:
         event = {"ts": _now(), "kind": kind, **fields}
-        with self.path.open("a", encoding="utf-8") as f:
-            f.write(json.dumps(event, ensure_ascii=False, default=str) + "\n")
+        line = json.dumps(event, ensure_ascii=False, default=str)
+        for s in self._secrets:
+            line = line.replace(s, "[REDACTED]")
+        with self._lock, self.path.open("a", encoding="utf-8") as f:
+            f.write(line + "\n")
         return event
 
     # common event helpers -----------------------------------------------------

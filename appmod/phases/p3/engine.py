@@ -32,8 +32,16 @@ class P3AgentRunner:
         pipeline driver."""
         self.brief = design_brief or {}
 
-    def run(self, agent_spec, inputs, policy):
-        return getattr(self, f"_run_{agent_spec['local_id'].lower()}")(agent_spec, inputs, policy)
+    accepts_context = True
+
+    def run(self, agent_spec, inputs, policy, context=None):
+        fn = getattr(self, f"_run_{agent_spec['local_id'].lower()}")
+        if agent_spec["local_id"] == "A8":
+            return fn(agent_spec, inputs, policy, context=context)
+        return fn(agent_spec, inputs, policy)
+
+    def fingerprint(self) -> str:
+        return "P3:" + hashlib.sha256(json.dumps(self.brief, sort_keys=True, default=str).encode()).hexdigest()[:16]
 
     @property
     def disposition(self) -> str:
@@ -281,24 +289,12 @@ class P3AgentRunner:
 
     # -- A8 Architecture Consolidator ---------------------------------------------------------------------
 
-    def _run_a8(self, spec, inputs, policy):
-        checks = []
-        published = {**inputs}
-        # deterministic consistency checks
-        for agent in ("A1", "A2", "A3", "A4", "A6", "A7"):
-            art = published.get(agent) or (inputs.get("G1", {}).get("payload", {})
-                                           .get("evidence_manifest", {}).get("artifact_refs", {}))
-        a1 = inputs.get("G1", {})
-        refs = a1.get("payload", {}).get("evidence_manifest", {}).get("artifact_refs", {}) if a1 else {}
-        checks.append({"check": "all-design-agents-published", "result": "PASS" if len(refs) >= 6 else "FAIL",
-                       "detail": f"{len(refs)} refs sealed"})
-        nfr_unset = all(n.get("target") == "UNSET" for n in
-                        (inputs.get("G1", {}).get("payload", {}).get("snapshot_digest", {}).get("nfrs", []) or [{"target": "UNSET"}]))
-        checks.append({"check": "nfr-targets-require-policy", "result": "PASS" if nfr_unset else "REVIEW",
-                       "detail": "UNSET targets restrict release conditions"})
-        unresolved = [c["detail"] for c in checks if c["result"] == "FAIL"]
+    def _run_a8(self, spec, inputs, policy, context=None):
+        sealed = _sealed_artifacts(inputs, (context or {}).get("published", {}))
+        checks = _p3_consistency_checks(sealed, self.brief)
+        unresolved = [f"{c['check']}: {c['detail']}" for c in checks if c["result"] == "FAIL"]
         return AgentOutcome(
-            status="COMPLETE",
+            status="PARTIAL" if unresolved else "COMPLETE",
             payload={
                 "architecture_package": {
                     "components": self.brief.get("components", ["app"]),
@@ -323,6 +319,84 @@ class P3AgentRunner:
             scope={"app": self.brief.get("app_id", "")},
             applicability={"route": "consolidation"},
         )
+
+
+def _sealed_artifacts(inputs: dict[str, Any], published: dict[str, Any]) -> dict[str, Any]:
+    """Artifacts sealed by G1 (exact id+version), resolved from the run."""
+    refs = (inputs.get("G1", {}).get("payload", {}).get("evidence_manifest", {})
+            .get("artifact_refs", {}))
+    out = {}
+    for node, ref in refs.items():
+        art = published.get(node)
+        if art and ref.get("version") == art.get("artifact_version") \
+                and ref.get("content_hash") == art.get("content_hash"):
+            out[node] = art
+    return out
+
+
+def _payload(art: dict[str, Any] | None, key: str, default: Any = None) -> Any:
+    v = (art or {}).get("payload", {}).get(key, default)
+    if isinstance(v, str) and v[:1] in "[{":
+        try:
+            return json.loads(v)
+        except ValueError:
+            return default
+    return v
+
+
+def _p3_consistency_checks(sealed: dict[str, Any], brief: dict[str, Any]) -> list[dict[str, Any]]:
+    """Deterministic cross-artifact checks over the sealed design candidates."""
+    checks: list[dict[str, Any]] = []
+
+    def add(check: str, ok: bool | None, detail: str) -> None:
+        checks.append({"check": check, "result": "PASS" if ok else ("REVIEW" if ok is None else "FAIL"),
+                       "detail": detail})
+
+    design = ["A1", "A2", "A3", "A4", "A5", "A6", "A7"]
+    missing = [a for a in design if a not in sealed]
+    add("all-design-agents-sealed", not missing,
+        f"{len(design) - len(missing)}/{len(design)} sealed" + (f"; missing {missing}" if missing else ""))
+    failed = [a for a in design if sealed.get(a, {}).get("status") == "FAILED"]
+    add("no-failed-design-candidates", not failed, f"failed: {failed}" if failed else "none failed")
+
+    activation = {m.get("agent"): m.get("mode") for m in _payload(sealed.get("A1"), "activation_manifest", [])}
+    mismatched = []
+    for agent, mode in activation.items():
+        st = sealed.get(agent, {}).get("status")
+        if mode == "SKIP_APPROVED" and st not in (None, "SKIPPED_APPROVED"):
+            mismatched.append(f"{agent} active despite SKIP_APPROVED")
+        if mode == "DESIGN" and st == "SKIPPED_APPROVED":
+            mismatched.append(f"{agent} skipped despite DESIGN")
+    add("activation-manifest-honoured", not mismatched, "; ".join(mismatched) or "modes match statuses")
+
+    comps = {str(c.get("component", "")).lower() for c in _payload(sealed.get("A1"), "component_map", [])
+             if isinstance(c, dict)}
+    bounds = " ".join(json.dumps(b).lower() for b in _payload(sealed.get("A2"), "boundaries", []))
+    uncovered = sorted(c for c in comps if c and c not in bounds)
+    add("components-have-boundaries", not uncovered if comps else None,
+        f"uncovered: {uncovered[:8]}" if uncovered else f"{len(comps)} components mapped")
+
+    datasets = [str(d) for d in brief.get("datasets", [])]
+    schemas = " ".join(json.dumps(s).lower() for s in _payload(sealed.get("A3"), "schemas", []))
+    no_design = [d for d in datasets if d.lower() not in schemas]
+    add("datasets-have-schema-design", not no_design if datasets else None,
+        f"no design for {no_design[:6]}" if no_design else f"{len(datasets)} datasets covered")
+
+    routes = brief.get("routes", [])
+    contracts = _payload(sealed.get("A6"), "contract_registry", [])
+    add("interfaces-have-contracts", bool(contracts) if routes else None,
+        f"{len(contracts)} contracts for {len(routes)} observed routes")
+
+    threats = _payload(sealed.get("A4"), "threats", [])
+    controls = _payload(sealed.get("A4"), "control_mapping", [])
+    add("threats-mapped-to-controls", bool(controls) if threats else None,
+        f"{len(threats)} threats, {len(controls)} control mappings")
+
+    nfrs = _payload(sealed.get("A1"), "nfr_criteria", [])
+    unset = [n.get("requirement_id") for n in nfrs if isinstance(n, dict) and n.get("target") == "UNSET"]
+    add("nfr-targets-set-by-policy", None if unset else True,
+        f"{len(unset)} NFR targets UNSET (release condition)" if unset else "all targets set")
+    return checks
 
 
 # ---------------------------------------------------------------------------

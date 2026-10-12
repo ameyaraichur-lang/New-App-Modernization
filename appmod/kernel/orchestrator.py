@@ -15,16 +15,18 @@ runner. Responsibilities (all deterministic, outside any model):
 from __future__ import annotations
 
 import hashlib
-import json
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Callable
 
 from appmod.agents.runtime import AgentRunner, TransientAgentError
 from appmod.contracts.schemas import (
     ContractValidator, canonical_json, content_hash, normalize_payload,
 )
 from appmod.kernel.audit import AuditJournal
+from appmod.kernel.evidence import enforce as enforce_evidence
 from appmod.kernel.gates import GateContext, gate_impl_for
 from appmod.kernel.policy import PolicyService
 from appmod.kernel.scheduler import Scheduler, SchedulerState
@@ -58,7 +60,22 @@ class PhaseOrchestrator:
         audit: AuditJournal,
         agent_runner: AgentRunner,
         gate_overrides: dict[str, Any] | None = None,
+        max_parallel: int = 1,
+        reuse: bool = False,
+        external_digest: Any = None,
+        force_nodes: set[str] | None = None,
+        cancel_event: threading.Event | None = None,
     ):
+        """reuse: adopt the latest stored artifact of a node when its input
+        hash (upstream versions + policy + run inputs + runner fingerprint +
+        external digest) is unchanged — this is what makes resume, approval
+        re-entry and A8 answer invalidation cheap and exact.
+        external_digest(node) -> str folds out-of-graph state (recorded
+        answers, review decisions) into the node's input hash."""
+        self.reuse = reuse
+        self.external_digest = external_digest
+        self.force_nodes = set(force_nodes or ())
+        self.cancel_event = cancel_event
         self.reg = phase_reg
         self.phase = phase_reg["phase"]
         self.store = store
@@ -68,6 +85,9 @@ class PhaseOrchestrator:
         self.scheduler = Scheduler(phase_reg)
         self.validator = ContractValidator(phase_reg)
         self.gate_overrides = gate_overrides or {}
+        self.event_listener: Callable[[dict[str, Any]], None] | None = None   # live traces (SSE)
+        self.max_parallel = max(1, int(max_parallel))
+        self._lock = threading.RLock()
         # Policy version is pinned at construction; a run started without a
         # policy bundle (self.policy None) fails at G0 rather than crashing.
         self._pinned_policy_version = policy.version if policy else "UNSET"
@@ -89,23 +109,41 @@ class PhaseOrchestrator:
         )
         return ctx
 
-    def step(self, ctx: RunContext) -> list[dict[str, Any]]:
-        """Dispatch every currently-ready node once. Returns step events."""
-        events: list[dict[str, Any]] = []
+    def step(self, ctx: RunContext, on_event=None) -> list[dict[str, Any]]:
+        """Dispatch every currently-ready node once (concurrently when
+        ``max_parallel`` > 1). Returns step events in ready order."""
+        if self.cancel_event is not None and self.cancel_event.is_set():
+            ctx.finished = True
+            self.audit.emit("CANCELLED", run_id=ctx.run_id)
+            return []
         self.scheduler.propagate_blockage(ctx.state)
         ready = self.scheduler.ready_nodes(ctx.state)
         for node in ready:
+            ctx.state.nodes[node].status = "RUNNING"
+
+        def one(node: str) -> dict[str, Any]:
             ns = ctx.state.nodes[node]
-            ns.status = "RUNNING"
             try:
                 if ns.kind in ("gate", "execution"):
                     ev = self._run_gate(ctx, node)
                 else:
                     ev = self._run_agent(ctx, node)
-                events.append(ev)
             except TransientAgentError as exc:
-                retry_ev = self._handle_transient(ctx, node, exc)
-                events.append(retry_ev)
+                with self._lock:
+                    ev = self._handle_transient(ctx, node, exc)
+            if on_event is not None:
+                with self._lock:
+                    try:
+                        on_event(ctx, ev)
+                    except Exception:
+                        pass  # progress hooks must never break execution
+            return ev
+
+        if self.max_parallel > 1 and len(ready) > 1:
+            with ThreadPoolExecutor(max_workers=min(self.max_parallel, len(ready))) as pool:
+                events = list(pool.map(one, ready))
+        else:
+            events = [one(n) for n in ready]
         self.scheduler.propagate_blockage(ctx.state)
         if not self.scheduler.ready_nodes(ctx.state) and not any(
             n.status == "RUNNING" for n in ctx.state.nodes.values()
@@ -136,14 +174,7 @@ class PhaseOrchestrator:
         for _ in range(max_steps):
             if ctx.finished:
                 break
-            step_events = self.step(ctx)
-            all_events.extend(step_events)
-            if on_event is not None:
-                for ev in step_events:
-                    try:
-                        on_event(ctx, ev)
-                    except Exception:
-                        pass  # progress hooks must never break execution
+            all_events.extend(self.step(ctx, on_event=on_event))
         return all_events
 
     # ------------------------------------------------------------------
@@ -168,6 +199,15 @@ class PhaseOrchestrator:
         manifest["_run_inputs_hash"] = hashlib.sha256(
             canonical_json(ctx.run_inputs).encode()
         ).hexdigest()
+        fp = getattr(self.runner, "fingerprint", None)
+        if callable(fp) and ctx.state.nodes[node].kind == "agent":
+            per_node = getattr(self.runner, "fingerprint_for", None)
+            ident = per_node(node) if callable(per_node) else fp()
+            manifest["_runner"] = hashlib.sha256(str(ident).encode()).hexdigest()[:16]
+        if self.external_digest is not None:
+            ext = self.external_digest(node)
+            if ext:
+                manifest["_external"] = ext
         digest = hashlib.sha256(canonical_json(manifest).encode()).hexdigest()
         return manifest, digest, parent_refs
 
@@ -183,18 +223,28 @@ class PhaseOrchestrator:
 
     def _run_agent(self, ctx: RunContext, node: str) -> dict[str, Any]:
         agent_spec = next(a for a in self.reg["agents"] if a["local_id"] == node)
-        manifest, input_hash, parent_refs = self._input_manifest(ctx, node)
-        upstream = {
-            src: ctx.inputs_by_node[src]
-            for src in self.scheduler.incoming.get(node, [])
-            if src in ctx.inputs_by_node
-        }
+        with self._lock:
+            manifest, input_hash, parent_refs = self._input_manifest(ctx, node)
+            upstream = {
+                src: ctx.inputs_by_node[src]
+                for src in self.scheduler.incoming.get(node, [])
+                if src in ctx.inputs_by_node
+            }
 
+        prior = self._reusable(ctx, node, input_hash)
+        if prior is not None:
+            return self._adopt(ctx, node, prior)
         ns = ctx.state.nodes[node]
         ns.attempts += 1
         self.audit.dispatch(ctx.run_id, node, ns.attempts, input_hash)
 
-        outcome = self.runner.run(agent_spec, upstream, self.policy)
+        if getattr(self.runner, "accepts_context", False):
+            outcome = self.runner.run(agent_spec, upstream, self.policy,
+                                      context=self._dispatch_context(ctx, node))
+        else:
+            outcome = self.runner.run(agent_spec, upstream, self.policy)
+        for ev in enforce_evidence(outcome, self._secrets()):
+            self.audit.emit("EVIDENCE_DOWNGRADE", run_id=ctx.run_id, node=node, **ev)
         outcome.payload = normalize_payload(
             outcome.payload, self.validator.schemas["payloads"].get(node)
         )
@@ -205,20 +255,87 @@ class PhaseOrchestrator:
             evidence_refs=outcome.evidence_refs, scope=outcome.scope,
             applicability=outcome.applicability, manifest=manifest,
             input_hash=input_hash, parent_refs=parent_refs,
+            extra_metadata=outcome.execution_metadata,
         )
         return self._publish(ctx, node, art)
 
+    def _dispatch_context(self, ctx: RunContext, node: str) -> dict[str, Any]:
+        run_id, phase = ctx.run_id, self.phase
+
+        def emit(kind: str, **fields: Any) -> None:
+            self.audit.emit(kind, run_id=run_id, node=node, **fields)
+            if self.event_listener is not None:
+                try:
+                    self.event_listener({"kind": kind, "phase": phase, "node": node, **fields})
+                except Exception:
+                    pass
+
+        with self._lock:
+            published = dict(ctx.inputs_by_node)
+        return {"run_id": run_id, "phase": phase, "application_id": ctx.application_id,
+                "node": node, "attempt": ctx.state.nodes[node].attempts,
+                "published": published, "store": self.store,
+                "run_inputs": ctx.run_inputs, "emit": emit}
+
+    def _reusable(self, ctx: RunContext, node: str, input_hash: str) -> dict[str, Any] | None:
+        if not self.reuse or node in self.force_nodes:
+            return None
+        aid = self._artifact_id(ctx, node)
+        versions = self.store.versions(aid)
+        if not versions:
+            return None
+        try:
+            prior = self.store.get(aid, versions[-1])
+        except Exception:
+            return None
+        if prior.get("input_hash") != input_hash or prior.get("status") == "FAILED":
+            return None
+        llm = prior.get("execution_metadata", {}).get("llm") or {}
+        if llm.get("mode") == "seed-fallback":
+            return None          # degraded output: always retry the model
+        return prior
+
+    def _adopt(self, ctx: RunContext, node: str, prior: dict[str, Any]) -> dict[str, Any]:
+        with self._lock:
+            ctx.inputs_by_node[node] = prior
+            ctx.published[node] = prior["artifact_id"]
+            ctx.state.set_outcome(node, prior["status"])
+            ctx.outcome_log.append({"node": node, "status": prior["status"],
+                                    "artifact_id": prior["artifact_id"], "reused": True})
+        self.audit.emit("REUSE", run_id=ctx.run_id, node=node, artifact_id=prior["artifact_id"],
+                        version=prior["artifact_version"], input_hash=prior["input_hash"])
+        ev = {"node": node, "status": prior["status"], "artifact_id": prior["artifact_id"],
+              "reused": True}
+        outcome = (prior.get("scope") or {}).get("outcome")
+        if outcome:
+            ev["gate_outcome"] = outcome
+            ev["reasons"] = []
+        return ev
+
+    @staticmethod
+    def _secrets() -> list[str]:
+        try:
+            from appmod.config import get_settings
+            return get_settings().secret_values()
+        except Exception:
+            return []
+
     def _run_gate(self, ctx: RunContext, node: str) -> dict[str, Any]:
         impl = self.gate_overrides.get(node) or gate_impl_for(node)
-        manifest, input_hash, parent_refs = self._input_manifest(ctx, node)
+        with self._lock:
+            manifest, input_hash, parent_refs = self._input_manifest(ctx, node)
+            upstream = {
+                src: ctx.inputs_by_node[src]
+                for src in self.scheduler.incoming.get(node, [])
+                if src in ctx.inputs_by_node
+            }
+            published_snapshot = dict(ctx.inputs_by_node)
+        prior = self._reusable(ctx, node, input_hash)
+        if prior is not None:
+            return self._adopt(ctx, node, prior)
         ns = ctx.state.nodes[node]
         ns.attempts += 1
         self.audit.dispatch(ctx.run_id, node, ns.attempts, input_hash)
-        upstream = {
-            src: ctx.inputs_by_node[src]
-            for src in self.scheduler.incoming.get(node, [])
-            if src in ctx.inputs_by_node
-        }
         gate_cfg = dict(self.gate_overrides.get(f"{node}:cfg", {}))
         if node not in ("G0",):
             # snapshot gates seal every non-gate predecessor by default
@@ -246,10 +363,18 @@ class PhaseOrchestrator:
             inputs=upstream,
             run_inputs=ctx.run_inputs,
             gate_cfg=gate_cfg,
-            published=ctx.inputs_by_node,
+            published=published_snapshot,
         )
         result = impl(gctx)
         self.audit.gate(ctx.run_id, node, result.outcome, result.reasons)
+        if result.outcome == "AWAITING_REVIEW":
+            # human authority pending: nothing is published; dependants stay
+            # unready until a recorded decision re-enters the gate
+            with self._lock:
+                ns.status = "AWAITING_REVIEW"
+                ctx.outcome_log.append({"node": node, "status": "AWAITING_REVIEW"})
+            return {"node": node, "status": "AWAITING_REVIEW", "gate_outcome": "AWAITING_REVIEW",
+                    "reasons": result.reasons, "review": result.payload}
 
         art = self._assemble_envelope(
             ctx, node, result.status, result.payload,
@@ -273,6 +398,7 @@ class PhaseOrchestrator:
         self, ctx: RunContext, node: str, status: str, payload: dict[str, Any], *,
         findings: list, gaps: list, evidence_refs: list, scope: dict,
         applicability: dict, manifest: dict, input_hash: str, parent_refs: list[str],
+        extra_metadata: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         artifact_id = self._artifact_id(ctx, node)
         art = {
@@ -300,6 +426,7 @@ class PhaseOrchestrator:
                 "idempotency_key": self._idempotency_key(ctx, node, input_hash),
                 "parent_refs": parent_refs,
                 "runner": type(self.runner).__name__,
+                **(extra_metadata or {}),
             },
             "access_classification": "INTERNAL",
         }
@@ -307,6 +434,10 @@ class PhaseOrchestrator:
         return art
 
     def _publish(self, ctx: RunContext, node: str, art: dict[str, Any]) -> dict[str, Any]:
+        with self._lock:
+            return self._publish_locked(ctx, node, art)
+
+    def _publish_locked(self, ctx: RunContext, node: str, art: dict[str, Any]) -> dict[str, Any]:
         errors = self.validator.validate(art)
         if errors:
             # Run Controls: 'Invalid publication is FAILED, not a successful

@@ -22,11 +22,12 @@ import json
 import re
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from appmod.agents.runtime import AgentOutcome
 from appmod.kernel.gates import GateContext, GateResult
-from appmod.tools.repo_intel import parse_dependencies, scan_repo
+from appmod.tools import analyzers
+from appmod.tools.repo_intel import CODE_LANGUAGES, RepoScan, parse_dependencies, scan_repo
 
 _now = lambda: time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
@@ -43,8 +44,14 @@ class P1AgentRunner:
     its upstream artifacts. No model calls — M1 keeps discovery fully
     evidence-bound; LLM enrichment slots in later behind this same runner."""
 
-    def __init__(self, confirmed_stakeholder: bool = False) -> None:
-        self._scan = None
+    def __init__(self, confirmed_stakeholder: bool = False, use_analyzers: bool | None = None) -> None:
+        self._scan: RepoScan | None = None
+        if use_analyzers is None:
+            from appmod.config import get_settings
+            use_analyzers = get_settings().analyzers == "on"
+        self.use_analyzers = use_analyzers
+        # callable -> recorded questions/answers (human mode)
+        self.answers_provider: Callable[[], list[dict[str, Any]]] | None = None
         # Pilot decision mode: designated apps receive simulated stakeholder
         # confirmations recorded as HUMAN_CONFIRMED with an explicit
         # pilot-simulated basis, and G2 records them as accepted exceptions
@@ -55,7 +62,7 @@ class P1AgentRunner:
     # -- shared scan ----------------------------------------------------------
 
     @property
-    def scan(self):
+    def scan(self) -> RepoScan:
         if self._scan is None:
             raise RuntimeError("repo_path not set: call bind_repo first")
         return self._scan
@@ -82,13 +89,13 @@ class P1AgentRunner:
         deps = parse_dependencies(s)
         code_dirs: dict[str, int] = {}
         for f in s.files:
-            if f["language"] in ("python", "javascript", "java", "ruby", "go", "php", "csharp"):
+            if f["language"] in CODE_LANGUAGES and f["language"] != "sql":
                 top = f["path"].split("/")[0]
                 code_dirs[top] = code_dirs.get(top, 0) + 1
         components = [
             {"name": d, "code_files": n} for d, n in sorted(code_dirs.items(), key=lambda kv: -kv[1])[:12]
         ]
-        sbom = {
+        sbom: dict[str, Any] = {
             "format": "appmod-lite-sbom/1",
             "generated_at": _now(),
             "packages": [
@@ -96,13 +103,35 @@ class P1AgentRunner:
             ],
             "license": s.license or {"type": "UNKNOWN"},
         }
-        sbom_ref = hashlib.sha256(json.dumps(sbom, sort_keys=True).encode()).hexdigest()[:32]
+        disabled: dict[str, Any] = {"status": "DISABLED"}
+        syft = analyzers.sbom(s.root) if self.use_analyzers else disabled
+        scc = analyzers.loc_metrics(s.root) if self.use_analyzers else disabled
+        if syft.get("status") == "OK":
+            sbom.update(format="syft-json/summary", generator=syft.get("version"),
+                        package_count=syft["package_count"], by_type=syft["by_type"],
+                        packages=[{k: p[k] for k in ("name", "version", "type", "purl")}
+                                  for p in syft["packages"][:250]])
+        content = {k: v for k, v in sbom.items() if k != "generated_at"}
+        sbom_ref = hashlib.sha256(json.dumps(content, sort_keys=True).encode()).hexdigest()[:32]
         findings: list[dict[str, Any]] = [
             _finding("A1-F1", "OBSERVED",
                      f"{len(s.files)} source files, {s.loc} LOC across "
-                     f"{len(s.languages)} languages; primary: "
-                     f"{max(s.languages, key=s.languages.get) if s.languages else 'none'}"),
+                     f"{len(s.languages)} languages ({s.code_loc} code LOC); primary: "
+                     f"{s.primary_language}"),
         ]
+        gaps: list[dict[str, Any]] = []
+        if scc.get("status") == "OK":
+            top = ", ".join(f"{x['language']} {x['code']}" for x in scc["languages"][:4])
+            findings.append(_finding("A1-F5", "OBSERVED",
+                                     f"scc: {scc['total_code']} code lines, cyclomatic complexity "
+                                     f"{scc['total_complexity']} ({top})"))
+        if syft.get("status") == "OK":
+            findings.append(_finding("A1-F6", "OBSERVED",
+                                     f"syft SBOM: {syft['package_count']} packages "
+                                     f"({', '.join(f'{k}={v}' for k, v in syft['by_type'].items())})"))
+        else:
+            gaps.append({"requirement": "SBOM generation", "impact": "package inventory from manifests only",
+                         "state": "NOT_ASSESSED", "reason": syft.get("detail", syft.get("status"))})
         lic_type = (s.license or {}).get("type")
         if lic_type and lic_type != "UNKNOWN":
             findings.append(_finding(
@@ -121,6 +150,11 @@ class P1AgentRunner:
             payload={
                 "repositories": [{
                     "path": str(s.root), "files": len(s.files), "loc": s.loc,
+                    "code_loc": s.code_loc,
+                    "primary_language": s.primary_language,
+                    "languages": dict(sorted(s.languages.items(), key=lambda kv: -kv[1])),
+                    "test_files": len(s.tests),
+                    "commit": s.commit,
                 }],
                 "components": components,
                 "dependencies": deps,
@@ -128,13 +162,21 @@ class P1AgentRunner:
                 "coverage": {
                     "measured": False,
                     "test_files": len(s.tests),
+                    "test_paths": list(s.tests[:200]),
                     "note": "Runtime coverage not measured in discovery; test inventory only.",
                 },
                 "build_status": "UNKNOWN",
+                "loc_metrics": ({"tool": scc.get("version"), "languages": scc["languages"][:12],
+                                 "total_code": scc["total_code"],
+                                 "total_complexity": scc["total_complexity"]}
+                                if scc.get("status") == "OK" else {"status": scc.get("status")}),
                 "findings": [f["id"] for f in findings],
             },
             findings=findings,
-            evidence_refs=[{"source": "repo-scan", "method": "deterministic file/manifest scan"}],
+            gaps=gaps,
+            evidence_refs=[{"source": "repo-scan", "method": "deterministic file/manifest scan"}]
+            + ([{"source": "scc", "method": "LOC/complexity metrics"}] if scc.get("status") == "OK" else [])
+            + ([{"source": "syft", "method": "SBOM"}] if syft.get("status") == "OK" else []),
             scope={"repo": s.root.name, "boundary": "authorized snapshot"},
             applicability={"route": "full"},
         )
@@ -164,7 +206,7 @@ class P1AgentRunner:
                              "No Dockerfile/CI/IaC descriptors found; hosting model code-inferred only"),
                 ],
             },
-            findings=[_finding("A4-F2", "NOT_ASSESSED" if False else "UNKNOWN",
+            findings=[_finding("A4-F2", "UNKNOWN",
                                "Runtime telemetry, RTO/RPO and restore evidence unavailable for corpus repos")],
             gaps=[{"requirement": "runtime utilization baseline", "impact": "capacity unknown",
                    "state": "NOT_ASSESSED"}],
@@ -305,41 +347,90 @@ class P1AgentRunner:
         s = self.scan
         a1 = inputs.get("A1", {})
         deps = a1.get("payload", {}).get("dependencies", [])
+        on = self.use_analyzers
+        def off(tool: str) -> dict[str, Any]:
+            return {"status": "DISABLED", "tool": tool}
+        osv = analyzers.vulnerabilities(s.root) if on else off("osv-scanner")
+        leaks = analyzers.secrets(s.root) if on else off("gitleaks")
+        sast = analyzers.static_analysis(s.root) if on else off("semgrep")
         control_findings = [
-            {"file": f["file"], "kind": f["kind"], "severity": "high"}
+            {"file": f["file"], "kind": f["kind"], "severity": "high", "source": "pattern-scan"}
             for f in s.secret_findings[:30]
         ]
+        if leaks.get("status") == "OK":
+            control_findings += [{"file": f["file"], "line": f["line"], "kind": f"secret:{f['rule']}",
+                                  "severity": "high", "source": "gitleaks"} for f in leaks["findings"][:50]]
+        if sast.get("status") == "OK":
+            control_findings += [{"file": f["path"], "line": f["line"], "kind": f["rule"],
+                                  "severity": _sast_sev(f["severity"]), "message": f["message"],
+                                  "source": "semgrep"} for f in sast["findings"][:80]]
+        vulns = []
+        if osv.get("status") == "OK":
+            seen: set[str] = set()
+            for v in sorted(osv["vulnerabilities"], key=lambda v: -_cvss(v["severity"])):
+                key = f"{v['id']}|{v['package']}"
+                if key in seen:
+                    continue
+                seen.add(key)
+                vulns.append({"id": v["id"], "aliases": v["aliases"], "package": f"{v['package']}@{v['version']}",
+                              "ecosystem": v["ecosystem"], "cvss": v["severity"] or None,
+                              "severity": _cvss_band(v["severity"]), "summary": v["summary"],
+                              "manifest": v["manifest"], "source": "osv-scanner"})
         license_flags = []
         lic_type = (s.license or {}).get("type", "UNKNOWN")
         if lic_type in ("UNKNOWN", "GPL"):
             license_flags.append({"scope": "repository", "license": lic_type,
                                   "review": "license identification/compatibility review required"})
+
+        def ctl(name: str, res: dict, method: str) -> dict:
+            return {"control": name, "status": "ASSESSED" if res.get("status") == "OK" else "NOT_ASSESSED",
+                    "method": method, "tool": res.get("version") or res.get("tool"),
+                    **({} if res.get("status") == "OK" else {"reason": res.get("detail", res.get("status"))})}
+
+        controls = [
+            ctl("secret-hygiene", leaks, "gitleaks dir scan (values redacted) + pattern scan"),
+            {"control": "license-review", "status": "ASSESSED", "method": "license file detection"},
+            ctl("vulnerability-scan", osv, "osv-scanner source scan with transitive resolution"),
+            ctl("static-code-analysis", sast, "semgrep p/default"),
+        ]
+        findings = [_finding("A6-F1", "OBSERVED",
+                             f"{len(s.secret_findings)} secret-pattern matches; gitleaks: "
+                             f"{leaks.get('finding_count', 'not run')} findings")]
+        gaps = []
+        for res, req, impact in ((osv, "dependency vulnerability scan", "CVE exposure unknown"),
+                                 (sast, "static code analysis", "code-level weaknesses unknown"),
+                                 (leaks, "secret scan", "hardcoded secret exposure partly unknown")):
+            if res.get("status") != "OK":
+                gaps.append({"requirement": req, "impact": impact, "state": "NOT_ASSESSED",
+                             "reason": res.get("detail", res.get("status"))})
+        if osv.get("status") == "OK":
+            crit = sum(1 for v in vulns if v["severity"] in ("critical", "high"))
+            findings.append(_finding("A6-F2", "OBSERVED",
+                                     f"osv-scanner: {len(vulns)} distinct advisories across dependencies; "
+                                     f"{crit} critical/high"))
+        else:
+            findings.append(_finding("A6-F2", "UNKNOWN", "Dependency vulnerability scan NOT_RUN"))
+        if sast.get("status") == "OK":
+            findings.append(_finding("A6-F3", "OBSERVED",
+                                     f"semgrep p/default: {sast['finding_count']} findings"))
         return AgentOutcome(
-            status="PARTIAL",
+            status="COMPLETE" if not gaps else "PARTIAL",
             payload={
-                "applicable_controls": [
-                    {"control": "secret-hygiene", "status": "ASSESSED",
-                     "method": "pattern scan"},
-                    {"control": "license-review", "status": "ASSESSED",
-                     "method": "license file detection"},
-                    {"control": "vulnerability-scan", "status": "NOT_ASSESSED",
-                     "method": "no scanner configured in pilot"},
-                ],
-                "vulnerabilities": [],
+                "applicable_controls": controls,
+                "vulnerabilities": vulns[:150],
                 "control_findings": control_findings,
                 "license_review_flags": license_flags,
                 "assessment_coverage": {
-                    "dependencies_scanned": len(deps),
-                    "scanner": "static-patterns-only",
+                    "dependencies_declared": len(deps),
+                    "scanners": [r.get("tool") for r in (osv, leaks, sast) if r.get("status") == "OK"],
+                    "not_run": [r.get("tool") for r in (osv, leaks, sast) if r.get("status") != "OK"],
                 },
             },
-            findings=[_finding("A6-F1", "OBSERVED",
-                               f"{len(s.secret_findings)} potential secret-pattern matches"),
-                      _finding("A6-F2", "NOT_ASSESSED" if False else "UNKNOWN",
-                               "Dependency vulnerability scan NOT_RUN: no scanner in pilot policy")],
-            gaps=[{"requirement": "dependency vulnerability scan", "impact": "CVE exposure unknown",
-                   "state": "NOT_ASSESSED"}],
-            evidence_refs=[{"source": "secret-scan+license-detect", "method": "deterministic patterns"}],
+            findings=findings,
+            gaps=gaps,
+            evidence_refs=[{"source": r.get("tool", "?"), "method": "static analyzer"}
+                           for r in (osv, leaks, sast) if r.get("status") == "OK"]
+            + [{"source": "license-detect", "method": "deterministic patterns"}],
             scope={"repo": s.root.name},
             applicability={"route": "static"},
         )
@@ -427,6 +518,8 @@ class P1AgentRunner:
     # -- A8 Stakeholder Elicitation (async, simulated in pilot) -----------------------------------
 
     def _run_a8(self, spec, inputs, policy) -> AgentOutcome:
+        if self.answers_provider is not None:
+            return self._run_a8_recorded()
         if self.confirmed_stakeholder:
             confirmed = [
                 {
@@ -489,6 +582,43 @@ class P1AgentRunner:
             applicability={"route": "async-simulated"},
         )
 
+    def _run_a8_recorded(self) -> AgentOutcome:
+        """Human mode: confirmations are exactly the answers recorded through
+        the questionnaire API (respondent identity + timestamp kept)."""
+        qs = (self.answers_provider() if self.answers_provider else None) or []
+        answered = [q for q in qs if q.get("status") == "ANSWERED"]
+        open_qs = [q for q in qs if q.get("status") != "ANSWERED"]
+        confirmed = [{
+            "question_id": q["question_id"], "question": q["question"], "answer": q["answer"],
+            "respondent": q["respondent"], "date": q["answered_at"],
+            "evidence_class": "HUMAN_CONFIRMED", "basis": "recorded answer via questionnaire API",
+        } for q in answered]
+        questions = [q["question"] for q in qs] or list(SEED_QUESTIONS)
+        return AgentOutcome(
+            status="COMPLETE" if confirmed and not open_qs else "PARTIAL",
+            payload={
+                "questions": questions,
+                "confirmed_responses": confirmed,
+                "requirements": [{"requirement": c["answer"][:200], "source": c["respondent"],
+                                  "question_id": c["question_id"]} for c in confirmed],
+                "unresolved_items": [{"question": q["question"], "question_id": q["question_id"],
+                                      "state": "PENDING"} for q in open_qs],
+                "hypothetical_examples": [],
+            },
+            findings=[_finding("A8-F1", "HUMAN_CONFIRMED" if confirmed else "UNKNOWN",
+                               f"{len(confirmed)} recorded stakeholder answers; {len(open_qs)} open")],
+            gaps=[{"requirement": "stakeholder responses", "impact": "decision scope restricted",
+                   "state": "PENDING_HUMAN", "open": len(open_qs)}] if open_qs else [],
+            evidence_refs=[{"source": "questionnaire-api", "method": "recorded human answers"}],
+            scope={"repo": self.scan.root.name},
+            applicability={"route": "async-recorded"},
+        )
+
+    def fingerprint(self) -> str:
+        return json.dumps({"engine": "P1", "commit": self.scan.commit, "root": str(self.scan.root),
+                           "analyzers": self.use_analyzers, "sim": self.confirmed_stakeholder,
+                           "recorded": self.answers_provider is not None}, sort_keys=True)
+
     # -- A10 Synthesis ---------------------------------------------------------------------------
 
     def _run_a10(self, spec, inputs, policy) -> AgentOutcome:
@@ -533,18 +663,22 @@ class P1AgentRunner:
     # -- A11 Risk Scoring ---------------------------------------------------------------------------
 
     def _run_a11(self, spec, inputs, policy) -> AgentOutcome:
-        a10 = inputs.get("A10", {})
-        rubric = policy.get("risk_taxonomy") if policy else None
+        taxonomy = policy.get("risk_taxonomy") if policy else None
+        drivers = self._risk_drivers()
         dims = []
         unassessed = []
-        for dim in (rubric or {}).get("dimensions", ["technical", "security", "data", "operational", "organizational"]):
+        for dim in (taxonomy or {}).get("dimensions", ["technical", "security", "data", "operational", "organizational"]):
             if dim == "operational":
                 unassessed.append({"dimension": "operational", "reason": "no runtime telemetry (A4 PARTIAL)"})
             elif dim == "organizational":
                 unassessed.append({"dimension": "organizational", "reason": "stakeholder input PENDING (A8)"})
+            elif (matched := drivers.get(dim)) is None:
+                unassessed.append({"dimension": dim, "reason": "required analyzer not available (NOT_ASSESSED)"})
             else:
-                dims.append({"dimension": dim, "score": 3, "basis": "pilot-default mid band",
-                             "evidence": "bounded static evidence"})
+                dims.append({"dimension": dim, "score": min(5, 1 + len(matched)),
+                             "basis": f"rubric {policy.version if policy else 'none'}: 1 + one point per "
+                                      f"matched anchor ({len(matched)} matched)",
+                             "drivers": matched, "evidence": "repo scan + analyzers"})
         return AgentOutcome(
             status="COMPLETE",
             payload={
@@ -558,12 +692,50 @@ class P1AgentRunner:
                 "handoff_recommendation": "READY_FOR_PORTFOLIO_DRAFT",
             },
             findings=[_finding("A11-F1", "DOCUMENTED",
-                               f"Scoring under pilot-default rubric {policy.version if policy else 'none'}; "
+                               f"Scoring under rubric {policy.version if policy else 'none'} "
+                               f"({(policy.bundle.get('label') if policy else '') or 'no label'}); "
                                "unassessed dimensions listed, not averaged")],
             evidence_refs=[{"source": "policy-rubric", "method": "configured scoring"}],
             scope={"policy": policy.version if policy else "none"},
             applicability={"route": "capstone"},
         )
+
+    def _risk_drivers(self) -> dict[str, list[str] | None]:
+        """Rubric anchors matched by deterministic evidence; None = dimension not assessable."""
+        s = self.scan
+        tech = []
+        if s.code_loc > 5000:
+            tech.append(f"code LOC > 5,000 ({s.code_loc})")
+        if s.code_loc > 50000:
+            tech.append("code LOC > 50,000")
+        if not s.tests:
+            tech.append("no automated tests found")
+        n_deps = len(parse_dependencies(s))
+        if n_deps > 40:
+            tech.append(f"more than 40 declared dependencies ({n_deps})")
+        security: list[str] | None = None
+        if self.use_analyzers:
+            osv = analyzers.vulnerabilities(s.root)
+            if osv.get("status") == "OK":
+                bands = {_cvss_band(v.get("severity")) for v in osv.get("vulnerabilities", [])}
+                n = len(osv.get("vulnerabilities", []))
+                security = []
+                if n:
+                    security.append(f"any known vulnerability (OSV: {n})")
+                if bands & {"medium", "high", "critical"}:
+                    security.append("any medium-or-worse vulnerability")
+                if bands & {"high", "critical"}:
+                    security.append("any high-or-worse vulnerability")
+                if "critical" in bands or s.secret_findings:
+                    security.append("any critical vulnerability or hardcoded secret")
+        data = []
+        if s.has_data_layer():
+            data.append("has a persistent data layer (models, SQL or migrations)")
+            if len(s.model_files) > 10:
+                data.append(f"more than 10 model/entity files ({len(s.model_files)})")
+            if s.sql_files or len(s.migrations) > 20:
+                data.append("raw SQL files or more than 20 migrations")
+        return {"technical": tech, "security": security, "data": data}
 
 
 # ---------------------------------------------------------------------------
@@ -670,6 +842,31 @@ def p1_release_gate(ctx: GateContext) -> GateResult:
         }
     }
     return GateResult("PUBLISHED", "COMPLETE", payload, [])
+
+
+SEED_QUESTIONS = (
+    "What is the business criticality of this application?",
+    "Which compliance obligations apply?",
+    "Who owns the data and the roadmap?",
+)
+
+
+def _cvss(v: str | None) -> float:
+    try:
+        return float(v or 0)
+    except ValueError:
+        return 0.0
+
+
+def _cvss_band(v: str | None) -> str:
+    x = _cvss(v)
+    if not v:
+        return "unknown"
+    return "critical" if x >= 9 else "high" if x >= 7 else "medium" if x >= 4 else "low"
+
+
+def _sast_sev(v: str | None) -> str:
+    return {"ERROR": "high", "WARNING": "medium", "INFO": "low"}.get((v or "").upper(), "low")
 
 
 def _intake_blockers(art: dict[str, Any]) -> list[str]:

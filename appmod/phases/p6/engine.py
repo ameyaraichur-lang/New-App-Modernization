@@ -490,7 +490,7 @@ def _attach_validation_agents(runner_cls):
                 "coverage": {"executed": 0, "required": 1},
                 "gaps": [{"gap": "no running approved environment", "consequence": "full handoff blocked"}],
             },
-            findings=[_f("A11-F1", "NOT_ASSESSED" if False else "UNKNOWN",
+            findings=[_f("A11-F1", "UNKNOWN",
                          "No running approved environment: NOT_RUN — never counted as PASS")],
             gaps=[{"requirement": "running environment", "impact": "G3 limited to LIMITED_HANDOFF",
                    "state": "NOT_RUN"}],

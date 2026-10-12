@@ -9,7 +9,6 @@ Encodes Run Controls as executable rules:
   - invalid publication is FAILED, not success
 """
 
-import pytest
 
 from appmod.agents.runtime import MockAgentRunner, ScriptedAgentRunner
 from appmod.kernel.audit import AuditJournal
@@ -73,7 +72,7 @@ def test_p1_happy_path(registry, tmp_path):
     def dispatched_after(node, *earliers):
         node_ts = [e for e in dispatches if e["node"] == node]
         assert node_ts, f"{node} never dispatched"
-        for early in earlies:
+        for early in earliers:
             early_ts = [e for e in dispatches if e["node"] == early]
             assert early_ts, f"{early} never dispatched"
     # A2 consumes A1+A4: both must appear before A2's last dispatch

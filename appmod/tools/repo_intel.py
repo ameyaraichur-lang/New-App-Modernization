@@ -21,8 +21,14 @@ EXCLUDE_DIRS = {
 EXCLUDE_SUFFIXES = {
     ".sqlite", ".sqlite3", ".log", ".pyc", ".class", ".jar", ".war",
     ".zip", ".gz", ".7z", ".exe", ".dll", ".pdf", ".png", ".jpg", ".gif",
-    ".ico", ".woff", ".woff2", ".ttf", ".eot", ".svg", ".min.js", ".map",
+    ".ico", ".woff", ".woff2", ".ttf", ".eot", ".svg", ".map",
 }
+# Third-party client libraries checked into the app (not the app's own code).
+VENDORED_DIRS = {"bower_components", "jspm_packages", "third_party", "third-party"}
+VENDORED_FILE_RE = re.compile(
+    r"^(jquery|bootstrap|modernizr|respond|angular|react|react-dom|vue|lodash|underscore|backbone|"
+    r"knockout|moment|d3|popper|require|signalr|ember|handlebars)([.-][\w.-]*)?\.(js|css)$"
+    r"|.*(\.intellisense|-vsdoc)\.js$")
 
 LANG_BY_EXT = {
     ".py": "python", ".js": "javascript", ".jsx": "javascript", ".ts": "typescript",
@@ -35,12 +41,22 @@ LANG_BY_EXT = {
     ".txt": "doc", ".gradle": "gradle", ".kt": "kotlin", ".scala": "scala",
 }
 
+CODE_LANGUAGES = {
+    "python", "javascript", "typescript", "java", "ruby", "go", "php", "csharp",
+    "vb", "kotlin", "scala", "shell", "powershell", "sql",
+}
+
 MANIFEST_FILES = [
     "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt",
     "requirements-dev.txt", "dev-requirements.txt", "package.json",
     "pom.xml", "build.gradle", "build.gradle.kts", "go.mod", "Gemfile",
     "composer.json", "packages.config",
 ]
+MANIFEST_NAMES = {m.lower() for m in MANIFEST_FILES}
+CLIENT_SCRIPT_EXTS = {".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".vue", ".coffee"}
+SERVER_PERSISTENCE_RE = re.compile(
+    r"""\b(mongoose|sequelize|typeorm|prisma|knex|objection|bookshelf|waterline|mikro-orm|"""
+    r"""drizzle-orm|mysql2?|pg|sqlite3?|better-sqlite3|mongodb|redis|ioredis)\b['"]|@Entity\(|\bPrismaClient\b""")
 
 LICENSE_PATTERNS = [
     ("BSD", r"\bBSD\b|\bRedistribution and use in source and binary forms"),
@@ -111,6 +127,20 @@ class RepoScan:
     def loc(self) -> int:
         return sum(self.languages.values())
 
+    @property
+    def code_languages(self) -> dict[str, int]:
+        return {k: v for k, v in self.languages.items() if k in CODE_LANGUAGES}
+
+    @property
+    def code_loc(self) -> int:
+        return sum(self.code_languages.values())
+
+    @property
+    def primary_language(self) -> str:
+        """Largest *code* language by LOC; data/markup/doc formats never win."""
+        code = {k: v for k, v in self.code_languages.items() if k != "sql"} or self.code_languages
+        return max(code, key=lambda k: code[k]) if code else "unknown"
+
     def has_ui(self) -> bool:
         return bool(self.templates or self.ui_frameworks)
 
@@ -128,7 +158,10 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
         parts = rel.parts
         if any(p in EXCLUDE_DIRS for p in parts):
             continue
-        if path.suffix.lower() in EXCLUDE_SUFFIXES:
+        name = path.name.lower()
+        if path.suffix.lower() in EXCLUDE_SUFFIXES or name.endswith((".min.js", ".min.css")):
+            continue
+        if VENDORED_FILE_RE.match(name) or any(p.lower() in VENDORED_DIRS for p in parts[:-1]):
             continue
         try:
             size = path.stat().st_size
@@ -142,6 +175,7 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
         }
         scan.files.append(rec)
 
+        text = ""
         if lang:
             try:
                 text = path.read_text(encoding="utf-8", errors="ignore") if size <= max_bytes else ""
@@ -152,7 +186,7 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
                 _scan_text(scan, path, rel, text)
 
         name = path.name.lower()
-        if name in MANIFEST_FILES or path.suffix.lower() in (".csproj",):
+        if name in MANIFEST_NAMES or path.suffix.lower() in (".csproj",):
             scan.manifests.append({"path": str(rel).replace("\\", "/"),
                                    "sha256": _sha(path.read_bytes())})
         if name.startswith("dockerfile") or name in {
@@ -163,8 +197,9 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             scan.infra_files.append(str(rel).replace("\\", "/"))
         if name.startswith("license") or name.startswith("copying") or name == "notice":
             _scan_license(scan, path, rel)
-        if re.match(r"test_.*\.py$|.*_test\.go$|.*test\.java$|.*test\.cs$|.*_spec\.rb$|.*test\.js$|.*test\.ts$",
-                    name) or "tests" in parts or "test" in parts:
+        if re.match(r"test_.*\.py$|tests?\.py$|.*_tests?\.py$|.*_test\.go$|.*tests?\.java$|.*tests?\.cs$"
+                    r"|.*_spec\.rb$|.*[._-](test|spec)\.[jt]sx?$|.*test\.[jt]s$",
+                    name) or {"tests", "test", "__tests__", "spec"} & set(parts):
             scan.tests.append(str(rel).replace("\\", "/"))
         if any(d.lower() in ("templates", "views") for d in parts) and path.suffix.lower() in (
             ".html", ".htm", ".jinja", ".j2", ".erb", ".hbs", ".cshtml", ".razor",
@@ -175,8 +210,11 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             scan.static_assets.append(str(rel).replace("\\", "/"))
         if path.suffix.lower() == ".sql":
             scan.sql_files.append(str(rel).replace("\\", "/"))
-        if re.match(r"models\.py$|model\.go$|.*models\.ts$", name) or "entities" in parts or "models" in parts:
-            scan.model_files.append(str(rel).replace("\\", "/"))
+        if lang in CODE_LANGUAGES and (re.match(r"models\.py$|models?\.go$|.*models\.ts$", name)
+                                       or "entities" in parts or "models" in parts):
+            # browser models (Backbone/CanJS/Ember) persist to localStorage, not a database
+            if path.suffix.lower() not in CLIENT_SCRIPT_EXTS or SERVER_PERSISTENCE_RE.search(text):
+                scan.model_files.append(str(rel).replace("\\", "/"))
         if "migrations" in parts or "migrate" in parts:
             scan.migrations.append(str(rel).replace("\\", "/"))
         if re.match(r"(app|main|manage|server|index|wsgi|asgi|program)\.(py|js|ts|go|rb|php|cs|java)$",
@@ -184,7 +222,18 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             scan.entry_candidates.append(str(rel).replace("\\", "/"))
 
     _detect_ui_frameworks(scan)
+    scan.commit = _git_head(root)
     return scan
+
+
+def _git_head(root: Path) -> str:
+    import subprocess
+    try:
+        out = subprocess.run(["git", "-C", str(root), "rev-parse", "HEAD"],
+                             capture_output=True, text=True, timeout=10)
+        return out.stdout.strip() if out.returncode == 0 else ""
+    except (OSError, subprocess.SubprocessError):
+        return ""
 
 
 def _scan_text(scan: RepoScan, path: Path, rel: Path, text: str) -> None:
@@ -197,10 +246,13 @@ def _scan_text(scan: RepoScan, path: Path, rel: Path, text: str) -> None:
             for m in re.finditer(pattern, text):
                 scan.routes.append({"file": rel_s, "framework": framework,
                                     "route": m.group(1) if m.groups() else ""})
-    # ORM/model hints
+    # ORM/model hints (source only: docs that mention an ORM are not a data layer)
+    if LANG_BY_EXT.get(path.suffix.lower(), "") not in CODE_LANGUAGES:
+        return
     if re.search(r"class\s+\w+\s*\(\s*(models\.Model|db\.Model|Base\))", text):
         scan.model_files.append(rel_s)
-    if re.search(r"SQLAlchemy|sqlalchemy|EntityFramework|Entity\(|ActiveRecord", text):
+    if re.search(r"SQLAlchemy|sqlalchemy|EntityFramework|Entity\(|ActiveRecord|gorm\.Model|\"gorm\.io/gorm\"",
+                 text):
         scan.model_files.append(rel_s)
 
 
@@ -267,6 +319,31 @@ def parse_dependencies(scan: RepoScan) -> list[dict[str, Any]]:
         elif name == "pom.xml":
             for mm in re.finditer(r"<groupId>([^<]+)</groupId>\s*<artifactId>([^<]+)</artifactId>", text):
                 found.append({"name": f"{mm.group(1)}:{mm.group(2)}", "source": m["path"]})
+        elif name == "pyproject.toml":
+            import tomllib
+            try:
+                data = tomllib.loads(text)
+            except tomllib.TOMLDecodeError:
+                data = {}
+            proj = data.get("project", {})
+            reqs = list(proj.get("dependencies", []))
+            for group in proj.get("optional-dependencies", {}).values():
+                reqs += group
+            for req in reqs:
+                pkg = re.split(r"[\s=<>!~;\[(]", req.strip(), maxsplit=1)[0]
+                if pkg:
+                    found.append({"name": pkg, "source": m["path"]})
+            poetry = data.get("tool", {}).get("poetry", {})
+            for scope in ("dependencies", "dev-dependencies"):
+                for k in poetry.get(scope, {}):
+                    if k.lower() != "python":
+                        found.append({"name": k, "source": m["path"]})
+        elif name.endswith(".csproj") or name == "packages.config":
+            for mm in re.finditer(r"""<(?:PackageReference|package)\s+(?:Include|id)="([^"]+)\"""", text, re.I):
+                found.append({"name": mm.group(1), "source": m["path"]})
+        elif name in ("build.gradle", "build.gradle.kts"):
+            for mm in re.finditer(r"""(?:implementation|api|compileOnly|runtimeOnly|testImplementation)\s*\(?\s*['"]([\w.-]+:[\w.-]+)""", text):
+                found.append({"name": mm.group(1), "source": m["path"]})
         elif name == "go.mod":
             for mm in re.finditer(r"^\s+([\w./-]+)\s+v[\w.-]+", text, re.M):
                 found.append({"name": mm.group(1), "source": m["path"]})

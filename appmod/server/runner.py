@@ -9,17 +9,16 @@ no shortcuts, and the honest-depth rules (NOT_RUN never PASS) apply.
 from __future__ import annotations
 
 import re
-import shutil
 import sqlite3
 import subprocess
 import threading
 import time
 import uuid
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 from appmod.kernel.audit import AuditJournal
-from appmod.kernel.orchestrator import PhaseOrchestrator
+from appmod.kernel.orchestrator import PhaseOrchestrator, RunContext
 from appmod.kernel.policy import PolicyService
 from appmod.phases.p1.engine import P1AgentRunner, P1_GATE_OVERRIDES
 from appmod.phases.p2.engine import P2AgentRunner, P2_GATE_OVERRIDES, PortfolioApp
@@ -29,6 +28,7 @@ from appmod.phases.p5.engine import P5AgentRunner, P5_GATE_OVERRIDES
 from appmod.phases.p6.engine import P6AgentRunner, P6_GATE_OVERRIDES
 from appmod.registry.compiler import resolve_registry
 from appmod.store.artifact_store import ArtifactStore
+from appmod.tools.repo_intel import CODE_LANGUAGES
 
 
 def _gate_of(phase: int) -> str:
@@ -188,7 +188,7 @@ class PipelineJob:
         self.state["facts"]["store_path"] = str(work / "store")
 
         def run_phase(phase: int, runner, run_app: str, run_inputs: dict,
-                      overrides: dict, na_ok: bool = False) -> PhaseOrchestrator:
+                      overrides: dict, na_ok: bool = False) -> tuple[ArtifactStore, RunContext]:
             pstate = self._phase(phase)
             pstate["status"] = "RUNNING"
             orch = PhaseOrchestrator(registry["phases"][phase], store, policy, audit,
@@ -273,10 +273,13 @@ class PipelineJob:
             raise RuntimeError("P1 released HOLD — downstream phases not admitted")
 
         # ---------------- P2 -------------------------------------------------
+        repo0 = p1_a1["payload"]["repositories"][0]
         apps = [PortfolioApp(
             app_id=app, p1_g2_status=p1_g2["status"],
-            loc=self.state["facts"]["loc"], languages=3,
-            dependencies=self.state["facts"]["dependencies"], tests=1,
+            loc=self.state["facts"]["loc"],
+            languages=max(1, sum(1 for k in repo0.get("languages", {}) if k in CODE_LANGUAGES)),
+            dependencies=self.state["facts"]["dependencies"],
+            tests=int(p1_a1["payload"].get("coverage", {}).get("test_files", 0)),
             route=p1_a5["payload"]["capability_route"],
             has_data_layer=bool(p1_a3["payload"]["datasets"]),
             primary_language=_primary_lang(p1_a1), source_family="solo",
@@ -335,7 +338,9 @@ class PipelineJob:
             "app_id": app, "disposition": disposition, "repo_path": str(repo),
             "routes": routes, "datasets": datasets,
             "dependencies": p1_a1["payload"]["dependencies"],
-            "tests": ["inventory"], "route": apps[0].route,
+            "tests": p1_a1["payload"].get("coverage", {}).get("test_paths", []),
+            "pinned_commit": repo0.get("commit") or "unpinned",
+            "route": apps[0].route,
         }), app, {
             "scope_manifest": {"workload_ids": [app]},
             "p4_package": {"application_id": app, "status": p4_g2["status"]},
@@ -412,6 +417,9 @@ def json_copy(obj):
 
 
 def _primary_lang(a1) -> str:
+    primary = a1["payload"]["repositories"][0].get("primary_language")
+    if primary:
+        return primary
     for f in a1["findings"]:
         if "primary:" in f["statement"]:
             return f["statement"].split("primary:")[-1].strip()
@@ -447,7 +455,7 @@ def _build_fixture(seed: Path, work: Path):
     tables: dict[str, int] = {}
     rows: dict[str, list[list]] = {}
     for table, values in inserts:
-        vals = []
+        vals: list[Any] = []
         for raw in re.findall(r"'(?:[^']|'')*'|[^,]+", values):
             raw = raw.strip()
             if raw == "default":
