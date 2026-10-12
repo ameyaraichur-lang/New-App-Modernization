@@ -265,32 +265,58 @@ it — L4), decommission plan for the legacy app, closure summary.
 ### Track F — Learn (L5)
 
 **F1. Outcome memory.** Store reviewer edits, rejections, answers and execution outcomes per
-agent; retrieve similar past cases as exemplars.
+agent (content-addressed, with the candidate hash they apply to); retrieve similar past cases
+as exemplars in the agent's context.
+*Files:* `appmod/memory/`, `server/rundb.py`, `llm_runner.py`. *Done when:* on a re-run of a
+repo whose route a reviewer corrected, the agent cites the correction and the eval shows no
+regression elsewhere.
+
 **F2. Eval-gated prompt evolution.** Candidate prompt/overlay changes are generated from
 failure clusters and adopted only if the nightly eval (A8) improves without regressions.
-*Done when:* one prompt change is proposed from data and adopted through the gate.
+*Files:* `scripts/propose_overlay.py`, overlays (versioned). *Done when:* one prompt change is
+proposed from data and adopted through the gate.
 
 ### Track G — Platform
 
-- **G1. Observability (Step 32):** OpenTelemetry spans run → phase → node → model call → tool
-  call; Langfuse; per-node tokens and latency in the report.
-- **G2. Copilot and MCP server (Step 31):** chat over registry/store/traces; `run_pipeline`,
-  `get_run`, `explain_decision`, `submit_review` exposed over MCP so Cursor can drive runs.
-- **G3. Cost and speed:** prompt caching of instructions + seeds, context trimming via B6,
-  fast-tier routing where evals show no loss; budget per run with hard stop.
-  *Target:* ≤ 50 % of today's input tokens per repo at equal CS.
-- **G4. Approved policy bundle:** replace `pilot-default-1.1.0` with an organization-approved
-  bundle (thresholds, data classes, allowed routes) with its own version in every envelope.
-- **G5. Production hardening:** secrets from a vault (no `.env` key), key rotation, durable
-  work queue for many concurrent runs, per-tenant isolation, model canarying on version change.
+**G1. Observability (Step 32).** OpenTelemetry spans run → phase → node → model call → tool
+call (GenAI conventions); Langfuse; per-node tokens and latency in the report.
+*Files:* `appmod/telemetry.py`, `llm/astra.py`, `tools/gateway.py`. *Done when:* one run's
+full span tree is browsable in Langfuse and the report lists p50/p95 latency per agent.
+
+**G2. Copilot and MCP server (Step 31).** Chat over registry/store/traces with
+confirm-before-act tools; `run_pipeline`, `get_run`, `explain_decision`, `submit_review`
+exposed over MCP so Cursor can drive runs.
+*Files:* `appmod/mcp_server.py`, `server/api.py`, `ui/`. *Done when:* a run is started,
+inspected and reviewed entirely from Cursor through the MCP server.
+
+**G3. Cost and speed.** Prompt caching of instructions + seeds, context trimming via B6,
+fast-tier routing where evals show no loss; per-run budget with hard stop.
+*Files:* `llm/router.py`, `llm_runner.py`, overlays. *Done when:* input tokens per repo
+≤ 50 % of run4's ~2 M at equal or better CS.
+
+**G4. Approved policy bundle.** Replace `pilot-default-1.1.0` with an organization-approved
+bundle (thresholds, data classes, allowed routes), versioned in every envelope.
+*Files:* `kernel/policy.py`, `config/policy/`. *Done when:* gates cite the approved bundle
+version and a bundle change invalidates exactly the dependent gate decisions.
+
+**G5. Production hardening.** Secrets from a vault (no `.env` key) with rotation; durable work
+queue for concurrent runs; per-tenant isolation; model canary on version change.
+*Files:* `config.py`, `server/jobs.py`, deployment manifests. *Done when:* 20 concurrent runs
+complete with a rotated key mid-run, and a model version change runs the canary eval before
+traffic moves.
 
 ### Track H — Real-world proof
 
-- **H1. Corpus of 50+ repos, held-out split:** add enterprise-shaped legacy — Java EE/Struts,
-  .NET Framework WebForms/WCF, PHP monoliths, Rails 4, a COBOL/CICS sample (e.g. AWS CardDemo),
-  one > 1 M LOC monolith. Tune on 30, report on a held-out 20.
-- **H2. Human pilot:** real reviewers and stakeholders on 3–5 internal apps; measure approval
-  rate, edit distance, questions answered, and hours saved vs a manual assessment.
+**H1. Corpus of 50+ repos, held-out split.** Add enterprise-shaped legacy — Java EE/Struts,
+.NET Framework WebForms/WCF, PHP monoliths, Rails 4, a COBOL/CICS sample (e.g. AWS CardDemo),
+one > 1 M LOC monolith. Tune on 30, report on a held-out 20.
+*Files:* `evals/golden/`, `evals/expert/`, `scripts/e2e_agentic.py --repos`. *Done when:* §4
+targets are reported on the held-out 20 only.
+
+**H2. Human pilot.** Real reviewers and stakeholders on 3–5 internal apps; measure approval
+rate, edit distance, questions answered, and hours saved vs a manual assessment.
+*Files:* `evals/pilot/`, report section. *Done when:* C9 is computed from real decisions and
+published with the reviewers' feedback.
 
 ---
 
