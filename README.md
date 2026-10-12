@@ -82,11 +82,25 @@ uv run python -m appmod.server           # → http://localhost:8600 (sign in wi
 - **Tools** — repo (`read_file`, `grep`, `list_dir`, `search_code` embeddings, `git_log`, …),
   artifacts (`get_artifact`, `list_artifacts`), analyzers (`vulnerability_scan` osv,
   `secret_scan` gitleaks, `static_analysis` semgrep, `sbom_packages` syft, `loc_metrics` scc),
+  portfolio (`app_similarity` code-embedding overlap), policy-gated `eol_lookup` (endoflife.date),
   plus any MCP server listed in `config/mcp_servers.json` (`mcp__<server>__<tool>`).
-  Tool output is redacted, truncated and wrapped as untrusted evidence with a citable id.
+  Tool output is redacted, truncated and wrapped as untrusted evidence with a citable id
+  (`ev-<sha>`, `art:<id>@v<n>`, `seed:<finding>`).
+- **Agent loop** — deterministic seed → tool loop → strict `submit_outcome` → kernel checks →
+  up to 2 repair rounds. Only the overlay's fields merge into the seed and status can only get
+  stricter. If only citation problems remain, the kernel strips the bad ids; any other failure
+  returns the seed with `llm.enriched = false` and a NOT_ASSESSED gap — never a silent success.
 - **Evidence rules** (kernel-enforced) — uncited OBSERVED/DOCUMENTED → INFERRED; model-claimed
   HUMAN_CONFIRMED → HYPOTHETICAL; unknown citations stripped; COMPLETE with NOT_ASSESSED gap →
   PARTIAL; configured secrets redacted everywhere (artifacts, audit, events, logs).
+- **Grounding** — cited paths must exist in the repository or be named by its code; P1.A9
+  function names are matched against the source and unverifiable ones removed. Failures go back
+  to the model as repair problems. Instruction-like text in tool output is recorded as an
+  instruction-boundary incident on the envelope and does not change the agent's instructions.
+- **Agent-specific reasoning** — P1.A11 scores risk per dimension from a policy rubric with
+  evidence-matched anchors; P1.A9 locates processes with `search_code`; P2.A4 measures app
+  overlap from embeddings; P2.A6 scores at least three of the 8R routes per app
+  (`options_considered`) before choosing; P3.A1 grounds runtime targets in end-of-life data.
 - **Portfolio runs** — several repos in one run: P1 per app (parallel) → one P2 portfolio
   decision → P3/P4 per authorized app. Single-repo runs continue to P5/P6.
 - **Review modes** — `simulated` (gates auto-release, labelled) or `human`: P1–P4 release gates
@@ -101,9 +115,34 @@ uv run python -m appmod.server           # → http://localhost:8600 (sign in wi
   run quotas apply to every submission.
 
 **Acceptance run:** `uv run python scripts/e2e_agentic.py --label run1 --cache record` starts the
-server, submits the 4-repo corpus in human review mode with live Astra, answers and approves through
-the API with a *scripted, labelled* reviewer and stakeholder, and scores every P1–P4 agent dispatch
-(not FAILED + enriched by the live loop + passes ContractValidator). Reports land in `docs/runs/`.
+server, submits the corpus (`--repos …`, default 4 repos from `../corpus`) in human review mode
+with live Astra, answers and approves through the API with a *scripted, labelled* reviewer and
+stakeholder, and scores every P1–P4 agent dispatch (not FAILED + enriched by the live loop +
+passes ContractValidator). P3/P4 slots for apps the authorized P2 gate routes to the
+non-delivery register are reported as *not admitted*, alongside the all-slots rate.
+`--rescore <job>` re-scores a finished job from the run DB. Reports land in `docs/runs/`.
+
+**Release-gate eval (Step 33):** `uv run python scripts/eval_run.py --runs-dir runs --job <job>
+--label <label>` scores a finished run: schema-valid after repair ≥ 95%, evidence
+resolvability ≥ 90%, zero hallucinated paths and A9 symbols, agreement with the golden labels in
+`evals/golden/corpus.json`, and variation of P2 dispositions and P3 boundaries across apps.
+
+### Current results (live Astra, 10-repo corpus)
+
+| Run | Measure | Result |
+|---|---|---|
+| [run4 e2e](docs/runs/e2e-run4.md) | P1–P4 agent dispatches passing | 270 / 270 (17 laravel58 P3/P4 slots not admitted: P2 routed it to Retain) |
+| [run4 eval](docs/runs/eval-run4.md) | Step 33 release gate | PASS — schema 100%, evidence resolved 100% (14,988), 0 / 860 bad paths, 0 / 351 bad symbols |
+| run4 eval | Golden-label agreement | language, framework, tests 100%; data layer 90% (todomvc's browser `localStorage` counted as data) |
+| run4 eval | Variation | P2 Refactor ×5, Replatform ×4, Retain ×1; 9 distinct P3 boundary sets across 9 apps |
+| [run3 e2e](docs/runs/e2e-run3.md) | P1–P4 agent dispatches passing | 287 / 287 |
+
+What these numbers do **not** show: "success" means the artifact was produced by the live loop
+and is schema-valid, not that a route or architecture is right. Resolvable citations prove the
+evidence exists, not that it supports the claim. The reviewer and stakeholders were scripted,
+golden labels cover four basic facts per repo, there is no runtime telemetry, P5–P6 remain
+deterministic, and run-to-run stability is measured over two runs only. Expert-labelled routes
+and boundaries are the next step for judging decision quality.
 
 ## The console
 
@@ -196,21 +235,27 @@ appmod/
   contracts/     IA04 schemas, validators, normalize_payload
   store/         content-addressed artifact store
   kernel/        scheduler, gates, invalidation, policy, audit, orchestrator
-  agents/        agent runner interface (LLM-backed enrichment plugs in here)
-  tools/         deterministic repo scanner (repo_intel)
+  llm/           Astra Responses client, tier router + failover, TPM limiter, record/replay cache
+  agents/        LLMAgentRunner tool loop, per-agent overlays, repo grounding checks
+  tools/         repo scanner (repo_intel), tool gateway, analyzers, MCP client
+  retrieval/     code embeddings for search_code and app similarity
   phases/p1..p6/ phase engines: gate overrides + agent runners
-  server/        FastAPI app (api.py), PipelineJob (runner.py), outcome report (report.py)
+  server/        FastAPI app (api.py), jobs + run DB (jobs.py), outcome report (report.py)
 ui/              React + React Flow console (views per phase, agent anatomy, runner)
 data/registry/   shipped compiled registry (master.json, phase_*.json, pipeline_digest.json)
-scripts/         p1_smoke.py · portfolio_run.py · e2e_pipeline.py
-tests/           41 tests: parity, contracts, store, kernel, invalidation, engines, conformance
+evals/golden/    labelled facts for the 10-repo corpus
+scripts/         e2e_agentic.py · eval_run.py · doctor.py · astra_smoke.py · install_tools.py ·
+                 p1_smoke.py · portfolio_run.py · e2e_pipeline.py
+tests/           96 offline tests + 40 live Astra tests (tests/live, APPMOD_LIVE=1)
 ```
 
 ## Tests & scripts
 
 ```bash
-python -m pytest tests/ -q                     # 41 tests — registry parity, contracts,
-                                               # store, kernel scenarios, engine conformance
+uv run pytest -q                               # 96 offline tests (live ones skip)
+APPMOD_LIVE=1 uv run pytest tests/live -q      # 40 live Astra tests: every tier, embeddings,
+                                               # json_schema, strict submit_outcome per agent
+uv run ruff check . && uv run mypy             # lint + types (also in CI)
 python scripts/p1_smoke.py <repo-path>         # Phase 1 discovery on any repo
 APPMOD_CORPUS=<dir> python scripts/portfolio_run.py   # P1×corpus + P2 portfolio routing
 APPMOD_CORPUS=<dir> python scripts/e2e_pipeline.py    # full P1→P6 on spring-petclinic
