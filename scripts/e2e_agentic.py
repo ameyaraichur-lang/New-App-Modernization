@@ -83,6 +83,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", default=time.strftime("%Y%m%d-%H%M%S"))
     ap.add_argument("--repos", nargs="*", default=DEFAULT_REPOS)
+    ap.add_argument("--corpus", choices=["tune", "holdout", "all"],
+                    help="take repos from evals/corpus.json instead of --repos")
     ap.add_argument("--cache", default="record", choices=["off", "read", "record", "replay"])
     ap.add_argument("--timeout", type=int, default=4 * 3600)
     ap.add_argument("--parallel-agents", type=int, default=4)
@@ -135,7 +137,11 @@ def main() -> int:
             r.raise_for_status()
             print(f"[e2e] resumed job {job} (port {port}, cache={args.cache})", flush=True)
         else:
-            repos = [str(CORPUS / r) if not r.startswith(("/", "http", "git@")) else r for r in args.repos]
+            names = args.repos
+            if args.corpus:
+                names = [e["name"] for e in json.loads((ROOT / "evals" / "corpus.json").read_text())["repos"]
+                         if args.corpus == "all" or e["split"] == args.corpus]
+            repos = [str(CORPUS / r) if not r.startswith(("/", "http", "git@")) else r for r in names]
             r = c.post("/api/runs", headers=H["op"], json={"repos": repos, "review_mode": "human", "llm": True})
             r.raise_for_status()
             job = r.json()["job_id"]

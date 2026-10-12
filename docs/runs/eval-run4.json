@@ -286,5 +286,136 @@
   "p3_distinct_boundary_sets": 9,
   "p3_apps": 9
  },
- "pass": true
+ "pass": true,
+ "confidence": {
+  "confidence_score": 0.0,
+  "weakest": "C3",
+  "assessed": [
+   "C1",
+   "C2"
+  ],
+  "not_assessed": [
+   "C3",
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8",
+   "C9"
+  ],
+  "weakest_assessed": "C2",
+  "components": [
+   {
+    "id": "C1",
+    "name": "Integrity",
+    "assessed": true,
+    "lower_bound": 98.6,
+    "reason": "",
+    "measures": [
+     {
+      "name": "schema valid after repair",
+      "k": 270,
+      "n": 270,
+      "lower_bound": 98.6
+     },
+     {
+      "name": "evidence ids resolve",
+      "k": 14988,
+      "n": 14988,
+      "lower_bound": 99.97
+     },
+     {
+      "name": "cited paths exist",
+      "k": 860,
+      "n": 860,
+      "lower_bound": 99.56
+     },
+     {
+      "name": "A9 function names exist",
+      "k": 351,
+      "n": 351,
+      "lower_bound": 98.92
+     }
+    ]
+   },
+   {
+    "id": "C2",
+    "name": "Factual accuracy",
+    "assessed": true,
+    "lower_bound": 86.82,
+    "reason": "",
+    "measures": [
+     {
+      "name": "golden facts agree",
+      "k": 38,
+      "n": 39,
+      "lower_bound": 86.82
+     }
+    ]
+   },
+   {
+    "id": "C3",
+    "name": "Claim support",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "claim-support verifier not built (stack PR 6)",
+    "measures": []
+   },
+   {
+    "id": "C4",
+    "name": "Decision correctness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no expert decision labels (decision 2: skipped)",
+    "measures": []
+   },
+   {
+    "id": "C5",
+    "name": "Stability",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no repeated runs (stack PR 4)",
+    "measures": []
+   },
+   {
+    "id": "C6",
+    "name": "Calibration",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no confidence field on decisions (stack PR 5)",
+    "measures": []
+   },
+   {
+    "id": "C7",
+    "name": "Execution proof",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "P5 runtime differential NOT_RUN; sandbox deferred (decision 1)",
+    "measures": []
+   },
+   {
+    "id": "C8",
+    "name": "Robustness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "adversarial suite not built (stack PR 8)",
+    "measures": []
+   },
+   {
+    "id": "C9",
+    "name": "Human acceptance",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "all reviews were by scripted actors",
+    "measures": [
+     {
+      "name": "human reviews approved",
+      "k": 0,
+      "n": 0,
+      "lower_bound": null
+     }
+    ]
+   }
+  ]
+ }
 }
