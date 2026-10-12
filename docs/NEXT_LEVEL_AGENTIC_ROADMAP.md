@@ -48,7 +48,7 @@ components, each reported as its **95 % Wilson lower bound** (so a small sample 
 | # | Component | What it proves | Today (95 % LB) |
 |---|---|---|---|
 | C1 | Integrity | outputs are schema-valid, every citation resolves, no invented paths/symbols | 98.6 % (270/270 schema), 99.6 % paths (0/860 bad), 98.9 % symbols (0/351 bad), 99.97 % evidence (14,988/14,988 resolve) |
-| C2 | Factual accuracy | discovered facts match ground truth | 87.1 % (39/40 — only 4 facts × 10 repos) |
+| C2 | Factual accuracy | discovered facts match ground truth | 86.8 % (38/39 — 4 facts × 10 repos, todomvc has no framework label) |
 | C3 | Claim support | cited evidence actually *supports* the claim, not merely exists | **unmeasured → 0** |
 | C4 | Decision correctness | routes, boundaries, plans match an expert panel | **unmeasured → 0** |
 | C5 | Stability | same inputs → same decisions across repeated runs | **unmeasured → 0** (run3 vs run4 agree on 5/10 routes, but run3 used a since-fixed biased prompt, so this is not a valid stability sample) |
@@ -328,7 +328,7 @@ published with the reviewers' feedback.
 |---|---|---|---|
 | AL (agentic level) | 19 % | 100 % (all roles at target) | B, C, D, E, F |
 | C1 integrity | ≥ 98.6 % LB | ≥ 99 % LB, 0 hallucinations | keep; scale n |
-| C2 facts | 87.1 % LB (n = 40) | ≥ 95 % LB (n ≥ 400) | A1, B7 |
+| C2 facts | 86.8 % LB (n = 39) | ≥ 95 % LB (n ≥ 400) | A1, B7 |
 | C3 claim support | 0 (unmeasured) | ≥ 95 % entailed | A4 |
 | C4 decisions | 0 (unmeasured) | ≥ inter-expert agreement | A2, B3, B4 |
 | C5 stability | 0 (unmeasured) | ≥ 90 % route agreement over 5 runs | A3, B4 |
