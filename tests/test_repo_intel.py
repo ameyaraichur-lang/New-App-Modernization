@@ -95,3 +95,14 @@ def test_manifests_are_detected_case_insensitively_and_parsed(tmp_path):
     names = {d["name"] for d in parse_dependencies(scan_repo(tmp_path))}
     assert {"sinatra", "rack-cache", "flask", "click", "pytest", "Microsoft.AspNetCore.Mvc",
             "org.springframework.boot:spring-boot-starter-web"} <= names
+
+
+def test_data_layer_needs_server_persistence(tmp_path):
+    (tmp_path / "js" / "models").mkdir(parents=True)
+    (tmp_path / "js" / "models" / "todo.js").write_text("var Todo = Backbone.Model.extend({});\n")
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "docs" / "orm.md").write_text("Use ActiveRecord or SQLAlchemy for persistence.\n")
+    assert not scan_repo(tmp_path).has_data_layer()
+    (tmp_path / "api").mkdir()
+    (tmp_path / "api" / "models.go").write_text('package api\nimport "gorm.io/gorm"\ntype A struct{ gorm.Model }\n')
+    assert scan_repo(tmp_path).has_data_layer()

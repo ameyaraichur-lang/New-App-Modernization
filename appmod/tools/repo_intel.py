@@ -53,6 +53,10 @@ MANIFEST_FILES = [
     "composer.json", "packages.config",
 ]
 MANIFEST_NAMES = {m.lower() for m in MANIFEST_FILES}
+CLIENT_SCRIPT_EXTS = {".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".vue", ".coffee"}
+SERVER_PERSISTENCE_RE = re.compile(
+    r"""\b(mongoose|sequelize|typeorm|prisma|knex|objection|bookshelf|waterline|mikro-orm|"""
+    r"""drizzle-orm|mysql2?|pg|sqlite3?|better-sqlite3|mongodb|redis|ioredis)\b['"]|@Entity\(|\bPrismaClient\b""")
 
 LICENSE_PATTERNS = [
     ("BSD", r"\bBSD\b|\bRedistribution and use in source and binary forms"),
@@ -171,6 +175,7 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
         }
         scan.files.append(rec)
 
+        text = ""
         if lang:
             try:
                 text = path.read_text(encoding="utf-8", errors="ignore") if size <= max_bytes else ""
@@ -205,8 +210,11 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             scan.static_assets.append(str(rel).replace("\\", "/"))
         if path.suffix.lower() == ".sql":
             scan.sql_files.append(str(rel).replace("\\", "/"))
-        if re.match(r"models\.py$|model\.go$|.*models\.ts$", name) or "entities" in parts or "models" in parts:
-            scan.model_files.append(str(rel).replace("\\", "/"))
+        if lang in CODE_LANGUAGES and (re.match(r"models\.py$|models?\.go$|.*models\.ts$", name)
+                                       or "entities" in parts or "models" in parts):
+            # browser models (Backbone/CanJS/Ember) persist to localStorage, not a database
+            if path.suffix.lower() not in CLIENT_SCRIPT_EXTS or SERVER_PERSISTENCE_RE.search(text):
+                scan.model_files.append(str(rel).replace("\\", "/"))
         if "migrations" in parts or "migrate" in parts:
             scan.migrations.append(str(rel).replace("\\", "/"))
         if re.match(r"(app|main|manage|server|index|wsgi|asgi|program)\.(py|js|ts|go|rb|php|cs|java)$",
@@ -238,10 +246,13 @@ def _scan_text(scan: RepoScan, path: Path, rel: Path, text: str) -> None:
             for m in re.finditer(pattern, text):
                 scan.routes.append({"file": rel_s, "framework": framework,
                                     "route": m.group(1) if m.groups() else ""})
-    # ORM/model hints
+    # ORM/model hints (source only: docs that mention an ORM are not a data layer)
+    if LANG_BY_EXT.get(path.suffix.lower(), "") not in CODE_LANGUAGES:
+        return
     if re.search(r"class\s+\w+\s*\(\s*(models\.Model|db\.Model|Base\))", text):
         scan.model_files.append(rel_s)
-    if re.search(r"SQLAlchemy|sqlalchemy|EntityFramework|Entity\(|ActiveRecord", text):
+    if re.search(r"SQLAlchemy|sqlalchemy|EntityFramework|Entity\(|ActiveRecord|gorm\.Model|\"gorm\.io/gorm\"",
+                 text):
         scan.model_files.append(rel_s)
 
 
