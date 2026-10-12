@@ -34,7 +34,9 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from appmod.config import get_settings  # noqa: E402
 from appmod.contracts.schemas import ContractValidator  # noqa: E402
+from appmod.evals.stability import pipeline_version  # noqa: E402
 from appmod.registry.compiler import resolve_registry  # noqa: E402
 from appmod.store.artifact_store import ArtifactStore  # noqa: E402
 
@@ -210,6 +212,8 @@ def main() -> int:
 
     elapsed = time.time() - t0
     report = score(snap, trace, reviews, questions, health, elapsed, args)
+    report["pipeline_version"] = pipeline_version()
+    report["runs_dir"] = str(get_settings().runs_dir)
     stem = out_dir / f"e2e-{args.label}"
     stem.with_suffix(".json").write_text(json.dumps(report, indent=2, default=str))
     stem.with_suffix(".md").write_text(render(report))
@@ -219,7 +223,6 @@ def main() -> int:
 
 
 def rescore(args) -> int:
-    from appmod.config import get_settings
     from appmod.server.rundb import RunDB
     from appmod.tools import analyzers
     db = RunDB(get_settings().runs_dir / "appmod.db")
