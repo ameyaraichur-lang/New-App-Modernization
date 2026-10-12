@@ -219,7 +219,9 @@ This is the largest single jump in AL (+28 points) and the only way to make C7 n
 has no container runtime. Options: (a) Colima + Docker per-run containers (reproducible,
 network-off by default — recommended); (b) git worktrees + per-language toolchains with macOS
 `sandbox-exec` (lighter, weaker isolation); (c) remote sandbox (e.g. a CI runner) per lane.
-*Files:* `appmod/tools/sandbox.py`.
+*Files:* `appmod/tools/sandbox.py`. *Done when:* a test proves the sandbox blocks network
+egress and writes outside the worktree, enforces CPU/memory/time limits, and leaves the source
+repo byte-identical after a run.
 
 **C1. Characterization tests (Step 27, P5.A1).** Generate tests for routes/journeys found in P1;
 run them on the *unmodified* build; the observed results become the oracle.
