@@ -358,6 +358,10 @@ Rules for every wave: each upgrade lands as a small PR with its done-when test; 
 
 ## 6. Decisions needed from you
 
+*Answered 2026-10-12 — see `docs/STACK_PLAN_W1_W2.md`: sandbox deferred, expert labels
+skipped, assurance coverage adopted (unverifiable items go to a human), 30-repo open-source
+corpus with tool-derived golden facts, no token cap, eval on change + weekly.*
+
 1. **Sandbox** (C0): Colima/Docker vs worktree + `sandbox-exec` vs remote runner. This
    overrides blueprint AH01 for P5–P8 and should be recorded as a blueprint finding.
 2. **Expert panel** (A2): who labels the corpus, and how many raters.
