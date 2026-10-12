@@ -52,6 +52,7 @@ MANIFEST_FILES = [
     "pom.xml", "build.gradle", "build.gradle.kts", "go.mod", "Gemfile",
     "composer.json", "packages.config",
 ]
+MANIFEST_NAMES = {m.lower() for m in MANIFEST_FILES}
 
 LICENSE_PATTERNS = [
     ("BSD", r"\bBSD\b|\bRedistribution and use in source and binary forms"),
@@ -180,7 +181,7 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
                 _scan_text(scan, path, rel, text)
 
         name = path.name.lower()
-        if name in MANIFEST_FILES or path.suffix.lower() in (".csproj",):
+        if name in MANIFEST_NAMES or path.suffix.lower() in (".csproj",):
             scan.manifests.append({"path": str(rel).replace("\\", "/"),
                                    "sha256": _sha(path.read_bytes())})
         if name.startswith("dockerfile") or name in {
@@ -307,6 +308,31 @@ def parse_dependencies(scan: RepoScan) -> list[dict[str, Any]]:
         elif name == "pom.xml":
             for mm in re.finditer(r"<groupId>([^<]+)</groupId>\s*<artifactId>([^<]+)</artifactId>", text):
                 found.append({"name": f"{mm.group(1)}:{mm.group(2)}", "source": m["path"]})
+        elif name == "pyproject.toml":
+            import tomllib
+            try:
+                data = tomllib.loads(text)
+            except tomllib.TOMLDecodeError:
+                data = {}
+            proj = data.get("project", {})
+            reqs = list(proj.get("dependencies", []))
+            for group in proj.get("optional-dependencies", {}).values():
+                reqs += group
+            for req in reqs:
+                pkg = re.split(r"[\s=<>!~;\[(]", req.strip(), maxsplit=1)[0]
+                if pkg:
+                    found.append({"name": pkg, "source": m["path"]})
+            poetry = data.get("tool", {}).get("poetry", {})
+            for scope in ("dependencies", "dev-dependencies"):
+                for k in poetry.get(scope, {}):
+                    if k.lower() != "python":
+                        found.append({"name": k, "source": m["path"]})
+        elif name.endswith(".csproj") or name == "packages.config":
+            for mm in re.finditer(r"""<(?:PackageReference|package)\s+(?:Include|id)="([^"]+)\"""", text, re.I):
+                found.append({"name": mm.group(1), "source": m["path"]})
+        elif name in ("build.gradle", "build.gradle.kts"):
+            for mm in re.finditer(r"""(?:implementation|api|compileOnly|runtimeOnly|testImplementation)\s*\(?\s*['"]([\w.-]+:[\w.-]+)""", text):
+                found.append({"name": mm.group(1), "source": m["path"]})
         elif name == "go.mod":
             for mm in re.finditer(r"^\s+([\w./-]+)\s+v[\w.-]+", text, re.M):
                 found.append({"name": mm.group(1), "source": m["path"]})

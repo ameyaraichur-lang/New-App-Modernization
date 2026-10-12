@@ -79,3 +79,19 @@ def test_p1_a11_scores_follow_policy_rubric():
         assert "security" in {u["dimension"] for u in out.payload["unassessed_dimensions"]}
         scores[repo] = {k: d["score"] for k, d in dims.items()}
     assert scores["spring-petclinic"]["data"] >= 2 and scores["microblog"]["data"] >= 2
+
+
+def test_manifests_are_detected_case_insensitively_and_parsed(tmp_path):
+    from appmod.tools.repo_intel import parse_dependencies
+    (tmp_path / "Gemfile").write_text('source "https://rubygems.org"\ngem "sinatra"\ngem \'rack-cache\'\n')
+    (tmp_path / "pyproject.toml").write_text(
+        '[project]\nname = "x"\ndependencies = ["flask>=3", "click"]\n'
+        '[project.optional-dependencies]\ntest = ["pytest"]\n')
+    (tmp_path / "Web.csproj").write_text(
+        '<Project><ItemGroup><PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1" />'
+        '</ItemGroup></Project>')
+    (tmp_path / "build.gradle").write_text(
+        "dependencies {\n  implementation 'org.springframework.boot:spring-boot-starter-web'\n}\n")
+    names = {d["name"] for d in parse_dependencies(scan_repo(tmp_path))}
+    assert {"sinatra", "rack-cache", "flask", "click", "pytest", "Microsoft.AspNetCore.Mvc",
+            "org.springframework.boot:spring-boot-starter-web"} <= names
