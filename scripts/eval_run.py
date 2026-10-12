@@ -68,7 +68,8 @@ def evaluate(runs_dir: Path, job: str) -> dict[str, Any]:
                     continue
                 total += 1
                 valid += not validators[phase].validate(art)
-                seeds = {f.get("id") for f in art.get("findings", []) if f.get("origin") != "llm"}
+                seeds = {i.get("id") for i in walk([art.get("findings", []), art.get("payload", {})])
+                         if i.get("origin") != "llm" and i.get("id")}
                 for item in walk([art.get("findings", []), art.get("payload", {})]):
                     if item.get("origin") != "llm":
                         continue

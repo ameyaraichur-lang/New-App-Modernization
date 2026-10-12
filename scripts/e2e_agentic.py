@@ -228,6 +228,12 @@ def score(snap, trace, reviews, questions, health, elapsed, args) -> dict:
     validators = {p: ContractValidator(reg[p]) for p in (1, 2, 3, 4)}
     apps = snap["apps"]
     tr = {(t["phase"], t["app"], t["node"]): t for t in trace}
+    try:   # apps the authorized P2 release gate routed to the non-delivery register (Retain/Retire)
+        record = store.get("P2/PF1/G2")["payload"]["decision_record"]
+        not_admitted = {e["application_id"]: e["route"]
+                        for e in (record.get("non_delivery_register") or {}).get("entries", [])}
+    except Exception:
+        not_admitted = {}
     rows = []
     for phase in (1, 2, 3, 4):
         scope = ["PF1"] if phase == 2 else apps
@@ -239,7 +245,12 @@ def score(snap, trace, reviews, questions, health, elapsed, args) -> dict:
                 try:
                     art = store.get(aid)
                 except Exception:
-                    row.update(status="NOT_DISPATCHED", success=False, reason="no artifact published")
+                    if phase >= 3 and app in not_admitted:
+                        row.update(status="NOT_ADMITTED", success=None,
+                                   reason=f"not admitted: P2 G2 put {app} in the IA02 non-delivery "
+                                          f"register ({not_admitted[app]})")
+                    else:
+                        row.update(status="NOT_DISPATCHED", success=False, reason="no artifact published")
                     rows.append(row)
                     continue
                 llm = (art.get("execution_metadata") or {}).get("llm") or {}
@@ -271,6 +282,8 @@ def score(snap, trace, reviews, questions, health, elapsed, args) -> dict:
                 row["success"] = not reasons
                 row["reason"] = "; ".join(reasons)
                 rows.append(row)
+    skipped = [r for r in rows if r["success"] is None]
+    rows_all, rows = rows, [r for r in rows if r["success"] is not None]
     ok = sum(r["success"] for r in rows)
     gates = []
     for p in snap["phases"]:
@@ -292,6 +305,8 @@ def score(snap, trace, reviews, questions, health, elapsed, args) -> dict:
         "apps": apps, "app_facts": snap.get("app_facts"),
         "summary": {"expected": len(rows), "succeeded": ok,
                     "success_rate": 100.0 * ok / max(1, len(rows)), "threshold": args.threshold,
+                    "not_admitted": len(skipped), "not_admitted_apps": not_admitted,
+                    "success_rate_all_slots": 100.0 * ok / max(1, len(rows_all)),
                     "by_phase": {p: {"ok": v[0], "total": v[1]} for p, v in sorted(by_phase.items())},
                     "enriched": sum(bool(r.get("enriched")) for r in rows),
                     "repairs": sum(r.get("repairs") or 0 for r in rows),
@@ -304,7 +319,7 @@ def score(snap, trace, reviews, questions, health, elapsed, args) -> dict:
         "questions": [{k: q[k] for k in ("app", "question", "source", "status", "respondent")}
                       for q in questions],
         "health": {"astra": health.get("astra"), "analyzers": health.get("analyzers")},
-        "agents": rows,
+        "agents": rows_all,
     }
 
 
@@ -322,7 +337,14 @@ def render(rep: dict) -> str:
          "record).", "",
          "## Result", "",
          f"**Agent success rate: {s['success_rate']:.2f}%** ({s['succeeded']}/{s['expected']} P1–P4 agent "
-         f"dispatches; threshold > {s['threshold']}%).", "",
+         f"dispatches; threshold > {s['threshold']}%).", ""]
+    if s.get("not_admitted"):
+        L += [f"{s['not_admitted']} P3/P4 agent slots were **not admitted** because the authorized P2 "
+              f"release gate routed {', '.join(f'`{a}` ({r})' for a, r in s['not_admitted_apps'].items())} "
+              "to the non-delivery register — by design, no architecture or plan is produced for a "
+              f"non-delivery route. Counting those slots as failures would give "
+              f"{s['success_rate_all_slots']:.2f}%.", ""]
+    L += [
          "Success = artifact not FAILED **and** enriched by the live Astra agent loop (not seed fallback) "
          "**and** passes ContractValidator (envelope + payload schema + content hash).", "",
          "| phase | ok / total |", "|---|---|"]
@@ -345,8 +367,8 @@ def render(rep: dict) -> str:
         L.append(f"| P{r['phase']}.{r['agent']} | {r['app']} | {r.get('status')} | "
                  f"{'yes' if r.get('enriched') else 'no'} | {r.get('tier') or ''} | {r.get('turns') or ''} | "
                  f"{r.get('repairs') or 0} | {r.get('tool_calls') or 0} | {r.get('evidence_cited') or 0} | "
-                 f"{'✅' if r['success'] else '❌'} | {r.get('reason') or ''} |")
-    fails = [r for r in rep["agents"] if not r["success"]]
+                 f"{'—' if r['success'] is None else '✅' if r['success'] else '❌'} | {r.get('reason') or ''} |")
+    fails = [r for r in rep["agents"] if r["success"] is False]
     if fails:
         L += ["", "## Failures", ""] + [f"- `{r['artifact']}`: {r['reason']}" for r in fails]
     return "\n".join(L) + "\n"

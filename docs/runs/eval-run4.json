@@ -1,0 +1,290 @@
+{
+ "job": "job-1791780230-52f08d",
+ "schema_valid_after_repair": {
+  "pct": 100.0,
+  "valid": 270,
+  "total": 270
+ },
+ "evidence_resolvability": {
+  "pct": 100.0,
+  "resolved": 14988,
+  "cited": 14988,
+  "unresolved_sample": []
+ },
+ "hallucinated_paths": {
+  "count": 0,
+  "checked": 860,
+  "items": []
+ },
+ "hallucinated_symbols": {
+  "count": 0,
+  "checked": 351,
+  "items": []
+ },
+ "golden_agreement": {
+  "primary_language": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": "java",
+     "got": "java",
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": "python",
+     "got": "python",
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": "python",
+     "got": "python",
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": "typescript",
+     "got": "typescript",
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": "csharp",
+     "got": "csharp",
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": "php",
+     "got": "php",
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": "ruby",
+     "got": "ruby",
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": "go",
+     "got": "go",
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true
+    }
+   ]
+  },
+  "framework": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": "spring-boot",
+     "got": "spring-boot",
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": "flask",
+     "got": "flask",
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": "django",
+     "got": "django",
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": "express",
+     "got": "express",
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": "Microsoft.AspNetCore",
+     "got": "Microsoft.AspNetCore",
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": "laravel/framework",
+     "got": "laravel/framework",
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": "sinatra",
+     "got": "sinatra",
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": "gin-gonic/gin",
+     "got": "gin-gonic/gin",
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": "react",
+     "got": "react",
+     "ok": true
+    }
+   ]
+  },
+  "has_tests": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": false,
+     "got": false,
+     "ok": true
+    }
+   ]
+  },
+  "has_data_layer": {
+   "pct": 90.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "flask-tutorial",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "django-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "musicstore",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "laravel58",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "sinatra",
+     "expected": false,
+     "got": false,
+     "ok": true
+    },
+    {
+     "app": "golang-example",
+     "expected": true,
+     "got": true,
+     "ok": true
+    },
+    {
+     "app": "todomvc",
+     "expected": false,
+     "got": true,
+     "ok": false
+    },
+    {
+     "app": "react-redux-realworld",
+     "expected": false,
+     "got": false,
+     "ok": true
+    }
+   ]
+  }
+ },
+ "variation": {
+  "p2_dispositions": {
+   "Refactor": 5,
+   "Replatform": 4,
+   "Retain": 1
+  },
+  "p3_distinct_boundary_sets": 9,
+  "p3_apps": 9
+ },
+ "pass": true
+}
