@@ -201,7 +201,7 @@ re-opens the P4 estimate for that lane automatically.
 **B6. Large-repo memory.** Hierarchical repo map (module summaries cached by content hash) and
 retrieval budgets so agents work on > 500 k LOC monoliths without blowing context; also the
 main lever on the 19:1 input/output token ratio.
-*Files:* `appmod/retrieval/`, `tools/builtin.py`. *Done when:* a 1 M LOC repo completes P1
+*Files:* `appmod/retrieval/`, `tools/builtin.py`. *Done when:* the largest corpus repo (OFBiz, 942 k scc code lines) completes P1
 with input tokens per agent ≤ 2× today's median.
 
 **B7. Raise P2/P3 evidence strength.** Give P2/P3 agents tools that produce *observations*

@@ -50,13 +50,15 @@ lower bounds, assurance coverage, and `not assessed` for unmeasured components.
 (e.g. 270/270 → 98.6 %).
 
 **PR 2 — `feat(corpus)`: 30-repo corpus with pinned commits and held-out split.**
-`evals/corpus.json` (URL, commit SHA, license, language family, split), `scripts/corpus_sync.py`
-to clone/verify. Candidates added to the current 10, finalized after license and clone checks:
-eShopModernizing (.NET Framework WebForms/MVC), eShopOnWeb (.NET), agoncal petstore-ee7
-(Java EE), struts-examples (Struts), Apache OFBiz (≈1 M+ LOC Java ERP), AWS CardDemo (COBOL/CICS),
-OpenCart (PHP monolith), a Rails app (Forem or similar), angular-phonecat (AngularJS 1.x),
-Saleor (Django), jhipster-sample-app, and others to reach ~30. Split: ~20 tune / ~10 held-out,
-every language family in both.
+`evals/corpus.json` (URL, commit SHA, verified license, language family, split, scc code lines),
+`scripts/corpus_sync.py` to clone/verify. Final list (the current 11 plus 19):
+tune — eShopOnWeb, Orchard 1.x (.NET Framework), struts-examples, Apache OFBiz, WebGoat,
+AWS CardDemo (COBOL/CICS), MantisBT, Bugzilla (Perl), Juice Shop; held-out — eShopModernizing
+(.NET Framework), spring-framework-petclinic, Cargo Tracker (Jakarta EE), jhipster-sample-app,
+Saleor, djangoproject.com, angular-phonecat, OpenCart, human-essentials (Rails), Gitea.
+Split: 20 tune / 10 held-out; every family with more than one repo is in both (COBOL and Perl
+have one repo each and are tune-only). Largest by scc code lines: OFBiz 942 k (406 k XML,
+262 k Java), OpenCart 806 k, Saleor 756 k, Gitea 649 k — no repo reaches 1 M.
 *Done when:* `corpus_sync.py --verify` passes for all pinned SHAs; held-out list is fixed.
 
 **PR 3 — `feat(eval)`: ~40 golden facts per repo, tool-derived, with spot-check workflow.**
@@ -111,7 +113,8 @@ introspection from migrations/DDL, API surface extraction.
 
 **PR 11 — `feat(retrieval)`: large-repo memory.**
 Hierarchical repo map with content-hash-cached module summaries and retrieval budgets.
-*Done when:* OFBiz (≈1 M LOC) completes P1–P4 with per-agent input tokens ≤ 2× run4 median.
+*Done when:* OFBiz (942 k scc code lines, the largest corpus repo) completes P1–P4 with
+per-agent input tokens ≤ 2× run4 median.
 
 **PR 12 — `feat(agents)`: `ask_stakeholder` for any agent.**
 Blocking questions park the node in `AWAITING_INPUT`; answers re-run only that node; per-app
