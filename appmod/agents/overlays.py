@@ -20,11 +20,11 @@ from __future__ import annotations
 
 import hashlib
 import json
-import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
+from appmod.agents.grounding import RepoIndex, check_function_names
 from appmod.contracts.schemas import EVIDENCE_CLASS_ENUM
 from appmod.tools.builtin import ARTIFACT_TOOLS, REPO_TOOLS
 
@@ -102,55 +102,14 @@ REPO_SEC = REPO + ["vulnerability_scan", "secret_scan", "static_analysis", "sbom
 
 # -- submission checks ------------------------------------------------------------
 
-SYMBOL_RE = re.compile(r"^[A-Za-z_$][\w$]*$")
 FUNCTION_DESC = ("declared name(s) only, ';'-separated, e.g. 'OwnerController.processCreationForm; "
                  "validateOwner'; '' for an anonymous handler — no prose")
-_SOURCE_SKIP = {".git", "node_modules", "bower_components", "vendor", "dist", "obj", "bin"}
-_repo_text: dict[Path, str] = {}
-
-
-def _source_text(root: Path) -> str:
-    if root not in _repo_text:
-        parts = []
-        for p in root.rglob("*"):
-            if p.is_file() and not (set(p.relative_to(root).parts) & _SOURCE_SKIP) \
-                    and p.stat().st_size < 1_000_000:
-                parts.append(p.read_text("utf-8", "ignore"))
-        _repo_text[root] = "\n".join(parts)
-    return _repo_text[root]
-
-
-def symbol_defined(root: Path, name: str, file: str | None = None) -> bool:
-    pat = re.compile(rf"(?<![\w$]){re.escape(name)}(?![\w$])")
-    if file:
-        p = (root / file).resolve()
-        if p.is_file() and p.is_relative_to(root.resolve()) and pat.search(p.read_text("utf-8", "ignore")):
-            return True
-    return pat.search(_source_text(root)) is not None
 
 
 def _check_p1_a9(payload: dict[str, Any], root: Path | None) -> tuple[list[str], dict[str, Any]]:
     if root is None:
         return [], payload
-    problems: list[str] = []
-    for key in ("processes", "business_rules"):
-        for it in payload.get(key) or []:
-            if not isinstance(it, dict):
-                continue
-            keep = []
-            for name in (n.strip() for n in re.split(r"[;,]", str(it.get("function") or ""))):
-                if not name:
-                    continue
-                leaf = re.split(r"::|->|#|\.", re.sub(r"\(.*", "", name))[-1].strip()
-                if not SYMBOL_RE.match(leaf):
-                    problems.append(f"{key}: function {name!r} is not a declared code name — list exact "
-                                    "names only, or '' for an anonymous handler")
-                elif not symbol_defined(root, leaf, it.get("file")):
-                    problems.append(f"{key}: function {name!r} not found in {it.get('file') or 'the repo'}")
-                else:
-                    keep.append(name)
-            it["function"] = "; ".join(keep)
-    return problems, payload
+    return check_function_names(payload, RepoIndex.of(root)), payload
 
 
 # -- postprocess hooks ------------------------------------------------------------

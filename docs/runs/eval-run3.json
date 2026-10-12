@@ -57,21 +57,9 @@
   ]
  },
  "hallucinated_paths": {
-  "count": 6,
+  "count": 3,
   "checked": 900,
   "items": [
-   {
-    "artifact": "P1/flask-tutorial/A2",
-    "path": "instance/flaskr.sqlite"
-   },
-   {
-    "artifact": "P1/laravel58/A3",
-    "path": "storage/logs/laravel.log"
-   },
-   {
-    "artifact": "P1/laravel58/A3",
-    "path": "database/database.sqlite"
-   },
    {
     "artifact": "P1/sinatra/A2",
     "path": "topic/article.md"
@@ -87,443 +75,328 @@
   ]
  },
  "hallucinated_symbols": {
-  "count": 87,
+  "count": 80,
   "checked": 488,
   "items": [
    {
     "artifact": "P1/spring-petclinic/A9",
-    "symbol": "Visit constructor",
-    "why": "not a code name"
+    "problem": "business_rules: function 'Visit constructor' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/node-express-realworld-example-app/A9",
-    "symbol": "auth.controller.ts POST /users handler",
-    "why": "not a code name"
+    "problem": "business_rules: function 'auth.controller.ts POST /users handler' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/musicstore/A9",
-    "symbol": "StoreManagerController authorization",
-    "why": "not a code name"
+    "problem": "business_rules: function 'StoreManagerController authorization' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/musicstore/A9",
-    "symbol": "Album data annotations enforced by StoreManagerController.Create/Edit",
-    "why": "not a code name"
+    "problem": "business_rules: function 'Album data annotations enforced by StoreManagerController.Create/Edit' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/musicstore/A9",
-    "symbol": "StoreManagerController.Details/Create/Edit/RemoveAlbumConfirmed",
-    "why": "not a code name"
+    "problem": "business_rules: function 'StoreManagerController.Details/Create/Edit/RemoveAlbumConfirmed' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "GET / route closure",
-    "why": "not a code name"
+    "problem": "processes: function 'GET / route closure' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "GET /user route closure",
-    "why": "not a code name"
+    "problem": "processes: function 'GET /user route closure' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "RegistersUsers trait",
-    "why": "not a code name"
+    "problem": "processes: function 'RegistersUsers trait' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "AuthenticatesUsers trait",
-    "why": "not a code name"
+    "problem": "processes: function 'AuthenticatesUsers trait' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "SendsPasswordResetEmails trait",
-    "why": "not a code name"
+    "problem": "processes: function 'SendsPasswordResetEmails trait' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "ResetsPasswords trait",
-    "why": "not a code name"
+    "problem": "processes: function 'ResetsPasswords trait' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "VerifiesEmails trait",
-    "why": "not a code name"
+    "problem": "processes: function 'VerifiesEmails trait' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "Broadcast::channel closure",
-    "why": "not a code name"
+    "problem": "business_rules: function 'GET /user route closure' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "Artisan::command closure",
-    "why": "not a code name"
+    "problem": "business_rules: function 'App\\\\User class configuration: $hidden' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "GET /user route closure",
-    "why": "not a code name"
+    "problem": "business_rules: function 'inherited serialization/assignment methods' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "App\\User class configuration: $hidden",
-    "why": "not a code name"
+    "problem": "business_rules: function 'Closure $next' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "$fillable",
-    "why": "not in source"
+    "problem": "business_rules: function '$guard = null)' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/laravel58/A9",
-    "symbol": "$casts",
-    "why": "not in source"
-   },
-   {
-    "artifact": "P1/laravel58/A9",
-    "symbol": "inherited serialization/assignment methods",
-    "why": "not a code name"
-   },
-   {
-    "artifact": "P1/laravel58/A9",
-    "symbol": "RedirectIfAuthenticated::handle($request",
-    "why": "not a code name"
-   },
-   {
-    "artifact": "P1/laravel58/A9",
-    "symbol": "Closure $next",
-    "why": "not a code name"
-   },
-   {
-    "artifact": "P1/laravel58/A9",
-    "symbol": "$guard = null)",
-    "why": "not a code name"
-   },
-   {
-    "artifact": "P1/laravel58/A9",
-    "symbol": "consumed by framework password broker",
-    "why": "not a code name"
-   },
-   {
-    "artifact": "P1/laravel58/A9",
-    "symbol": "Broadcast::channel closure",
-    "why": "not a code name"
-   },
-   {
-    "artifact": "P1/laravel58/A9",
-    "symbol": "@auth and Route::has branches",
-    "why": "not a code name"
+    "problem": "business_rules: function 'consumed by framework password broker' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/'",
-    "why": "not a code name"
+    "problem": "processes: function \"get '/'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "@@ layout",
-    "why": "not a code name"
+    "problem": "processes: function '@@ layout' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "before '/p/:topic'",
-    "why": "not a code name"
+    "problem": "processes: function \"before '/p/:topic'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/p/:topic'",
-    "why": "not a code name"
+    "problem": "processes: function \"get '/p/:topic'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "@@ layout",
-    "why": "not a code name"
+    "problem": "processes: function '@@ layout' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "before '/p/:topic/:article'",
-    "why": "not a code name"
+    "problem": "processes: function \"before '/p/:topic/:article'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/p/:topic/:article'",
-    "why": "not a code name"
+    "problem": "processes: function \"get '/p/:topic/:article'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "@@ layout",
-    "why": "not a code name"
+    "problem": "processes: function '@@ layout' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/activity'",
-    "why": "not a code name"
+    "problem": "processes: function \"get '/activity'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "@@ layout",
-    "why": "not a code name"
+    "problem": "processes: function '@@ layout' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/style.css'",
-    "why": "not a code name"
+    "problem": "processes: function \"get '/style.css'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "@@ style",
-    "why": "not a code name"
+    "problem": "processes: function '@@ style' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "Not implemented in application methods",
-    "why": "not a code name"
+    "problem": "processes: function 'Not implemented in application methods' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "README 'How can I help?' and 'On translations'",
-    "why": "not a code name"
+    "problem": "processes: function \"README 'How can I help?' and 'On translations'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "app.rb @@ layout links to contribution guidance",
-    "why": "not a code name"
+    "problem": "processes: function 'app.rb @@ layout links to contribution guidance' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/p/:topic'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/p/:topic'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/p/:topic/:article'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/p/:topic/:article'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/p/:topic'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/p/:topic'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/p/:topic/:article'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/p/:topic/:article'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/activity'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/activity'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/p/:topic'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/p/:topic'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/p/:topic/:article'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/p/:topic/:article'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "@@ layout",
-    "why": "not a code name"
+    "problem": "business_rules: function '@@ layout' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "@@ layout",
-    "why": "not a code name"
+    "problem": "business_rules: function '@@ layout' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "get '/activity'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"get '/activity'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "configure :production",
-    "why": "not a code name"
+    "problem": "business_rules: function 'configure :production' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "production before filter",
-    "why": "not a code name"
+    "problem": "business_rules: function 'production before filter' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "No enforcing application method",
-    "why": "not a code name"
+    "problem": "business_rules: function 'No enforcing application method' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "README 'How can I help?' and app.rb @@ layout contribution footer",
-    "why": "not a code name"
+    "problem": "business_rules: function \"README 'How can I help?' and app.rb @@ layout contribution footer\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "No enforcing application method",
-    "why": "not a code name"
+    "problem": "business_rules: function 'No enforcing application method' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/sinatra/A9",
-    "symbol": "README 'On translations'",
-    "why": "not a code name"
+    "problem": "business_rules: function \"README 'On translations'\" is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/todomvc/A9",
-    "symbol": "Specification sections New todo",
-    "why": "not a code name"
+    "problem": "business_rules: function 'Specification sections New todo' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/todomvc/A9",
-    "symbol": "Persistence and Routing",
-    "why": "not a code name"
+    "problem": "business_rules: function 'Persistence and Routing' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/todomvc/A9",
-    "symbol": "implementing methods mapped in P1/P2/P5/P6",
-    "why": "not a code name"
+    "problem": "business_rules: function 'implementing methods mapped in P1/P2/P5/P6' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "App.componentWillMount/componentWillReceiveProps",
-    "why": "not a code name"
+    "problem": "processes: function 'App.componentWillMount/componentWillReceiveProps' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Auth.login/register/current",
-    "why": "not a code name"
+    "problem": "processes: function 'Auth.login/register/current' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default auth/common reducers",
-    "why": "not a code name"
+    "problem": "processes: function 'default auth/common reducers' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default articleList reducer",
-    "why": "not a code name"
+    "problem": "processes: function 'default articleList reducer' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Articles.all/feed/byTag",
-    "why": "not a code name"
+    "problem": "processes: function 'Articles.all/feed/byTag' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Editor.componentWillMount/submitForm/watchForEnter/removeTagHandler/componentWillUnmount",
-    "why": "not a code name"
+    "problem": "processes: function 'Editor.componentWillMount/submitForm/watchForEnter/removeTagHandler/componentWillUnmount' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default editor/common reducers",
-    "why": "not a code name"
+    "problem": "processes: function 'default editor/common reducers' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Articles.create/update",
-    "why": "not a code name"
+    "problem": "processes: function 'Articles.create/update' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default common reducer",
-    "why": "not a code name"
+    "problem": "processes: function 'default common reducer (DELETE_ARTICLE)' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Article.componentWillMount/render",
-    "why": "not a code name"
+    "problem": "processes: function 'Article.componentWillMount/render' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default article reducer",
-    "why": "not a code name"
+    "problem": "processes: function 'default article reducer' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Comments.create/delete/forArticle",
-    "why": "not a code name"
+    "problem": "processes: function 'Comments.create/delete/forArticle' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Profile.componentWillMount/render",
-    "why": "not a code name"
+    "problem": "processes: function 'Profile.componentWillMount/render' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "mapDispatchToProps.onFollow/onUnfollow",
-    "why": "not a code name"
+    "problem": "processes: function 'mapDispatchToProps.onFollow/onUnfollow' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default profile/articleList reducers",
-    "why": "not a code name"
+    "problem": "processes: function 'default profile/articleList reducers' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Profile.follow/unfollow/get",
-    "why": "not a code name"
+    "problem": "processes: function 'Profile.follow/unfollow/get' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "mapDispatchToProps.favorite/unfavorite",
-    "why": "not a code name"
+    "problem": "processes: function 'mapDispatchToProps.favorite/unfavorite' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default articleList reducer",
-    "why": "not a code name"
+    "problem": "processes: function 'default articleList reducer' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Articles.favorite/unfavorite",
-    "why": "not a code name"
+    "problem": "processes: function 'Articles.favorite/unfavorite' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "SettingsForm.componentWillMount/componentWillReceiveProps/updateState/submitForm/render",
-    "why": "not a code name"
+    "problem": "processes: function 'SettingsForm.componentWillMount/componentWillReceiveProps/updateState/submitForm/render' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default settings/common reducers",
-    "why": "not a code name"
+    "problem": "processes: function 'default settings/common reducers' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default common/auth reducers",
-    "why": "not a code name"
+    "problem": "business_rules: function 'default common/auth reducers (LOGIN/REGISTER)' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default articleList reducer",
-    "why": "not a code name"
+    "problem": "business_rules: function 'default articleList reducer (APPLY_TAG_FILTER/CHANGE_TAB)' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Articles.create/update",
-    "why": "not a code name"
+    "problem": "business_rules: function 'Articles.create/update' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default articleList reducer",
-    "why": "not a code name"
+    "problem": "business_rules: function 'default articleList reducer (ARTICLE_FAVORITED/ARTICLE_UNFAVORITED)' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "Editor.watchForEnter/removeTagHandler",
-    "why": "not a code name"
+    "problem": "business_rules: function 'Editor.watchForEnter/removeTagHandler' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    },
    {
     "artifact": "P1/react-redux-realworld/A9",
-    "symbol": "default editor reducer",
-    "why": "not a code name"
+    "problem": "business_rules: function 'default editor reducer (ADD_TAG/REMOVE_TAG)' is not a declared code name \u2014 list exact names only, or '' for an anonymous handler"
    }
   ]
  },

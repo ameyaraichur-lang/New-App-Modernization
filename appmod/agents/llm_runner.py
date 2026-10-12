@@ -29,6 +29,7 @@ from typing import Any, Callable
 
 import jsonschema
 
+from appmod.agents.grounding import RepoIndex, grounded_claims, ungrounded_paths
 from appmod.agents.overlays import EVC, EVIDS, Overlay, A, E, N, O, S, overlay_for
 from appmod.agents.runtime import AgentOutcome, TransientAgentError, build_charter
 from appmod.config import Settings, get_settings
@@ -361,6 +362,12 @@ class LLMAgentRunner:
         if ov.check is not None and not review_only:
             extra, args["payload"] = ov.check(args.get("payload") or {}, repo_root)
             problems.extend(extra)
+        if repo_root is not None:
+            missing = ungrounded_paths(RepoIndex.of(repo_root), grounded_claims(
+                args.get("findings") or [], args.get("payload") or {}, self.phase))
+            if missing:
+                problems.append(f"paths not in the repository and not named by its code: {missing[:10]} "
+                                "— cite only paths you saw in list_dir/read_file/grep output")
         merged = None
         if not review_only:
             merged = self._merge_payload(seed.payload, args.get("payload") or {}, ov)

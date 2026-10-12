@@ -15,6 +15,7 @@ Metrics and release thresholds:
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import re
 import sqlite3
@@ -26,79 +27,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from appmod.agents.grounding import (RepoIndex, check_function_names,  # noqa: E402
+                                     grounded_claims, path_tokens, walk)
 from appmod.contracts.schemas import ContractValidator  # noqa: E402
 from appmod.registry.compiler import resolve_registry  # noqa: E402
 from appmod.store.artifact_store import ArtifactStore  # noqa: E402
 
 GOLDEN = ROOT / "evals" / "golden" / "corpus.json"
 THRESHOLDS = {"schema_valid_after_repair": 95.0, "evidence_resolvability": 90.0}
-FILE_EXTS = ("java|kt|groovy|gradle|xml|properties|ya?ml|json|toml|ini|cfg|conf|env|py|rb|php|go|mod|sum|"
-             "js|jsx|ts|tsx|mjs|cjs|vue|cs|csproj|sln|props|targets|cshtml|razor|html?|css|scss|less|sql|"
-             "sqlite|db|md|txt|rst|lock|sh|ps1|cmd|bat|dockerfile|tf|jsp|blade\\.php|twig|erb|slim|map|log")
-PATH_RE = re.compile(rf"(?<![\w/.:-])((?:[\w@.-]+/)+[\w.-]+\.(?:{FILE_EXTS}))(?![\w/])", re.I)
-TEXT_SKIP = {".git", "node_modules", "bower_components", "vendor", "dist", "obj", "bin"}
-SYMBOL_RE = re.compile(r"^[A-Za-z_$][\w$]*$")
-
-
-def walk(obj: Any):
-    if isinstance(obj, dict):
-        yield obj
-        for v in obj.values():
-            yield from walk(v)
-    elif isinstance(obj, list):
-        for v in obj:
-            yield from walk(v)
-
-
-def strings(obj: Any):
-    if isinstance(obj, str):
-        yield obj
-    elif isinstance(obj, dict):
-        for v in obj.values():
-            yield from strings(v)
-    elif isinstance(obj, list):
-        for v in obj:
-            yield from strings(v)
-
-
-class Repo:
-    def __init__(self, root: Path):
-        self.root = root
-        self.files = [p.relative_to(root).as_posix() for p in root.rglob("*")
-                      if p.is_file() and ".git" not in p.relative_to(root).parts]
-        self.dirs = {str(Path(f).parent.as_posix()) for f in self.files}
-        self._text: str | None = None
-
-    def has_path(self, token: str) -> bool:
-        """Exists as a file/dir, or is a path the repo itself names (runtime files such as
-        ``storage/logs/laravel.log`` or ``./data/gorm.db`` are referenced, not checked in)."""
-        t = re.sub(rf"^(\./|{re.escape(self.root.name)}/)", "", token)
-        if any(f == t or f.endswith("/" + t) for f in self.files):
-            return True
-        if any(d == t or d.endswith("/" + t) for d in self.dirs):
-            return True
-        return t in self.text
-
-    @property
-    def text(self) -> str:
-        if self._text is None:
-            parts = []
-            for f in self.files:
-                if set(Path(f).parts) & TEXT_SKIP:
-                    continue
-                p = self.root / f
-                if p.stat().st_size < 1_000_000:
-                    parts.append(p.read_text("utf-8", "ignore"))
-            self._text = "\n".join(parts)
-        return self._text
-
-    def has_symbol(self, name: str) -> bool:
-        return re.search(rf"\b{re.escape(name)}\b", self.text) is not None
-
-
-def is_candidate_path(tok: str) -> bool:
-    return not (tok.startswith(("http", "www.")) or "://" in tok or tok.count("/") == 0
-                or re.match(r"^\d", tok) or tok.endswith((".com", ".org", ".io", ".net")))
 
 
 def evaluate(runs_dir: Path, job: str) -> dict[str, Any]:
@@ -114,7 +50,7 @@ def evaluate(runs_dir: Path, job: str) -> dict[str, Any]:
         (job,)) if r[0]}
     reg = resolve_registry()["phases"]
     validators = {p: ContractValidator(reg[p]) for p in (1, 2, 3, 4)}
-    repos = {a: Repo(roots[a]) for a in apps}
+    repos = {a: RepoIndex.of(roots[a]) for a in apps}
 
     total = valid = 0
     cited = resolved = 0
@@ -153,32 +89,17 @@ def evaluate(runs_dir: Path, job: str) -> dict[str, Any]:
                 repo = repos.get(app)
                 if repo is None:
                     continue
-                claims = [art.get("payload", {})] if phase == 1 else []
-                claims += [i for i in walk([art.get("findings", []), art.get("payload", {})])
-                           if i.get("evidence_class") in ("OBSERVED", "DOCUMENTED")]
-                seen: set[str] = set()
-                for s in strings(claims):
-                    for tok in PATH_RE.findall(s):
-                        if tok in seen or not is_candidate_path(tok):
-                            continue
-                        seen.add(tok)
-                        checked_paths += 1
-                        if not repo.has_path(tok):
-                            bad_paths.append({"artifact": aid, "path": tok})
+                claims = grounded_claims(art.get("findings", []), art.get("payload", {}), phase)
+                for tok in path_tokens(claims):
+                    checked_paths += 1
+                    if not repo.has_path(tok):
+                        bad_paths.append({"artifact": aid, "path": tok})
                 if phase == 1 and agent["local_id"] == "A9":
-                    for i in walk(art.get("payload", {})):
-                        if "function" not in i:
-                            continue
-                        for seg in re.split(r"[;,]", str(i.get("function") or "")):
-                            seg = re.sub(r"\(.*?\)", "", seg).strip()
-                            if not seg:
-                                continue
-                            name = re.split(r"::|->|#|\.", seg)[-1].strip()
-                            checked_symbols += 1
-                            if not SYMBOL_RE.match(name):
-                                bad_symbols.append({"artifact": aid, "symbol": seg, "why": "not a code name"})
-                            elif not repo.has_symbol(name):
-                                bad_symbols.append({"artifact": aid, "symbol": seg, "why": "not in source"})
+                    payload = copy.deepcopy(art.get("payload", {}))
+                    checked_symbols += sum(len([n for n in re.split(r"[;,]", str(i.get("function") or ""))
+                                                if n.strip()])
+                                           for i in walk(payload) if "function" in i)
+                    bad_symbols += [{"artifact": aid, "problem": p} for p in check_function_names(payload, repo)]
 
     golden = json.loads(GOLDEN.read_text())["repos"]
     facts: dict[str, list[dict[str, Any]]] = {}
