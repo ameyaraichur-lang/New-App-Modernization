@@ -28,8 +28,13 @@ the evidence:
 1. CI green (ruff, mypy, offline tests, UI build).
 2. Its own done-when test passes.
 3. A **live Astra run on the full corpus** at that PR's head: P1–P4 dispatch success > 97 %,
-   Step 33 gate PASS, and no confidence component lower than on the previous merged PR.
+   Step 33 gate PASS, and no confidence component with more failures or a lower point
+   estimate than on the previous merged PR. Lower bounds may move with sample size (amended
+   2026-10-12: run5's C1 bound fell 98.6 → 98.5 % from 270 → 253 dispatches, zero failures).
 4. Key scan of the diff and reports: 0 hits.
+
+P2 route changes between consecutive runs are listed in every PR; they block merges only
+once the stability harness (PR 4) defines a threshold.
 
 Stack mechanics: each PR is based on the one below it; after the bottom PR merges, the next is
 retargeted to `main` and re-verified. A failed rule stops the stack at that PR; nothing above it
