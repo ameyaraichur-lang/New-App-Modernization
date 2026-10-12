@@ -3,6 +3,7 @@ fallback, evidence enforcement and gateway sandboxing — no network."""
 
 import json
 import re
+import time
 from pathlib import Path
 
 import pytest
@@ -203,6 +204,7 @@ def test_recorded_run_replays_offline_with_identical_content(tmp_path):
 
     rec_runner, reg = _routed(ScriptedClient(), tmp_path, "record")
     recorded = rec_runner.run(_spec(reg, "A1"), {}, PolicyService(), context={"published": {}})
+    time.sleep(1.1)   # replay must not depend on wall-clock seconds
     offline = ScriptedClient(offline=True)
     rep_runner, reg = _routed(offline, tmp_path, "replay")
     replayed = rep_runner.run(_spec(reg, "A1"), {}, PolicyService(), context={"published": {}})
@@ -322,3 +324,18 @@ def test_gateway_sandbox(tmp_path):
                          ToolEnv(application_id="t", phase=2, repo_root=None, store=None, published={}),
                          EvidenceLedger())
     assert "read_file" not in {t.name for t in no_repo.specs()}
+
+
+def test_a9_function_names_are_verified_against_source(tmp_path):
+    from appmod.agents.overlays import overlay_for
+    (tmp_path / "owners.py").write_text("def register_owner(form):\n    return save(form)\n")
+    payload = {"processes": [
+        {"name": "Register", "file": "owners.py", "function": "register_owner; route closure"},
+        {"name": "Ghost", "file": "owners.py", "function": "OwnerService.deleteAll"},
+        {"name": "Anon", "file": "owners.py", "function": ""},
+    ]}
+    problems, fixed = overlay_for(1, "A9").check(payload, tmp_path)
+    assert len(problems) == 2
+    assert any("not a declared code name" in p for p in problems)
+    assert any("'OwnerService.deleteAll' not found" in p for p in problems)
+    assert [p["function"] for p in fixed["processes"]] == ["register_owner", "", ""]

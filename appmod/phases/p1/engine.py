@@ -111,7 +111,8 @@ class P1AgentRunner:
                         package_count=syft["package_count"], by_type=syft["by_type"],
                         packages=[{k: p[k] for k in ("name", "version", "type", "purl")}
                                   for p in syft["packages"][:250]])
-        sbom_ref = hashlib.sha256(json.dumps(sbom, sort_keys=True).encode()).hexdigest()[:32]
+        content = {k: v for k, v in sbom.items() if k != "generated_at"}
+        sbom_ref = hashlib.sha256(json.dumps(content, sort_keys=True).encode()).hexdigest()[:32]
         findings: list[dict[str, Any]] = [
             _finding("A1-F1", "OBSERVED",
                      f"{len(s.files)} source files, {s.loc} LOC across "
