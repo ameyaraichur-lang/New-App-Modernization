@@ -57,6 +57,33 @@ def tool_loop(client: AstraClient, deployment: str) -> dict:
             "tokens": r1.usage.total + r2.usage.total}
 
 
+FACT_SCHEMA = {
+    "type": "json_schema", "name": "fact", "strict": True,
+    "schema": {"type": "object", "additionalProperties": False, "required": ["language", "year"],
+               "properties": {"language": {"type": "string"}, "year": {"type": "integer"}}},
+}
+
+
+def json_schema_output(client: AstraClient, deployment: str) -> dict:
+    r = client.create(deployment, instructions="Answer with the requested JSON only.",
+                      input_items=[{"role": "user", "content": "Which language did Guido van Rossum "
+                                    "create, and in which year was it first released?"}],
+                      text_format=FACT_SCHEMA, reasoning_effort="low", max_output_tokens=2000)
+    out = json.loads(r.text)
+    assert out["language"].lower() == "python" and isinstance(out["year"], int), out
+    return out
+
+
+def list_deployments(settings) -> list[str]:
+    """Deployment ids on the resource (data-plane listing is only served on 2022-12-01)."""
+    import httpx
+    r = httpx.get(f"{settings.astra_endpoint.rstrip('/')}/openai/deployments",
+                  params={"api-version": "2022-12-01"},
+                  headers={"api-key": settings.astra_api_key.get_secret_value()}, timeout=30)
+    r.raise_for_status()
+    return [d["id"] for d in r.json().get("data", [])]
+
+
 def main() -> int:
     s = get_settings()
     if not s.astra_configured:
@@ -64,6 +91,17 @@ def main() -> int:
         return 2
     client = AstraClient(s)
     failures = 0
+    try:
+        deps = list_deployments(s)
+        tiers = {t: s.deployment_for(t) for t in ("reasoning", "coding", "fast", "fallback")}
+        missing = [d for d in [*tiers.values(), s.tier_embedding] if d not in deps]
+        failures += bool(missing)
+        print(f"{'deploys':<10} {len(deps)} listed; missing tiers: {missing or 'none'}")
+        print(f"{'json':<10} {s.deployment_for('reasoning'):<28} "
+              f"{json_schema_output(client, s.deployment_for('reasoning'))}")
+    except Exception as exc:
+        failures += 1
+        print(f"probe FAIL {type(exc).__name__}: {str(exc)[:300]}")
     for tier in ("reasoning", "coding", "fast", "fallback"):
         dep = s.deployment_for(tier)
         try:
