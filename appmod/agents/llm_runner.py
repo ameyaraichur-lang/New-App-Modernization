@@ -24,6 +24,7 @@ from __future__ import annotations
 import copy
 import json
 import time
+from pathlib import Path
 from typing import Any, Callable
 
 import jsonschema
@@ -245,7 +246,8 @@ class LLMAgentRunner:
                 if call.name == "submit_outcome":
                     try:
                         args = call.parsed()
-                        problems, candidate = self._check(spec, seed, ov, args, ledger, review_only)
+                        problems, candidate = self._check(spec, seed, ov, args, ledger, review_only,
+                                                          env.repo_root)
                     except (ValueError, KeyError, TypeError) as exc:
                         problems, candidate, args = [f"submission rejected: {exc}"], None, None
                     if problems and repairs < self.max_repairs:
@@ -336,7 +338,7 @@ class LLMAgentRunner:
     # -- submission check + merge --------------------------------------------------
 
     def _check(self, spec, seed: AgentOutcome, ov: Overlay, args: dict[str, Any],
-               ledger: EvidenceLedger, review_only: bool):
+               ledger: EvidenceLedger, review_only: bool, repo_root: Path | None = None):
         problems: list[str] = []
         cited: list[str] = []
 
@@ -356,6 +358,9 @@ class LLMAgentRunner:
             problems.append(f"unknown evidence ids (cite only ids you were given): {unknown[:15]}")
         if not args.get("findings") and not review_only:
             problems.append("at least one finding is required")
+        if ov.check is not None and not review_only:
+            extra, args["payload"] = ov.check(args.get("payload") or {}, repo_root)
+            problems.extend(extra)
         merged = None
         if not review_only:
             merged = self._merge_payload(seed.payload, args.get("payload") or {}, ov)

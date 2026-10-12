@@ -20,7 +20,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Callable
 
 from appmod.contracts.schemas import EVIDENCE_CLASS_ENUM
@@ -82,6 +84,8 @@ class Overlay:
     fields: dict[str, tuple[dict[str, Any], str]] = field(default_factory=dict)
     guidance: str = ""
     postprocess: Callable[[dict[str, Any], dict[str, Any], dict[str, Any]], dict[str, Any]] | None = None
+    # (llm payload, repo root) -> (repairable problems, payload with unverifiable claims removed)
+    check: Callable[[dict[str, Any], Path | None], tuple[list[str], dict[str, Any]]] | None = None
     max_turns: int = 10
 
     def fields_schema(self) -> dict[str, Any]:
@@ -95,6 +99,59 @@ class Overlay:
 
 REPO = REPO_TOOLS + ARTIFACT_TOOLS
 REPO_SEC = REPO + ["vulnerability_scan", "secret_scan", "static_analysis", "sbom_packages"]
+
+# -- submission checks ------------------------------------------------------------
+
+SYMBOL_RE = re.compile(r"^[A-Za-z_$][\w$]*$")
+FUNCTION_DESC = ("declared name(s) only, ';'-separated, e.g. 'OwnerController.processCreationForm; "
+                 "validateOwner'; '' for an anonymous handler — no prose")
+_SOURCE_SKIP = {".git", "node_modules", "bower_components", "vendor", "dist", "obj", "bin"}
+_repo_text: dict[Path, str] = {}
+
+
+def _source_text(root: Path) -> str:
+    if root not in _repo_text:
+        parts = []
+        for p in root.rglob("*"):
+            if p.is_file() and not (set(p.relative_to(root).parts) & _SOURCE_SKIP) \
+                    and p.stat().st_size < 1_000_000:
+                parts.append(p.read_text("utf-8", "ignore"))
+        _repo_text[root] = "\n".join(parts)
+    return _repo_text[root]
+
+
+def symbol_defined(root: Path, name: str, file: str | None = None) -> bool:
+    pat = re.compile(rf"(?<![\w$]){re.escape(name)}(?![\w$])")
+    if file:
+        p = (root / file).resolve()
+        if p.is_file() and p.is_relative_to(root.resolve()) and pat.search(p.read_text("utf-8", "ignore")):
+            return True
+    return pat.search(_source_text(root)) is not None
+
+
+def _check_p1_a9(payload: dict[str, Any], root: Path | None) -> tuple[list[str], dict[str, Any]]:
+    if root is None:
+        return [], payload
+    problems: list[str] = []
+    for key in ("processes", "business_rules"):
+        for it in payload.get(key) or []:
+            if not isinstance(it, dict):
+                continue
+            keep = []
+            for name in (n.strip() for n in re.split(r"[;,]", str(it.get("function") or ""))):
+                if not name:
+                    continue
+                leaf = re.split(r"::|->|#|\.", re.sub(r"\(.*", "", name))[-1].strip()
+                if not SYMBOL_RE.match(leaf):
+                    problems.append(f"{key}: function {name!r} is not a declared code name — list exact "
+                                    "names only, or '' for an anonymous handler")
+                elif not symbol_defined(root, leaf, it.get("file")):
+                    problems.append(f"{key}: function {name!r} not found in {it.get('file') or 'the repo'}")
+                else:
+                    keep.append(name)
+            it["function"] = "; ".join(keep)
+    return problems, payload
+
 
 # -- postprocess hooks ------------------------------------------------------------
 
@@ -132,7 +189,8 @@ def _pp_p2_a6(seed: dict, llm: dict, ctx: dict) -> dict:
         if m and m["proposed_disposition"] in R8:
             nd.update(proposed_disposition=m["proposed_disposition"], rationale=m["rationale"],
                       second_best=m["second_best"], evidence_class=m["evidence_class"],
-                      evidence_ids=m["evidence_ids"], origin="llm")
+                      evidence_ids=m["evidence_ids"], origin="llm",
+                      options_considered=m.get("options_considered", []))
             if m["proposed_disposition"] in ("Retain", "Retire"):
                 nd["wave_id"] = None
             else:
@@ -325,16 +383,20 @@ P1 = {
             "Reconstruct business processes and business rules from controllers, services, "
             "validators and models. Locate them with search_code first — one natural-language "
             "query per candidate process (e.g. 'register a new user', 'place an order', "
-            "'follow another user') — then read_file the hits. For each process and rule name the "
-            "implementing function or method and its file, and cite the search_code and read_file "
-            "evidence ids. Owner confirmation is PENDING — never mark rules as confirmed."),
+            "'follow another user') — then read_file the hits. For each process and rule give its "
+            "file and the implementing function/method names exactly as declared in that file, and "
+            "cite the search_code and read_file evidence ids. Names are verified against the source; "
+            "anonymous handlers (route closures, Sinatra/Express DSL blocks) have no name — leave "
+            "function empty and describe the handler in steps. Owner confirmation is PENDING — never "
+            "mark rules as confirmed."),
         fields={
             "processes": (A(item(name=S(), trigger=S(), steps=A(S()), file=S(),
-                                 function=S("implementing function/method"))), "append"),
-            "business_rules": (A(item(rule=S(), file=S(), function=S("enforcing function/method"),
+                                 function=S(FUNCTION_DESC))), "append"),
+            "business_rules": (A(item(rule=S(), file=S(), function=S(FUNCTION_DESC),
                                       enforcement=S())), "append"),
             "exception_paths": (A(item(process=S(), condition=S(), handling=S())), "append"),
-        }),
+        },
+        check=_check_p1_a9),
     "A10": Overlay(
         tier="reasoning", tools=ARTIFACT_TOOLS,
         guidance=(
@@ -425,16 +487,32 @@ P2 = {
             "skills_gaps": (A(item(skill=S(), applications=A(S()), state=S())), "append"),
         }),
     "A6": Overlay(
-        tier="reasoning", effort="high", tools=PF_TOOLS,
+        tier="reasoning", effort="high", tools=PF_TOOLS + ["eol_lookup"],
         guidance=(
-            "Decide one 8R disposition per application (Retain, Retire, Rehost, Replatform, "
-            "Refactor, Rearchitect, Rebuild, Replace) from the P1/P2 evidence: framework/runtime age, "
-            "vulnerabilities, complexity, value, coupling, test coverage. Give the rationale, the "
-            "second-best option and why not, and a wave (1 = first). Approval stays PENDING. "
-            "Retire/Retain need explicit owner decisions — propose them only with strong evidence."),
+            "Decide one 8R disposition per application from the P1/P2 evidence. The routes mean:\n"
+            "- Retain: keep as-is, no modernization funded now (stable, low value of change, or "
+            "awaiting an owner decision).\n"
+            "- Retire: decommission (no ongoing business need: demo/reference/duplicate code).\n"
+            "- Rehost: move unchanged to new infrastructure; no code or framework change.\n"
+            "- Replatform: keep the design, move to a supported runtime/framework major version or "
+            "managed platform — the driver is an EOL or unsupported stack under a sound design.\n"
+            "- Refactor: change code within the existing architecture and supported stack — the "
+            "driver is code-level quality, security or testability defects.\n"
+            "- Rearchitect: change the structure (decomposition, integration style) because the "
+            "current architecture blocks requirements.\n"
+            "- Rebuild: rewrite on a new stack (no viable upgrade path, or the code is cheaper to "
+            "rewrite than to fix).\n"
+            "- Replace: substitute a SaaS/COTS/existing product.\n"
+            "Ground each choice in that app's evidence (eol_lookup for runtime/framework support, "
+            "vulnerabilities, complexity, value, coupling, tests). Score at least three candidate "
+            "routes in options_considered and choose the best fit; do not default to one route "
+            "across the portfolio. Give the second-best option and why not, and a wave (1 = first). "
+            "Approval stays PENDING. Retire/Retain are proposals that need owner decisions."),
         fields={
             "decisions": (A(item(application_id=S(), proposed_disposition=E(*R8), rationale=S(),
-                                 second_best=E(*R8), why_not_second_best=S(), wave=I())), "decide"),
+                                 second_best=E(*R8), why_not_second_best=S(), wave=I(),
+                                 options_considered=A(O(route=E(*R8), fit=E("strong", "partial", "poor"),
+                                                        evidence=S())))), "decide"),
         },
         postprocess=_pp_p2_a6),
     "A7": Overlay(
