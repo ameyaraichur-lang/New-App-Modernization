@@ -35,6 +35,7 @@ from appmod.kernel.audit import AuditJournal
 from appmod.kernel.gates import gate_impl_for
 from appmod.kernel.orchestrator import PhaseOrchestrator
 from appmod.kernel.policy import PolicyService
+from appmod.kernel.assurance import with_assurance
 from appmod.kernel.reviews import with_human_review
 from appmod.phases import handoff as H
 from appmod.phases.p1.engine import P1_GATE_OVERRIDES, P1AgentRunner
@@ -401,8 +402,11 @@ class PipelineJob:
                                     env_factory=self._env_factory(phase, app), settings=self.settings,
                                     extra_tools=lambda: list(getattr(self, "_mcp_tools", [])))
         overrides = dict(overrides)
+        if phase <= 4:
+            human = self.review_mode == "human"
+            overrides["G2"] = with_assurance(overrides.get("G2") or gate_impl_for("G2"), human_review=human)
         if self.review_mode == "human" and phase <= 4:
-            g2 = overrides.get("G2") or gate_impl_for("G2")
+            g2 = overrides["G2"]
             overrides["G2"] = with_human_review(
                 g2, self.db, self.job_id, phase, "G2", audit=self.audit,
                 on_pending=self._review_pending)

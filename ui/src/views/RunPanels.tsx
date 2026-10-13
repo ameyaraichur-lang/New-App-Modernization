@@ -27,6 +27,50 @@ const box: React.CSSProperties = {
 const PROPOSAL_KEYS = ['status', 'authorized_apps', 'conditions', 'scope', 'blockers', 'unresolved',
   'risk_summary', 'candidate_hash', 'manifest_hash'];
 
+interface UnverifiedItem { artifact: string; path: string; evidence_class: string; verdict: string | null; item: string }
+interface Assurance {
+  counts: Record<string, number>; unverified_count: number; unverified: UnverifiedItem[];
+  confirmed?: { by: string; class: string; items: number };
+}
+
+const CLASS_CHIP: Record<string, string> = {
+  'execution-verified': 'green', 'tool-measured': 'green', entailed: 'green', 'human-confirmed': 'green',
+  'scripted-confirmed': 'amber', unverified: 'red',
+};
+
+function AssuranceBadges({ a }: { a: Assurance }) {
+  return (
+    <span style={{ display: 'inline-flex', gap: 4, flexWrap: 'wrap' }}>
+      {Object.entries(a.counts).map(([k, v]) => (
+        <span key={k} className={`chip ${CLASS_CHIP[k] ?? ''}`} title="assurance class of released items">{k} {v}</span>
+      ))}
+    </span>
+  );
+}
+
+function UnverifiedList({ a }: { a: Assurance }) {
+  if (!a.unverified_count) return <div className="kv">No unverified items: everything is tool-measured, entailed or confirmed.</div>;
+  return (
+    <div>
+      <div className="kv">
+        Approving confirms these <b>{a.unverified_count}</b> unverified model items under your identity
+        {a.unverified.length < a.unverified_count ? ` (first ${a.unverified.length} shown)` : ''}:
+      </div>
+      <table className="table" style={{ fontSize: 11 }}>
+        <thead><tr><th>artifact</th><th>item</th><th>class</th><th>verifier</th></tr></thead>
+        <tbody>
+          {a.unverified.map((u) => (
+            <tr key={`${u.artifact}#${u.path}`}>
+              <td className="mono">{u.artifact.split('/').pop()} {u.path}</td><td>{u.item}</td>
+              <td>{u.evidence_class}</td><td>{u.verdict ?? '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function Approvals({ jobId, me, tick }: { jobId: string; me: Me | null; tick: number }) {
   const [rows, setRows] = useState<Review[]>([]);
   const [comment, setComment] = useState<Record<string, string>>({});
@@ -62,6 +106,12 @@ export function Approvals({ jobId, me, tick }: { jobId: string; me: Me | null; t
           <pre style={{ fontSize: 11, maxHeight: 220, overflow: 'auto' }}>
             {JSON.stringify(Object.fromEntries(Object.entries(r.proposal).filter(([k]) => PROPOSAL_KEYS.includes(k))), null, 2)}
           </pre>
+          {r.proposal.assurance ? (
+            <>
+              <div className="kv">Assurance <AssuranceBadges a={r.proposal.assurance as Assurance} /></div>
+              <UnverifiedList a={r.proposal.assurance as Assurance} />
+            </>
+          ) : null}
           {can(me, 'reviewer') && (
             <div style={{ display: 'flex', gap: 8 }}>
               <input style={box} placeholder="comment / reason (recorded with your identity)"
@@ -75,14 +125,21 @@ export function Approvals({ jobId, me, tick }: { jobId: string; me: Me | null; t
       ))}
       {past.length > 0 && (
         <table className="table">
-          <thead><tr><th>gate</th><th>app</th><th>status</th><th>decision</th><th>by</th><th>comment</th></tr></thead>
+          <thead><tr><th>gate</th><th>app</th><th>status</th><th>decision</th><th>by</th><th>confirmed as</th><th>comment</th></tr></thead>
           <tbody>
-            {past.map((r) => (
-              <tr key={r.review_id}>
-                <td>P{r.phase}.{r.gate}</td><td>{r.app}</td><td>{r.status}</td>
-                <td>{r.decision ?? '—'}</td><td>{r.reviewer ?? '—'}</td><td>{r.comment ?? ''}</td>
-              </tr>
-            ))}
+            {past.map((r) => {
+              const a = r.proposal.assurance as Assurance | undefined;
+              const cls = r.reviewer?.startsWith('scripted-') ? 'scripted-confirmed' : 'human-confirmed';
+              return (
+                <tr key={r.review_id}>
+                  <td>P{r.phase}.{r.gate}</td><td>{r.app}</td><td>{r.status}</td>
+                  <td>{r.decision ?? '—'}</td><td>{r.reviewer ?? '—'}</td>
+                  <td>{a && r.decision === 'approve' && a.unverified_count
+                    ? <span className={`chip ${CLASS_CHIP[cls]}`}>{cls} {a.unverified_count}</span> : '—'}</td>
+                  <td>{r.comment ?? ''}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
