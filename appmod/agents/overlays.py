@@ -27,7 +27,7 @@ from typing import Any, Callable
 
 from appmod.agents.grounding import RepoIndex, check_function_names
 from appmod.contracts.schemas import EVIDENCE_CLASS_ENUM
-from appmod.tools.builtin import ARTIFACT_TOOLS, REPO_TOOLS
+from appmod.tools.builtin import ARTIFACT_TOOLS, REPO_TOOLS, STRUCTURE_TOOLS
 
 # -- strict-schema helpers -------------------------------------------------------
 
@@ -101,6 +101,7 @@ class Overlay:
 
 
 REPO = REPO_TOOLS + ARTIFACT_TOOLS
+REPO_STRUCT = REPO + STRUCTURE_TOOLS
 REPO_SEC = REPO + ["vulnerability_scan", "secret_scan", "static_analysis", "sbom_packages"]
 
 # -- submission checks ------------------------------------------------------------
@@ -395,7 +396,7 @@ P1 = {
 
 # -- P2 Portfolio ---------------------------------------------------------------------
 
-PF_TOOLS = ARTIFACT_TOOLS + ["repo_summary", "list_dependencies", "grep", "read_file"]
+PF_TOOLS = ARTIFACT_TOOLS + ["repo_summary", "list_dependencies", "grep", "read_file"] + STRUCTURE_TOOLS
 
 P2 = {
     "A1": Overlay(
@@ -412,8 +413,10 @@ P2 = {
         tier="reasoning", tools=PF_TOOLS,
         guidance=(
             "Assess technical complexity per app (framework age, coupling, data layer, test "
-            "coverage) and cross-app dependencies/shared components. Complexity band is computed; "
-            "add your qualitative drivers and sequencing constraints."),
+            "coverage) and cross-app dependencies/shared components. Call dependency_graph and "
+            "change_coupling per app (application_id) for import edges, cycles and co-change pairs; "
+            "cite those tool ids and mark structural coupling OBSERVED when the JSON shows it. "
+            "Complexity band is computed; add your qualitative drivers and sequencing constraints."),
         fields={
             "complexity_drivers": (A(item(application_id=S(), driver=S(), impact=SEV)), "append"),
             "dependency_edges": (A(item(**{"from": S(), "to": S()}, kind=S())), "append"),
@@ -434,9 +437,11 @@ P2 = {
             "Look for functional overlap between applications (same domain, duplicate capability). "
             "Call app_similarity first: it measures code overlap from embeddings (share of "
             "near-duplicate chunks = copied code; mean best-match cosine = same capability even "
-            "across languages; centroid cosine; closest chunk pairs). Report each pair's "
-            "measured overlap, then confirm or reject a functional overlap from P1 capabilities "
-            "and processes. Similarity proposes investigation only; never approve retirement."),
+            "across languages; centroid cosine; closest chunk pairs). Use api_surface and "
+            "db_schema per app to compare interfaces and data ownership; cite tool evidence for "
+            "shared endpoints or tables. Report each pair's measured overlap, then confirm or "
+            "reject a functional overlap from P1 capabilities and processes. Similarity proposes "
+            "investigation only; never approve retirement."),
         fields={
             "overlap": (A(item(group=S(), members=A(S()), signal=S(),
                                code_overlap=NUM("app_similarity overlap share 0-1"))), "append"),
@@ -469,7 +474,9 @@ P2 = {
             "rewrite than to fix).\n"
             "- Replace: substitute a SaaS/COTS/existing product.\n"
             "Ground each choice in that app's evidence (eol_lookup for runtime/framework support, "
-            "vulnerabilities, complexity, value, coupling, tests). Score at least three candidate "
+            "dependency_graph/change_coupling for coupling, db_schema for data risk, "
+            "vulnerabilities, complexity, value, tests). Cite tool ids; mark coupling/data facts "
+            "OBSERVED when tools show them. Score at least three candidate "
             "routes in options_considered and choose the best fit; do not default to one route "
             "across the portfolio. Give the second-best option and why not, and a wave (1 = first). "
             "Approval stays PENDING. Retire/Retain are proposals that need owner decisions."),
@@ -495,11 +502,13 @@ P2 = {
 
 P3 = {
     "A1": Overlay(
-        tier="reasoning", effort="high", tools=REPO + ["eol_lookup"],
+        tier="reasoning", effort="high", tools=REPO_STRUCT + ["eol_lookup"],
         guidance=(
             "Propose the target architecture for the approved disposition: target runtime and "
             "framework versions, component mapping from current modules, and ADRs with rationale "
-            "and consequences. Ground every runtime/framework version choice in eol_lookup "
+            "and consequences. Use dependency_graph for module boundaries when mapping components; "
+            "cite tool ids and mark module structure OBSERVED when the graph shows it. Ground every "
+            "runtime/framework version choice in eol_lookup "
             "(endoflife.date: current version's cycle and EOL date, supported target cycle) and "
             "cite it. NFR targets stay UNSET (engagement policy) — never invent numbers."),
         fields={
@@ -511,20 +520,24 @@ P3 = {
             "transition_constraints": (A(item(constraint=S())), "append"),
         }),
     "A2": Overlay(
-        tier="reasoning", tools=REPO,
+        tier="reasoning", tools=REPO_STRUCT,
         guidance=(
-            "Define service/module boundaries from the code's domain structure. A modular monolith "
-            "is a valid answer; justify any split with coupling evidence."),
+            "Define service/module boundaries from the code's domain structure. Call "
+            "dependency_graph and change_coupling; cite them for coupling/co-change and mark "
+            "boundary drivers OBSERVED when tools show cycles, fan-in/out or co-change pairs. "
+            "A modular monolith is a valid answer; justify any split with that evidence."),
         fields={
             "boundaries": (A(item(boundary=S(), modules=A(S()), justification=S())), "append"),
             "communication_needs": (A(item(**{"from": S(), "to": S()}, style=S())), "append"),
             "rationale": (A(item(point=S())), "append"),
         }),
     "A3": Overlay(
-        tier="reasoning", tools=REPO,
+        tier="reasoning", tools=REPO_STRUCT,
         guidance=(
             "Design the target data architecture: schema alignment per entity, data contracts, and "
-            "the migration approach with reconciliation criteria. Design only — no migration runs."),
+            "the migration approach with reconciliation criteria. Call db_schema first; cite table "
+            "and FK sources and mark entity ownership OBSERVED when db_schema lists them. "
+            "Design only — no migration runs."),
         fields={
             "schemas": (A(item(object=S(), action=E("keep", "align", "split", "merge", "retire"),
                                detail=S())), "append"),
@@ -552,10 +565,11 @@ P3 = {
             "service_demands": (A(item(demand=S(), consumer=S())), "append"),
         }),
     "A6": Overlay(
-        tier="reasoning", tools=REPO,
+        tier="reasoning", tools=REPO_STRUCT,
         guidance=(
             "Build the interface contract registry from the code's real endpoints (methods, paths, "
-            "payloads) and outbound integrations. State compatibility criteria per contract."),
+            "payloads) and outbound integrations. Call api_surface; cite it and mark endpoints "
+            "OBSERVED when listed there. State compatibility criteria per contract."),
         fields={
             "contract_registry": (A(item(endpoint=S(), method=S(), handler=S(), payload=S(),
                                          versioning=S())), "append"),
