@@ -493,6 +493,49 @@ def predict(f: Fact, p: dict[str, dict[str, Any]]) -> Any:
     return None
 
 
+TEXT_ATTRIBUTED = ("datastore", "route", "runtime_version", "license")
+
+
+def _states(f: Fact, item: dict[str, Any]) -> bool:
+    got = predict(f, {"A6": item})
+    return got is True or (got is not None and got == f.expected)
+
+
+def confidence_pairs(facts: list[Fact], payloads: dict[str, dict[str, Any]],
+                     items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """(stated confidence, correct) for facts a model item asserts.
+
+    items are model-authored findings and payload items that carry a confidence. A fact is
+    attributed to the items that state it; its pair uses their mean confidence. The capability
+    route review is scored as right or wrong; the other types only yield pairs when an item
+    states the true value, because a model item contradicting a tool fact is not detectable here.
+    """
+    rated = [i for i in items if isinstance(i.get("confidence"), int | float)
+             and not isinstance(i.get("confidence"), bool)]
+    out = []
+    for f in facts:
+        if f.type == "capability_route":
+            rr = payloads.get("A5", {}).get("route_review") or {}
+            conf = rr.get("confidence")
+            if isinstance(conf, int | float) and rr.get("proposed_route"):
+                out.append({"type": f.type, "key": f.key, "confidence": float(conf),
+                            "correct": rr["proposed_route"] == f.expected})
+            continue
+        if f.type == "entity":
+            hits = [i for i in rated if "defined_in" in i or "key_fields" in i
+                    if any(form in _norm(str(i.get("name", ""))) for form in _entity_forms(f.key))]
+        elif f.type == "framework":
+            hits = [i for i in rated if _norm(f.key) in _norm(_text(i))]
+        elif f.type in TEXT_ATTRIBUTED:
+            hits = [i for i in rated if _states(f, i)]
+        else:
+            continue
+        if hits:
+            out.append({"type": f.type, "key": f.key, "correct": True,
+                        "confidence": sum(float(i["confidence"]) for i in hits) / len(hits)})
+    return out
+
+
 def score_app(facts: list[Fact], payloads: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
     for f in facts:

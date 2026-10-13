@@ -12,8 +12,9 @@ An overlay says *how* the model participates in one agent:
   postprocess(seed_payload, llm_fields, ctx) -> payload  — re-derives any
               structural fields consumers read, so contracts stay intact
 
-Every model item carries ``evidence_class`` + ``evidence_ids``; the
-EvidenceValidator downgrades uncited OBSERVED/DOCUMENTED claims.
+Every model item carries ``evidence_class`` + ``evidence_ids`` + ``confidence``; the
+EvidenceValidator downgrades uncited OBSERVED/DOCUMENTED claims. Confidence is reported and
+calibrated by the eval; no gate reads it.
 """
 
 from __future__ import annotations
@@ -66,10 +67,12 @@ def O(**props: dict[str, Any]) -> dict[str, Any]:
 
 EVC = E(*EVIDENCE_CLASS_ENUM)
 EVIDS = A(S(), desc="Evidence ids you were given (ev-..., art:..., seed:...). Never invent ids.")
+CONF = NUM("Probability 0-1 that this item is correct given the evidence you cited. Be calibrated: "
+           "items you mark 0.9 should be right about 9 times in 10.")
 
 
 def item(**props: dict[str, Any]) -> dict[str, Any]:
-    return O(**props, evidence_class=EVC, evidence_ids=EVIDS)
+    return O(**props, evidence_class=EVC, evidence_ids=EVIDS, confidence=CONF)
 
 
 SEV = E("critical", "high", "medium", "low", "info")
@@ -123,13 +126,14 @@ def _pp_p1_a11(seed: dict, llm: dict, ctx: dict) -> dict:
         m = by_dim.pop(d["dimension"], None)
         dims.append({**d, **({"score": max(1, min(5, int(m["score"]))), "basis": m["basis"],
                               "drivers": m["drivers"], "evidence_class": m["evidence_class"],
-                              "evidence_ids": m["evidence_ids"], "origin": "llm"} if m else {})})
+                              "evidence_ids": m["evidence_ids"], "confidence": m.get("confidence"),
+                              "origin": "llm"} if m else {})})
     unassessed = {u["dimension"] for u in seed.get("unassessed_dimensions", [])}
     for name, m in by_dim.items():
         if name not in unassessed:
             dims.append({"dimension": name, "score": max(1, min(5, int(m["score"]))), "basis": m["basis"],
                          "drivers": m["drivers"], "evidence_class": m["evidence_class"],
-                         "evidence_ids": m["evidence_ids"], "origin": "llm"})
+                         "evidence_ids": m["evidence_ids"], "confidence": m.get("confidence"), "origin": "llm"})
     out["risk_dimensions"] = dims
     out["scores"] = [{"dimension": d["dimension"], "score": d["score"]} for d in dims]
     out["blockers"] = list(seed.get("blockers", [])) + [dict(b, origin="llm") for b in llm.get("blockers", [])]
@@ -148,7 +152,7 @@ def _pp_p2_a6(seed: dict, llm: dict, ctx: dict) -> dict:
         if m and m["proposed_disposition"] in R8:
             nd.update(proposed_disposition=m["proposed_disposition"], rationale=m["rationale"],
                       second_best=m["second_best"], evidence_class=m["evidence_class"],
-                      evidence_ids=m["evidence_ids"], origin="llm",
+                      evidence_ids=m["evidence_ids"], confidence=m.get("confidence"), origin="llm",
                       options_considered=m.get("options_considered", []))
             if m["proposed_disposition"] in ("Retain", "Retire"):
                 nd["wave_id"] = None
@@ -182,7 +186,7 @@ def _pp_p4_a3(seed: dict, llm: dict, ctx: dict) -> dict:
                       "owner_role": t["owner_role"], "acceptance": t["acceptance"],
                       "component": t["component"], "estimate_days": t["estimate_days"],
                       "evidence_class": t["evidence_class"], "evidence_ids": t["evidence_ids"],
-                      "origin": "llm"})
+                      "confidence": t.get("confidence"), "origin": "llm"})
         for dep in t["depends_on"]:
             if dep in ids and dep != t["task_id"]:
                 edges.append({"from": dep, "to": t["task_id"]})
@@ -296,7 +300,9 @@ P1 = {
             "personas": (A(item(name=S(), goals=S())), "append"),
             "friction_findings": (A(item(journey=S(), issue=S(), severity=SEV)), "append"),
             "route_review": (O(agrees=B(), proposed_route=E("UI", "API_ONLY", "HEADLESS_BATCH"),
-                               rationale=S(), evidence_ids=EVIDS), "replace"),
+                               rationale=S(), evidence_ids=EVIDS,
+                               confidence=NUM("Probability 0-1 that proposed_route is the right "
+                                              "capability route")), "replace"),
         }),
     "A6": Overlay(
         tier="reasoning", tools=REPO_SEC,
