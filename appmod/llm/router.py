@@ -13,7 +13,8 @@ from typing import Any, Callable
 
 from appmod.config import Settings, get_settings
 from appmod.llm.cache import ResponseCache
-from appmod.llm.errors import DeploymentUnavailableError, TransientLLMError
+from appmod.llm.errors import ConnectivityError, DeploymentUnavailableError, TransientLLMError
+from appmod.llm.outage import OutageGate
 from appmod.llm.ratelimit import TokenBucket
 from appmod.llm.types import ModelResponse, ToolSpec, Usage
 
@@ -31,6 +32,9 @@ class ModelRouter:
         self.cache = cache or ResponseCache(self.settings.runs_dir / "llm_cache",
                                             self.settings.llm_cache)
         self.limiter = limiter or TokenBucket(self.settings.llm_tpm_limit)
+        probe = getattr(client, "reachable", None)
+        self.outage: OutageGate | None = (
+            OutageGate(probe, max_wait_s=self.settings.llm_outage_max_wait_s) if callable(probe) else None)
         self.usage = Usage()
         self.calls = 0
         self.failovers = 0
@@ -45,11 +49,28 @@ class ModelRouter:
                  reasoning_effort: str | None = None, text_format: dict[str, Any] | None = None,
                  max_output_tokens: int | None = None, on_call: CallHook | None = None,
                  context: dict[str, Any] | None = None) -> ModelResponse:
-        primary = self.settings.deployment_for(tier)
-        fallback = self.settings.deployment_for("fallback")
         args = dict(instructions=instructions, input_items=input_items, tools=tools,
                     tool_choice=tool_choice, reasoning_effort=reasoning_effort,
                     text_format=text_format, max_output_tokens=max_output_tokens)
+        while True:
+            try:
+                return self._complete_once(tier, args, on_call, context)
+            except TransientLLMError as exc:
+                if not self._outage_over(exc):
+                    raise
+
+    def _outage_over(self, exc: TransientLLMError) -> bool:
+        """True once an outage that caused ``exc`` has ended; False if ``exc`` is not an outage."""
+        if self.outage is None:
+            return False
+        if not isinstance(exc, ConnectivityError) and self.outage.reachable():
+            return False
+        return self.outage.wait()
+
+    def _complete_once(self, tier: str, args: dict[str, Any], on_call: CallHook | None,
+                       context: dict[str, Any] | None) -> ModelResponse:
+        primary = self.settings.deployment_for(tier)
+        fallback = self.settings.deployment_for("fallback")
         try:
             resp = self._call(primary, args)
         except (TransientLLMError, DeploymentUnavailableError) as exc:

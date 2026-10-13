@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, withToken } from './api';
 
-export type Kind = 'NODE' | 'MODEL_CALL' | 'TOOL_CALL' | 'SUBMISSION_REJECTED' | 'AGENT_LLM_DONE';
-export const KINDS: Kind[] = ['NODE', 'MODEL_CALL', 'TOOL_CALL', 'SUBMISSION_REJECTED', 'AGENT_LLM_DONE'];
+export type Kind = 'NODE' | 'MODEL_CALL' | 'TOOL_CALL' | 'SUBMISSION_REJECTED' | 'AGENT_LLM_DONE' | 'CONNECTIVITY';
+export const KINDS: Kind[] = ['NODE', 'MODEL_CALL', 'TOOL_CALL', 'SUBMISSION_REJECTED', 'AGENT_LLM_DONE', 'CONNECTIVITY'];
 
 export interface Ev {
   seq: number; ts: string; kind: Kind; phase?: number; app?: string; node?: string; agent?: string;
