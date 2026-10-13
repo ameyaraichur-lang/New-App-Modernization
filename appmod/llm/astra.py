@@ -14,6 +14,7 @@ from typing import Any
 
 from appmod.config import Settings, get_settings
 from appmod.llm.errors import (
+    ConnectivityError,
     ContentFilteredError,
     ContextLengthError,
     DeploymentUnavailableError,
@@ -99,6 +100,15 @@ class AstraClient:
             out.extend(d.embedding for d in sorted(resp.data, key=lambda d: d.index))
         return out
 
+    def reachable(self, timeout_s: float = 10.0) -> bool:
+        """Any HTTP answer from the endpoint counts; no key is sent and no tokens are used."""
+        import httpx
+        try:
+            httpx.get(self.settings.astra_endpoint.rstrip("/") + "/", timeout=timeout_s)
+            return True
+        except httpx.HTTPError:
+            return False
+
     # -- error mapping ------------------------------------------------------------
 
     def _call(self, fn, deployment: str):
@@ -107,8 +117,10 @@ class AstraClient:
             return fn()
         except openai.RateLimitError as e:
             raise TransientLLMError(f"{deployment}: rate limited", _retry_after(e)) from e
-        except (openai.APITimeoutError, openai.APIConnectionError) as e:
+        except openai.APITimeoutError as e:
             raise TransientLLMError(f"{deployment}: {type(e).__name__}") from e
+        except openai.APIConnectionError as e:
+            raise ConnectivityError(f"{deployment}: {type(e).__name__}") from e
         except openai.InternalServerError as e:
             raise TransientLLMError(f"{deployment}: server error {e.status_code}") from e
         except openai.NotFoundError as e:

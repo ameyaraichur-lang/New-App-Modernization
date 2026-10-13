@@ -17,6 +17,10 @@ class TransientLLMError(LLMError):
         self.retry_after = retry_after
 
 
+class ConnectivityError(TransientLLMError):
+    """No HTTP response at all (DNS, TCP, TLS) — the endpoint, not the model, is unavailable."""
+
+
 class DeploymentUnavailableError(LLMError):
     """Deployment missing/not found — eligible for tier failover, not retry."""
 
