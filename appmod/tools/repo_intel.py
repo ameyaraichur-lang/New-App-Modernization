@@ -85,8 +85,29 @@ ROUTE_PATTERNS = [
     ("aspnet-controller", r"""Map(?:Controller)?Route\("""),
     ("go-http", r"""(?:http|\w+)\.HandleFunc\(\s*["'`]([^"'`]+)["'`]"""),
     ("go-chi", r"""[rRmM]\.(?:Get|Post|Put|Delete|Handle)\(\s*["']/([^"']*)["']?"""),
+    ("go-gin", r"""\b\w+\.(?:GET|POST|PUT|DELETE|PATCH|Any|Group)\(\s*"(/[^"]*)\""""),
     ("php-route", r"""(?:Route::|\$app->)(?:get|post|put|delete|patch)\(\s*['"]([^'"]+)['"]"""),
 ]
+
+CI_FILES = {
+    ".travis.yml", ".gitlab-ci.yml", "azure-pipelines.yml", "azure-pipelines.yaml", "appveyor.yml",
+    ".appveyor.yml", "circle.yml", "bitbucket-pipelines.yml",
+}
+RUNTIME_PATTERNS: dict[str, list[tuple[str, str]]] = {
+    "go.mod": [(r"^go\s+(\d+\.\d+)", "go {}")],
+    "pom.xml": [(r"<java\.version>\s*(?:1\.)?(\d+)", "java {}"),
+                (r"<maven\.compiler\.(?:source|release)>\s*(?:1\.)?(\d+)", "java {}")],
+    "build.gradle": [(r"languageVersion\s*=?\s*JavaLanguageVersion\.of\((\d+)\)", "java {}"),
+                     (r"sourceCompatibility\s*=\s*['\"]?(?:JavaVersion\.VERSION_)?(?:1[._])?(\d+)", "java {}")],
+    "package.json": [(r"\"node\"\s*:\s*\"[^\d\"]*(\d+)", "node {}")],
+    "composer.json": [(r"\"php\"\s*:\s*\"[^\d\"]*(\d+\.\d+)", "php {}")],
+    "pyproject.toml": [(r"requires-python\s*=\s*['\"][^\d'\"]*(3\.\d+)", "python {}"),
+                       (r"^python\s*=\s*['\"][^\d'\"]*(3\.\d+)", "python {}")],
+    "runtime.txt": [(r"(3\.\d+)", "python {}")],
+    ".python-version": [(r"(3\.\d+)", "python {}")],
+    ".ruby-version": [(r"(\d+\.\d+)", "ruby {}")],
+}
+RUNTIME_SOURCES = set(RUNTIME_PATTERNS) | {"build.gradle.kts"}
 
 UI_FRAMEWORK_HINTS = {
     "react": ("package.json", ["react"]),
@@ -118,6 +139,7 @@ class RepoScan:
     model_files: list[str] = field(default_factory=list)
     migrations: list[str] = field(default_factory=list)
     infra_files: list[str] = field(default_factory=list)
+    runtime_versions: list[dict[str, str]] = field(default_factory=list)
     secret_findings: list[dict[str, str]] = field(default_factory=list)
     ui_frameworks: list[str] = field(default_factory=list)
     entry_candidates: list[str] = field(default_factory=list)
@@ -193,8 +215,14 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             "docker-compose.yml", "docker-compose.yaml", "jenkinsfile", "procfile",
         } or name.endswith(".tf") or name.endswith(".toml") and "workflow" in str(rel):
             scan.infra_files.append(str(rel).replace("\\", "/"))
-        if ".github" in parts and "workflows" in parts:
+        if (".github" in parts and "workflows" in parts) or name in CI_FILES or (
+                ".circleci" in parts and name == "config.yml"):
             scan.infra_files.append(str(rel).replace("\\", "/"))
+        if (name in RUNTIME_SOURCES or name.endswith(".csproj")) and (
+                manifest_text := _read_small(path, size, max_bytes)):
+            for rt in _runtime_versions(name, manifest_text):
+                if not any(r["runtime"] == rt for r in scan.runtime_versions):
+                    scan.runtime_versions.append({"runtime": rt, "file": str(rel).replace("\\", "/")})
         if name.startswith("license") or name.startswith("copying") or name == "notice":
             _scan_license(scan, path, rel)
         if re.match(r"test_.*\.py$|tests?\.py$|.*_tests?\.py$|.*_test\.go$|.*tests?\.java$|.*tests?\.cs$"
@@ -222,8 +250,34 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             scan.entry_candidates.append(str(rel).replace("\\", "/"))
 
     _detect_ui_frameworks(scan)
+    scan.runtime_versions.sort(key=lambda r: r["file"].count("/"))
     scan.commit = _git_head(root)
     return scan
+
+
+def _read_small(path: Path, size: int, max_bytes: int) -> str:
+    if size > max_bytes:
+        return ""
+    try:
+        return path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return ""
+
+
+def _runtime_versions(name: str, text: str) -> list[str]:
+    """Declared language/runtime versions, e.g. 'go 1.21', 'java 17', 'net8.0'."""
+    pats: list[tuple[str, str]] = RUNTIME_PATTERNS.get(name, [])
+    if name.endswith(".csproj"):
+        pats = [(r"<TargetFrameworks?>\s*([\w.]+)", "{}"), (r"<TargetFrameworkVersion>\s*v?([\d.]+)", "net{}")]
+    elif name.startswith("build.gradle"):
+        pats = RUNTIME_PATTERNS["build.gradle"]
+    out: list[str] = []
+    for pat, fmt in pats:
+        m = re.search(pat, text, re.M)
+        if m and (rt := fmt.format(m.group(1))) not in out:
+            out.append(rt)
+            break
+    return out
 
 
 def _git_head(root: Path) -> str:
@@ -243,6 +297,8 @@ def _scan_text(scan: RepoScan, path: Path, rel: Path, text: str) -> None:
             scan.secret_findings.append({"file": rel_s, "kind": kind})
     if path.suffix.lower() in (".py", ".js", ".ts", ".java", ".rb", ".go", ".cs", ".php"):
         for framework, pattern in ROUTE_PATTERNS:
+            if framework.startswith("go-") and path.suffix.lower() != ".go":
+                continue
             for m in re.finditer(pattern, text):
                 scan.routes.append({"file": rel_s, "framework": framework,
                                     "route": m.group(1) if m.groups() else ""})
