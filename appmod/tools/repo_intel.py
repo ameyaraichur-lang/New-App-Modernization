@@ -8,6 +8,7 @@ so downstream agents inherit OBSERVED/DOCUMENTED evidence, never invention.
 from __future__ import annotations
 
 import hashlib
+import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -171,11 +172,23 @@ class RepoScan:
         return bool(self.sql_files or self.model_files or self.migrations)
 
 
+def _repo_files(root: Path):
+    """All regular files under ``root`` without following symlinked directories."""
+    root = root.resolve()
+    for dirpath, _, filenames in os.walk(root, followlinks=False):
+        for name in filenames:
+            yield Path(dirpath) / name
+
+
 def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
+    from appmod.tools.gateway import path_under_root
+
     root = Path(root).resolve()
     scan = RepoScan(root=root)
-    for path in sorted(root.rglob("*")):
+    for path in sorted(_repo_files(root)):
         if not path.is_file():
+            continue
+        if not path_under_root(root, path):
             continue
         rel = path.relative_to(root)
         parts = rel.parts
