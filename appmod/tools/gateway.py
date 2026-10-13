@@ -23,6 +23,7 @@ from appmod.config import redact
 from appmod.llm.types import ToolSpec
 
 MAX_TOOL_CHARS = 14_000
+MAX_EVIDENCE_TEXT = MAX_TOOL_CHARS
 
 INJECTION_RE = re.compile(
     r"(ignore|disregard|forget)\s+(all\s+|any\s+)?(the\s+)?(previous|prior|above|earlier)\s+"
@@ -66,14 +67,22 @@ class EvidenceLedger:
 
     def __init__(self) -> None:
         self._items: dict[str, dict[str, Any]] = {}
+        self._text: dict[str, str] = {}
         self._lock = threading.Lock()
 
-    def register(self, kind: str, content: str, **meta: Any) -> str:
+    def register(self, kind: str, content: str, *, text: str | None = None, **meta: Any) -> str:
+        """``text`` is what a claim citing this id can be checked against (default: ``content``)."""
         digest = hashlib.sha256(content.encode("utf-8", "ignore")).hexdigest()
         eid = meta.pop("eid", None) or f"ev-{digest[:12]}"
         with self._lock:
             self._items.setdefault(eid, {"id": eid, "kind": kind, "content_hash": digest, **meta})
+            body = content if text is None else text
+            if body and eid not in self._text:
+                self._text[eid] = body[:MAX_EVIDENCE_TEXT]
         return eid
+
+    def text(self, eid: str) -> str | None:
+        return self._text.get(eid)
 
     def has(self, eid: str) -> bool:
         return eid in self._items

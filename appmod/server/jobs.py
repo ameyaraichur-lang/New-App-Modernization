@@ -54,7 +54,7 @@ PHASE_NAME = {1: "Discovery", 2: "Portfolio decision", 3: "Target architecture",
 GATE_OF = {1: "G2", 2: "G2", 3: "G2", 4: "G2", 5: "G4", 6: "G3"}
 TERMINAL_NODE = {"PUBLISHED", "COMPLETE", "PARTIAL", "FAILED", "BLOCKED", "SKIPPED_APPROVED",
                  "NOT_ASSESSED"}
-TRACE_KINDS = ("MODEL_CALL", "TOOL_CALL", "AGENT_LLM_DONE", "SUBMISSION_REJECTED")
+TRACE_KINDS = ("MODEL_CALL", "TOOL_CALL", "AGENT_LLM_DONE", "SUBMISSION_REJECTED", "VERIFIER")
 
 
 class Cancelled(Exception):
