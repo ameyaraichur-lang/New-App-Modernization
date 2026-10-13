@@ -144,3 +144,13 @@ def test_gin_routes_ci_files_and_runtime_versions(tmp_path):
 def test_runtime_version_manifests(tmp_path, name, text, want):
     (tmp_path / name).write_text(text)
     assert [r["runtime"] for r in scan_repo(tmp_path).runtime_versions] == [want]
+
+
+def test_project_licence_is_the_root_file_not_vendored_ones(tmp_path):
+    (tmp_path / "LICENSE").write_text("Apache License\nVersion 2.0, January 2004\n")
+    (tmp_path / "NOTICE").write_text("This product includes software developed elsewhere.\n")
+    (tmp_path / "vendor" / "fontawesome").mkdir(parents=True)
+    (tmp_path / "vendor" / "fontawesome" / "LICENSE.txt").write_text("MIT License\n")
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "tests" / "licenses.test.ts").write_text("test('licenses', () => {});\n")
+    assert scan_repo(tmp_path).license == {"file": "LICENSE", "type": "Apache-2.0", "evidence": "DOCUMENTED"}

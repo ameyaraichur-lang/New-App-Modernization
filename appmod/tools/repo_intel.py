@@ -58,6 +58,7 @@ SERVER_PERSISTENCE_RE = re.compile(
     r"""\b(mongoose|sequelize|typeorm|prisma|knex|objection|bookshelf|waterline|mikro-orm|"""
     r"""drizzle-orm|mysql2?|pg|sqlite3?|better-sqlite3|mongodb|redis|ioredis)\b['"]|@Entity\(|\bPrismaClient\b""")
 
+LICENSE_FILE_RE = re.compile(r"^(?:un)?licen[cs]e(?:[._-]|$)|^copying(?:[._-]|$)")
 LICENSE_PATTERNS = [
     ("BSD", r"\bBSD\b|\bRedistribution and use in source and binary forms"),
     ("MIT", r"\bMIT\b|Permission is hereby granted, free of charge"),
@@ -223,7 +224,7 @@ def scan_repo(root: Path, max_bytes: int = 1_000_000) -> RepoScan:
             for rt in _runtime_versions(name, manifest_text):
                 if not any(r["runtime"] == rt for r in scan.runtime_versions):
                     scan.runtime_versions.append({"runtime": rt, "file": str(rel).replace("\\", "/")})
-        if name.startswith("license") or name.startswith("copying") or name == "notice":
+        if LICENSE_FILE_RE.match(name):
             _scan_license(scan, path, rel)
         if re.match(r"test_.*\.py$|tests?\.py$|.*_tests?\.py$|.*_test\.go$|.*tests?\.java$|.*tests?\.cs$"
                     r"|.*_spec\.rb$|.*[._-](test|spec)\.[jt]sx?$|.*test\.[jt]s$",
@@ -313,15 +314,21 @@ def _scan_text(scan: RepoScan, path: Path, rel: Path, text: str) -> None:
 
 
 def _scan_license(scan: RepoScan, path: Path, rel: Path) -> None:
+    """The project licence is the shallowest licence file; nested ones belong to vendored code."""
+    if scan.license:
+        held = len(Path(scan.license["file"]).parts)
+        if held < len(rel.parts) or (held == len(rel.parts) and scan.license["type"] != "UNKNOWN"):
+            return
     try:
         head = path.read_text(encoding="utf-8", errors="ignore")[:4000]
     except OSError:
         return
-    for name, pattern in LICENSE_PATTERNS:
-        if re.search(pattern, head):
-            scan.license = {"file": str(rel).replace("\\", "/"), "type": name,
-                            "evidence": "DOCUMENTED"}
-            return
+    for window in (head[:300], head):     # the title first: licence texts name other licences
+        for name, pattern in LICENSE_PATTERNS:
+            if re.search(pattern, window, re.I):
+                scan.license = {"file": str(rel).replace("\\", "/"), "type": name,
+                                "evidence": "DOCUMENTED"}
+                return
     scan.license = {"file": str(rel).replace("\\", "/"), "type": "UNKNOWN",
                     "evidence": "UNKNOWN"}
 
