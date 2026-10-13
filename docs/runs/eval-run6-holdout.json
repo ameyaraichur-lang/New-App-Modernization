@@ -1,0 +1,167 @@
+{
+ "job": "job-1791801761-559979",
+ "schema_valid_after_repair": {
+  "pct": 100.0,
+  "valid": 253,
+  "total": 253
+ },
+ "evidence_resolvability": {
+  "pct": 100.0,
+  "resolved": 14793,
+  "cited": 14793,
+  "unresolved_sample": []
+ },
+ "hallucinated_paths": {
+  "count": 0,
+  "checked": 2136,
+  "items": []
+ },
+ "hallucinated_symbols": {
+  "count": 0,
+  "checked": 416,
+  "items": []
+ },
+ "golden_agreement": {},
+ "variation": {
+  "p2_dispositions": {
+   "Replatform": 2,
+   "Retain": 1,
+   "Refactor": 6,
+   "Retire": 1
+  },
+  "p3_distinct_boundary_sets": 8,
+  "p3_apps": 8
+ },
+ "pass": true,
+ "confidence": {
+  "confidence_score": 0.0,
+  "weakest": "C2",
+  "assessed": [
+   "C1"
+  ],
+  "not_assessed": [
+   "C2",
+   "C3",
+   "C4",
+   "C5",
+   "C6",
+   "C7",
+   "C8",
+   "C9"
+  ],
+  "weakest_assessed": "C1",
+  "components": [
+   {
+    "id": "C1",
+    "name": "Integrity",
+    "assessed": true,
+    "lower_bound": 98.5,
+    "reason": "",
+    "measures": [
+     {
+      "name": "schema valid after repair",
+      "k": 253,
+      "n": 253,
+      "lower_bound": 98.5
+     },
+     {
+      "name": "evidence ids resolve",
+      "k": 14793,
+      "n": 14793,
+      "lower_bound": 99.97
+     },
+     {
+      "name": "cited paths exist",
+      "k": 2136,
+      "n": 2136,
+      "lower_bound": 99.82
+     },
+     {
+      "name": "A9 function names exist",
+      "k": 416,
+      "n": 416,
+      "lower_bound": 99.09
+     }
+    ]
+   },
+   {
+    "id": "C2",
+    "name": "Factual accuracy",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "",
+    "measures": [
+     {
+      "name": "golden facts agree",
+      "k": 0,
+      "n": 0,
+      "lower_bound": null
+     }
+    ]
+   },
+   {
+    "id": "C3",
+    "name": "Claim support",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "claim-support verifier not built (stack PR 6)",
+    "measures": []
+   },
+   {
+    "id": "C4",
+    "name": "Decision correctness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no expert decision labels (decision 2: skipped)",
+    "measures": []
+   },
+   {
+    "id": "C5",
+    "name": "Stability",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no repeated runs (stack PR 4)",
+    "measures": []
+   },
+   {
+    "id": "C6",
+    "name": "Calibration",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no confidence field on decisions (stack PR 5)",
+    "measures": []
+   },
+   {
+    "id": "C7",
+    "name": "Execution proof",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "P5 runtime differential NOT_RUN; sandbox deferred (decision 1)",
+    "measures": []
+   },
+   {
+    "id": "C8",
+    "name": "Robustness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "adversarial suite not built (stack PR 8)",
+    "measures": []
+   },
+   {
+    "id": "C9",
+    "name": "Human acceptance",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "all reviews were by scripted actors",
+    "measures": [
+     {
+      "name": "human reviews approved",
+      "k": 0,
+      "n": 0,
+      "lower_bound": null
+     }
+    ]
+   }
+  ]
+ }
+}
