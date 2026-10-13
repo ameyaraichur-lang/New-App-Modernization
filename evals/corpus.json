@@ -1,0 +1,306 @@
+{
+ "description": "Evaluation corpus: pinned commits, language family and tune/holdout split. Repos are cloned locally by scripts/corpus_sync.py and never committed. Report held-out results separately; never tune prompts on holdout repos. license 'none-found' means no licence file or manifest field exists upstream; such repos are analysed locally only and never redistributed. scc_code_lines: scc code lines at the pinned commit, all languages, before vendored-code exclusion.",
+ "repos": [
+  {
+   "name": "spring-petclinic",
+   "url": "https://github.com/spring-projects/spring-petclinic.git",
+   "commit": "500158f732419217507c7656904b8e6aa1bcc0d6",
+   "family": "java",
+   "split": "tune",
+   "license": "Apache-2.0",
+   "note": "Spring Boot reference app",
+   "scc_code_lines": 23526
+  },
+  {
+   "name": "flask-tutorial",
+   "url": "https://github.com/pallets/flask.git",
+   "commit": "d086db856be187255b8ec61ef409357393020f32",
+   "family": "python",
+   "split": "tune",
+   "license": "BSD-3-Clause",
+   "note": "Flask tutorial app (subdirectory snapshot)",
+   "subdir": "examples/tutorial",
+   "scc_code_lines": 718
+  },
+  {
+   "name": "django-realworld-example-app",
+   "url": "https://github.com/gothinkster/django-realworld-example-app.git",
+   "commit": "29c9d42831fa0cfc5a4aa7561f674396eacf20a2",
+   "family": "python",
+   "split": "tune",
+   "license": "none-found",
+   "note": "Django REST API",
+   "scc_code_lines": 1069
+  },
+  {
+   "name": "microblog",
+   "url": "https://github.com/miguelgrinberg/microblog.git",
+   "commit": "a975ef64864354867c88e0ed3a17ba7d17dca752",
+   "family": "python",
+   "split": "tune",
+   "license": "MIT",
+   "note": "Flask app; used in runs 1-2",
+   "scc_code_lines": 2026
+  },
+  {
+   "name": "node-express-realworld-example-app",
+   "url": "https://github.com/gothinkster/node-express-realworld-example-app.git",
+   "commit": "30b68e1e881462b2f4164ea09ab4c4f5699c7b0b",
+   "family": "javascript",
+   "split": "tune",
+   "license": "MIT",
+   "note": "Express + Prisma API",
+   "scc_code_lines": 2334
+  },
+  {
+   "name": "musicstore",
+   "url": "https://github.com/aspnet/MusicStore.git",
+   "commit": "0abdfec1e87aeab68bc5e8502ec73968a4b8c7ef",
+   "family": "dotnet",
+   "split": "tune",
+   "license": "Apache-2.0",
+   "note": "ASP.NET Core sample store",
+   "scc_code_lines": 28421
+  },
+  {
+   "name": "laravel58",
+   "url": "https://github.com/laravel/laravel.git",
+   "commit": "c4a7a7bc9cdccd00d6fdda8846d1660a0608d7ef",
+   "family": "php",
+   "split": "tune",
+   "license": "MIT",
+   "note": "Laravel 5.8 skeleton",
+   "scc_code_lines": 1734
+  },
+  {
+   "name": "sinatra",
+   "url": "https://github.com/sinatra/sinatra-recipes.git",
+   "commit": "7dc52fc2971439ed6b967e8be73b72ef929c1593",
+   "family": "ruby",
+   "split": "tune",
+   "license": "none-found",
+   "note": "Sinatra recipes site",
+   "scc_code_lines": 4171
+  },
+  {
+   "name": "golang-example",
+   "url": "https://github.com/gothinkster/golang-gin-realworld-example-app.git",
+   "commit": "626c372d259472148d93303f74aa9b9a1cdcef24",
+   "family": "go",
+   "split": "tune",
+   "license": "MIT",
+   "note": "Gin + GORM API",
+   "scc_code_lines": 6268
+  },
+  {
+   "name": "todomvc",
+   "url": "https://github.com/tastejs/todomvc.git",
+   "commit": "ff43b02e59dfa604386bb382034b2cd07c2bcd8a",
+   "family": "javascript",
+   "split": "tune",
+   "license": "MIT",
+   "note": "many client-side frameworks",
+   "scc_code_lines": 1170718
+  },
+  {
+   "name": "react-redux-realworld",
+   "url": "https://github.com/gothinkster/react-redux-realworld-example-app.git",
+   "commit": "ee72eba4056392c95a27bc48d385d3f54ba38a18",
+   "family": "javascript",
+   "split": "tune",
+   "license": "MIT",
+   "note": "React/Redux SPA",
+   "scc_code_lines": 2161
+  },
+  {
+   "name": "eshop-on-web",
+   "url": "https://github.com/dotnet-architecture/eShopOnWeb.git",
+   "commit": "4da8212117e87d808d4bbc7da6286fd2147ce606",
+   "family": "dotnet",
+   "split": "tune",
+   "license": "MIT",
+   "note": "ASP.NET Core reference monolith (archived)",
+   "scc_code_lines": 18031
+  },
+  {
+   "name": "orchard",
+   "url": "https://github.com/OrchardCMS/Orchard.git",
+   "commit": "8c47962e3c1ae025fc65d585f41d0ad9897d90b2",
+   "family": "dotnet",
+   "split": "tune",
+   "license": "BSD-3-Clause",
+   "note": "Orchard 1.x CMS on .NET Framework",
+   "scc_code_lines": 567718
+  },
+  {
+   "name": "struts-examples",
+   "url": "https://github.com/apache/struts-examples.git",
+   "commit": "ca9c1e92873501492f057de6f7a622d58551d200",
+   "family": "java",
+   "split": "tune",
+   "license": "Apache-2.0",
+   "note": "Apache Struts 2 examples",
+   "scc_code_lines": 167265
+  },
+  {
+   "name": "ofbiz",
+   "url": "https://github.com/apache/ofbiz-framework.git",
+   "commit": "45506b377c855e455942b238dbd55e33fce79d4f",
+   "family": "java",
+   "split": "tune",
+   "license": "Apache-2.0",
+   "note": "large Java ERP",
+   "scc_code_lines": 941664
+  },
+  {
+   "name": "webgoat",
+   "url": "https://github.com/WebGoat/WebGoat.git",
+   "commit": "7e198f39189f33e1912f7cbb60e24e42635ca06a",
+   "family": "java",
+   "split": "tune",
+   "license": "GPL-2.0",
+   "note": "deliberately insecure Java app",
+   "scc_code_lines": 99672
+  },
+  {
+   "name": "carddemo",
+   "url": "https://github.com/aws-samples/aws-mainframe-modernization-carddemo.git",
+   "commit": "59cc6c2fd7ebd7ef7925cad552a01a4b8b6e4d5e",
+   "family": "cobol",
+   "split": "tune",
+   "license": "Apache-2.0",
+   "note": "COBOL/CICS/VSAM mainframe app",
+   "scc_code_lines": 41724
+  },
+  {
+   "name": "mantisbt",
+   "url": "https://github.com/mantisbt/mantisbt.git",
+   "commit": "5fe206ebf6c43d99fcf404c9e2323a0d8f680818",
+   "family": "php",
+   "split": "tune",
+   "license": "GPL-2.0",
+   "note": "legacy PHP bug tracker",
+   "scc_code_lines": 244778
+  },
+  {
+   "name": "bugzilla",
+   "url": "https://github.com/bugzilla/bugzilla.git",
+   "commit": "852cd06ef751cb5a5f87e100466e71e46e3cfc0e",
+   "family": "perl",
+   "split": "tune",
+   "license": "MPL-2.0",
+   "note": "legacy Perl bug tracker",
+   "scc_code_lines": 116183
+  },
+  {
+   "name": "juice-shop",
+   "url": "https://github.com/juice-shop/juice-shop.git",
+   "commit": "5a21ff87cac57bcc5c1722ac7ed4f8058dd35bbc",
+   "family": "javascript",
+   "split": "tune",
+   "license": "MIT",
+   "note": "deliberately insecure Node/Angular app",
+   "scc_code_lines": 143606
+  },
+  {
+   "name": "eshop-modernizing",
+   "url": "https://github.com/dotnet-architecture/eShopModernizing.git",
+   "commit": "63bc9ec4414d7e281dc9f9d7bdcf70030950457d",
+   "family": "dotnet",
+   "split": "holdout",
+   "license": "MIT",
+   "note": "ASP.NET MVC/WebForms on .NET Framework (archived)",
+   "scc_code_lines": 409440
+  },
+  {
+   "name": "spring-framework-petclinic",
+   "url": "https://github.com/spring-petclinic/spring-framework-petclinic.git",
+   "commit": "cf392920cdbe9cd07689f1f4b603271940bac957",
+   "family": "java",
+   "split": "holdout",
+   "license": "Apache-2.0",
+   "note": "Spring MVC with XML config",
+   "scc_code_lines": 21266
+  },
+  {
+   "name": "cargotracker",
+   "url": "https://github.com/eclipse-ee4j/cargotracker.git",
+   "commit": "4d26b8fd59a7f0bac6e42d5d19a8cd1b379353b5",
+   "family": "java",
+   "split": "holdout",
+   "license": "MIT",
+   "note": "Jakarta EE DDD sample",
+   "scc_code_lines": 27993
+  },
+  {
+   "name": "jhipster-sample-app",
+   "url": "https://github.com/jhipster/jhipster-sample-app.git",
+   "commit": "6b000b5d23a36c45e01472471b84a44fa2464044",
+   "family": "java",
+   "split": "holdout",
+   "license": "Apache-2.0",
+   "note": "Spring Boot + Angular generated app",
+   "scc_code_lines": 34937
+  },
+  {
+   "name": "saleor",
+   "url": "https://github.com/saleor/saleor.git",
+   "commit": "782a751f622c4a047798ce7084b7c66c0877ec6f",
+   "family": "python",
+   "split": "holdout",
+   "license": "BSD-3-Clause",
+   "note": "large Django/GraphQL commerce",
+   "scc_code_lines": 755980
+  },
+  {
+   "name": "djangoproject",
+   "url": "https://github.com/django/djangoproject.com.git",
+   "commit": "4b2a648aa6ed2f0681a4d777d0de7d812bdf8f26",
+   "family": "python",
+   "split": "holdout",
+   "license": "BSD-3-Clause",
+   "note": "djangoproject.com site",
+   "scc_code_lines": 64943
+  },
+  {
+   "name": "angular-phonecat",
+   "url": "https://github.com/angular/angular-phonecat.git",
+   "commit": "ef6f6eb672ded472b4e442d598f5df40d0e0642c",
+   "family": "javascript",
+   "split": "holdout",
+   "license": "MIT",
+   "note": "AngularJS 1.x tutorial app (archived)",
+   "scc_code_lines": 2605
+  },
+  {
+   "name": "opencart",
+   "url": "https://github.com/opencart/opencart.git",
+   "commit": "5fe7827555dac90d8c08aaaacd3f6e3c2f9a7cb3",
+   "family": "php",
+   "split": "holdout",
+   "license": "GPL-3.0",
+   "note": "PHP e-commerce monolith",
+   "scc_code_lines": 806050
+  },
+  {
+   "name": "human-essentials",
+   "url": "https://github.com/rubyforgood/human-essentials.git",
+   "commit": "6b5bc26be9f6d31818959bb77e16a573e18e920e",
+   "family": "ruby",
+   "split": "holdout",
+   "license": "MIT",
+   "note": "Rails inventory app",
+   "scc_code_lines": 126416
+  },
+  {
+   "name": "gitea",
+   "url": "https://github.com/go-gitea/gitea.git",
+   "commit": "8c7b8d085c9b0f1f18b1364096161ec0f766b485",
+   "family": "go",
+   "split": "holdout",
+   "license": "MIT",
+   "note": "large Go web app",
+   "scc_code_lines": 648771
+  }
+ ]
+}

@@ -27,6 +27,7 @@ import sys
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
+from typing import Any, Callable
 
 import httpx
 
@@ -79,10 +80,27 @@ def free_port() -> int:
         return s.getsockname()[1]
 
 
+MAX_TRANSIENT = 40
+
+
+def retry(call: Callable[[], Any]) -> Any:
+    """Calls to the local server, retried on transient transport errors (resets under load)."""
+    for attempt in range(1, MAX_TRANSIENT + 1):
+        try:
+            return call()
+        except httpx.TransportError as e:
+            if attempt == MAX_TRANSIENT:
+                raise
+            print(f"[e2e] transient {type(e).__name__} ({attempt}/{MAX_TRANSIENT}): {e}", flush=True)
+            time.sleep(3)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", default=time.strftime("%Y%m%d-%H%M%S"))
     ap.add_argument("--repos", nargs="*", default=DEFAULT_REPOS)
+    ap.add_argument("--corpus", choices=["tune", "holdout", "all"],
+                    help="take repos from evals/corpus.json instead of --repos")
     ap.add_argument("--cache", default="record", choices=["off", "read", "record", "replay"])
     ap.add_argument("--timeout", type=int, default=4 * 3600)
     ap.add_argument("--parallel-agents", type=int, default=4)
@@ -91,6 +109,9 @@ def main() -> int:
     ap.add_argument("--no-llm", action="store_true", help="plumbing check only (scores will fail)")
     ap.add_argument("--rescore", metavar="JOB_ID", help="score a finished job from the run DB (no server)")
     ap.add_argument("--resume", metavar="JOB_ID", help="resume an interrupted job (finished nodes are reused)")
+    ap.add_argument("--rerun", metavar="JOB_ID",
+                    help="re-execute a finished job: nodes without a published artifact (e.g. failed during an "
+                         "outage) and everything downstream run again; the rest is reused")
     args = ap.parse_args()
     if args.rescore:
         return rescore(args)
@@ -134,28 +155,47 @@ def main() -> int:
             r = c.post(f"/api/runs/{job}/resume", headers=H["op"])
             r.raise_for_status()
             print(f"[e2e] resumed job {job} (port {port}, cache={args.cache})", flush=True)
+        elif args.rerun:
+            job = args.rerun
+            first = c.get(f"/api/runs/{job}", headers=H["vw"]).json()["apps"][0]
+            r = c.post(f"/api/runs/{job}/rerun", headers=H["op"], json={"phase": 1, "app": first, "nodes": []})
+            r.raise_for_status()
+            print(f"[e2e] re-running job {job} (port {port}, cache={args.cache})", flush=True)
         else:
-            repos = [str(CORPUS / r) if not r.startswith(("/", "http", "git@")) else r for r in args.repos]
+            names = args.repos
+            if args.corpus:
+                names = [e["name"] for e in json.loads((ROOT / "evals" / "corpus.json").read_text())["repos"]
+                         if args.corpus == "all" or e["split"] == args.corpus]
+            repos = [str(CORPUS / r) if not r.startswith(("/", "http", "git@")) else r for r in names]
             r = c.post("/api/runs", headers=H["op"], json={"repos": repos, "review_mode": "human", "llm": True})
             r.raise_for_status()
             job = r.json()["job_id"]
             print(f"[e2e] job {job} on {len(repos)} repos (port {port}, cache={args.cache})", flush=True)
 
-        answered, decisions, last = 0, [], ""
+        answered, decisions, last, failures = 0, [], "", 0
         while time.monotonic() - m0 < args.timeout:
-            snap = c.get(f"/api/runs/{job}", headers=H["vw"]).json()
-            for q in c.get(f"/api/runs/{job}/questions", params={"status": "OPEN"}, headers=H["vw"]).json():
-                resp = c.post(f"/api/questions/{q['question_id']}/answer", headers=H["sh"],
-                              json={"answer": answer_for(q["question"])})
-                answered += resp.status_code == 200
-            for rv in c.get("/api/reviews", params={"job_id": job, "status": "PENDING"}, headers=H["vw"]).json():
-                prop = rv["proposal"]
-                resp = c.post(f"/api/reviews/{rv['review_id']}/decision", headers=H["rv"],
-                              json={"decision": "approve", "candidate_hash": rv["candidate_hash"],
-                                    "comment": f"approve proposed {prop.get('status')} {SCRIPTED}"})
-                if resp.status_code == 200:
-                    decisions.append({"phase": rv["phase"], "app": rv["app"], "gate": rv["gate"],
-                                      "proposed": prop.get("status"), "decision": "approve"})
+            try:
+                snap = c.get(f"/api/runs/{job}", headers=H["vw"]).json()
+                for q in c.get(f"/api/runs/{job}/questions", params={"status": "OPEN"}, headers=H["vw"]).json():
+                    resp = c.post(f"/api/questions/{q['question_id']}/answer", headers=H["sh"],
+                                  json={"answer": answer_for(q["question"])})
+                    answered += resp.status_code == 200
+                for rv in c.get("/api/reviews", params={"job_id": job, "status": "PENDING"}, headers=H["vw"]).json():
+                    prop = rv["proposal"]
+                    resp = c.post(f"/api/reviews/{rv['review_id']}/decision", headers=H["rv"],
+                                  json={"decision": "approve", "candidate_hash": rv["candidate_hash"],
+                                        "comment": f"approve proposed {prop.get('status')} {SCRIPTED}"})
+                    if resp.status_code == 200:
+                        decisions.append({"phase": rv["phase"], "app": rv["app"], "gate": rv["gate"],
+                                          "proposed": prop.get("status"), "decision": "approve"})
+            except httpx.TransportError as e:
+                failures += 1
+                if failures > MAX_TRANSIENT:
+                    raise
+                print(f"[e2e] transient {type(e).__name__} while polling ({failures}/{MAX_TRANSIENT}): {e}", flush=True)
+                time.sleep(3)
+                continue
+            failures = 0
             line = (f"{snap['status']} {snap['progress']}% {snap.get('stage_detail') or ''} | "
                     f"llm calls={snap['llm']['calls']} tok_in={snap['llm']['input_tokens']} "
                     f"answers={answered} approvals={len(decisions)}")
@@ -165,10 +205,10 @@ def main() -> int:
             if snap["status"] in TERMINAL:
                 break
             time.sleep(3)
-        snap = c.get(f"/api/runs/{job}", headers=H["vw"]).json()
-        trace = c.get(f"/api/runs/{job}/trace", headers=H["vw"]).json()
-        reviews = c.get("/api/reviews", params={"job_id": job}, headers=H["vw"]).json()
-        questions = c.get(f"/api/runs/{job}/questions", headers=H["vw"]).json()
+        snap = retry(lambda: c.get(f"/api/runs/{job}", headers=H["vw"]).json())
+        trace = retry(lambda: c.get(f"/api/runs/{job}/trace", headers=H["vw"]).json())
+        reviews = retry(lambda: c.get("/api/reviews", params={"job_id": job}, headers=H["vw"]).json())
+        questions = retry(lambda: c.get(f"/api/runs/{job}/questions", headers=H["vw"]).json())
     finally:
         server.terminate()
         try:
