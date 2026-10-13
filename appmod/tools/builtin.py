@@ -17,6 +17,7 @@ from typing import Any
 from appmod.tools import analyzers
 from appmod.tools.gateway import ToolDef, ToolEnv, ToolGateway, safe_path
 from appmod.tools.repo_intel import parse_dependencies, scan_repo
+from appmod.tools import structure
 
 _scan_cache: dict[str, Any] = {}
 _scan_lock = threading.Lock()
@@ -325,6 +326,18 @@ def build_gateway() -> ToolGateway:
          "correctness findings."),
     ):
         gw.register(ToolDef(name, desc, P({"application_id": APP}), _analyzer(fn), needs_repo=True))
+    for name, fn, desc in (
+        ("dependency_graph", structure.dependency_graph,
+         "Internal module/package import graph with fan-in/out and cycle hints (AST/regex; optional "
+         "go list when available)."),
+        ("change_coupling", structure.change_coupling,
+         "Git co-change coupling between modules and file churn hotspots (bounded history)."),
+        ("db_schema", structure.db_schema,
+         "Tables/columns/FKs from SQL DDL, migrations (Rails/Laravel/Django/Alembic/EF) and ORM models."),
+        ("api_surface", structure.api_surface,
+         "HTTP routes from code, messaging topic hints, and exported interface entry points by module."),
+    ):
+        gw.register(ToolDef(name, desc, P({"application_id": APP}), _analyzer(fn), needs_repo=True))
     return gw
 
 
@@ -333,6 +346,7 @@ REPO_TOOLS = ["repo_summary", "list_dir", "read_file", "grep", "list_dependencie
 ARTIFACT_TOOLS = ["get_artifact", "list_artifacts"]
 ANALYZER_TOOLS = ["loc_metrics", "sbom_packages", "vulnerability_scan", "secret_scan",
                   "static_analysis"]
+STRUCTURE_TOOLS = ["dependency_graph", "change_coupling", "db_schema", "api_surface"]
 
 
 def tool_catalog() -> list[dict[str, Any]]:
