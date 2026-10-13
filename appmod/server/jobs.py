@@ -111,6 +111,7 @@ class PipelineJob:
         self.db = db or RunDB(self.runs_root / "appmod.db")
         self.work = self.runs_root / "ui" / self.job_id
         self.force: dict[tuple[int, str], set[str]] = {}
+        self._detail_before_outage: str | None = None
         self.spec = {"repos": self.repos, "decision_mode": decision_mode, "include_p6": include_p6,
                      "include_p5_p6": self.include_p5_p6, "app_id": app_id, "owner": owner,
                      "review_mode": self.review_mode, "llm": self.llm}
@@ -276,7 +277,24 @@ class PipelineJob:
         if self._router is None and self.llm:
             from appmod.llm.router import ModelRouter
             self._router = ModelRouter(self.settings)
+            if self._router.outage is not None:
+                self._router.outage.on_change = self._on_outage
+                self._router.outage.stop = self._cancel
         return self._router
+
+    def _on_outage(self, status: str, info: dict[str, Any]) -> None:
+        self._event("CONNECTIVITY", status=status, **info)
+        if status == "LOST":
+            with self._lock:
+                self._detail_before_outage = self.state.get("stage_detail")
+            self._update(stage_detail="paused — Astra unreachable, waiting for it to answer")
+            self._log("Astra endpoint unreachable — model work paused; agent retries are not spent", level="error")
+        elif status == "RESTORED":
+            self._update(stage_detail=self._detail_before_outage)
+            self._log(f"Astra reachable again after {info.get('waited_s', 0)} s — model work resumed")
+        else:
+            self._log(f"stopped waiting for Astra ({info.get('reason')}) — affected agents fail normally",
+                      level="error")
 
     @property
     def gateway(self):

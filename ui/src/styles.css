@@ -239,6 +239,11 @@ body {
 .feed-line.TOOL_CALL .feed-icon { color: var(--cyan); }
 .feed-line.SUBMISSION_REJECTED .feed-icon { color: var(--amber); }
 .feed-line.AGENT_LLM_DONE .feed-icon { color: var(--green); }
+.feed-line.CONNECTIVITY .feed-icon { color: var(--amber); }
+.outage-banner {
+  margin-top: 8px; padding: 8px 10px; border-radius: 6px; font-size: 12px;
+  border: 1px solid var(--amber); background: rgba(245, 158, 11, 0.08); color: var(--text);
+}
 
 .split-agent { display: grid; grid-template-columns: 300px 1fr; gap: 10px; align-items: start; }
 .agent-list { max-height: 720px; overflow-y: auto; display: flex; flex-direction: column; gap: 3px; }

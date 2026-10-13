@@ -89,6 +89,8 @@ export function LiveAgents() {
 
   const agents = [...live.agents.values()];
   const running = !!job && ACTIVE.includes(job.status);
+  const lastConn = [...live.events].reverse().find((e) => e.kind === 'CONNECTIVITY');
+  const paused = running && lastConn?.status === 'LOST';
 
   return (
     <div className="live">
@@ -121,6 +123,12 @@ export function LiveAgents() {
             <span className="kv">{job.apps?.length} apps · {job.progress}%</span>
           </div>
           <div className="progress-track"><div className="progress-fill" style={{ width: `${job.progress}%` }} /></div>
+          {paused && (
+            <div className="outage-banner">
+              ⚡ Astra has been unreachable since {lastConn.ts.slice(11, 19)} UTC. Model work is paused and
+              agent retries are not being spent; agents resume on their own once the endpoint answers.
+            </div>
+          )}
         </div>
       )}
 
@@ -212,6 +220,7 @@ function LiveTab({ agents, events, onOpen }: { agents: AgentRun[]; events: Ev[];
           <select className="input small" style={{ float: 'right' }} value={filter} onChange={(e) => setFilter(e.target.value as typeof filter)}>
             <option value="all">all</option><option value="MODEL_CALL">model calls</option><option value="TOOL_CALL">tool calls</option>
             <option value="SUBMISSION_REJECTED">rejections</option><option value="AGENT_LLM_DONE">agent done</option>
+            <option value="CONNECTIVITY">connectivity</option>
           </select>
         </h3>
         <div className="feed">
@@ -224,6 +233,17 @@ function LiveTab({ agents, events, onOpen }: { agents: AgentRun[]; events: Ev[];
 }
 
 function FeedLine({ e, onOpen }: { e: Ev; onOpen: (k: string) => void }) {
+  if (e.kind === 'CONNECTIVITY') {
+    const text = e.status === 'LOST' ? 'Astra unreachable — model work paused, retries not spent'
+      : e.status === 'RESTORED' ? `Astra reachable again after ${String(e.waited_s)} s — model work resumed`
+        : `stopped waiting for Astra (${String(e.reason)})`;
+    return (
+      <div className="feed-line CONNECTIVITY">
+        <span className="muted">{e.ts.slice(11, 19)}</span> <span className="feed-icon">⚡</span>{' '}
+        <span className={e.status === 'RESTORED' ? '' : 'err'}>{text}</span>
+      </div>
+    );
+  }
   const who = `P${e.phase}.${e.node} ${e.app}`;
   const open = () => onOpen(`P${e.phase}/${e.app}/${e.node}`);
   let body: React.ReactNode;
@@ -305,7 +325,8 @@ function Timeline({ a }: { a: AgentRun }) {
               <div className="tl-body">
                 <div className="tl-head">
                   <b>{{ MODEL_CALL: `Model turn ${String(e.turn ?? '')}`, TOOL_CALL: `Tool · ${String(e.tool)}`,
-                        SUBMISSION_REJECTED: 'Kernel bounced the submission', AGENT_LLM_DONE: 'Submission accepted', NODE: '' }[e.kind]}</b>
+                        SUBMISSION_REJECTED: 'Kernel bounced the submission', AGENT_LLM_DONE: 'Submission accepted', NODE: '',
+                        CONNECTIVITY: '' }[e.kind]}</b>
                   <span className="muted">{e.ts.slice(11, 19)}</span>
                 </div>
                 {e.kind === 'MODEL_CALL' && (

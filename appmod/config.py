@@ -40,6 +40,7 @@ class Settings(BaseSettings):
     llm_cache: str = "read"           # off | read | record | replay
     llm_timeout_s: float = 240.0
     llm_tpm_limit: int = 900_000      # client-side tokens-per-minute ceiling
+    llm_outage_max_wait_s: float = 6 * 3600   # awake time to wait for an unreachable endpoint
     max_parallel_agents: int = 6
     max_parallel_apps: int = 4
     analyzers: str = "on"             # on | off (external analyzer CLIs in deterministic seeds)
