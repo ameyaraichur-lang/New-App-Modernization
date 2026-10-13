@@ -32,6 +32,9 @@ def mini_repo(tmp_path):
     (tmp_path / "pkg" / "routes.py").write_text(
         'from flask import Flask\napp = Flask(__name__)\n@app.get("/health")\ndef health():\n    return "ok"\n'
     )
+    (tmp_path / "web").mkdir()
+    (tmp_path / "web" / "app.js").write_text('const u = require("./util");\nmodule.exports = {};\n')
+    (tmp_path / "web" / "util.js").write_text('const a = require("./app");\nmodule.exports = {};\n')
     (tmp_path / "db").mkdir()
     (tmp_path / "db" / "schema.sql").write_text(
         "CREATE TABLE users (id INT PRIMARY KEY, name VARCHAR(64));\n"
@@ -56,6 +59,8 @@ def test_dependency_graph_cycle_and_edges(mini_repo):
     mods = {m["module"] for m in g["modules"]}
     assert "pkg.a" in mods or "pkg.b" in mods
     assert g["cycles"]
+    js_mods = {m for m in mods if m.startswith("web.")}
+    assert js_mods
 
 
 def test_change_coupling_pairs(mini_repo):
