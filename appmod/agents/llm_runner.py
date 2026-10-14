@@ -153,6 +153,7 @@ class LLMAgentRunner:
         self.env_factory = env_factory
         self.max_repairs = max_repairs
         self.extra_tools = extra_tools
+        self.on_disagreement = None
 
     # -- plumbing ----------------------------------------------------------------
 
@@ -172,7 +173,7 @@ class LLMAgentRunner:
                                                       for t in ("reasoning", "coding", "fast")},
                            "llm": self.settings.llm_enabled, "verifier": verifier,
                            "degrade": os.environ.get("APPMOD_PROMPT_DEGRADE") == "1",
-                           "memory": "repo-memory/1"}, sort_keys=True)
+                           "memory": "repo-memory/1", "consistency": "k3"}, sort_keys=True)
 
     def fingerprint_for(self, local_id: str) -> str:
         """Runner identity for one agent: a changed overlay (guidance, fields,
@@ -208,6 +209,9 @@ class LLMAgentRunner:
             seed.execution_metadata["llm"] = meta
             return seed
         try:
+            from appmod.agents.consistency import ROLES
+            if (self.phase, agent_spec["local_id"]) in ROLES:
+                return self._consistent(agent_spec, inputs, seed, ov, context)
             return self._agent_loop(agent_spec, inputs, seed, ov, context)
         except TransientLLMError as exc:
             raise TransientAgentError(f"model transient after failover: {exc}") from exc
@@ -220,6 +224,38 @@ class LLMAgentRunner:
             out.execution_metadata["llm"] = {"enriched": False, "mode": "seed-fallback",
                                              "error": f"{type(exc).__name__}: {str(exc)[:300]}"}
             return out
+
+    def _consistent(self, spec: dict[str, Any], inputs: dict[str, dict], seed: AgentOutcome,
+                    ov: Overlay, context: dict[str, Any]) -> AgentOutcome:
+        from appmod.agents.consistency import K, combine
+        payloads: list[dict[str, Any]] = []
+        samples: list[AgentOutcome | None] = []
+        for sample in range(1, K + 1):
+            try:
+                outcome = self._agent_loop(spec, inputs, seed, ov, {**context, "sample": sample, "samples": K})
+            except LLMError:
+                payloads.append({})
+                samples.append(None)
+                continue
+            payloads.append(outcome.payload)
+            samples.append(outcome)
+        vote = combine(self.phase, spec["local_id"], payloads)
+        if vote["agreed"] and vote["winner"]:
+            chosen = samples[vote["winner"] - 1]
+            assert chosen is not None
+            chosen.execution_metadata.setdefault("llm", {})["consistency"] = {
+                "k": K, "agreed": True, "agreement": vote["agreement"]}
+            return chosen
+        review = vote["review"]
+        out = copy.deepcopy(seed)
+        out.payload = {**out.payload, "consistency_review": review}
+        out.execution_metadata["llm"] = {
+            "enriched": True, "mode": "consistency-disagreement", "consistency": review,
+            "agreement": vote["agreement"],
+        }
+        if review and self.on_disagreement is not None:
+            self.on_disagreement(review)
+        return out
 
     def _agent_loop(self, spec: dict[str, Any], inputs: dict[str, dict], seed: AgentOutcome,
                     ov: Overlay, context: dict[str, Any]) -> AgentOutcome:
@@ -259,6 +295,9 @@ class LLMAgentRunner:
         charter = build_charter(spec, PHASE_NAMES.get(self.phase, f"Phase {self.phase}"))
         instructions = charter + operating_rules() + (
             f"\n## Method for this agent\n{ov.guidance}\n" if ov.guidance else "")
+        if context.get("sample"):
+            instructions += (f"\n## Independent sample {context['sample']} of {context.get('samples', 3)}\n"
+                             "Decide from the evidence. Do not assume another sample's answer.\n")
         if review_only:
             instructions += ("\n## Review mode\nThe deterministic route marked this agent "
                              "SKIPPED_APPROVED. Verify the skip justification with tools and report "
