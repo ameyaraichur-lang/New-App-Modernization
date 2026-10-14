@@ -484,11 +484,20 @@ class PipelineJob:
 
         while True:
             digest_before = self.db.answers_digest(self.job_id, app) if phase == 1 else ""
+            def escalate(source: str, target: str, statement: str) -> bool:
+                self.db.add_question(
+                    self.job_id, app,
+                    f"Critique from {source} about {target} was not resolved in two reruns: {statement[:400]}",
+                    why="critique rerun cap", source="critique", phase=phase, node=target,
+                    blocking=True)
+                return self.review_mode == "human"
+
             orch = PhaseOrchestrator(
                 reg, self.store, self.policy, self.audit, runner, gate_overrides=overrides,
                 max_parallel=self.settings.max_parallel_agents, reuse=True,
                 external_digest=lambda node: self._external_digest(phase, app, node),
-                force_nodes=self.force.pop((phase, app), set()), cancel_event=self._cancel)
+                force_nodes=self.force.pop((phase, app), set()), cancel_event=self._cancel,
+                escalate=escalate)
             orch.event_listener = lambda ev: self._trace(phase, app, ev)
             ctx = orch.start_run(f"{self.job_id}-p{phase}-{app}", app, run_inputs)
             with self._lock:
