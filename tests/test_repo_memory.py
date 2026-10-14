@@ -4,10 +4,10 @@ import json
 import subprocess
 from pathlib import Path
 
-from appmod.retrieval.memory import AGENT_INPUT_TOKEN_CAP, MAP_BUDGET_CHARS, map_text, repo_map
+from appmod.retrieval.memory import (
+    AGENT_INPUT_TOKEN_CAP, MAP_BUDGET_CHARS, map_text, over_budget, repo_map)
 from appmod.tools.builtin import build_gateway
 from appmod.tools.gateway import EvidenceLedger, ToolEnv
-from scripts.check_retrieval_budget import over_budget
 
 
 def _repo(tmp_path: Path) -> Path:
