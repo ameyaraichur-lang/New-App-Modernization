@@ -47,7 +47,7 @@ def events_from_answers(questions: list[dict[str, Any]]) -> list[dict[str, Any]]
             continue
         if not isinstance(data, dict) or not data.get("changes"):
             continue
-        event = {"kind": "answer"}
+        event: dict[str, Any] = {"kind": "answer"}
         for key in _EVENT_KEYS:
             if key in data:
                 event[key] = data[key]
