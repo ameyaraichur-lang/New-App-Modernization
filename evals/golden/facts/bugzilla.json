@@ -62,7 +62,7 @@
   {
    "type": "license",
    "key": "license",
-   "expected": "lgpl",
+   "expected": "mpl",
    "source": "LICENSE",
    "snippet": "mozilla public license version 2.0\n==================================\n\n1. definitions\n--------------\n\n1.1. \"contributor\"",
    "review": null
