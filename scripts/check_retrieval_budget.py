@@ -13,17 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from appmod.retrieval.memory import AGENT_INPUT_TOKEN_CAP  # noqa: E402
-
-
-def over_budget(report: dict, cap: int = AGENT_INPUT_TOKEN_CAP) -> list[str]:
-    problems = []
-    for agent in report.get("agents") or []:
-        tokens = (agent.get("tokens") or {}).get("input") or 0
-        if tokens > cap:
-            problems.append(f"{agent.get('phase')}.{agent.get('agent')} {agent.get('app')} "
-                            f"{tokens} > {cap}")
-    return problems
+from appmod.retrieval.memory import AGENT_INPUT_TOKEN_CAP, over_budget  # noqa: E402
 
 
 def main() -> int:
