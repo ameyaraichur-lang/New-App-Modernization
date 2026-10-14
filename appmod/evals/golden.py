@@ -88,6 +88,23 @@ LICENSES = [("apache", r"apache license"), ("mit", r"\bmit license|permission is
             ("lgpl", r"lesser general public license"), ("gpl", r"gnu general public license"),
             ("mpl", r"mozilla public license")]
 
+
+def _license_label(head: str) -> str | None:
+    """The license named earliest in the text.
+
+    MPL 2.0 names the LGPL later as a secondary license. That mention must not
+    replace the heading.
+    """
+    found: list[tuple[int, str]] = []
+    for label, pat in LICENSES:
+        match = re.search(pat, head)
+        if match:
+            found.append((match.start(), label))
+    if not found:
+        return None
+    found.sort()
+    return found[0][1]
+
 ENTITY_PATTERNS: list[tuple[re.Pattern[str], re.Pattern[str]]] = [
     (re.compile(r"\.(java|kt)$"), re.compile(r"@Entity\b[\s\S]{0,400}?\bclass\s+(\w+)")),
     (re.compile(r"\.cs$"), re.compile(r"\bDbSet<(\w+)>")),
@@ -285,10 +302,8 @@ def derive(root: Path, scc: str | None = None) -> list[Fact]:
                 first.setdefault(kind, rel)
         if licence is None and rel.count("/") == 0 and name.startswith(("licen", "copying")):
             head = _read(p)[:3000].lower()
-            for label, pat in LICENSES:
-                if re.search(pat, head):
-                    licence = Fact("license", "license", label, rel, head[:120].strip())
-                    break
+            if (label := _license_label(head)):
+                licence = Fact("license", "license", label, rel, head[:120].strip())
         manifest_like = (name in ("pom.xml", "package.json", "composer.json", "gemfile", "go.mod",
                                   "packages.config", "pyproject.toml", "runtime.txt", ".python-version",
                                   ".ruby-version", "cpanfile", "makefile.pl", "build.pl")
