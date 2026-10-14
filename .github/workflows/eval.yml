@@ -1,0 +1,99 @@
+name: eval
+
+on:
+  schedule:
+    - cron: "0 2 * * 0"
+  workflow_dispatch:
+    inputs:
+      degrade:
+        description: "Run with the deliberately degraded agent prompt"
+        type: boolean
+        default: false
+  pull_request:
+    paths:
+      - "appmod/agents/**"
+      - "appmod/llm/**"
+      - "appmod/evals/**"
+      - "evals/corpus.json"
+      - "uv.lock"
+      - ".github/workflows/eval.yml"
+
+jobs:
+  gate-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv python install 3.12
+      - run: uv sync --python 3.12 --frozen --extra dev
+      - run: uv run pytest -q tests/test_eval_regress.py
+        env:
+          APPMOD_LLM_MODE: "off"
+          APPMOD_ANALYZERS: "off"
+          APPMOD_HTTP_TOOLS: "off"
+
+  corpus:
+    needs: gate-check
+    if: github.event_name != 'pull_request'
+    strategy:
+      fail-fast: false
+      matrix:
+        split: [tune, holdout]
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - run: uv python install 3.12
+      - run: uv sync --python 3.12 --frozen --extra dev
+      - name: clone the pinned corpus
+        run: uv run python scripts/corpus_sync.py --split ${{ matrix.split }} --dir "$RUNNER_TEMP/corpus"
+      - name: previous report
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: eval-${{ matrix.split }}
+          path: previous
+      - name: live corpus run
+        run: |
+          uv run python scripts/e2e_agentic.py \
+            --label gha-${{ matrix.split }} --corpus ${{ matrix.split }} \
+            --timeout 18000 --parallel-apps 4 --parallel-agents 4 --cache off
+        env:
+          APPMOD_CORPUS: ${{ runner.temp }}/corpus
+          APPMOD_RUNS_DIR: ${{ runner.temp }}/runs
+          APPMOD_ASTRA_ENDPOINT: ${{ secrets.APPMOD_ASTRA_ENDPOINT }}
+          APPMOD_ASTRA_API_VERSION: ${{ secrets.APPMOD_ASTRA_API_VERSION }}
+          APPMOD_ASTRA_API_KEY: ${{ secrets.APPMOD_ASTRA_API_KEY }}
+          APPMOD_ASTRA_DEPLOYMENT: ${{ secrets.APPMOD_ASTRA_DEPLOYMENT }}
+          APPMOD_ASTRA_MODEL_VERSION: ${{ secrets.APPMOD_ASTRA_MODEL_VERSION }}
+          APPMOD_PROMPT_DEGRADE: ${{ github.event.inputs.degrade == 'true' && '1' || '0' }}
+      - name: score and compare
+        run: |
+          job=$(python -c 'import json; print(json.load(open("docs/runs/e2e-gha-${{ matrix.split }}.json"))["job_id"])')
+          uv run python scripts/eval_run.py --runs-dir "$APPMOD_RUNS_DIR" --job "$job" --label gha-${{ matrix.split }}
+          prev=""
+          if [ -f previous/eval-gha-${{ matrix.split }}.json ]; then prev="--previous previous/eval-gha-${{ matrix.split }}.json"; fi
+          set +e
+          uv run python scripts/eval_regress.py --current docs/runs/eval-gha-${{ matrix.split }}.json $prev
+          code=$?
+          set -e
+          if [ "${APPMOD_PROMPT_DEGRADE}" = "1" ]; then
+            test "$code" -ne 0
+          else
+            test "$code" -eq 0
+          fi
+        env:
+          APPMOD_RUNS_DIR: ${{ runner.temp }}/runs
+          APPMOD_PROMPT_DEGRADE: ${{ github.event.inputs.degrade == 'true' && '1' || '0' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-${{ matrix.split }}
+          path: |
+            docs/runs/eval-gha-${{ matrix.split }}.*
+            docs/runs/verifier-audit-gha-${{ matrix.split }}.jsonl
