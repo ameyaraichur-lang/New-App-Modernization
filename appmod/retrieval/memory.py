@@ -17,6 +17,17 @@ from typing import Any
 
 RUN4_MEDIAN_INPUT_TOKENS = 49_656
 AGENT_INPUT_TOKEN_CAP = 2 * RUN4_MEDIAN_INPUT_TOKENS
+
+
+def over_budget(report: dict[str, Any], cap: int = AGENT_INPUT_TOKEN_CAP) -> list[str]:
+    """Agent lines whose input tokens exceed the large-repo cap."""
+    problems = []
+    for agent in report.get("agents") or []:
+        tokens = (agent.get("tokens") or {}).get("input") or 0
+        if tokens > cap:
+            problems.append(f"{agent.get('phase')}.{agent.get('agent')} {agent.get('app')} "
+                            f"{tokens} > {cap}")
+    return problems
 MAP_BUDGET_CHARS = 4_000
 MEMORY_VERSION = "repo-memory/1"
 
