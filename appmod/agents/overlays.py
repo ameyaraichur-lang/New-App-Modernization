@@ -143,55 +143,60 @@ def _pp_p1_a11(seed: dict, llm: dict, ctx: dict) -> dict:
     return out
 
 
+def _decision_ok(row: dict) -> bool:
+    return (row.get("proposed_disposition") in R8 and row.get("second_best") in R8
+            and str(row.get("rationale") or "").strip()
+            and isinstance(row.get("wave"), int))
+
+
 def _pp_p2_a6(seed: dict, llm: dict, ctx: dict) -> dict:
     out = dict(seed)
-    by_app = {d["application_id"]: d for d in llm.get("decisions", [])}
+    by_app = {d["application_id"]: d for d in llm.get("decisions", []) if isinstance(d, dict)}
     decisions, unscheduled = [], []
     waves: dict[str, list[str]] = {}
+    authored = 0
     for d in seed.get("decisions", []):
         m = by_app.get(d["application_id"])
         nd = dict(d)
-        if m and m["proposed_disposition"] in R8:
+        if m and _decision_ok(m):
+            authored += 1
             nd.update(proposed_disposition=m["proposed_disposition"], rationale=m["rationale"],
-                      second_best=m["second_best"], evidence_class=m["evidence_class"],
-                      evidence_ids=m["evidence_ids"], confidence=m.get("confidence"), origin="llm",
-                      options_considered=m.get("options_considered", []))
+                      second_best=m["second_best"], evidence_class=m.get("evidence_class", "INFERRED"),
+                      evidence_ids=m.get("evidence_ids", []), confidence=m.get("confidence"),
+                      origin="llm", options_considered=m.get("options_considered", []),
+                      why_not_second_best=m.get("why_not_second_best", ""))
             if m["proposed_disposition"] in ("Retain", "Retire"):
                 nd["wave_id"] = None
             else:
                 nd["wave_id"] = f"W{max(1, min(6, int(m['wave'])))}"
         decisions.append(nd)
-        if nd["wave_id"]:
+        if nd.get("wave_id"):
             waves.setdefault(nd["wave_id"], []).append(nd["application_id"])
-        elif nd["proposed_disposition"] in ("Retain", "Retire"):
+        elif nd.get("proposed_disposition") in ("Retain", "Retire"):
             unscheduled.append({"application_id": nd["application_id"], "route": nd["proposed_disposition"]})
     out["decisions"] = decisions
     out["waves"] = [{"wave_id": w, "apps": ",".join(a)} for w, a in sorted(waves.items())]
     out["unscheduled"] = unscheduled
+    accepted = [m for m in by_app.values() if _decision_ok(m)]
     out["alternatives"] = [{"application_id": m["application_id"], "option": m["second_best"],
-                            "why_not": m["why_not_second_best"], "origin": "llm"}
-                           for m in llm.get("decisions", [])] or seed.get("alternatives", [])
+                            "why_not": m.get("why_not_second_best", ""), "origin": "llm"}
+                           for m in accepted] or seed.get("alternatives", [])
+    ctx["first_pass_valid"] = bool(seed.get("decisions")) and authored == len(seed.get("decisions", []))
     return out
 
 
 def _pp_p4_a3(seed: dict, llm: dict, ctx: dict) -> dict:
+    from appmod.agents.structure_author import accept_tasks
     out = dict(seed)
-    seed_ids = {t["task_id"] for t in seed.get("tasks", [])}
-    tasks = list(seed.get("tasks", []))
-    edges = list(seed.get("dependency_edges", []))
-    llm_tasks = llm.get("tasks", [])
-    ids = seed_ids | {t["task_id"] for t in llm_tasks}
-    for t in llm_tasks:
-        if t["task_id"] in seed_ids:
-            continue
-        tasks.append({"task_id": t["task_id"], "phase": t["phase"], "kind": t["kind"],
-                      "owner_role": t["owner_role"], "acceptance": t["acceptance"],
-                      "component": t["component"], "estimate_days": t["estimate_days"],
-                      "evidence_class": t["evidence_class"], "evidence_ids": t["evidence_ids"],
-                      "confidence": t.get("confidence"), "origin": "llm"})
-        for dep in t["depends_on"]:
-            if dep in ids and dep != t["task_id"]:
-                edges.append({"from": dep, "to": t["task_id"]})
+    llm_tasks = [t for t in llm.get("tasks", []) if isinstance(t, dict)]
+    if accept_tasks(llm_tasks):
+        tasks = [{**t, "origin": "llm"} for t in llm_tasks]
+        edges = [{"from": dep, "to": t["task_id"]} for t in tasks for dep in t["depends_on"]]
+        ctx["first_pass_valid"] = True
+    else:
+        tasks = list(seed.get("tasks", []))
+        edges = list(seed.get("dependency_edges", []))
+        ctx["first_pass_valid"] = False
     edges = _acyclic(edges)
     ctx_hash = hashlib.sha256(json.dumps({"tasks": tasks, "edges": edges}, sort_keys=True).encode()).hexdigest()
     out.update(tasks=tasks, dependency_edges=edges,
@@ -201,6 +206,40 @@ def _pp_p4_a3(seed: dict, llm: dict, ctx: dict) -> dict:
                phase_routes=[{"task": t["task_id"], "phase": t["phase"]} for t in tasks])
     out["estimate_assumptions"] = list(seed.get("estimate_assumptions", [])) + [
         dict(e, origin="llm") for e in llm.get("estimate_assumptions", [])]
+    return out
+
+
+def _pp_p3_a1(seed: dict, llm: dict, ctx: dict) -> dict:
+    from appmod.agents.structure_author import _rows, accept_component_map
+    ok = (accept_component_map(llm.get("component_map"))
+          and _rows(llm.get("technology_evidence"), {"choice", "rationale"})
+          and _rows(llm.get("proposed_adrs"), {"adr", "decision", "rationale", "consequences"}))
+    out = dict(seed)
+    if ok:
+        out["component_map"] = llm["component_map"]
+        out["technology_evidence"] = llm["technology_evidence"]
+        out["proposed_adrs"] = llm["proposed_adrs"]
+    ctx["first_pass_valid"] = ok
+    return out
+
+
+def _pp_p3_a2(seed: dict, llm: dict, ctx: dict) -> dict:
+    from appmod.agents.structure_author import accept_boundaries
+    out = dict(seed)
+    ok = accept_boundaries(llm.get("boundaries"))
+    if ok:
+        out["boundaries"] = llm["boundaries"]
+    ctx["first_pass_valid"] = ok
+    return out
+
+
+def _pp_p3_a3(seed: dict, llm: dict, ctx: dict) -> dict:
+    from appmod.agents.structure_author import accept_schemas
+    out = dict(seed)
+    ok = accept_schemas(llm.get("schemas"))
+    if ok:
+        out["schemas"] = llm["schemas"]
+    ctx["first_pass_valid"] = ok
     return out
 
 
@@ -523,7 +562,8 @@ P3 = {
             "proposed_adrs": (A(item(adr=S(), decision=S(), rationale=S(), consequences=S(),
                                      status=E("PROPOSED"))), "append"),
             "transition_constraints": (A(item(constraint=S())), "append"),
-        }),
+        },
+        postprocess=_pp_p3_a1),
     "A2": Overlay(
         tier="reasoning", tools=REPO_STRUCT,
         guidance=(
@@ -535,7 +575,8 @@ P3 = {
             "boundaries": (A(item(boundary=S(), modules=A(S()), justification=S())), "append"),
             "communication_needs": (A(item(**{"from": S(), "to": S()}, style=S())), "append"),
             "rationale": (A(item(point=S())), "append"),
-        }),
+        },
+        postprocess=_pp_p3_a2),
     "A3": Overlay(
         tier="reasoning", tools=REPO_STRUCT,
         guidance=(
@@ -548,7 +589,8 @@ P3 = {
                                detail=S())), "append"),
             "data_contracts": (A(item(contract=S(), owner=S(), detail=S())), "append"),
             "reconciliation_criteria": (A(item(criterion=S(), method=S())), "append"),
-        }),
+        },
+        postprocess=_pp_p3_a3),
     "A4": Overlay(
         tier="reasoning", tools=REPO_SEC + [ASK_STAKEHOLDER],
         guidance=(
