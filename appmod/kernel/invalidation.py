@@ -1,50 +1,101 @@
-"""Invalidation engine (AH06 / H17).
+"""Replan predicates: new evidence reopens only the P4 planners that read it.
 
-Blueprint: 'A late upstream decision/build/schema/checkpoint change cannot
-reuse stale downstream permission.' When an upstream artifact is superseded
-by a new version, every artifact whose parent lineage includes an older
-version is STALE; affected approvals/handoffs must be re-run. Old records
-stay in the audit trail — nothing is silently edited.
+An answer, critique, or upstream revision names the facts it changes. Each planner
+declares the facts it reads. Downstream planners reopen because their upstream
+artifact version changes; planners that do not read the fact stay reusable.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import hashlib
+import json
 from typing import Any
 
-from appmod.store.artifact_store import ArtifactStore
+from appmod.contracts.schemas import canonical_json
+
+# Facts a planner reads directly. Downstream nodes are not listed; a new version
+# of a dependency reopens them through the normal input hash.
+NODE_FACTS: dict[str, frozenset[str]] = {
+    "A1": frozenset({"wave"}),
+    "A2": frozenset({"components", "wave"}),
+    "A3": frozenset({"components", "wave", "disposition"}),
+    "A5": frozenset({"estimate"}),
+}
+
+REPLAN_TRIGGERS = (
+    {"trigger": "p3_scope", "response": "reopen planners that read components",
+     "fact": "components"},
+    {"trigger": "wave", "response": "reopen planners that read the wave",
+     "fact": "wave"},
+    {"trigger": "estimate", "response": "reopen the resource estimate for the failed lane",
+     "fact": "estimate"},
+)
+
+_EVENT_KEYS = ("kind", "changes", "lane", "target", "statement", "components", "wave",
+               "disposition", "estimate")
 
 
-@dataclass
-class InvalidationRecord:
-    origin: tuple[str, int]                    # (artifact_id, superseded version)
-    new_version: int
-    stale: list[dict[str, Any]] = field(default_factory=list)   # descendant pointers
+def events_from_answers(questions: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """JSON answers may declare ``changes`` (for example ``["components"]``)."""
+    events = []
+    for question in questions:
+        if question.get("status") != "ANSWERED":
+            continue
+        try:
+            data = json.loads(question.get("answer") or "")
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(data, dict) or not data.get("changes"):
+            continue
+        event = {"kind": "answer"}
+        for key in _EVENT_KEYS:
+            if key in data:
+                event[key] = data[key]
+        event["changes"] = list(data["changes"])
+        events.append(event)
+    return events
 
 
-class InvalidationEngine:
-    def __init__(self, store: ArtifactStore):
-        self.store = store
+def lane_failure_events(lanes: dict[str, Any]) -> list[dict[str, Any]]:
+    events = []
+    for lane, info in sorted(lanes.items()):
+        status = info.get("status") if isinstance(info, dict) else info
+        if status == "FAILED":
+            events.append({"kind": "execution_failure", "changes": ["estimate"], "lane": lane})
+    return events
 
-    def supersede(self, artifact_id: str) -> InvalidationRecord:
-        """Announce that `artifact_id` gained a new version. Everything
-        transitively consuming any OLDER version is stale."""
-        versions = self.store.versions(artifact_id)
-        if len(versions) < 2:
-            # nothing superseded yet
-            return InvalidationRecord(
-                (artifact_id, versions[-1] if versions else 0),
-                versions[-1] if versions else 0,
-                [],
-            )
-        latest = versions[-1]
-        stale: dict[tuple[str, int], dict[str, Any]] = {}
-        for older in versions[:-1]:
-            for desc in self.store.descendants_of(artifact_id, older):
-                stale.setdefault(
-                    (desc["artifact_id"], desc["artifact_version"]), desc
-                )
-        return InvalidationRecord((artifact_id, latest - 1), latest, list(stale.values()))
 
-    def stale_for_run(self, run_id: str, record: InvalidationRecord) -> list[str]:
-        return [d["artifact_id"] for d in record.stale if d.get("run_id") == run_id]
+def _apply(scope: dict[str, Any], events: list[dict[str, Any]]) -> dict[str, Any]:
+    merged = dict(scope)
+    for event in events:
+        for fact in event.get("changes") or []:
+            if fact in event:
+                merged[fact] = event[fact]
+    return merged
+
+
+def scope_token(node: str, run_inputs: dict[str, Any]) -> str:
+    """Stable per-planner identity of the facts and events that planner reads."""
+    facts = NODE_FACTS.get(node, frozenset())
+    events = list(run_inputs.get("replan_events") or [])
+    scope = _apply(run_inputs.get("scope") or {}, events)
+    parts: dict[str, Any] = {fact: scope.get(fact) for fact in sorted(facts)}
+    relevant = []
+    for event in events:
+        if event.get("kind") == "critique" and event.get("target") == node:
+            relevant.append({k: event.get(k) for k in ("kind", "target", "statement")})
+        elif facts.intersection(event.get("changes") or []):
+            relevant.append({k: event.get(k) for k in ("kind", "changes", "lane", "statement")
+                             if k in event})
+    if relevant:
+        parts["events"] = relevant
+    if not parts:
+        return ""
+    return hashlib.sha256(canonical_json(parts).encode()).hexdigest()[:16]
+
+
+def affected_planners(run_inputs: dict[str, Any]) -> set[str]:
+    """Planners whose scope token differs from the same inputs with no replan events."""
+    baseline = {k: v for k, v in run_inputs.items() if k != "replan_events"}
+    return {node for node in NODE_FACTS
+            if scope_token(node, run_inputs) != scope_token(node, baseline)}
