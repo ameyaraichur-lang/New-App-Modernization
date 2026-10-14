@@ -57,6 +57,15 @@ def test_derive_reads_manifests_code_and_infra(repo: Path):
     assert facts["dependency:org.postgresql:postgresql"].source == "pom.xml:4"
 
 
+def test_mpl_heading_wins_over_a_later_lgpl_mention(tmp_path: Path):
+    _write(tmp_path, "index.js", "console.log(1)\n")
+    _write(tmp_path, "LICENSE",
+           "Mozilla Public License Version 2.0\n\n" + (".\n" * 30)
+           + "GNU Lesser General Public License, Version 2.1\n")
+    facts = _by_id(derive(tmp_path))
+    assert facts["license:license"].expected == "mpl"
+
+
 def test_derive_empty_repo_states_negatives(tmp_path: Path):
     _write(tmp_path, "index.js", "console.log(1)\n")
     facts = _by_id(derive(tmp_path))
