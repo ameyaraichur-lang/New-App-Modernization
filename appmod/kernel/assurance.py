@@ -52,9 +52,10 @@ def items(art: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:
 
 def classify(item: dict[str, Any]) -> str:
     """Class before any gate confirmation."""
+    human = [i for i in (item.get("evidence_ids") or []) if str(i).startswith("human:")]
+    if item.get("evidence_class") == "HUMAN_CONFIRMED" and (item.get("respondent") or human):
+        return confirmation_class(item.get("respondent"))
     if item.get("origin") != "llm":
-        if item.get("evidence_class") == "HUMAN_CONFIRMED" and item.get("respondent"):
-            return confirmation_class(item["respondent"])
         return "tool-measured"
     if (item.get("support") or {}).get("verdict") == "ENTAILED":
         return "entailed"

@@ -103,6 +103,7 @@ class Overlay:
 REPO = REPO_TOOLS + ARTIFACT_TOOLS
 REPO_STRUCT = REPO + STRUCTURE_TOOLS
 REPO_SEC = REPO + ["vulnerability_scan", "secret_scan", "static_analysis", "sbom_packages"]
+ASK_STAKEHOLDER = "ask_stakeholder"
 
 # -- submission checks ------------------------------------------------------------
 
@@ -400,10 +401,11 @@ PF_TOOLS = ARTIFACT_TOOLS + ["repo_summary", "list_dependencies", "grep", "read_
 
 P2 = {
     "A1": Overlay(
-        tier="reasoning", tools=PF_TOOLS,
+        tier="reasoning", tools=PF_TOOLS + [ASK_STAKEHOLDER],
         guidance=(
             "Assess business value per application from P1 evidence (journeys, processes, "
-            "capabilities). Without market data the assessment is internal benchmarking (INFERRED)."),
+            "capabilities). Without market data the assessment is internal benchmarking (INFERRED). "
+            "Use ask_stakeholder when business criticality or ownership is unknown and blocks value scoring."),
         fields={
             "value_assessments": (A(item(application_id=S(), value_score=I(desc="1-5"),
                                          capabilities=A(S()), rationale=S())), "append"),
@@ -545,10 +547,11 @@ P3 = {
             "reconciliation_criteria": (A(item(criterion=S(), method=S())), "append"),
         }),
     "A4": Overlay(
-        tier="reasoning", tools=REPO_SEC,
+        tier="reasoning", tools=REPO_SEC + [ASK_STAKEHOLDER],
         guidance=(
             "Threat-model the target (STRIDE) using real P1 findings: vulnerabilities, secrets, "
-            "auth code, input handling. Map each threat to a control and a validation criterion."),
+            "auth code, input handling. Map each threat to a control and a validation criterion. "
+            "Use ask_stakeholder for security policy or data-classification facts you cannot infer."),
         fields={
             "threats": (A(item(threat=S(), stride=E("S", "T", "R", "I", "D", "E"), asset=S(),
                                control=S())), "append"),

@@ -145,8 +145,9 @@ class PhaseOrchestrator:
         else:
             events = [one(n) for n in ready]
         self.scheduler.propagate_blockage(ctx.state)
+        waiting = {"RUNNING", "AWAITING_REVIEW", "AWAITING_INPUT"}
         if not self.scheduler.ready_nodes(ctx.state) and not any(
-            n.status == "RUNNING" for n in ctx.state.nodes.values()
+            n.status in waiting for n in ctx.state.nodes.values()
         ):
             ctx.finished = True
         return events
@@ -243,6 +244,13 @@ class PhaseOrchestrator:
                                       context=self._dispatch_context(ctx, node))
         else:
             outcome = self.runner.run(agent_spec, upstream, self.policy)
+        if outcome.awaiting_input:
+            with self._lock:
+                ns.status = "AWAITING_INPUT"
+                ctx.outcome_log.append({"node": node, "status": "AWAITING_INPUT",
+                                        **outcome.awaiting_input})
+            self.audit.emit("AWAITING_INPUT", run_id=ctx.run_id, node=node, **outcome.awaiting_input)
+            return {"node": node, "status": "AWAITING_INPUT", **outcome.awaiting_input}
         for ev in enforce_evidence(outcome, self._secrets()):
             self.audit.emit("EVIDENCE_DOWNGRADE", run_id=ctx.run_id, node=node, **ev)
         outcome.payload = normalize_payload(

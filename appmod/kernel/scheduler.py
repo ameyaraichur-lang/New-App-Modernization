@@ -21,7 +21,8 @@ class NodeState:
     node_id: str
     kind: str                      # agent | gate | execution
     lane: str = "normal"           # normal | async
-    status: str = "PENDING"        # PENDING | RUNNING | PUBLISHED | FAILED | BLOCKED | AWAITING_REVIEW
+    status: str = "PENDING"        # PENDING | RUNNING | PUBLISHED | FAILED | BLOCKED |
+                                   # AWAITING_REVIEW | AWAITING_INPUT
     outcome: str | None = None     # artifact status once published
     attempts: int = 0
 
@@ -70,7 +71,7 @@ class Scheduler:
                 continue  # async lanes never gate consumers (P1.A8 rule)
             if src_state.status in ("FAILED", "BLOCKED"):
                 reasons.append(f"{src} {src_state.status}")
-            elif src_state.status in ("PENDING", "RUNNING", "AWAITING_REVIEW"):
+            elif src_state.status in ("PENDING", "RUNNING", "AWAITING_REVIEW", "AWAITING_INPUT"):
                 reasons.append(f"{src} not published")
             elif src_state.status == "PUBLISHED" and src_state.outcome not in CONSUMABLE:
                 reasons.append(f"{src} outcome {src_state.outcome} not consumable")

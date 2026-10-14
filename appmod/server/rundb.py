@@ -36,8 +36,10 @@ CREATE INDEX IF NOT EXISTS reviews_lookup ON reviews (job_id, phase, app, gate, 
 CREATE TABLE IF NOT EXISTS questions (
   question_id TEXT PRIMARY KEY, job_id TEXT, app TEXT, question TEXT, why TEXT,
   target_role TEXT, source TEXT, status TEXT, answer TEXT, respondent TEXT,
-  created_at TEXT, answered_at TEXT, UNIQUE (job_id, app, question)
+  created_at TEXT, answered_at TEXT, phase INTEGER, node TEXT, blocking INTEGER
 );
+CREATE UNIQUE INDEX IF NOT EXISTS questions_agent_dedup
+  ON questions (job_id, phase, app, node, question);
 """
 
 
@@ -58,7 +60,40 @@ class RunDB:
         self._lock = threading.RLock()
         self._con.execute("PRAGMA journal_mode=WAL")
         self._con.executescript(SCHEMA)
+        self._migrate_questions()
         self._seq: dict[str, int] = {}
+
+    def _migrate_questions(self) -> None:
+        cols = {r[1] for r in self._con.execute("PRAGMA table_info(questions)")}
+        for name, ddl in (
+            ("phase", "ALTER TABLE questions ADD COLUMN phase INTEGER"),
+            ("node", "ALTER TABLE questions ADD COLUMN node TEXT DEFAULT ''"),
+            ("blocking", "ALTER TABLE questions ADD COLUMN blocking INTEGER DEFAULT 0"),
+        ):
+            if name not in cols:
+                self._con.execute(ddl)
+        self._con.execute(
+            "CREATE UNIQUE INDEX IF NOT EXISTS questions_agent_dedup "
+            "ON questions (job_id, phase, app, node, question)"
+        )
+        legacy = self._con.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='questions'"
+        ).fetchone()
+        if legacy and legacy[0] and "UNIQUE (job_id, app, question)" in legacy[0]:
+            self._con.executescript("""
+                CREATE TABLE IF NOT EXISTS questions_new (
+                  question_id TEXT PRIMARY KEY, job_id TEXT, app TEXT, question TEXT, why TEXT,
+                  target_role TEXT, source TEXT, status TEXT, answer TEXT, respondent TEXT,
+                  created_at TEXT, answered_at TEXT, phase INTEGER, node TEXT, blocking INTEGER
+                );
+                INSERT OR IGNORE INTO questions_new SELECT * FROM questions;
+                DROP TABLE questions;
+                ALTER TABLE questions_new RENAME TO questions;
+            """)
+            self._con.execute(
+                "CREATE UNIQUE INDEX IF NOT EXISTS questions_agent_dedup "
+                "ON questions (job_id, phase, app, node, question)"
+            )
 
     def _q(self, sql: str, args: tuple = ()) -> list[sqlite3.Row]:
         with self._lock:
@@ -174,17 +209,28 @@ class RunDB:
     # -- questions ----------------------------------------------------------------
 
     def add_question(self, job_id: str, app: str, question: str, why: str = "",
-                     target_role: str = "", source: str = "seed") -> str:
+                     target_role: str = "", source: str = "seed", *,
+                     phase: int | None = None, node: str = "", blocking: bool = False) -> str:
         with self._lock:
-            rows = self._q("SELECT question_id FROM questions WHERE job_id=? AND app=? AND question=?",
-                           (job_id, app, question))
-            if rows:
-                return rows[0]["question_id"]
+            if phase is not None and node:
+                rows = self._q(
+                    "SELECT question_id FROM questions WHERE job_id=? AND phase=? AND app=? "
+                    "AND node=? AND question=?", (job_id, phase, app, node, question))
+                if rows:
+                    return rows[0]["question_id"]
+            elif phase is None and not node:
+                rows = self._q(
+                    "SELECT question_id FROM questions WHERE job_id=? AND app=? AND question=? "
+                    "AND (node IS NULL OR node='') AND phase IS NULL",
+                    (job_id, app, question))
+                if rows:
+                    return rows[0]["question_id"]
             qid = f"q-{uuid.uuid4().hex[:10]}"
             self._con.execute(
                 "INSERT INTO questions (question_id, job_id, app, question, why, target_role, source, "
-                "status, created_at) VALUES (?,?,?,?,?,?,?,'OPEN',?)",
-                (qid, job_id, app, question, why, target_role, source, _now()))
+                "status, created_at, phase, node, blocking) VALUES (?,?,?,?,?,?,?,'OPEN',?,?,?,?)",
+                (qid, job_id, app, question, why, target_role, source, _now(),
+                 phase, node or "", 1 if blocking else 0))
             return qid
 
     def answer(self, question_id: str, answer: str, respondent: str) -> dict[str, Any]:
@@ -215,3 +261,21 @@ class RunDB:
             return ""
         blob = json.dumps([[r["question_id"], r["answer"], r["respondent"]] for r in rows])
         return hashlib.sha256(blob.encode()).hexdigest()[:16]
+
+    def node_answers_digest(self, job_id: str, phase: int, app: str, node: str) -> str:
+        rows = self._q(
+            "SELECT question_id, answer, respondent FROM questions WHERE job_id=? AND phase=? "
+            "AND app=? AND node=? AND status='ANSWERED' ORDER BY question_id",
+            (job_id, phase, app, node))
+        if not rows:
+            return ""
+        blob = json.dumps([[r["question_id"], r["answer"], r["respondent"]] for r in rows])
+        return hashlib.sha256(blob.encode()).hexdigest()[:16]
+
+    def count_questions(self, job_id: str, app: str, *, open_blocking: bool = False) -> int:
+        sql = "SELECT COUNT(*) FROM questions WHERE job_id=? AND app=?"
+        args: list[Any] = [job_id, app]
+        if open_blocking:
+            sql += " AND blocking=1 AND status='OPEN'"
+        row = self._q(sql, tuple(args))[0]
+        return int(row[0])

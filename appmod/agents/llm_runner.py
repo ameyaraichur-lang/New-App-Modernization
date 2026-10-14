@@ -31,7 +31,8 @@ from typing import Any, Callable
 import jsonschema
 
 from appmod.agents.grounding import RepoIndex, grounded_claims, ungrounded_paths
-from appmod.agents.overlays import CONF, EVC, EVIDS, Overlay, A, E, N, O, S, overlay_for
+from appmod.agents.overlays import ASK_STAKEHOLDER, CONF, EVC, EVIDS, Overlay, A, E, N, O, S, overlay_for
+from appmod.tools.stakeholder import AwaitingStakeholderInput
 from appmod.agents.runtime import AgentOutcome, TransientAgentError, build_charter
 from appmod.agents.verifier import VERSION as VERIFIER_VERSION
 from appmod.agents.verifier import ClaimVerifier
@@ -242,8 +243,17 @@ class LLMAgentRunner:
         for node, art in env.published.items():
             ledger.register("artifact", art.get("content_hash", ""), text=_artifact_text(art),
                             eid=f"art:{art['artifact_id']}@v{art['artifact_version']}")
+        bridge = getattr(env, "stakeholder", None)
+        if bridge is not None:
+            for q in bridge.answered_for_node():
+                body = (f"Question: {q['question']}\nAnswer: {q['answer']}\n"
+                        f"Respondent: {q['respondent']} ({q.get('answered_at', '')})")
+                ledger.register("human", body, eid=f"human:{q['question_id']}",
+                                question_id=q["question_id"])
 
         allow = list(ov.tools) + (self.extra_tools() if self.extra_tools else [])
+        if bridge is not None and ASK_STAKEHOLDER not in allow:
+            allow.append(ASK_STAKEHOLDER)
         session = self.gateway.session(spec["id"], allow, env, ledger,
                                        on_call=lambda rec: emit("TOOL_CALL", **rec))
         charter = build_charter(spec, PHASE_NAMES.get(self.phase, f"Phase {self.phase}"))
@@ -317,7 +327,11 @@ class LLMAgentRunner:
                     except ValueError as exc:
                         text = json.dumps({"error": str(exc)})
                     else:
-                        text, _ = session.call(call.name, cargs)
+                        try:
+                            text, _ = session.call(call.name, cargs)
+                        except AwaitingStakeholderInput as exc:
+                            return self._awaiting_outcome(spec, seed, ov, context, exc, turn,
+                                                          len(session.calls), usage, t0, emit)
                     items.append({"type": "function_call_output", "call_id": call.call_id,
                                   "output": text})
             if submitted is not None:
@@ -349,6 +363,7 @@ class LLMAgentRunner:
             "summary": submitted.get("summary", "")[:1500],
             "confidence": submitted.get("confidence"), "llm_status": submitted.get("status"),
         }
+        self._stamp_respondents(out, env)
         if self.settings.verifier != "off":
             out.execution_metadata["llm"]["verifier"] = ClaimVerifier(
                 self.router, self.settings.verifier_tier, self.settings.verifier_audit_rate,
@@ -360,6 +375,41 @@ class LLMAgentRunner:
         return out
 
     # -- context ------------------------------------------------------------------
+
+    def _awaiting_outcome(self, spec, seed: AgentOutcome, ov: Overlay, context: dict[str, Any],
+                          exc: AwaitingStakeholderInput, turn: int, tool_calls: int, usage: Usage,
+                          t0: float, emit) -> AgentOutcome:
+        out = copy.deepcopy(seed)
+        out.status = "PARTIAL"
+        out.awaiting_input = {
+            "question_id": exc.question_id, "question": exc.question,
+            "why": exc.why, "target_role": exc.target_role,
+        }
+        out.gaps.append({"requirement": exc.question, "impact": exc.why or "stakeholder input",
+                         "state": "PENDING_HUMAN", "question_id": exc.question_id})
+        out.execution_metadata["llm"] = {
+            "enriched": False, "mode": "awaiting-input", "tier": ov.tier,
+            "turns": turn, "tool_calls": tool_calls,
+            "latency_ms": int((time.monotonic() - t0) * 1000),
+            "input_tokens": usage.input_tokens, "output_tokens": usage.output_tokens,
+            "awaiting_input": out.awaiting_input,
+        }
+        emit("AGENT_AWAITING_INPUT", agent=spec["id"], **out.awaiting_input)
+        return out
+
+    @staticmethod
+    def _stamp_respondents(out: AgentOutcome, env: ToolEnv) -> None:
+        """A human: citation is only as confirmed as the person who answered."""
+        bridge = getattr(env, "stakeholder", None)
+        if bridge is None:
+            return
+        who = {f"human:{q['question_id']}": q.get("respondent") for q in bridge.answered_for_node()}
+        for item in out.findings:
+            if not isinstance(item, dict):
+                continue
+            respondent = next((who[i] for i in item.get("evidence_ids") or [] if i in who), None)
+            if respondent:
+                item["respondent"] = respondent
 
     def _context_message(self, spec, seed: AgentOutcome, inputs, env: ToolEnv,
                          ledger: EvidenceLedger, review_only: bool) -> str:
@@ -390,6 +440,14 @@ class LLMAgentRunner:
             parts.append("\n# Other artifacts available via get_artifact: " + ", ".join(
                 f"{n} (art:{env.published[n]['artifact_id']}@v{env.published[n]['artifact_version']})"
                 for n in others))
+        bridge = getattr(env, "stakeholder", None)
+        if bridge is not None:
+            answered = bridge.answered_for_node()
+            if answered:
+                parts.append("\n# Recorded stakeholder answers (HUMAN_CONFIRMED — cite human:<question_id>)")
+                for q in answered:
+                    parts.append(f"- human:{q['question_id']}: Q={q['question']!r} "
+                                 f"A={q['answer']!r} (by {q['respondent']})")
         parts.append("\nInvestigate with tools, then call submit_outcome."
                      + (" (review mode: payload must be {})" if review_only else ""))
         return "\n".join(parts)
