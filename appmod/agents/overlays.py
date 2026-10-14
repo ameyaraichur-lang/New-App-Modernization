@@ -144,9 +144,9 @@ def _pp_p1_a11(seed: dict, llm: dict, ctx: dict) -> dict:
 
 
 def _decision_ok(row: dict) -> bool:
-    return (row.get("proposed_disposition") in R8 and row.get("second_best") in R8
-            and str(row.get("rationale") or "").strip()
-            and isinstance(row.get("wave"), int))
+    return bool(row.get("proposed_disposition") in R8 and row.get("second_best") in R8
+                and str(row.get("rationale") or "").strip()
+                and isinstance(row.get("wave"), int))
 
 
 def _pp_p2_a6(seed: dict, llm: dict, ctx: dict) -> dict:
