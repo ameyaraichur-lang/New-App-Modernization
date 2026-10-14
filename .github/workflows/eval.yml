@@ -75,18 +75,28 @@ jobs:
       - name: score and compare
         run: |
           job=$(python -c 'import json; print(json.load(open("docs/runs/e2e-gha-${{ matrix.split }}.json"))["job_id"])')
-          uv run python scripts/eval_run.py --runs-dir "$APPMOD_RUNS_DIR" --job "$job" --label gha-${{ matrix.split }}
-          prev=""
-          if [ -f previous/eval-gha-${{ matrix.split }}.json ]; then prev="--previous previous/eval-gha-${{ matrix.split }}.json"; fi
           set +e
+          uv run python scripts/eval_run.py --runs-dir "$APPMOD_RUNS_DIR" --job "$job" --label gha-${{ matrix.split }}
+          eval_code=$?
+          prev=""
+          if [ -f previous/eval-gha-${{ matrix.split }}.json ]; then
+            prev="--previous previous/eval-gha-${{ matrix.split }}.json"
+          elif [ "${APPMOD_PROMPT_DEGRADE}" = "1" ] && [ "${{ matrix.split }}" = "tune" ] && [ -f docs/runs/eval-s1-r4-base.json ]; then
+            prev="--previous docs/runs/eval-s1-r4-base.json"
+          fi
           uv run python scripts/eval_regress.py --current docs/runs/eval-gha-${{ matrix.split }}.json $prev
-          code=$?
+          regress_code=$?
           set -e
           if [ "${APPMOD_PROMPT_DEGRADE}" = "1" ]; then
-            test "$code" -ne 0
-          else
-            test "$code" -eq 0
+            if [ "$eval_code" -ne 0 ] || [ "$regress_code" -ne 0 ]; then
+              echo "degraded prompt failed the eval"
+              exit 1
+            fi
+            echo "degraded prompt did not fail the eval"
+            exit 0
           fi
+          test "$eval_code" -eq 0
+          test "$regress_code" -eq 0
         env:
           APPMOD_RUNS_DIR: ${{ runner.temp }}/runs
           APPMOD_PROMPT_DEGRADE: ${{ github.event.inputs.degrade == 'true' && '1' || '0' }}
