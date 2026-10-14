@@ -485,6 +485,9 @@ class PipelineJob:
         while True:
             digest_before = self.db.answers_digest(self.job_id, app) if phase == 1 else ""
             live_inputs = dict(run_inputs)
+            if phase <= 4:
+                from appmod.agents.lineage import project_store
+                live_inputs["lineage"] = project_store(self.store, app, phase)
             if phase == 4:
                 from appmod.kernel.invalidation import events_from_answers
                 live_inputs["replan_events"] = list(run_inputs.get("replan_events") or []) + (
