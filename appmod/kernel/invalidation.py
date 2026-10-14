@@ -9,9 +9,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import dataclass, field
 from typing import Any
 
 from appmod.contracts.schemas import canonical_json
+from appmod.store.artifact_store import ArtifactStore
 
 # Facts a planner reads directly. Downstream nodes are not listed; a new version
 # of a dependency reopens them through the normal input hash.
@@ -99,3 +101,32 @@ def affected_planners(run_inputs: dict[str, Any]) -> set[str]:
     baseline = {k: v for k, v in run_inputs.items() if k != "replan_events"}
     return {node for node in NODE_FACTS
             if scope_token(node, run_inputs) != scope_token(node, baseline)}
+
+
+@dataclass
+class InvalidationRecord:
+    origin: tuple[str, int]
+    new_version: int
+    stale: list[dict[str, Any]] = field(default_factory=list)
+
+
+class InvalidationEngine:
+    """A new artifact version marks every consumer of an older version stale (H17)."""
+
+    def __init__(self, store: ArtifactStore):
+        self.store = store
+
+    def supersede(self, artifact_id: str) -> InvalidationRecord:
+        versions = self.store.versions(artifact_id)
+        if len(versions) < 2:
+            current = versions[-1] if versions else 0
+            return InvalidationRecord((artifact_id, current), current, [])
+        latest = versions[-1]
+        stale: dict[tuple[str, int], dict[str, Any]] = {}
+        for older in versions[:-1]:
+            for desc in self.store.descendants_of(artifact_id, older):
+                stale.setdefault((desc["artifact_id"], desc["artifact_version"]), desc)
+        return InvalidationRecord((artifact_id, latest - 1), latest, list(stale.values()))
+
+    def stale_for_run(self, run_id: str, record: InvalidationRecord) -> list[str]:
+        return [d["artifact_id"] for d in record.stale if d.get("run_id") == run_id]
