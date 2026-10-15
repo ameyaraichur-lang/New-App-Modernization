@@ -418,6 +418,18 @@ class PipelineJob:
         if kind == "MODEL_CALL":
             self._sync_llm()
 
+    def _consistency_review(self, phase: int, app: str):
+        def open_review(review: dict[str, Any]) -> None:
+            import hashlib
+            import json
+            digest = hashlib.sha256(json.dumps(review, sort_keys=True, default=str).encode()).hexdigest()
+            review_id = self.db.ensure_pending(
+                self.job_id, phase, app, review["role"], digest, review)
+            self._review_pending({"review_id": review_id, "phase": phase, "app": app,
+                                  "gate": review["role"], "proposed_status": "CONSISTENCY",
+                                  "candidate_hash": digest})
+        return open_review
+
     def _review_pending(self, r: dict[str, Any]) -> None:
         self._event("REVIEW_PENDING", **r)
         self._log(f"P{r['phase']} {r['app']} G2 awaiting human review {r['review_id']} "
@@ -434,6 +446,7 @@ class PipelineJob:
             runner = LLMAgentRunner(base, reg, router=self.router, gateway=self.gateway,
                                     env_factory=self._env_factory(phase, app), settings=self.settings,
                                     extra_tools=lambda: list(getattr(self, "_mcp_tools", [])))
+            runner.on_disagreement = self._consistency_review(phase, app)
         overrides = dict(overrides)
         if phase <= 4:
             human = self.review_mode == "human"
