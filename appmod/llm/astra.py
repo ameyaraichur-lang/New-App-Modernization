@@ -9,6 +9,7 @@ rejected by the reasoning deployments and are never sent.
 from __future__ import annotations
 
 import random
+import socket
 import time
 from typing import Any
 
@@ -27,6 +28,15 @@ from appmod.llm.types import ModelResponse, ToolSpec, Usage
 NON_REASONING_PREFIXES = ("gpt-4", "gpt-35", "text-embedding")
 
 
+def bound_blocking_io(timeout_s: float) -> None:
+    """Give blocking SSL reads the same deadline as the HTTP client.
+
+    A peer that closes without a TLS alert can leave ``SSLSocket.read`` in
+    ``select`` with no timeout, so the client's 240s deadline never fires.
+    """
+    socket.setdefaulttimeout(timeout_s)
+
+
 def supports_reasoning(deployment: str) -> bool:
     return not deployment.lower().startswith(NON_REASONING_PREFIXES)
 
@@ -34,6 +44,7 @@ def supports_reasoning(deployment: str) -> bool:
 class AstraClient:
     def __init__(self, settings: Settings | None = None, max_attempts: int = 4):
         self.settings = settings or get_settings()
+        bound_blocking_io(self.settings.llm_timeout_s)
         if not self.settings.astra_configured:
             raise LLMConfigError("Astra endpoint/key not configured (APPMOD_ASTRA_* in .env)")
         from openai import AzureOpenAI
