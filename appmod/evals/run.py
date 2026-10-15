@@ -6,7 +6,8 @@ Step 33 gate (unchanged):
                                       (TOOL_CALL event), an existing artifact version, or a seed finding
   hallucinated_paths/symbols == 0     file paths in P1 output and in OBSERVED/DOCUMENTED claims exist
                                       in the repo; A9 `function` names exist in the source
-Also reported: golden-fact agreement per fact type (appmod.evals.golden), variation across apps, and the confidence score
+Also reported: golden-fact agreement per fact type (appmod.evals.golden), variation across apps, stability
+(appmod.evals.stability, when a report is given), and the confidence score
 (appmod.evals.confidence) with every component at its 95 % lower bound.
 """
 
@@ -38,7 +39,7 @@ def _pct(n: int, d: int) -> float:
     return round(100.0 * n / d, 2) if d else 100.0
 
 
-def evaluate(runs_dir: Path, job: str) -> dict[str, Any]:
+def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) -> dict[str, Any]:
     db = sqlite3.connect(runs_dir / "appmod.db")
     state = json.loads(db.execute("SELECT state FROM jobs WHERE job_id=?", (job,)).fetchone()[0])
     store = ArtifactStore(Path(state["facts"]["store_path"]))
@@ -135,11 +136,12 @@ def evaluate(runs_dir: Path, job: str) -> dict[str, Any]:
     out["pass"] = (out["schema_valid_after_repair"]["pct"] >= THRESHOLDS["schema_valid_after_repair"]
                    and out["evidence_resolvability"]["pct"] >= THRESHOLDS["evidence_resolvability"]
                    and not bad_paths and not bad_symbols)
-    out["confidence"] = score(components(out, reviews))
+    out["confidence"] = score(components(out, reviews, stability))
     return out
 
 
-def components(r: dict[str, Any], reviews: list[tuple[str, str]]) -> list[Component]:
+def components(r: dict[str, Any], reviews: list[tuple[str, str]],
+               stability: dict[str, Any] | None = None) -> list[Component]:
     """Map eval results onto C1–C9. Components without data stay unassessed and score 0."""
     sv, ev = r["schema_valid_after_repair"], r["evidence_resolvability"]
     hp, hs = r["hallucinated_paths"], r["hallucinated_symbols"]
@@ -153,7 +155,8 @@ def components(r: dict[str, Any], reviews: list[tuple[str, str]]) -> list[Compon
         Component("C2", [Measure("golden facts agree", sum(x["ok"] for x in rows), len(rows))]),
         Component("C3", reason="claim-support verifier not built (stack PR 6)"),
         Component("C4", reason="no expert decision labels (decision 2: skipped)"),
-        Component("C5", reason="no repeated runs (stack PR 4)"),
+        Component("C5", [Measure(m["name"], m["k"], m["n"]) for m in (stability or {}).get("measures", [])],
+                  reason="" if stability else "no stability report given (scripts/stability_run.py)"),
         Component("C6", reason="no confidence field on decisions (stack PR 5)"),
         Component("C7", reason="P5 runtime differential NOT_RUN; sandbox deferred (decision 1)"),
         Component("C8", reason="adversarial suite not built (stack PR 8)"),
