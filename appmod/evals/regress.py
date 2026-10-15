@@ -19,6 +19,19 @@ def _stats(component: dict[str, Any]) -> tuple[int, float]:
     return 0, float(component.get("lower_bound") or 0) / 100
 
 
+def route_flips(previous: dict[str, Any], current: dict[str, Any]) -> list[str]:
+    """P2 disposition changes between two e2e reports. Listed, not a merge block."""
+    prev = previous.get("app_facts") or {}
+    cur = current.get("app_facts") or {}
+    flips = []
+    for app in sorted(set(prev) & set(cur)):
+        old = (prev[app] or {}).get("disposition")
+        new = (cur[app] or {}).get("disposition")
+        if old and new and old != new:
+            flips.append(f"{app}: {old} -> {new}")
+    return flips
+
+
 def regressions(previous: dict[str, Any], current: dict[str, Any]) -> list[str]:
     prev = {c["id"]: c for c in previous["confidence"]["components"]}
     cur = {c["id"]: c for c in current["confidence"]["components"]}
