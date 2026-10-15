@@ -47,6 +47,7 @@ class ToolEnv:
     portfolio_apps: list[str] = field(default_factory=list)
     repo_roots: dict[str, Path] = field(default_factory=dict)  # app -> repo (portfolio phases)
     index: Any = None                     # retrieval index (lazy)
+    retrieval_budget_chars: int = 0       # 0 = unlimited; counts tool text returned to the model
 
 
 @dataclass
@@ -124,6 +125,7 @@ class ToolSession:
         self.on_call = on_call
         self.calls: list[dict[str, Any]] = []
         self.incidents: list[dict[str, Any]] = []
+        self.retrieval_spent = 0
 
     def specs(self) -> list[ToolSpec]:
         return [t.spec() for t in self.tools.values()]
@@ -145,8 +147,15 @@ class ToolSession:
         text = result if isinstance(result, str) else json.dumps(result, default=str, ensure_ascii=False)
         text = redact(text)
         full_len = len(text)
-        if full_len > MAX_TOOL_CHARS:
+        budget = self.env.retrieval_budget_chars
+        if budget and self.retrieval_spent >= budget:
+            text = json.dumps({"retrieval_budget_exhausted": True, "spent_chars": self.retrieval_spent,
+                               "budget_chars": budget,
+                               "note": "use repo_map and narrower reads; do not request the whole tree"})
+        elif full_len > MAX_TOOL_CHARS:
             text = text[:MAX_TOOL_CHARS] + f"\n...[truncated {full_len - MAX_TOOL_CHARS} chars; narrow the query]"
+        if budget:
+            self.retrieval_spent += len(text)
         if status != "OK":
             self._record(name, args, status, None, full_len, t0)
             return text, None

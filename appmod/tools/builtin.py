@@ -126,6 +126,18 @@ def grep(env: ToolEnv, a: dict[str, Any]) -> dict[str, Any]:
     return {"matches": hits, "truncated": False}
 
 
+def repo_map_tool(env: ToolEnv, a: dict[str, Any]) -> dict[str, Any]:
+    from appmod.retrieval.memory import repo_map
+    data = repo_map(_root(env, a.get("application_id")))
+    module = (a.get("module") or "").strip()
+    if module:
+        data = {**data, "modules": [m for m in data["modules"] if m["module"] == module]}
+        if not data["modules"]:
+            raise KeyError(f"unknown module '{module}'")
+    return {"content_hash": data["content_hash"], "cached": data.get("cached", False),
+            "files": data["files"], "modules": data["modules"]}
+
+
 def list_dependencies(env: ToolEnv, a: dict[str, Any]) -> dict[str, Any]:
     s = _scan(_root(env, a.get("application_id")))
     deps = parse_dependencies(s)
@@ -276,6 +288,10 @@ def _analyzer(fn):
 def build_gateway() -> ToolGateway:
     gw = ToolGateway()
     P = _obj
+    gw.register(ToolDef("repo_map", "Hierarchical module map cached by content hash. Pass module to "
+                        "read one module; omit it for the whole map.",
+                        P({"application_id": APP, "module": {"type": ["string", "null"]}}),
+                        repo_map_tool, needs_repo=True))
     gw.register(ToolDef("repo_summary", "Repository facts: languages, LOC, manifests, entry points, "
                         "infra files, tests, routes, license, commit.", P({"application_id": APP}),
                         repo_summary, needs_repo=True))
@@ -341,8 +357,8 @@ def build_gateway() -> ToolGateway:
     return gw
 
 
-REPO_TOOLS = ["repo_summary", "list_dir", "read_file", "grep", "list_dependencies", "git_log",
-              "search_code"]
+REPO_TOOLS = ["repo_map", "repo_summary", "list_dir", "read_file", "grep", "list_dependencies",
+              "git_log", "search_code"]
 ARTIFACT_TOOLS = ["get_artifact", "list_artifacts"]
 ANALYZER_TOOLS = ["loc_metrics", "sbom_packages", "vulnerability_scan", "secret_scan",
                   "static_analysis"]

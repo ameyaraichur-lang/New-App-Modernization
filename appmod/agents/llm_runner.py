@@ -170,7 +170,8 @@ class LLMAgentRunner:
         return json.dumps({"base": base_fp, "tiers": {t: self.settings.deployment_for(t)
                                                       for t in ("reasoning", "coding", "fast")},
                            "llm": self.settings.llm_enabled, "verifier": verifier,
-                           "degrade": os.environ.get("APPMOD_PROMPT_DEGRADE") == "1"}, sort_keys=True)
+                           "degrade": os.environ.get("APPMOD_PROMPT_DEGRADE") == "1",
+                           "memory": "repo-memory/1"}, sort_keys=True)
 
     def fingerprint_for(self, local_id: str) -> str:
         """Runner identity for one agent: a changed overlay (guidance, fields,
@@ -366,6 +367,14 @@ class LLMAgentRunner:
                  f"{env.application_id}. Phase {self.phase} ({PHASE_NAMES.get(self.phase, '')})."]
         if env.portfolio_apps:
             parts.append("Portfolio applications: " + ", ".join(env.portfolio_apps))
+        from appmod.retrieval.memory import MAP_BUDGET_CHARS, map_text
+        roots = dict(env.repo_roots) if env.repo_roots else (
+            {env.application_id: env.repo_root} if env.repo_root else {})
+        if roots:
+            share = max(800, MAP_BUDGET_CHARS // len(roots))
+            maps = [f"## {app}\n{map_text(path, share)}" for app, path in sorted(roots.items())]
+            parts.append("\n# Repository map (open a module with repo_map; do not read the whole tree)\n"
+                         + "\n".join(maps))
         parts.append("\n# Deterministic seed (computed by tools; verify and deepen)\n"
                      f"status: {seed.status}\n"
                      f"payload: {_brief(seed.payload, 9000)}\n"
