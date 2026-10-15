@@ -1,0 +1,431 @@
+{
+ "repo": "saleor",
+ "commit": "782a751f622c4a047798ce7084b7c66c0877ec6f",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "python",
+   "source": "scc",
+   "snippet": "scc: python 693167",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "django",
+   "expected": "django",
+   "source": "pyproject.toml:25",
+   "snippet": "django",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pyproject.toml",
+   "expected": true,
+   "source": "pyproject.toml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "saleor/webhook/transport/tests/__init__.py",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": ".env.example:1",
+   "snippet": "cache_url=redis://localhost:6379/0\ncelery_broker_url=re",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "saleor/settings.py:139",
+   "snippet": "abase_url.default_env,\n        default=\"postgres://saleor:saleor@localhost:5432/saleor\",",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "saleor/webhook/models.py:18",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Allocation",
+   "expected": true,
+   "source": "saleor/warehouse/models.py:573",
+   "snippet": "class Allocation(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Checkout",
+   "expected": true,
+   "source": "saleor/checkout/models.py:110",
+   "snippet": "class Checkout(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CheckoutDelivery",
+   "expected": true,
+   "source": "saleor/checkout/models.py:38",
+   "snippet": "class CheckoutDelivery(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CustomSchedule",
+   "expected": true,
+   "source": "saleor/schedulers/models.py:16",
+   "snippet": "class CustomSchedule(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CustomerEvent",
+   "expected": true,
+   "source": "saleor/account/models.py:392",
+   "snippet": "class CustomerEvent(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "GiftCardTag",
+   "expected": true,
+   "source": "saleor/giftcard/models.py:19",
+   "snippet": "class GiftCardTag(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Group",
+   "expected": true,
+   "source": "saleor/account/models.py:443",
+   "snippet": "class Group(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "InvoiceEvent",
+   "expected": true,
+   "source": "saleor/invoice/models.py:62",
+   "snippet": "class InvoiceEvent(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Job",
+   "expected": true,
+   "source": "saleor/core/models.py:147",
+   "snippet": "class Job(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "OrderGrantedRefund",
+   "expected": true,
+   "source": "saleor/order/models.py:940",
+   "snippet": "class OrderGrantedRefund(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Permission",
+   "expected": true,
+   "source": "saleor/permission/models.py:42",
+   "snippet": "class Permission(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "PreorderReservation",
+   "expected": true,
+   "source": "saleor/warehouse/models.py:638",
+   "snippet": "class PreorderReservation(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "PublishableModel",
+   "expected": true,
+   "source": "saleor/core/models.py:69",
+   "snippet": "class PublishableModel(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Reservation",
+   "expected": true,
+   "source": "saleor/warehouse/models.py:668",
+   "snippet": "class Reservation(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "StaffNotificationRecipient",
+   "expected": true,
+   "source": "saleor/account/models.py:416",
+   "snippet": "class StaffNotificationRecipient(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "TaxConfigurationPerCountry",
+   "expected": true,
+   "source": "saleor/tax/models.py:72",
+   "snippet": "class TaxConfigurationPerCountry(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Thumbnail",
+   "expected": true,
+   "source": "saleor/thumbnail/models.py:18",
+   "snippet": "class Thumbnail(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Transaction",
+   "expected": true,
+   "source": "saleor/payment/models.py:479",
+   "snippet": "class Transaction(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "VariantChannelListingPromotionRule",
+   "expected": true,
+   "source": "saleor/product/models.py:556",
+   "snippet": "class VariantChannelListingPromotionRule(models.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Webhook",
+   "expected": true,
+   "source": "saleor/webhook/models.py:18",
+   "snippet": "class Webhook(models.Model)",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/graphql",
+   "expected": true,
+   "source": "saleor/urls.py:18",
+   "snippet": "re_path(\n        r\"^graphql/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/plugins",
+   "expected": true,
+   "source": "saleor/urls.py:34",
+   "snippet": "re_path(\n        r\"^plugins/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/plugins/channel",
+   "expected": true,
+   "source": "saleor/urls.py:23",
+   "snippet": "re_path(\n        r\"^plugins/channel/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/plugins/global",
+   "expected": true,
+   "source": "saleor/urls.py:29",
+   "snippet": "re_path(\n        r\"^plugins/global/",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/static",
+   "expected": true,
+   "source": "saleor/urls.py:61",
+   "snippet": "re_path(r\"^static/",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "authlib",
+   "expected": true,
+   "source": "pyproject.toml:15",
+   "snippet": "authlib",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "azure-storage-common",
+   "expected": true,
+   "source": "pyproject.toml:18",
+   "snippet": "azure-storage-common",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django",
+   "expected": true,
+   "source": "pyproject.toml:25",
+   "snippet": "django",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "django-phonenumber-field",
+   "expected": true,
+   "source": "pyproject.toml:32",
+   "snippet": "django-phonenumber-field",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "graphql-core",
+   "expected": true,
+   "source": "pyproject.toml:39",
+   "snippet": "graphql-core",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "lxml",
+   "expected": true,
+   "source": "pyproject.toml:41",
+   "snippet": "lxml",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "micawber",
+   "expected": true,
+   "source": "pyproject.toml:43",
+   "snippet": "micawber",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "opentelemetry-distro",
+   "expected": true,
+   "source": "pyproject.toml:71",
+   "snippet": "opentelemetry-distro",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "opentelemetry-sdk",
+   "expected": true,
+   "source": "pyproject.toml:69",
+   "snippet": "opentelemetry-sdk",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "pydantic",
+   "expected": true,
+   "source": "pyproject.toml:66",
+   "snippet": "pydantic",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "python-magic-bin",
+   "expected": true,
+   "source": "pyproject.toml:76",
+   "snippet": "python-magic-bin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "requests-hardened",
+   "expected": true,
+   "source": "pyproject.toml:57",
+   "snippet": "requests-hardened",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "semantic-version",
+   "expected": true,
+   "source": "pyproject.toml:59",
+   "snippet": "semantic-version",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "sentry-sdk",
+   "expected": true,
+   "source": "pyproject.toml:60",
+   "snippet": "sentry-sdk",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "stripe",
+   "expected": true,
+   "source": "pyproject.toml:61",
+   "snippet": "stripe",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/bump-dependencies.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "node 20",
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "bsd",
+   "source": "LICENSE",
+   "snippet": "bsd 3-clause license\n\ncopyright (c) 2020-2023, saleor commerce\ncopyright (c) 2010-2020, mirumee software\nall rights rese",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

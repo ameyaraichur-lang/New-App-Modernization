@@ -1,0 +1,191 @@
+{
+ "repo": "sinatra",
+ "commit": "7dc52fc2971439ed6b967e8be73b72ef929c1593",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "ruby",
+   "source": "scc",
+   "snippet": "scc: ruby 412, javascript 17",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "sinatra",
+   "expected": "sinatra",
+   "source": "Gemfile:5",
+   "snippet": "sinatra",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "gemfile",
+   "expected": true,
+   "source": "Gemfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": false,
+   "source": "no test code found",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": false,
+   "source": "no entities, .sql, migrations or datastore",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/activity",
+   "expected": true,
+   "source": "app.rb:141",
+   "snippet": "\nget '/activity'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/p/*",
+   "expected": true,
+   "source": "app.rb:123",
+   "snippet": "\nget '/p/:topic'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/p/*/*",
+   "expected": true,
+   "source": "app.rb:133",
+   "snippet": "\nget '/p/:topic/:article'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/style.css",
+   "expected": true,
+   "source": "app.rb:152",
+   "snippet": "\nget '/style.css'",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "faraday",
+   "expected": true,
+   "source": "Gemfile:14",
+   "snippet": "faraday",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "faraday-http-cache",
+   "expected": true,
+   "source": "Gemfile:15",
+   "snippet": "faraday-http-cache",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "glorify",
+   "expected": true,
+   "source": "Gemfile:10",
+   "snippet": "glorify",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "json",
+   "expected": true,
+   "source": "Gemfile:13",
+   "snippet": "json",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "newrelic_rpm",
+   "expected": true,
+   "source": "Gemfile:12",
+   "snippet": "newrelic_rpm",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "rack-cache",
+   "expected": true,
+   "source": "Gemfile:7",
+   "snippet": "rack-cache",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "rdoc",
+   "expected": true,
+   "source": "Gemfile:11",
+   "snippet": "rdoc",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "sass",
+   "expected": true,
+   "source": "Gemfile:6",
+   "snippet": "sass",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "sinatra",
+   "expected": true,
+   "source": "Gemfile:5",
+   "snippet": "sinatra",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "slim",
+   "expected": true,
+   "source": "Gemfile:9",
+   "snippet": "slim",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "unicorn",
+   "expected": true,
+   "source": "Gemfile:8",
+   "snippet": "unicorn",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "API_ONLY",
+   "source": "routes without templates",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

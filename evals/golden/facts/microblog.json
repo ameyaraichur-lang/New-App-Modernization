@@ -1,0 +1,359 @@
+{
+ "repo": "microblog",
+ "commit": "a975ef64864354867c88e0ed3a17ba7d17dca752",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "python",
+   "source": "scc",
+   "snippet": "scc: python 1381",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "flask",
+   "expected": "flask",
+   "source": "requirements.txt:15",
+   "snippet": "Flask",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "requirements.txt",
+   "expected": true,
+   "source": "requirements.txt",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": false,
+   "source": "no test code found",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "requirements.txt:37",
+   "snippet": "psycopg2-binary",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": "requirements.txt:43",
+   "snippet": "redis",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "app/models.py:303",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Message",
+   "expected": true,
+   "source": "app/models.py:303",
+   "snippet": "class Message(db.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Notification",
+   "expected": true,
+   "source": "app/models.py:324",
+   "snippet": "class Notification(db.Model)",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Task",
+   "expected": true,
+   "source": "app/models.py:338",
+   "snippet": "class Task(db.Model)",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/edit_profile",
+   "expected": true,
+   "source": "app/main/routes.py:97",
+   "snippet": ".route('/edit_profile'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/index",
+   "expected": true,
+   "source": "app/main/routes.py:26",
+   "snippet": ".route('/index'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/login",
+   "expected": true,
+   "source": "app/auth/routes.py:14",
+   "snippet": ".route('/login'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/messages",
+   "expected": true,
+   "source": "app/main/routes.py:199",
+   "snippet": ".route('/messages'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/notifications",
+   "expected": true,
+   "source": "app/main/routes.py:230",
+   "snippet": ".route('/notifications'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/register",
+   "expected": true,
+   "source": "app/auth/routes.py:39",
+   "snippet": ".route('/register'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/reset_password/*",
+   "expected": true,
+   "source": "app/auth/routes.py:72",
+   "snippet": ".route('/reset_password/<token>'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/reset_password_request",
+   "expected": true,
+   "source": "app/auth/routes.py:55",
+   "snippet": ".route('/reset_password_request'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/send_message/*",
+   "expected": true,
+   "source": "app/main/routes.py:181",
+   "snippet": ".route('/send_message/<recipient>'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/tokens",
+   "expected": true,
+   "source": "app/api/tokens.py:6",
+   "snippet": ".route('/tokens'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/translate",
+   "expected": true,
+   "source": "app/main/routes.py:156",
+   "snippet": ".route('/translate'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/unfollow/*",
+   "expected": true,
+   "source": "app/main/routes.py:135",
+   "snippet": ".route('/unfollow/<username>'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/user/*/popup",
+   "expected": true,
+   "source": "app/main/routes.py:89",
+   "snippet": ".route('/user/<username>/popup'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users/*",
+   "expected": true,
+   "source": "app/api/users.py:10",
+   "snippet": ".route('/users/<int:id>'",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users/*/following",
+   "expected": true,
+   "source": "app/api/users.py:35",
+   "snippet": ".route('/users/<int:id>/following'",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "attrs",
+   "expected": true,
+   "source": "requirements.txt:4",
+   "snippet": "attrs",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "certifi",
+   "expected": true,
+   "source": "requirements.txt:7",
+   "snippet": "certifi",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "defusedxml",
+   "expected": true,
+   "source": "requirements.txt:10",
+   "snippet": "defusedxml",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "flask-mail",
+   "expected": true,
+   "source": "requirements.txt:19",
+   "snippet": "Flask-Mail",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "gunicorn",
+   "expected": true,
+   "source": "requirements.txt:25",
+   "snippet": "gunicorn",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "langdetect",
+   "expected": true,
+   "source": "requirements.txt:30",
+   "snippet": "langdetect",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "markupsafe",
+   "expected": true,
+   "source": "requirements.txt:33",
+   "snippet": "MarkupSafe",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "multidict",
+   "expected": true,
+   "source": "requirements.txt:35",
+   "snippet": "multidict",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "psycopg2-binary",
+   "expected": true,
+   "source": "requirements.txt:37",
+   "snippet": "psycopg2-binary",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "pygments",
+   "expected": true,
+   "source": "requirements.txt:38",
+   "snippet": "Pygments",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "requests-toolbelt",
+   "expected": true,
+   "source": "requirements.txt:45",
+   "snippet": "requests-toolbelt",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "sqlalchemy",
+   "expected": true,
+   "source": "requirements.txt:22",
+   "snippet": "SQLAlchemy",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "typing_extensions",
+   "expected": true,
+   "source": "requirements.txt:51",
+   "snippet": "typing_extensions",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "urllib3",
+   "expected": true,
+   "source": "requirements.txt:52",
+   "snippet": "urllib3",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "wtforms",
+   "expected": true,
+   "source": "requirements.txt:54",
+   "snippet": "WTForms",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE",
+   "snippet": "the mit license (mit)\n\ncopyright (c) 2017 miguel grinberg\n\npermission is hereby granted, free of charge, to any person o",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

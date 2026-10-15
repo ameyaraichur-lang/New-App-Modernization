@@ -124,8 +124,15 @@ non-delivery register are reported as *not admitted*, alongside the all-slots ra
 
 **Release-gate eval (Step 33):** `uv run python scripts/eval_run.py --runs-dir runs --job <job>
 --label <label>` scores a finished run: schema-valid after repair ≥ 95%, evidence
-resolvability ≥ 90%, zero hallucinated paths and A9 symbols, agreement with the golden labels in
-`evals/golden/corpus.json`, and variation of P2 dispositions and P3 boundaries across apps.
+resolvability ≥ 90%, zero hallucinated paths and A9 symbols, agreement with the golden facts in
+`evals/golden/facts/`, and variation of P2 dispositions and P3 boundaries across apps.
+
+**Golden facts (C2):** `python scripts/golden_build.py` derives about 35 facts per corpus repo
+(language, frameworks, manifests, datastores, entities, routes, dependencies, CI, container,
+runtime, licence, capability route) from the pinned checkouts with parsers and scc, independent
+of the P1 agents. `python scripts/golden_review.py` walks a fixed, stratified 10% sample with the
+source lines beside each fact; verdicts (accept / reject / correct) land in
+`evals/golden/review.json` and are applied when scoring.
 
 ### Current results (live Astra, 10-repo corpus)
 

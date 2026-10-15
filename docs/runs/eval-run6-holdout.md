@@ -11,12 +11,12 @@
 
 ## Confidence score
 
-**0.0%** — weakest component C2; 8 of 9 components not assessed (each counts as 0). Every value is a 95% Wilson lower bound.
+**0.0%** — weakest component C3; 7 of 9 components not assessed (each counts as 0). Every value is a 95% Wilson lower bound.
 
 | component | lower bound | basis |
 |---|---|---|
 | C1 Integrity | 98.5% | schema valid after repair 253/253 (LB 98.5%); evidence ids resolve 14793/14793 (LB 99.97%); cited paths exist 2136/2136 (LB 99.82%); A9 function names exist 416/416 (LB 99.09%) |
-| C2 Factual accuracy | not assessed |  |
+| C2 Factual accuracy | 77.85% | golden facts agree 370/453 (LB 77.85%) |
 | C3 Claim support | not assessed | claim-support verifier not built (stack PR 6) |
 | C4 Decision correctness | not assessed | no expert decision labels (decision 2: skipped) |
 | C5 Stability | not assessed | no repeated runs (stack PR 4) |
@@ -25,10 +25,27 @@
 | C8 Robustness | not assessed | adversarial suite not built (stack PR 8) |
 | C9 Human acceptance | not assessed | all reviews were by scripted actors |
 
-## Agreement with golden labels (`evals/golden/corpus.json`)
+## Agreement with golden facts (`evals/golden/facts/`)
 
-| fact | agreement | misses |
-|---|---|---|
+453 tool-derived facts over 10 repos; 0 human-reviewed.
+
+| fact type | agreement | n | misses (first 5) |
+|---|---|---|---|
+| build_manifest | 100.0% | 15 | — |
+| capability_route | 80.0% | 10 | spring-framework-petclinic capability_route (got API_ONLY, want UI), cargotracker capability_route (got HEADLESS_BATCH, want UI) |
+| ci | 90.0% | 10 | angular-phonecat ci (got False, want True) |
+| containerized | 100.0% | 10 | — |
+| datastore | 100.0% | 20 | — |
+| dependency | 100.0% | 150 | — |
+| entity | 61.45% | 83 | saleor CheckoutDelivery (got False, want True), saleor CustomSchedule (got False, want True), saleor CustomerEvent (got False, want True), saleor GiftCardTag (got False, want True), saleor Group (got False, want True) |
+| framework | 100.0% | 13 | — |
+| has_data_layer | 90.0% | 10 | angular-phonecat has_data_layer (got True, want False) |
+| has_tests | 100.0% | 10 | — |
+| license | 60.0% | 10 | eshop-modernizing license (got None, want mit), cargotracker license (got None, want mit), human-essentials license (got None, want mit), gitea license (got None, want mit) |
+| primary_language | 100.0% | 10 | — |
+| route | 54.02% | 87 | eshop-modernizing /api/[controller] (got False, want True), saleor /static (got False, want True), djangoproject /.well-known/security.txt (got False, want True), djangoproject /403 (got False, want True), djangoproject /bouncing (got False, want True) |
+| runtime_version | 66.67% | 9 | eshop-modernizing runtime (got None, want net4.7.2), spring-framework-petclinic runtime (got None, want java 17), gitea runtime (got None, want go 1.27) |
+| test_framework | 100.0% | 6 | — |
 
 ## Variation with evidence
 

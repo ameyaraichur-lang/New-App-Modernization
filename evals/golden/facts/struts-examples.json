@@ -1,0 +1,207 @@
+{
+ "repo": "struts-examples",
+ "commit": "ca9c1e92873501492f057de6f7a622d58551d200",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "java",
+   "source": "scc",
+   "snippet": "scc: java 6606, javascript 324",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "struts2",
+   "expected": "org.apache.struts:struts2-core",
+   "source": "pom.xml:165",
+   "snippet": "org.apache.struts:struts2-core",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "junit:junit",
+   "expected": true,
+   "source": "unknown-handler/pom.xml:42",
+   "snippet": "junit:junit",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pom.xml",
+   "expected": true,
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "unit-testing/src/test/java/org/apache/struts/register/action/RegisterTest.java",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": false,
+   "source": "no entities, .sql, migrations or datastore",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.fasterxml.jackson.core:jackson-annotations",
+   "expected": true,
+   "source": "rest-angular/pom.xml:85",
+   "snippet": "com.fasterxml.jackson.core:jackson-annotations",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.jayway.jsonpath:json-path",
+   "expected": true,
+   "source": "rest-angular/pom.xml:105",
+   "snippet": "com.jayway.jsonpath:json-path",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "io.quarkus:quarkus-undertow",
+   "expected": true,
+   "source": "quarkus/pom.xml:35",
+   "snippet": "io.quarkus:quarkus-undertow",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jakarta.servlet.jsp:jakarta.servlet.jsp-api",
+   "expected": true,
+   "source": "pom.xml:140",
+   "snippet": "jakarta.servlet.jsp:jakarta.servlet.jsp-api",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "junit:junit",
+   "expected": true,
+   "source": "unknown-handler/pom.xml:42",
+   "snippet": "junit:junit",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "net.sf.flexjson:flexjson",
+   "expected": true,
+   "source": "json-customize/pom.xml:35",
+   "snippet": "net.sf.flexjson:flexjson",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.apache.logging.log4j:log4j-api",
+   "expected": true,
+   "source": "pom.xml:183",
+   "snippet": "org.apache.logging.log4j:log4j-api",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.apache.struts:struts2-bean-validation-plugin",
+   "expected": true,
+   "source": "rest-angular/pom.xml:58",
+   "snippet": "org.apache.struts:struts2-bean-validation-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.apache.struts:struts2-json-plugin",
+   "expected": true,
+   "source": "json-customize/pom.xml:30",
+   "snippet": "org.apache.struts:struts2-json-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.apache.struts:struts2-junit-plugin",
+   "expected": true,
+   "source": "unit-testing/pom.xml:20",
+   "snippet": "org.apache.struts:struts2-junit-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.apache.struts:struts2-rest-plugin",
+   "expected": true,
+   "source": "rest-angular/pom.xml:31",
+   "snippet": "org.apache.struts:struts2-rest-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.apache.struts:struts2-spring-plugin",
+   "expected": true,
+   "source": "spring-struts/pom.xml:20",
+   "snippet": "org.apache.struts:struts2-spring-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.apache.struts:struts2-tiles-plugin",
+   "expected": true,
+   "source": "unknown-handler/pom.xml:31",
+   "snippet": "org.apache.struts:struts2-tiles-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.glassfish:jakarta.el",
+   "expected": true,
+   "source": "pom.xml:159",
+   "snippet": "org.glassfish:jakarta.el",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "xalan:serializer",
+   "expected": true,
+   "source": "jasperreports/pom.xml:73",
+   "snippet": "xalan:serializer",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/maven.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "java 17",
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

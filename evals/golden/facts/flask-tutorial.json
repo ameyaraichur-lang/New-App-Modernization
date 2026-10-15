@@ -1,0 +1,143 @@
+{
+ "repo": "flask-tutorial",
+ "commit": "d086db856be187255b8ec61ef409357393020f32",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "python",
+   "source": "scc",
+   "snippet": "scc: python 379",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "flask",
+   "expected": "flask",
+   "source": "pyproject.toml:2",
+   "snippet": "flask",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pyproject.toml",
+   "expected": true,
+   "source": "pyproject.toml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "tests/conftest.py",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "tests/data.sql",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/*/delete",
+   "expected": true,
+   "source": "flaskr/blog.py:113",
+   "snippet": ".route(\"/<int:id>/delete\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/*/update",
+   "expected": true,
+   "source": "flaskr/blog.py:86",
+   "snippet": ".route(\"/<int:id>/update\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/create",
+   "expected": true,
+   "source": "flaskr/blog.py:60",
+   "snippet": ".route(\"/create\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/hello",
+   "expected": true,
+   "source": "flaskr/__init__.py:26",
+   "snippet": ".route(\"/hello\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/login",
+   "expected": true,
+   "source": "flaskr/auth.py:84",
+   "snippet": ".route(\"/login\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/logout",
+   "expected": true,
+   "source": "flaskr/auth.py:112",
+   "snippet": ".route(\"/logout\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/register",
+   "expected": true,
+   "source": "flaskr/auth.py:46",
+   "snippet": ".route(\"/register\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "flask",
+   "expected": true,
+   "source": "pyproject.toml:2",
+   "snippet": "flask",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "bsd",
+   "source": "LICENSE.txt",
+   "snippet": "copyright 2010 pallets\n\nredistribution and use in source and binary forms, with or without\nmodification, are permitted p",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

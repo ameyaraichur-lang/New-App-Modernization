@@ -1,0 +1,247 @@
+{
+ "repo": "orchard",
+ "commit": "8c47962e3c1ae025fc65d585f41d0ad9897d90b2",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "csharp",
+   "source": "scc",
+   "snippet": "scc: csharp 211464, javascript 131715",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "aspnet-mvc",
+   "expected": "microsoft.aspnet.mvc",
+   "source": "src/Orchard.Web/packages.config:8",
+   "snippet": "Microsoft.AspNet.Mvc",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "nunit",
+   "expected": true,
+   "source": "src/Tools/Orchard.Tests/packages.config:5",
+   "snippet": "NUnit",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "src/Package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "*.csproj",
+   "expected": true,
+   "source": "src/Tools/Orchard.Tests/Orchard.Tests.csproj",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "src/Tools/Orchard.Tests/CommandLineParserTests.cs",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "mysql",
+   "expected": true,
+   "source": "src/Orchard.Web/packages.config:15",
+   "snippet": "MySql.Data",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "src/Orchard.Web/packages.config:17",
+   "snippet": "Npgsql",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": "src/Orchard.Web/Modules/Orchard.Redis/packages.config:9",
+   "snippet": "StackExchange.Redis",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "src/Orchard.Web/packages.config:15",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "documentformat.openxml.framework",
+   "expected": true,
+   "source": "src/Orchard.Web/Modules/Orchard.DynamicForms/packages.config:4",
+   "snippet": "DocumentFormat.OpenXml.Framework",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "glimpse.mvc5",
+   "expected": true,
+   "source": "src/Orchard.Web/packages.config:6",
+   "snippet": "Glimpse.Mvc5",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "gulp-newer",
+   "expected": true,
+   "source": "src/Package.json:10",
+   "snippet": "gulp-newer",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "gulp-postcss",
+   "expected": true,
+   "source": "src/Package.json:14",
+   "snippet": "gulp-postcss",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "gulp-uglify",
+   "expected": true,
+   "source": "src/Package.json:20",
+   "snippet": "gulp-uglify",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.aspnet.webapi.client",
+   "expected": true,
+   "source": "src/Orchard.Web/Modules/Upgrade/packages.config:7",
+   "snippet": "Microsoft.AspNet.WebApi.Client",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.identitymodel.protocol.extensions",
+   "expected": true,
+   "source": "src/Orchard.Web/Modules/Orchard.OpenId/packages.config:17",
+   "snippet": "Microsoft.IdentityModel.Protocol.Extensions",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.identitymodel.tokens.saml",
+   "expected": true,
+   "source": "src/Orchard.Web/Modules/Orchard.OpenId/packages.config:22",
+   "snippet": "Microsoft.IdentityModel.Tokens.Saml",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.owin.security.cookies",
+   "expected": true,
+   "source": "src/Orchard.Web/Modules/Orchard.OpenId/packages.config:28",
+   "snippet": "Microsoft.Owin.Security.Cookies",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.rest.clientruntime.azure",
+   "expected": true,
+   "source": "src/Orchard.Web/Modules/Orchard.Azure/packages.config:14",
+   "snippet": "Microsoft.Rest.ClientRuntime.Azure",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "microsoft.windowsazure.configurationmanager",
+   "expected": true,
+   "source": "src/Orchard.Web/Modules/Orchard.Azure/packages.config:16",
+   "snippet": "Microsoft.WindowsAzure.ConfigurationManager",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "moq",
+   "expected": true,
+   "source": "src/Tools/Orchard.Tests/packages.config:4",
+   "snippet": "Moq",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "nunit.runners",
+   "expected": true,
+   "source": "src/Orchard.Tests/packages.config:22",
+   "snippet": "NUnit.Runners",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "orchard.nuget.core",
+   "expected": true,
+   "source": "src/Orchard.Web/packages.config:18",
+   "snippet": "Orchard.NuGet.Core",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "specflow.tools.msbuild.generation",
+   "expected": true,
+   "source": "src/Orchard.Specs/packages.config:21",
+   "snippet": "SpecFlow.Tools.MsBuild.Generation",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/build-crowdin-translation-packages.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "net4.8",
+   "source": "src/Tools/Orchard.Tests/Orchard.Tests.csproj",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "bsd",
+   "source": "LICENSE.txt",
+   "snippet": "copyright (c) 2009 outercurve foundation\ncopyright (c) 2014 .net foundation\nall rights reserved.\n\nredistribution and use",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

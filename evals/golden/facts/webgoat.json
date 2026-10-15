@@ -1,0 +1,383 @@
+{
+ "repo": "webgoat",
+ "commit": "7e198f39189f33e1912f7cbb60e24e42635ca06a",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "javascript",
+   "source": "scc",
+   "snippet": "scc: javascript 31028, java 25181",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "spring-boot",
+   "expected": "org.springframework.boot:spring-boot-starter-validation",
+   "source": "pom.xml:245",
+   "snippet": "org.springframework.boot:spring-boot-starter-validation",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pom.xml",
+   "expected": true,
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "src/test/java/org/owasp/webgoat/WithWebGoatUser.java",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/webwolf/user/WebWolfUser.java:19",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Assignment",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/container/lessons/Assignment.java:19",
+   "snippet": "@Entity\npublic class Assignment",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "AssignmentProgress",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/container/users/AssignmentProgress.java:18",
+   "snippet": "@Entity\n@EqualsAndHashCode\npublic class AssignmentProgress",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Email",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/container/mailbox/Email.java:24",
+   "snippet": "@Entity\n@NoArgsConstructor\npublic class Email",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "LessonProgress",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/container/users/LessonProgress.java:24",
+   "snippet": "@Entity\n@EqualsAndHashCode\npublic class LessonProgress",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "UserProgress",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/container/users/UserProgress.java:23",
+   "snippet": "@Entity\n@EqualsAndHashCode\npublic class UserProgress",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "WebGoatUser",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/container/users/WebGoatUser.java:19",
+   "snippet": "@Entity\npublic class WebGoatUser",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "WebWolfUser",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/webwolf/user/WebWolfUser.java:19",
+   "snippet": "@Entity\n@Table(name = \"WEB_GOAT_USER\")\npublic class WebWolfUser",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/challenge/7",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/challenges/challenge7/Assignment7.java:74",
+   "snippet": "@PostMapping(\"/challenge/7\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/commandinjection/safety/status",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/commandinjection/CommandInjectionSafetyGate.java:39",
+   "snippet": "@GetMapping(\n      value = \"/CommandInjection/safety/status\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/crosssitescripting/attack6a",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/xss/CrossSiteScriptingLesson6a.java:34",
+   "snippet": "@PostMapping(\"/CrossSiteScripting/attack6a\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/crypto/secure/defaults",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/cryptography/SecureDefaultsAssignment.java:27",
+   "snippet": "@PostMapping(\"/crypto/secure/defaults\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/crypto/timing/tag",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/cryptography/timing/TimingAttackTagAssignment.java:32",
+   "snippet": "@PostMapping(\"/crypto/timing/tag\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/file-server-location",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/webwolf/FileServer.java:63",
+   "snippet": "@RequestMapping(\n      path = \"/file-server-location\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/insecurelogin/login",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/insecurelogin/InsecureLoginTask.java:27",
+   "snippet": "@PostMapping(\"/InsecureLogin/login\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/jwt/encode",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/webwolf/jwt/JWTController.java:36",
+   "snippet": "@PostMapping(\n      value = \"/jwt/encode\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/jwt/refresh/checkout",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/jwt/JWTRefreshEndpoint.java:83",
+   "snippet": "@PostMapping(\"/JWT/refresh/checkout\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/jwt/votings/login",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/jwt/JWTVotesEndpoint.java:109",
+   "snippet": "@GetMapping(\"/JWT/votings/login\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/passwordreset/simple-mail",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/passwordreset/SimpleMailAssignment.java:37",
+   "snippet": "@PostMapping(\n      path = \"/PasswordReset/simple-mail\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/passwordstorage/stage1",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/passwordstorage/Stage1HashAssignment.java:21",
+   "snippet": "@PostMapping(\"/PasswordStorage/stage1\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/pathtraversal/profile-upload-remove-user-input",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/pathtraversal/ProfileUploadRemoveUserInput.java:33",
+   "snippet": "@PostMapping(\n      value = \"/PathTraversal/profile-upload-remove-user-input\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/server-directory",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/container/service/EnvironmentService.java:18",
+   "snippet": "@GetMapping(\"/server-directory\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/webgoat/mail",
+   "expected": true,
+   "source": "src/main/java/org/owasp/webgoat/lessons/webgoatintroduction/MailAssignment.java:67",
+   "snippet": "@PostMapping(\"/WebGoat/mail\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.github.terma:javaniotcpproxy",
+   "expected": true,
+   "source": "pom.xml:401",
+   "snippet": "com.github.terma:javaniotcpproxy",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.google.guava:guava",
+   "expected": true,
+   "source": "pom.xml:76",
+   "snippet": "com.google.guava:guava",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.microsoft.playwright:playwright",
+   "expected": true,
+   "source": "pom.xml:232",
+   "snippet": "com.microsoft.playwright:playwright",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.sun.xml.bind:jaxb-impl",
+   "expected": true,
+   "source": "pom.xml:396",
+   "snippet": "com.sun.xml.bind:jaxb-impl",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "commons-io:commons-io",
+   "expected": true,
+   "source": "pom.xml:73",
+   "snippet": "commons-io:commons-io",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.asciidoctor:asciidoctorj",
+   "expected": true,
+   "source": "pom.xml:65",
+   "snippet": "org.asciidoctor:asciidoctorj",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.hsqldb:hsqldb",
+   "expected": true,
+   "source": "pom.xml:287",
+   "snippet": "org.hsqldb:hsqldb",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.jruby:jruby",
+   "expected": true,
+   "source": "pom.xml:227",
+   "snippet": "org.jruby:jruby",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.jsoup:jsoup",
+   "expected": true,
+   "source": "pom.xml:83",
+   "snippet": "org.jsoup:jsoup",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.projectlombok:lombok",
+   "expected": true,
+   "source": "pom.xml:248",
+   "snippet": "org.projectlombok:lombok",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-properties-migrator",
+   "expected": true,
+   "source": "pom.xml:450",
+   "snippet": "org.springframework.boot:spring-boot-properties-migrator",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-data-jpa-test",
+   "expected": true,
+   "source": "pom.xml:419",
+   "snippet": "org.springframework.boot:spring-boot-starter-data-jpa-test",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-thymeleaf",
+   "expected": true,
+   "source": "pom.xml:307",
+   "snippet": "org.springframework.boot:spring-boot-starter-thymeleaf",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter-validation",
+   "expected": true,
+   "source": "pom.xml:245",
+   "snippet": "org.springframework.boot:spring-boot-starter-validation",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.security:spring-security-test",
+   "expected": true,
+   "source": "pom.xml:430",
+   "snippet": "org.springframework.security:spring-security-test",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/build.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "java 25",
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "gpl",
+   "source": "LICENSE.txt",
+   "snippet": "this file is part of webgoat, an open web application security project utility. for details, please see http://www.owasp",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

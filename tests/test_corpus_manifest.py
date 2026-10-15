@@ -32,9 +32,3 @@ def test_holdout_split_covers_every_family_with_more_than_one_repo():
             assert splits == {"tune", "holdout"}, family
     assert sum(r["split"] == "holdout" for r in _repos()) == 10
 
-
-def test_golden_labels_only_cover_tune_repos():
-    golden = json.loads((MANIFEST.parent / "golden" / "corpus.json").read_text())["repos"]
-    split = {r["name"]: r["split"] for r in _repos()}
-    assert set(golden) <= set(split)
-    assert all(split[name] == "tune" for name in golden)

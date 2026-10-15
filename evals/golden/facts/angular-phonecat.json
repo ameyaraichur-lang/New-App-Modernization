@@ -1,0 +1,207 @@
+{
+ "repo": "angular-phonecat",
+ "commit": "ef6f6eb672ded472b4e442d598f5df40d0e0642c",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "javascript",
+   "source": "scc",
+   "snippet": "scc: javascript 416",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "angular",
+   "expected": "angular",
+   "source": "package.json:2",
+   "snippet": "angular",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "jasmine-core",
+   "expected": true,
+   "source": "package.json:20",
+   "snippet": "jasmine-core",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "app/phone-list/phone-list.component.spec.js",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": false,
+   "source": "no entities, .sql, migrations or datastore",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "angular",
+   "expected": true,
+   "source": "package.json:2",
+   "snippet": "angular",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "angular-animate",
+   "expected": true,
+   "source": "package.json:10",
+   "snippet": "angular-animate",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "angular-mocks",
+   "expected": true,
+   "source": "package.json:17",
+   "snippet": "angular-mocks",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "angular-resource",
+   "expected": true,
+   "source": "package.json:11",
+   "snippet": "angular-resource",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "angular-route",
+   "expected": true,
+   "source": "package.json:12",
+   "snippet": "angular-route",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "bootstrap",
+   "expected": true,
+   "source": "package.json:13",
+   "snippet": "bootstrap",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "cpx",
+   "expected": true,
+   "source": "package.json:18",
+   "snippet": "cpx",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "http-server",
+   "expected": true,
+   "source": "package.json:19",
+   "snippet": "http-server",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jasmine-core",
+   "expected": true,
+   "source": "package.json:20",
+   "snippet": "jasmine-core",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jquery",
+   "expected": true,
+   "source": "package.json:14",
+   "snippet": "jquery",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "karma",
+   "expected": true,
+   "source": "package.json:21",
+   "snippet": "karma",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "karma-chrome-launcher",
+   "expected": true,
+   "source": "package.json:22",
+   "snippet": "karma-chrome-launcher",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "karma-firefox-launcher",
+   "expected": true,
+   "source": "package.json:23",
+   "snippet": "karma-firefox-launcher",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "karma-jasmine",
+   "expected": true,
+   "source": "package.json:24",
+   "snippet": "karma-jasmine",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "protractor",
+   "expected": true,
+   "source": "package.json:25",
+   "snippet": "protractor",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".travis.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE",
+   "snippet": "the mit license\n\ncopyright (c) 2010-2012 google, inc. http://angularjs.org\n\npermission is hereby granted, free of charge",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}
