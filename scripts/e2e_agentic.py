@@ -111,6 +111,9 @@ def main() -> int:
     ap.add_argument("--no-llm", action="store_true", help="plumbing check only (scores will fail)")
     ap.add_argument("--rescore", metavar="JOB_ID", help="score a finished job from the run DB (no server)")
     ap.add_argument("--resume", metavar="JOB_ID", help="resume an interrupted job (finished nodes are reused)")
+    ap.add_argument("--rerun", metavar="JOB_ID",
+                    help="re-execute a finished job: nodes without a published artifact (e.g. failed during an "
+                         "outage) and everything downstream run again; the rest is reused")
     args = ap.parse_args()
     if args.rescore:
         return rescore(args)
@@ -154,6 +157,12 @@ def main() -> int:
             r = c.post(f"/api/runs/{job}/resume", headers=H["op"])
             r.raise_for_status()
             print(f"[e2e] resumed job {job} (port {port}, cache={args.cache})", flush=True)
+        elif args.rerun:
+            job = args.rerun
+            first = c.get(f"/api/runs/{job}", headers=H["vw"]).json()["apps"][0]
+            r = c.post(f"/api/runs/{job}/rerun", headers=H["op"], json={"phase": 1, "app": first, "nodes": []})
+            r.raise_for_status()
+            print(f"[e2e] re-running job {job} (port {port}, cache={args.cache})", flush=True)
         else:
             names = args.repos
             if args.corpus:

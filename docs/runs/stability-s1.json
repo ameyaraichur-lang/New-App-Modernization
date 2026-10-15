@@ -1,0 +1,1709 @@
+{
+  "replicates": 4,
+  "apps": [
+    "bugzilla",
+    "carddemo",
+    "django-realworld-example-app",
+    "eshop-on-web",
+    "flask-tutorial",
+    "golang-example",
+    "juice-shop",
+    "laravel58",
+    "mantisbt",
+    "microblog",
+    "musicstore",
+    "node-express-realworld-example-app",
+    "ofbiz",
+    "orchard",
+    "react-redux-realworld",
+    "sinatra",
+    "spring-petclinic",
+    "struts-examples",
+    "todomvc",
+    "webgoat"
+  ],
+  "per_app": {
+    "bugzilla": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY"
+        ],
+        "modal": "API_ONLY",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retain",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 0.75,
+        "identical": false
+      },
+      "boundaries": {
+        "mean_jaccard": 0.16,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "carddemo": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "HEADLESS_BATCH",
+          "HEADLESS_BATCH",
+          "HEADLESS_BATCH",
+          "HEADLESS_BATCH"
+        ],
+        "modal": "HEADLESS_BATCH",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retain",
+          "Retain",
+          "Retain",
+          "Retain"
+        ],
+        "modal": "Retain",
+        "share": 1.0,
+        "identical": true
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 1,
+        "technical": 0
+      }
+    },
+    "django-realworld-example-app": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY"
+        ],
+        "modal": "API_ONLY",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Replatform",
+          "Replatform",
+          "Replatform",
+          "Replatform"
+        ],
+        "modal": "Replatform",
+        "share": 1.0,
+        "identical": true
+      },
+      "boundaries": {
+        "mean_jaccard": 0.17,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 1,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "eshop-on-web": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Replatform",
+          "Replatform",
+          "Replatform",
+          "Replatform"
+        ],
+        "modal": "Replatform",
+        "share": 1.0,
+        "identical": true
+      },
+      "boundaries": {
+        "mean_jaccard": 0.111,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "flask-tutorial": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retire",
+          "Refactor",
+          "Retain",
+          "Retain"
+        ],
+        "modal": "Retain",
+        "share": 0.5,
+        "identical": false
+      },
+      "risk_spread": {
+        "data": 1,
+        "security": 2,
+        "technical": 0
+      }
+    },
+    "golang-example": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "HEADLESS_BATCH",
+          "HEADLESS_BATCH",
+          "HEADLESS_BATCH",
+          "HEADLESS_BATCH"
+        ],
+        "modal": "HEADLESS_BATCH",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Replatform",
+          "Replatform",
+          "Replatform",
+          "Replatform"
+        ],
+        "modal": "Replatform",
+        "share": 1.0,
+        "identical": true
+      },
+      "boundaries": {
+        "mean_jaccard": 0.4,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 1
+      }
+    },
+    "juice-shop": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retain",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 0.75,
+        "identical": false
+      },
+      "boundaries": {
+        "mean_jaccard": 0.308,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "laravel58": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retire",
+          "Retain",
+          "Retire",
+          "Retire"
+        ],
+        "modal": "Retire",
+        "share": 0.75,
+        "identical": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "mantisbt": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY"
+        ],
+        "modal": "API_ONLY",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Replatform",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 0.75,
+        "identical": false
+      },
+      "boundaries": {
+        "mean_jaccard": 0.287,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 1,
+        "security": 0,
+        "technical": 1
+      }
+    },
+    "microblog": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Refactor",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 1.0,
+        "identical": true
+      },
+      "boundaries": {
+        "mean_jaccard": 0.286,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "musicstore": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Replatform",
+          "Replatform",
+          "Replatform",
+          "Replatform"
+        ],
+        "modal": "Replatform",
+        "share": 1.0,
+        "identical": true
+      },
+      "boundaries": {
+        "mean_jaccard": 0.3,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "node-express-realworld-example-app": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY"
+        ],
+        "modal": "API_ONLY",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Refactor",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 1.0,
+        "identical": true
+      },
+      "boundaries": {
+        "mean_jaccard": 0.228,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 1,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "ofbiz": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retain",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 0.75,
+        "identical": false
+      },
+      "boundaries": {
+        "mean_jaccard": 0.384,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "orchard": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retain",
+          "Retain",
+          "Replatform",
+          "Replatform"
+        ],
+        "modal": "Retain",
+        "share": 0.5,
+        "identical": false
+      },
+      "boundaries": {
+        "mean_jaccard": 0.19,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 1,
+        "technical": 0
+      }
+    },
+    "react-redux-realworld": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Refactor",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 1.0,
+        "identical": true
+      },
+      "boundaries": {
+        "mean_jaccard": 0.061,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "sinatra": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY"
+        ],
+        "modal": "API_ONLY",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Replatform",
+          "Replatform",
+          "Replatform",
+          "Refactor"
+        ],
+        "modal": "Replatform",
+        "share": 0.75,
+        "identical": false
+      },
+      "boundaries": {
+        "mean_jaccard": 0.215,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 1
+      }
+    },
+    "spring-petclinic": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Refactor",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 1.0,
+        "identical": true
+      },
+      "boundaries": {
+        "mean_jaccard": 0.091,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 1,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "struts-examples": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY",
+          "API_ONLY"
+        ],
+        "modal": "API_ONLY",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retain",
+          "Refactor",
+          "Refactor",
+          "Retain"
+        ],
+        "modal": "Retain",
+        "share": 0.5,
+        "identical": false
+      },
+      "boundaries": {
+        "mean_jaccard": 0.381,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "todomvc": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retain",
+          "Refactor",
+          "Refactor",
+          "Refactor"
+        ],
+        "modal": "Refactor",
+        "share": 0.75,
+        "identical": false
+      },
+      "boundaries": {
+        "mean_jaccard": 0.414,
+        "stable": false
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    },
+    "webgoat": {
+      "runs": 4,
+      "route": {
+        "values": [
+          "UI",
+          "UI",
+          "UI",
+          "UI"
+        ],
+        "modal": "UI",
+        "share": 1.0,
+        "identical": true
+      },
+      "disposition": {
+        "values": [
+          "Retain",
+          "Retain",
+          "Retain",
+          "Retain"
+        ],
+        "modal": "Retain",
+        "share": 1.0,
+        "identical": true
+      },
+      "risk_spread": {
+        "data": 0,
+        "security": 0,
+        "technical": 0
+      }
+    }
+  },
+  "flagged": [
+    {
+      "agent": "P2 A6 disposition",
+      "app": "bugzilla",
+      "values": [
+        "Retain",
+        "Refactor",
+        "Refactor",
+        "Refactor"
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "bugzilla",
+      "values": [
+        [
+          "B1 Presentation and transport adapters \u2014 retain within web application",
+          "B10 Administrative and integration utilities \u2014 controlled tooling boundary",
+          "B11 Documentation build \u2014 non-runtime artifact boundary",
+          "B2 Issue lifecycle and collaboration \u2014 transactional core",
+          "B3 Product catalog and workflow configuration \u2014 in-process module",
+          "B4 Identity and access policy \u2014 central in-process capability",
+          "B5 Search and reporting \u2014 permission-aware query module",
+          "B6 Notifications and optional job execution \u2014 shared-schema module with existing worker seam",
+          "B7 Extension compatibility \u2014 in-process extension boundary",
+          "B8 Shared application context, persistence and schema lifecycle",
+          "B9 Runtime packaging and infrastructure \u2014 not a business service",
+          "contrib",
+          "docker",
+          "docs",
+          "js"
+        ],
+        [
+          "Attachment lifecycle and content \u2014 proposed internal storage module",
+          "Browser and protocol adapters \u2014 retained public boundary",
+          "Delivery and operational tooling \u2014 retained non-domain boundary",
+          "Documentation generation \u2014 retained build boundary",
+          "Identity and visibility policy \u2014 proposed internal module",
+          "Issue lifecycle and transactional collaboration \u2014 proposed internal module",
+          "Notifications and optional mail worker \u2014 retained operational boundary",
+          "Product catalog and workflow configuration \u2014 proposed internal module",
+          "Search, saved queries and reporting \u2014 proposed internal query module",
+          "Shared request, persistence and extension kernel \u2014 retained internal platform boundary",
+          "contrib",
+          "docker",
+          "docs",
+          "js"
+        ]
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "django-realworld-example-app",
+      "values": [
+        [
+          "Conduit deployment and shared relational lifecycle \u2014 operational boundary",
+          "Identity and access \u2014 logical module within conduit",
+          "Profiles and social relationships \u2014 logical module within conduit",
+          "Publishing \u2014 logical module within conduit",
+          "Shared kernel and API composition \u2014 not a business service",
+          "conduit",
+          "manage.py"
+        ],
+        [
+          "Application release and administration boundary",
+          "Articles, comments, tags and content queries",
+          "Identity and authentication",
+          "Profiles and social relationships",
+          "Shared technical core",
+          "conduit",
+          "manage.py"
+        ],
+        [
+          "Accounts and authentication",
+          "Application deployment and relational consistency boundary",
+          "Management and migration adapter",
+          "Profiles and social relationships",
+          "Publishing, comments and tags",
+          "Shared technical kernel and API adapters",
+          "conduit",
+          "manage.py"
+        ],
+        [
+          "Application composition and operations \u2014 one deployable, not a domain service",
+          "Coordinated relational schema \u2014 shared persistence boundary",
+          "Identity and account module",
+          "Profile and social relationships module",
+          "Publishing and content-query module",
+          "Shared technical core \u2014 library, not service",
+          "conduit",
+          "manage.py"
+        ]
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "eshop-on-web",
+      "values": [
+        [
+          "Basket module \u2014 aggregate and lifecycle ownership",
+          "Blazor administration and shared contracts \u2014 client/API compatibility boundary",
+          "Catalog module \u2014 logical commerce ownership, retained in-process",
+          "Identity and token adapter \u2014 separate logical persistence/trust boundary",
+          "Ordering module and checkout coordination \u2014 retained commerce boundary",
+          "Persistence adapter \u2014 shared schema stewardship, not a business service",
+          "Verification assets \u2014 transition support, not a runtime service",
+          "Web and PublicApi \u2014 existing host/adapter boundaries, not separate domain owners",
+          "src",
+          "tests"
+        ],
+        [
+          "Commerce / Basket \u2014 logical module within ApplicationCore",
+          "Commerce / Catalog \u2014 logical module, not a new service",
+          "Commerce / Orders and checkout coordination \u2014 logical module within ApplicationCore",
+          "Identity and authentication \u2014 existing framework-backed logical boundary",
+          "Persistence and bootstrap \u2014 shared technical adapter boundary",
+          "Presentation and public contracts \u2014 existing host/client boundaries",
+          "Verification \u2014 supporting transition unit, not a domain or runtime service",
+          "src",
+          "tests"
+        ],
+        [
+          "Basket logical domain module \u2014 retained in-process",
+          "Catalog logical domain module \u2014 retained in-process",
+          "Cross-boundary verification assets \u2014 not a production service",
+          "Identity and authentication \u2014 retained framework/store boundary",
+          "Ordering and checkout logical domain module \u2014 retained in-process",
+          "PublicApi transport host and shared contract library",
+          "Shared persistence adapter and schema lifecycle",
+          "Web storefront and hosted administration presentation",
+          "src",
+          "tests"
+        ],
+        [
+          "Administration client and shared contracts",
+          "Basket logical module \u2014 retained in process",
+          "Catalog logical module \u2014 retained in process",
+          "Identity and authentication \u2014 retained framework boundary",
+          "Ordering and checkout logical module \u2014 retained in process",
+          "PublicApi host",
+          "Shared persistence and schema lifecycle",
+          "Verification boundary \u2014 not a production service",
+          "Web storefront host",
+          "src",
+          "tests"
+        ]
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "flask-tutorial",
+      "values": [
+        "Retire",
+        "Refactor",
+        "Retain",
+        "Retain"
+      ]
+    },
+    {
+      "agent": "P1 A11 risk score",
+      "app": "flask-tutorial",
+      "dimension": "security",
+      "values": [
+        4,
+        4,
+        4,
+        2
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "golang-example",
+      "values": [
+        [
+          "api",
+          "application composition and persistence lifecycle \u2014 one deployment boundary",
+          "articles",
+          "articles \u2014 content and engagement; logical module within one deployable",
+          "build and contract verification \u2014 non-production tooling boundary",
+          "common",
+          "common \u2014 in-process infrastructure, not a business service",
+          "doc.go",
+          "hello.go",
+          "scripts",
+          "users",
+          "users \u2014 identity, profiles and social following; logical module within one deployable"
+        ],
+        [
+          "SQLite persistence \u2014 shared physical data boundary",
+          "api",
+          "application composition and deployment \u2014 one executable",
+          "articles",
+          "articles \u2014 publishing and engagement; retained in-process feature",
+          "build and acceptance tooling \u2014 non-runtime boundary",
+          "common",
+          "common \u2014 shared infrastructure, not a business service",
+          "doc.go",
+          "hello.go",
+          "scripts",
+          "users",
+          "users \u2014 identity, profiles and follow graph; retained in-process feature"
+        ],
+        [
+          "api",
+          "application composition and deployment \u2014 one API artifact",
+          "articles",
+          "articles \u2014 publishing, discovery and engagement; in-process domain module",
+          "common",
+          "common \u2014 shared infrastructure library and SQLite access",
+          "delivery and compatibility assets \u2014 non-runtime support boundary",
+          "doc.go",
+          "hello.go",
+          "scripts",
+          "users",
+          "users \u2014 accounts, identity, profiles and follow graph; in-process domain module"
+        ],
+        [
+          "Application composition and HTTP boundary",
+          "Articles: publication, comments, tags, favorites and feed assembly",
+          "Build, test and API contract collateral",
+          "Shared local infrastructure and persistence adapter",
+          "Users: accounts, authentication, profiles and follow graph",
+          "api",
+          "articles",
+          "common",
+          "doc.go",
+          "hello.go",
+          "scripts",
+          "users"
+        ]
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "juice-shop",
+      "values": [
+        "Retain",
+        "Refactor",
+        "Refactor",
+        "Refactor"
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "juice-shop",
+      "values": [
+        [
+          "B1 Browser presentation",
+          "B2 HTTP compatibility and composition",
+          "B3 Identity and customer interaction",
+          "B4 Catalog, stock and reviews",
+          "B5 Basket, checkout and fulfillment",
+          "B6 Training progress and notifications",
+          "B7 Provider adapters",
+          "B8 Instance lifecycle and embedded persistence",
+          "B9 Verification and curriculum tooling",
+          "app.ts",
+          "data",
+          "frontend",
+          "lib",
+          "models",
+          "routes",
+          "rsn",
+          "test"
+        ],
+        [
+          "Browser presentation",
+          "Catalogue, inventory and reviews",
+          "Commerce: basket, checkout and fulfillment",
+          "Customer content and support",
+          "External integration adapters",
+          "Identity and privacy",
+          "Instance runtime, HTTP composition and persistence substrate",
+          "Training, progress and notifications",
+          "Verification and teaching assets, not deployable domains",
+          "app.ts",
+          "data",
+          "frontend",
+          "lib",
+          "models",
+          "routes",
+          "rsn",
+          "test"
+        ],
+        [
+          "Application composition, persistence lifecycle and transport adapters",
+          "Catalog, stock and product reviews",
+          "Chat and external-provider adapters",
+          "Commerce and checkout",
+          "Compatibility tooling \u2014 non-runtime boundary",
+          "Customer submissions and community content",
+          "Identity, profile and privacy",
+          "Presentation client \u2014 retained browser boundary",
+          "Training progress, lesson content and notifications",
+          "app.ts",
+          "data",
+          "frontend",
+          "lib",
+          "models",
+          "routes",
+          "rsn",
+          "test"
+        ]
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "laravel58",
+      "values": [
+        "Retire",
+        "Retain",
+        "Retire",
+        "Retire"
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "mantisbt",
+      "values": [
+        "Replatform",
+        "Refactor",
+        "Refactor",
+        "Refactor"
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "mantisbt",
+      "values": [
+        [
+          "Attachments \u2014 internal storage module",
+          "Browser, REST and SOAP adapters \u2014 presentation/contract boundary",
+          "Extensions and plugin lifecycle \u2014 in-process extension boundary",
+          "Identity, access and user settings \u2014 internal policy module",
+          "Issue and project work management \u2014 internal domain cluster",
+          "Notifications and scheduled delivery \u2014 internal module with CLI execution context",
+          "Release support and vendor dependency boundary \u2014 non-domain substitute",
+          "Shared platform, configuration and schema maintenance",
+          "admin",
+          "api",
+          "core",
+          "js",
+          "library",
+          "plugins",
+          "scripts",
+          "tests"
+        ],
+        [
+          "Attachments",
+          "Channel adapters",
+          "Contract and regression verification",
+          "Identity and access",
+          "Issue lifecycle",
+          "Notifications",
+          "Persistence and maintenance",
+          "Plugin compatibility",
+          "Project catalog and membership",
+          "Queries and reporting",
+          "Scoped configuration",
+          "Vendor and asset compatibility",
+          "admin",
+          "api",
+          "core",
+          "js",
+          "library",
+          "plugins",
+          "scripts",
+          "tests"
+        ],
+        [
+          "B1 \u2014 Browser, REST and SOAP transport adapters",
+          "B10 \u2014 Cross-boundary verification assets",
+          "B2 \u2014 Issue lifecycle and collaboration",
+          "B3 \u2014 Project catalogue and scoped policy",
+          "B4 \u2014 Identity, request context and authorization",
+          "B5 \u2014 Attachment persistence adapter",
+          "B6 \u2014 Notification composition, queue and delivery",
+          "B7 \u2014 Search, saved filters and reporting",
+          "B8 \u2014 Plugin compatibility and import/export adapters",
+          "B9 \u2014 Composition, shared persistence and privileged maintenance",
+          "admin",
+          "api",
+          "core",
+          "js",
+          "library",
+          "plugins",
+          "scripts",
+          "tests"
+        ]
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "microblog",
+      "values": [
+        [
+          "Export orchestration \u2014 internal application service with RQ worker execution",
+          "Identity and profile \u2014 internal module",
+          "Integration adapters \u2014 search, translation and mail",
+          "Messaging \u2014 internal module",
+          "Notification snapshots \u2014 internal module",
+          "Presentation adapters \u2014 retain Flask main/auth/api/errors",
+          "Publishing and social graph \u2014 internal module",
+          "Shared composition, SQL unit of work and release infrastructure",
+          "app",
+          "boot.sh",
+          "config.py",
+          "microblog.py",
+          "migrations",
+          "tests.py"
+        ],
+        [
+          "Application shell and delivery adapters \u2014 retained single Flask application",
+          "Export jobs \u2014 retained RQ process, shared application release",
+          "Identity and profile \u2014 in-process logical data steward",
+          "Messaging and notification projection \u2014 in-process logical data steward",
+          "Provider adapters \u2014 retained integration boundaries",
+          "Publishing, social graph and feed \u2014 in-process logical data steward",
+          "Shared persistence and application lifecycle \u2014 supporting transition unit",
+          "app",
+          "boot.sh",
+          "config.py",
+          "microblog.py",
+          "migrations",
+          "tests.py"
+        ],
+        [
+          "Accounts and identity \u2014 logical module",
+          "Application composition and delivery adapters",
+          "Export orchestration and RQ execution",
+          "External translation and mail adapters",
+          "Messaging and notification state \u2014 logical module",
+          "Publishing and social graph \u2014 logical module",
+          "Search projection adapter",
+          "Shared relational schema and release support",
+          "app",
+          "boot.sh",
+          "config.py",
+          "microblog.py",
+          "migrations",
+          "tests.py"
+        ],
+        [
+          "B1 \u2014 Identity and profiles (logical module, not service)",
+          "B2 \u2014 Publishing and social feed (logical module, not service)",
+          "B3 \u2014 Private messaging (logical module, not service)",
+          "B4 \u2014 User notification projection (shared internal module)",
+          "B5 \u2014 Export orchestration and background execution",
+          "B6 \u2014 External integration adapters (separate interfaces, not one domain)",
+          "B7 \u2014 Composition, presentation and release support",
+          "app",
+          "boot.sh",
+          "config.py",
+          "microblog.py",
+          "migrations",
+          "tests.py"
+        ]
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "musicstore",
+      "values": [
+        [
+          "B1 Catalog and authorized administration \u2014 logical module",
+          "B2 Cart and ordering \u2014 common write/commit boundary",
+          "B3 Identity and access \u2014 framework-backed logical module",
+          "B4 Shared persistence and initialization \u2014 infrastructure boundary",
+          "B5 Web presentation and request state \u2014 in-process adapter boundary",
+          "B6 Application host and external adapters \u2014 deployment boundary",
+          "B7 Verification and delivery \u2014 supporting boundaries only",
+          "build.sh",
+          "run.ps1",
+          "run.sh",
+          "samples",
+          "test",
+          "tools"
+        ],
+        [
+          "B1 \u2014 Web host and presentation composition; retained single deployment",
+          "B2 \u2014 Catalog with protected administration",
+          "B3 \u2014 Cart, checkout and orders",
+          "B4 \u2014 Identity/account and authentication adapters",
+          "B5 \u2014 Shared persistence and ephemeral-state infrastructure",
+          "B6 \u2014 Isolated test/demo harness",
+          "B7 \u2014 Build, packaging and deployment tooling",
+          "build.sh",
+          "run.ps1",
+          "run.sh",
+          "samples",
+          "test",
+          "tools"
+        ],
+        [
+          "B1 \u2014 Catalog and catalog administration (logical module)",
+          "B2 \u2014 Cart and checkout commerce (logical module and unit of work)",
+          "B3 \u2014 Account, authentication and authorization (framework-backed logical module)",
+          "B4 \u2014 Server-rendered presentation and read composition",
+          "B5 \u2014 Shared persistence and initialization infrastructure",
+          "B6 \u2014 Web host, session and cache lifecycle infrastructure",
+          "B7 \u2014 Test and delivery tooling (non-domain boundary)",
+          "build.sh",
+          "run.ps1",
+          "run.sh",
+          "samples",
+          "test",
+          "tools"
+        ],
+        [
+          "Catalog \u2014 logical module within MusicStore",
+          "Commerce \u2014 Cart and Checkout/Orders kept together",
+          "Identity and Access \u2014 embedded framework module",
+          "Notification adapter \u2014 existing no-delivery seam",
+          "Qualification and delivery tooling \u2014 non-runtime transition boundary",
+          "Shared persistence \u2014 infrastructure boundary, not a business service",
+          "Web host, presentation and transient state",
+          "build.sh",
+          "run.ps1",
+          "run.sh",
+          "samples",
+          "test",
+          "tools"
+        ]
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "node-express-realworld-example-app",
+      "values": [
+        [
+          "API composition and HTTP adapters \u2014 retained deployment boundary",
+          "Accounts and authentication \u2014 in-process write owner",
+          "Profiles and relationships \u2014 in-process relation owner",
+          "Publishing and engagement \u2014 in-process aggregate/write boundary",
+          "Publishing discovery/read facade \u2014 no independent data store",
+          "Shared persistence and lifecycle \u2014 retained PostgreSQL boundary",
+          "Verification and build tooling \u2014 non-runtime substitute for seed directory boundaries",
+          "e2e",
+          "jest.config.ts",
+          "jest.preset.js",
+          "src"
+        ],
+        [
+          "Accounts and authentication",
+          "Content aggregate \u2014 articles, comments, favorites and tag mutation",
+          "Content visibility policy \u2014 small in-process policy seam",
+          "HTTP composition and transport adapter \u2014 retain one deployable",
+          "Public profiles and following",
+          "Shared PostgreSQL/Prisma infrastructure",
+          "Tag discovery \u2014 read-only content projection",
+          "Test and setup support \u2014 not production domain services",
+          "e2e",
+          "jest.config.ts",
+          "jest.preset.js",
+          "src"
+        ],
+        [
+          "Accounts and authentication",
+          "Content publishing and engagement",
+          "HTTP composition and runtime lifecycle \u2014 one API deployable",
+          "Profiles and follow relationships",
+          "Shared persistence and offline schema operations",
+          "Tag discovery \u2014 read-only Content facade",
+          "Verification and delivery support \u2014 non-runtime substitute for seed test boundaries",
+          "e2e",
+          "jest.config.ts",
+          "jest.preset.js",
+          "src"
+        ],
+        [
+          "B0 \u2014 Application composition and HTTP transport; one deployable",
+          "B1 \u2014 Accounts and authentication",
+          "B2 \u2014 Public profiles and follow relationships",
+          "B3 \u2014 Content, engagement and tag-write consistency",
+          "B4 \u2014 Tag discovery, read-only module within the application",
+          "B5 \u2014 Shared persistence adapter and schema lifecycle",
+          "B6 \u2014 Verification and test configuration; non-runtime support",
+          "e2e",
+          "jest.config.ts",
+          "jest.preset.js",
+          "src"
+        ]
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "ofbiz",
+      "values": [
+        "Retain",
+        "Refactor",
+        "Refactor",
+        "Refactor"
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "ofbiz",
+      "values": [
+        [
+          "Accounting, invoicing and payment rules",
+          "Build, packaging, documentation and extension delivery",
+          "Catalog, inventory and fulfillment",
+          "Content and resource management",
+          "Order capture and lifecycle",
+          "Other retained business components, individually scoped",
+          "Party and contact management",
+          "Presentation and external API adapters",
+          "Shared OFBiz execution platform",
+          "Shared identity, permissions and common services",
+          "Shared logical data model and reference contracts",
+          "applications",
+          "docker",
+          "docs",
+          "framework",
+          "gradle",
+          "pullAllPluginsSource.sh",
+          "pullPluginSource.sh",
+          "themes"
+        ],
+        [
+          "applications",
+          "docker",
+          "docs",
+          "framework",
+          "gradle",
+          "pullAllPluginsSource.sh",
+          "pullPluginSource.sh",
+          "themes"
+        ],
+        [
+          "Accounting and payment processing",
+          "Build, packaging and operational documentation",
+          "Content and content subscriptions",
+          "Human resources and marketing: retained separate domain modules",
+          "Order lifecycle and orchestration",
+          "Party master data and separate identity/authorization submodule",
+          "Presentation and cross-component composition",
+          "Product, inventory and fulfillment",
+          "Shared OFBiz execution platform",
+          "Shared schema and reference-data governance",
+          "Work effort and manufacturing: retained separate domain modules",
+          "applications",
+          "docker",
+          "docs",
+          "framework",
+          "gradle",
+          "pullAllPluginsSource.sh",
+          "pullPluginSource.sh",
+          "themes"
+        ]
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "orchard",
+      "values": [
+        "Retain",
+        "Retain",
+        "Replatform",
+        "Replatform"
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "orchard",
+      "values": [
+        [
+          "B1 \u2014 retained application host and tenant composition",
+          "B2 \u2014 shared content lifecycle and persistence kernel",
+          "B3 \u2014 editorial features and presentation",
+          "B4 \u2014 identity and authorization module seam",
+          "B5 \u2014 workflow and in-process event extension seam",
+          "B6 \u2014 media storage provider seam",
+          "B7 \u2014 optional search, cache, message-bus and mail adapters",
+          "B8 \u2014 asset build, packaging and workspace utilities",
+          "CalculateBindingRedirects.ps1",
+          "CleanSolution.ps1",
+          "deploy.ps1",
+          "src"
+        ],
+        [
+          "Build, packaging and workspace utilities \u2014 delivery boundary",
+          "CalculateBindingRedirects.ps1",
+          "CleanSolution.ps1",
+          "Comments and moderation \u2014 retained feature module boundary",
+          "Content lifecycle and shared persistence \u2014 retained consistency boundary",
+          "Host and tenant composition \u2014 retained runtime boundary",
+          "Identity and authorization \u2014 retained feature module boundary",
+          "Media and external storage adapters \u2014 retained provider boundary",
+          "Presentation and asset production \u2014 selected modernization boundary",
+          "Search, cache and messaging adapters \u2014 retained infrastructure boundary",
+          "Workflow execution and background lifecycle \u2014 retained in-process boundary",
+          "deploy.ps1",
+          "src"
+        ]
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "react-redux-realworld",
+      "values": [
+        [
+          "Account and session",
+          "Application shell and composition \u2014 retained single SPA",
+          "Article detail and comments",
+          "Client API transport and request orchestration",
+          "Discovery and reusable article-list queries",
+          "External RealWorld API \u2014 preserved remote boundary",
+          "Profile and relationships",
+          "Publishing",
+          "src"
+        ],
+        [
+          "B1 \u2014 SPA composition and navigation",
+          "B2 \u2014 Identity, session and account settings",
+          "B3 \u2014 Discovery and article-list projections",
+          "B4 \u2014 Article reading, publishing and discussion",
+          "B5 \u2014 Profiles and following",
+          "B6 \u2014 Client API and request lifecycle infrastructure",
+          "B7 \u2014 External Conduit API and authoritative business persistence",
+          "src"
+        ],
+        [
+          "B1 \u2014 Application shell and navigation; retained within one SPA",
+          "B2 \u2014 Identity, account and browser session",
+          "B3 \u2014 Publishing and article discussion",
+          "B4 \u2014 Discovery, feeds and article-list projections",
+          "B5 \u2014 Public profiles and following",
+          "B6 \u2014 Client transport and effect infrastructure",
+          "B7 \u2014 Safe content rendering and shared presentation",
+          "B8 \u2014 External Conduit API; retained integration boundary",
+          "src"
+        ],
+        [
+          "Account and session \u2014 internal module",
+          "Application shell and navigation \u2014 internal module in one browser SPA",
+          "Discovery and article-list projections \u2014 internal module shared by home and profiles",
+          "External Conduit-compatible provider \u2014 preserved external boundary, not a proposed extraction",
+          "Public profiles and following \u2014 internal module",
+          "Publishing and article interaction \u2014 internal module with comments colocated",
+          "Request orchestration and API transport \u2014 internal infrastructure module",
+          "Untrusted content rendering and shared presentation \u2014 internal leaf modules",
+          "src"
+        ]
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "sinatra",
+      "values": [
+        "Replatform",
+        "Replatform",
+        "Replatform",
+        "Refactor"
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "sinatra",
+      "values": [
+        [
+          "GitHub activity adapter \u2014 internal adapter to existing vendor API",
+          "Presentation and browser assets \u2014 internal rendering boundary",
+          "Recipe catalog \u2014 internal read-only content boundary",
+          "Runtime, release metadata and cache policy \u2014 cross-cutting infrastructure boundary",
+          "Web orchestration \u2014 retained single deployable",
+          "app.rb",
+          "config",
+          "public"
+        ],
+        [
+          "Content catalog \u2014 authoritative flat-file read boundary",
+          "GitHub activity \u2014 internal vendor adapter and projection owner",
+          "Observability vendor integration \u2014 configuration/egress responsibility",
+          "Presentation and browser assets \u2014 one UI responsibility",
+          "Reader application \u2014 internal orchestration, not a service",
+          "Runtime composition and response caching \u2014 infrastructure boundary",
+          "app.rb",
+          "config",
+          "public"
+        ],
+        [
+          "GitHub integration and activity projection \u2014 logical in-process adapter",
+          "Presentation and assets \u2014 retained in-process/browser boundary",
+          "Published content access \u2014 logical in-process module",
+          "Runtime, response caching and observability \u2014 retained infrastructure boundary",
+          "Web request orchestration \u2014 retained application boundary",
+          "app.rb",
+          "config",
+          "public"
+        ],
+        [
+          "ActivityPresenter \u2014 derived activity model",
+          "ContentCatalog \u2014 repository content authority and read interface",
+          "GitHubClient \u2014 external read adapter",
+          "PageRenderer and assets \u2014 presentation boundary",
+          "RuntimePolicy \u2014 deployment, response cache and telemetry",
+          "WebApplication \u2014 single deployable composition and HTTP boundary",
+          "app.rb",
+          "config",
+          "public"
+        ]
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "spring-petclinic",
+      "values": [
+        [
+          "Application shell and technical infrastructure \u2014 same deployable",
+          "Care records \u2014 owner/pet/visit logical module; retained in-process",
+          "Relational persistence and initialization \u2014 shared physical resource, logically partitioned tables",
+          "Shared model primitives \u2014 minimal shared kernel, not app-core service",
+          "Veterinarian directory \u2014 retained read module",
+          "src"
+        ],
+        [
+          "B0 \u2014 Single application/deployment boundary",
+          "B1 \u2014 Owner-care aggregate module",
+          "B2 \u2014 Veterinarian-directory module",
+          "B3 \u2014 Shared model primitives",
+          "B4 \u2014 System, presentation support and persistence configuration",
+          "src"
+        ],
+        [
+          "Application composition and shared web/runtime infrastructure",
+          "Owner and animal-care records \u2014 logical domain module, not a service",
+          "Shared model primitives \u2014 code-only dependency boundary",
+          "Shared relational infrastructure and schema lifecycle \u2014 physical boundary",
+          "Veterinarian directory \u2014 logical read module, not a service",
+          "src"
+        ],
+        [
+          "owner-care \u2014 local feature module",
+          "shared relational infrastructure \u2014 retained resource boundary",
+          "shared-model \u2014 minimal mapped kernel",
+          "src",
+          "veterinarian-catalogue \u2014 local feature module",
+          "web/system shell \u2014 shared presentation and runtime adapters"
+        ]
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "struts-examples",
+      "values": [
+        "Retain",
+        "Refactor",
+        "Refactor",
+        "Retain"
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "struts-examples",
+      "values": [
+        [
+          "Other reactor examples \u2014 individual boundaries preserved, not one merged component",
+          "Shared build foundation \u2014 configuration boundary, not app-core service",
+          "blank",
+          "blank \u2014 minimal starter tutorial",
+          "crud",
+          "crud \u2014 person and reference-data tutorial",
+          "exclude-parameters",
+          "exclude-parameters \u2014 binding-policy tutorial",
+          "json-customize",
+          "json-customize \u2014 serialization extension tutorial",
+          "mailreader2",
+          "mailreader2 \u2014 account and subscription tutorial",
+          "preparable-interface",
+          "preparable-interface \u2014 lifecycle/preparation tutorial",
+          "quarkus \u2014 separate hosting variant",
+          "rest-angular",
+          "rest-angular \u2014 order tutorial with co-packaged browser/API",
+          "text-provider",
+          "text-provider \u2014 localization extension tutorial"
+        ],
+        [
+          "Remaining reactor inventory (not a consolidated runtime boundary)",
+          "Shared build foundation (not a runtime service)",
+          "blank",
+          "crud",
+          "exclude-parameters",
+          "json-customize",
+          "mailreader2",
+          "preparable-interface",
+          "rest-angular",
+          "text-provider"
+        ]
+      ]
+    },
+    {
+      "agent": "P2 A6 disposition",
+      "app": "todomvc",
+      "values": [
+        "Retain",
+        "Refactor",
+        "Refactor",
+        "Refactor"
+      ]
+    },
+    {
+      "agent": "P3 A2 boundaries",
+      "app": "todomvc",
+      "values": [
+        [
+          "B1 \u2014 Independent framework examples; logical per-example ownership",
+          "B2 \u2014 Catalog, learning metadata and presentation",
+          "B3 \u2014 Static hosting and launch adapters",
+          "B4 \u2014 Build and artifact assembly",
+          "B5 \u2014 Shared dependency and asset propagation",
+          "B6 \u2014 Shared behavioral verification and framework adapters",
+          "cypress",
+          "cypress.config.js",
+          "examples",
+          "gulpfile.js",
+          "server.js",
+          "site-assets",
+          "tasks",
+          "tests"
+        ],
+        [
+          "B1 \u2014 Independent browser example implementations",
+          "B2 \u2014 Catalogue content and browser presentation",
+          "B3 \u2014 Static host and process lifecycle",
+          "B4 \u2014 Behavioral conformance and example adapters",
+          "B5 \u2014 Build assembly and root orchestration",
+          "B6 \u2014 Shared dependency and asset maintenance",
+          "cypress",
+          "cypress.config.js",
+          "examples",
+          "gulpfile.js",
+          "server.js",
+          "site-assets",
+          "tasks",
+          "tests"
+        ],
+        [
+          "B1 \u2014 Independent browser Todo examples",
+          "B2 \u2014 Catalog and learning content",
+          "B3 \u2014 Static host and compatibility entry points",
+          "B4 \u2014 Acceptance contract and framework adapters",
+          "B5 \u2014 Build, static assembly and dependency maintenance",
+          "cypress",
+          "cypress.config.js",
+          "examples",
+          "gulpfile.js",
+          "server.js",
+          "site-assets",
+          "tasks",
+          "tests"
+        ]
+      ]
+    }
+  ],
+  "agent_agreement": {
+    "P1 A5 capability route": 1.0,
+    "P2 A6 disposition": 0.838
+  },
+  "measures": [
+    {
+      "name": "P1 A5 capability route identical across runs",
+      "k": 20,
+      "n": 20,
+      "lower_bound": 0.8388748398148704
+    },
+    {
+      "name": "P2 A6 disposition identical across runs",
+      "k": 10,
+      "n": 20,
+      "lower_bound": 0.2992980068701797
+    },
+    {
+      "name": "P3 A2 boundary Jaccard >= 0.8",
+      "k": 0,
+      "n": 16,
+      "lower_bound": 0.0
+    },
+    {
+      "name": "P1 A11 risk score spread <= 1",
+      "k": 59,
+      "n": 60,
+      "lower_bound": 0.911448701829104
+    }
+  ],
+  "jobs": [
+    [
+      {
+        "runs_dir": "/Users/ameyar/App Mod New (1-6)/wt-stability/runs/stability-s1-root",
+        "job": "job-1791867233-63338f",
+        "pipeline_version": "fcbde0a49c01"
+      }
+    ],
+    [
+      {
+        "runs_dir": "/Users/ameyar/App Mod New (1-6)/wt-stability/runs/stability-s1-root",
+        "job": "job-1791875588-c891e0",
+        "pipeline_version": "fcbde0a49c01"
+      }
+    ],
+    [
+      {
+        "runs_dir": "/Users/ameyar/App Mod New (1-6)/wt-stability/runs/stability-s1-root",
+        "job": "job-1791886685-a4e2e2",
+        "pipeline_version": "fcbde0a49c01"
+      }
+    ],
+    [
+      {
+        "runs_dir": "/Users/ameyar/App Mod New (1-6)/wt-stability/runs/stability-s1-root",
+        "job": "job-1791950641-ffb627",
+        "pipeline_version": "fcbde0a49c01"
+      }
+    ]
+  ],
+  "pipeline_versions": [
+    "fcbde0a49c01"
+  ]
+}
