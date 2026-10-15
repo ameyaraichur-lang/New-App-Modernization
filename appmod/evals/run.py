@@ -44,6 +44,34 @@ def _pct(n: int, d: int) -> float:
     return round(100.0 * n / d, 2) if d else 100.0
 
 
+OBSERVED_DOCUMENTED = ("OBSERVED", "DOCUMENTED")
+
+
+def evidence_mix(store: ArtifactStore, apps: list[str], reg: dict[int, Any]) -> dict[str, Any]:
+    """Share of model-authored items (origin llm with evidence_class) that are OBSERVED or DOCUMENTED."""
+    out: dict[str, Any] = {}
+    for phase in (1, 2, 3, 4):
+        total = cited = 0
+        for app in (["PF1"] if phase == 2 else apps):
+            for agent in reg[phase]["agents"]:
+                aid = f"P{phase}/{app}/{agent['local_id']}"
+                if not store.versions(aid):
+                    continue
+                art = store.get(aid)
+                for item in walk([art.get("findings", []), art.get("payload", {})]):
+                    if item.get("origin") != "llm":
+                        continue
+                    cls = item.get("evidence_class")
+                    if not cls:
+                        continue
+                    total += 1
+                    if cls in OBSERVED_DOCUMENTED:
+                        cited += 1
+        out[f"P{phase}"] = {"total": total, "observed_documented": cited,
+                           "share_pct": _pct(cited, total)}
+    return out
+
+
 def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None,
              adversarial: dict[str, Any] | None = None) -> dict[str, Any]:
     db = sqlite3.connect(runs_dir / "appmod.db")
@@ -160,8 +188,10 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None,
                   for a in apps if store.versions(f"P3/{a}/A2")}
     reviews = db.execute("SELECT decision, reviewer FROM reviews WHERE job_id=? AND status='DECIDED'",
                          (job,)).fetchall()
+    mix = evidence_mix(store, apps, reg)
     out: dict[str, Any] = {
         "job": job,
+        "evidence_mix": mix,
         "schema_valid_after_repair": {"pct": _pct(valid, total), "valid": valid, "total": total},
         "evidence_resolvability": {"pct": _pct(resolved, cited), "resolved": resolved, "cited": cited,
                                    "unresolved_sample": unresolved},
@@ -317,6 +347,14 @@ def to_md(r: dict[str, Any], label: str) -> str:
         miss = ", ".join(f"{x['app']} {x['key']} (got {x['got']}, want {x['expected']})" for x in misses[:5])
         lines.append(f"| {k} | {v['pct']}% | {len(v['rows'])} | {miss or '—'} |")
     lines += _assurance_md(r.get("assurance", {}))
+    mix = r.get("evidence_mix") or {}
+    if mix:
+        lines += ["", "## Evidence mix (model items: OBSERVED + DOCUMENTED share)", "",
+                  "| phase | share | observed+documented | total |", "|---|---|---|---|"]
+        for ph in ("P1", "P2", "P3", "P4"):
+            if ph in mix:
+                m = mix[ph]
+                lines.append(f"| {ph} | {m['share_pct']}% | {m['observed_documented']} | {m['total']} |")
     lines += _claim_support_md(r.get("claim_support", {}))
     lines += _calibration_md(r.get("calibration", {}))
     var = r["variation"]
