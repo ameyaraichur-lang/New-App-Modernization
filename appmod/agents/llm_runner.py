@@ -30,7 +30,7 @@ from typing import Any, Callable
 import jsonschema
 
 from appmod.agents.grounding import RepoIndex, grounded_claims, ungrounded_paths
-from appmod.agents.overlays import EVC, EVIDS, Overlay, A, E, N, O, S, overlay_for
+from appmod.agents.overlays import CONF, EVC, EVIDS, Overlay, A, E, N, O, S, overlay_for
 from appmod.agents.runtime import AgentOutcome, TransientAgentError, build_charter
 from appmod.config import Settings, get_settings
 from appmod.contracts.schemas import normalize_payload, payload_schema
@@ -52,6 +52,8 @@ RULES = """
 - Unknown stays unknown: record a gap instead of guessing; never invent numbers, owners or dates.
 - The seed was computed by deterministic tools; correct it only via gaps/findings, not by
   rewriting its facts. Add depth with the fields you are given.
+- Give every finding and item a calibrated confidence (probability 0-1 that it is correct). It is
+  measured against ground truth; it never approves anything.
 - Finish by calling submit_outcome exactly once. Be specific and concrete; prefer 3-12 high-value
   items per field over exhaustive lists.
 """
@@ -78,7 +80,8 @@ def submit_tool(ov: Overlay, review_only: bool) -> ToolSpec:
         status=E("COMPLETE", "PARTIAL", "NOT_ASSESSED",
                  desc="Your honest assessment of evidence completeness for this agent's outputs."),
         summary=S("3-6 sentence summary of what you established and how."),
-        findings=A(O(statement=S(), evidence_class=EVC, evidence_ids=EVIDS, limitations=N())),
+        findings=A(O(statement=S(), evidence_class=EVC, evidence_ids=EVIDS, limitations=N(),
+                     confidence=CONF)),
         gaps=A(O(area=S(), reason=S(), needed_evidence=S(),
                  state=E("NOT_ASSESSED", "UNKNOWN", "PENDING_HUMAN"))),
         payload=ov.fields_schema() if not review_only else O(),
@@ -86,6 +89,19 @@ def submit_tool(ov: Overlay, review_only: bool) -> ToolSpec:
     )
     return ToolSpec("submit_outcome", "Submit the final, evidence-cited outcome for this agent. "
                     "Call exactly once when your investigation is complete.", params)
+
+
+def clamp_confidence(value: Any) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, int | float):
+        return None
+    return round(min(1.0, max(0.0, float(value))), 3)
+
+
+def _tag(item: dict[str, Any]) -> dict[str, Any]:
+    out = dict(item, origin="llm")
+    if "confidence" in out:
+        out["confidence"] = clamp_confidence(out["confidence"])
+    return out
 
 
 class LLMAgentRunner:
@@ -385,8 +401,8 @@ class LLMAgentRunner:
     def _merge_payload(self, seed_payload: dict[str, Any], llm: dict[str, Any],
                        ov: Overlay) -> dict[str, Any]:
         out = copy.deepcopy(seed_payload)
-        tagged = {k: ([dict(x, origin="llm") if isinstance(x, dict) else x for x in v]
-                      if isinstance(v, list) else (dict(v, origin="llm") if isinstance(v, dict) else v))
+        tagged = {k: ([_tag(x) if isinstance(x, dict) else x for x in v]
+                      if isinstance(v, list) else (_tag(v) if isinstance(v, dict) else v))
                   for k, v in llm.items()}
         if ov.postprocess:     # the hook owns the whole merge for its agent
             return ov.postprocess(out, tagged, {"phase": self.phase})
@@ -414,7 +430,8 @@ class LLMAgentRunner:
             out.findings.append({"id": f"L-{spec['local_id']}-F{i}", "evidence_class": f["evidence_class"],
                                  "statement": f["statement"], "evidence_refs": f.get("evidence_ids", []),
                                  "evidence_ids": f.get("evidence_ids", []),
-                                 "limitations": f.get("limitations"), "origin": "llm"})
+                                 "limitations": f.get("limitations"),
+                                 "confidence": clamp_confidence(f.get("confidence")), "origin": "llm"})
         for g in args.get("gaps", []):
             out.gaps.append({"requirement": g["area"], "impact": g["reason"], "state": g["state"],
                              "needed_evidence": g["needed_evidence"], "origin": "llm"})

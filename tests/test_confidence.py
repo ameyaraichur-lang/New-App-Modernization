@@ -35,7 +35,7 @@ def test_unmeasured_component_scores_zero():
     assert r["not_assessed"] == ["C4"] and r["weakest_assessed"] == "C1"
     c4 = next(c for c in r["components"] if c["id"] == "C4")
     assert c4 == {"id": "C4", "name": "Decision correctness", "assessed": False,
-                  "lower_bound": 0.0, "reason": "no labels", "measures": []}
+                  "lower_bound": 0.0, "reason": "no labels", "basis": "", "measures": []}
 
 
 def test_component_lower_bound_is_its_weakest_measure():

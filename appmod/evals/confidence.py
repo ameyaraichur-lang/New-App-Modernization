@@ -1,4 +1,7 @@
-"""Confidence score: nine measured components, each at its 95 % Wilson lower bound.
+"""Confidence score: nine measured components, each at a 95 % lower bound.
+
+Proportions use the Wilson lower bound; a component measured another way (C6 calibration) carries
+its own conservative bound as `value`.
 
 The overall score is the weakest component. An unmeasured component scores 0 — the
 pipeline rule that NOT_RUN never counts as PASS applies to confidence too.
@@ -43,6 +46,8 @@ class Component:
     cid: str
     measures: list[Measure] = field(default_factory=list)
     reason: str = ""
+    value: float | None = None
+    basis: str = ""
 
     @property
     def name(self) -> str:
@@ -50,16 +55,18 @@ class Component:
 
     @property
     def assessed(self) -> bool:
-        return any(m.n > 0 for m in self.measures)
+        return self.value is not None or any(m.n > 0 for m in self.measures)
 
     @property
     def lower(self) -> float:
         bounds = [b for m in self.measures if (b := m.lower) is not None]
+        if self.value is not None:
+            bounds.append(self.value)
         return min(bounds) if bounds else 0.0
 
     def to_dict(self) -> dict[str, Any]:
         return {"id": self.cid, "name": self.name, "assessed": self.assessed,
-                "lower_bound": round(100 * self.lower, 2), "reason": self.reason,
+                "lower_bound": round(100 * self.lower, 2), "reason": self.reason, "basis": self.basis,
                 "measures": [asdict(m) | {"lower_bound": None if m.lower is None
                                           else round(100 * m.lower, 2)} for m in self.measures]}
 
