@@ -40,7 +40,7 @@ from appmod.evals.stability import pipeline_version  # noqa: E402
 from appmod.registry.compiler import resolve_registry  # noqa: E402
 from appmod.store.artifact_store import ArtifactStore  # noqa: E402
 
-CORPUS = ROOT.parent / "corpus"
+CORPUS = Path(os.environ.get("APPMOD_CORPUS", ROOT.parent / "corpus"))
 DEFAULT_REPOS = ["spring-petclinic", "microblog", "node-express-realworld-example-app",
                  "django-realworld-example-app"]
 TERMINAL = {"COMPLETED", "FAILED", "CANCELLED", "INTERRUPTED"}
