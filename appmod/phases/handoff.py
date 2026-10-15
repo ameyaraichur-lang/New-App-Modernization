@@ -125,13 +125,17 @@ def plan_brief(store, app: str) -> dict[str, Any]:
             "components": brief["components"]}
 
 
-def p4_run_inputs(store, app: str) -> dict[str, Any]:
+def p4_run_inputs(store, app: str, replan_events: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     g2 = p3_release(store, app)
+    brief = plan_brief(store, app)
     return {
         "scope_manifest": {"workload_ids": [app]},
         "p3_package": {"application_id": app, "status": g2["status"],
                        "conditions": g2.get("conditions", []),
                        "candidate_hash": g2.get("candidate_hash")},
+        "scope": {"components": brief.get("components") or [], "wave": brief.get("wave"),
+                  "disposition": brief.get("disposition")},
+        "replan_events": list(replan_events or []),
     }
 
 

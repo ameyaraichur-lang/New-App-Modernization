@@ -484,6 +484,12 @@ class PipelineJob:
 
         while True:
             digest_before = self.db.answers_digest(self.job_id, app) if phase == 1 else ""
+            live_inputs = dict(run_inputs)
+            if phase == 4:
+                from appmod.kernel.invalidation import events_from_answers
+                live_inputs["replan_events"] = list(run_inputs.get("replan_events") or []) + (
+                    events_from_answers(self.db.list_questions(self.job_id, app)))
+
             def escalate(source: str, target: str, statement: str) -> bool:
                 self.db.add_question(
                     self.job_id, app,
@@ -499,7 +505,7 @@ class PipelineJob:
                 force_nodes=self.force.pop((phase, app), set()), cancel_event=self._cancel,
                 escalate=escalate)
             orch.event_listener = lambda ev: self._trace(phase, app, ev)
-            ctx = orch.start_run(f"{self.job_id}-p{phase}-{app}", app, run_inputs)
+            ctx = orch.start_run(f"{self.job_id}-p{phase}-{app}", app, live_inputs)
             with self._lock:
                 pstate["nodes"] = [{"id": nid, "status": ns.status}
                                    for nid, ns in sorted(ctx.state.nodes.items())]
@@ -709,6 +715,12 @@ class PipelineJob:
         }, P5_GATE_OVERRIDES)
         p5_g4 = self.store.get(f"P5/{app}/G4")["payload"]["decision_record"]
         p5_g3 = self.store.get(f"P5/{app}/G3")["payload"]["final_manifest"]
+        from appmod.kernel.invalidation import lane_failure_events
+        failures = lane_failure_events(p5_g3.get("lanes") or {})
+        if failures:
+            self._log(f"P5 {app}: lane failure reopens the P4 estimate")
+            self._run_phase(4, app, P4AgentRunner(H.plan_brief(self.store, app)),
+                            H.p4_run_inputs(self.store, app, failures), P4_GATE_OVERRIDES)
         self._gate(5, app, p5_g4["status"])
         if not self.include_p6:
             e = self._phase(6, app)
