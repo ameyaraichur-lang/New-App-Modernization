@@ -154,3 +154,15 @@ def test_log_filter_keeps_uvicorn_access_args():
     assert RedactingFilter().filter(rec)
     client_addr, method, path, version, status = rec.args
     assert status == 200 and rec.getMessage() == '127.0.0.1:1 - "GET /api/health HTTP/1.1" 200'
+
+
+def test_bound_blocking_io_sets_the_default_socket_timeout():
+    import socket
+
+    from appmod.llm.astra import bound_blocking_io
+    previous = socket.getdefaulttimeout()
+    try:
+        bound_blocking_io(12.5)
+        assert socket.getdefaulttimeout() == 12.5
+    finally:
+        socket.setdefaulttimeout(previous)
