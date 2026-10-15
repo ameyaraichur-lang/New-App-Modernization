@@ -42,6 +42,8 @@ def test_commit_pinned_for_git_repo():
     ("laravel58", "php"),
     ("sinatra", "ruby"),
     ("golang-example", "go"),
+    ("carddemo", "cobol"),              # JCL and shell scripts must not outrank COBOL
+    ("bugzilla", "perl"),               # JavaScript assets must not outrank Perl modules
 ])
 def test_corpus_primary_language(repo, lang):
     path = CORPUS / repo
