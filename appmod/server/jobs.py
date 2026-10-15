@@ -15,6 +15,8 @@ recompute what actually changed.
 review_mode=human: P1–P4 release gates pause in AWAITING_REVIEW until a
 reviewer decides through the approvals API (bound to the candidate hash);
 P1.A8 confirmations come only from answers recorded via the questions API.
+Any P1–P4 agent may call ``ask_stakeholder``; blocking questions park the node in
+``AWAITING_INPUT`` until the questions API records an answer (per-node input hash).
 """
 
 from __future__ import annotations
@@ -49,6 +51,7 @@ from appmod.server.rundb import RunDB
 from appmod.server.runner import _build_fixture, _find_seed_sql, json_copy
 from appmod.store.artifact_store import ArtifactStore
 from appmod.tools.gateway import ToolEnv
+from appmod.tools.stakeholder import StakeholderBridge
 
 PHASE_NAME = {1: "Discovery", 2: "Portfolio decision", 3: "Target architecture",
               4: "Planning", 5: "Code modernization", 6: "Data modernization"}
@@ -203,7 +206,7 @@ class PipelineJob:
             for p in self.state["phases"]:
                 if p["status"] in ("COMPLETED", "N/A", "SKIPPED", "FAILED", "NOT_ADMITTED"):
                     done += 1
-                elif p["status"] in ("RUNNING", "AWAITING_REVIEW") and p["nodes"]:
+                elif p["status"] in ("RUNNING", "AWAITING_REVIEW", "AWAITING_INPUT") and p["nodes"]:
                     frac += sum(1 for n in p["nodes"] if n["status"] in TERMINAL_NODE) / len(p["nodes"])
             self.state["progress"] = round(100 * min(1.0, (done + frac) / self._expected_entries()))
 
@@ -357,19 +360,48 @@ class PipelineJob:
     # -- phase execution --------------------------------------------------------------------
 
     def _external_digest(self, phase: int, app: str, node: str) -> str:
-        if phase == 1 and self.review_mode == "human" and node in ("A8", "G1", "G2"):
+        if self.review_mode != "human":
+            return ""
+        if phase == 1 and node in ("A8", "G1", "G2"):
             return self.db.answers_digest(self.job_id, app)
-        return ""
+        return self.db.node_answers_digest(self.job_id, phase, app, node)
+
+    def _stakeholder_bridge(self, phase: int, app: str, node: str) -> StakeholderBridge:
+        db, job_id = self.db, self.job_id
+        s = self.settings
+
+        def ensure(**kw: Any) -> str:
+            return db.add_question(
+                job_id, app, kw["question"], kw.get("why", ""), kw.get("target_role", ""),
+                kw.get("source", "ask_stakeholder"), phase=phase, node=node,
+                blocking=bool(kw.get("blocking")),
+            )
+
+        def list_for_node() -> list[dict[str, Any]]:
+            return [q for q in db.list_questions(job_id, app)
+                    if q.get("phase") == phase and q.get("node") == node]
+
+        return StakeholderBridge(
+            job_id, phase, app, node, self.review_mode, ensure=ensure, list_for_node=list_for_node,
+            count_open_blocking=lambda: db.count_questions(job_id, app, open_blocking=True),
+            count_total=lambda: db.count_questions(job_id, app),
+            max_open_blocking=s.stakeholder_max_open_blocking,
+            max_total=s.stakeholder_max_questions,
+            on_pending=lambda p: self._event("QUESTION_PENDING", **p),
+        )
 
     def _env_factory(self, phase: int, app: str):
         def make(context: dict[str, Any]) -> ToolEnv:
             portfolio = phase == 2
-            return ToolEnv(application_id=app, phase=phase,
-                           repo_root=None if portfolio else self.repo_paths.get(app),
-                           store=self.store, published=context.get("published", {}),
-                           portfolio_apps=list(self.repo_paths) if portfolio else [],
-                           repo_roots=dict(self.repo_paths) if portfolio else {},
-                           retrieval_budget_chars=self.settings.retrieval_budget_chars)
+            env = ToolEnv(application_id=app, phase=phase,
+                          repo_root=None if portfolio else self.repo_paths.get(app),
+                          store=self.store, published=context.get("published", {}),
+                          portfolio_apps=list(self.repo_paths) if portfolio else [],
+                          repo_roots=dict(self.repo_paths) if portfolio else {},
+                          retrieval_budget_chars=self.settings.retrieval_budget_chars)
+            if phase <= 4:
+                env.stakeholder = self._stakeholder_bridge(phase, app, context.get("node", ""))
+            return env
         return make
 
     def _trace(self, phase: int, app: str, ev: dict[str, Any]) -> None:
@@ -438,6 +470,8 @@ class PipelineJob:
             if ev.get("gate_outcome"):
                 msg += f" ({ev['gate_outcome']}" + (
                     f": {', '.join(str(r) for r in ev['reasons'][:2])}" if ev.get("reasons") else "") + ")"
+            if ev.get("status") == "AWAITING_INPUT" and ev.get("question"):
+                msg += f" — awaiting stakeholder: {str(ev['question'])[:80]}"
             by_design = na_ok and node == "G0" and ev.get("status") == "FAILED"
             if by_design:
                 msg += " — expected on the approved no-data route"
@@ -470,8 +504,18 @@ class PipelineJob:
             if self._cancel.is_set():
                 raise Cancelled()
             awaiting = [n for n, s in ctx.state.nodes.items() if s.status == "AWAITING_REVIEW"]
+            awaiting_input = [n for n, s in ctx.state.nodes.items() if s.status == "AWAITING_INPUT"]
             if phase == 1 and self.db.answers_digest(self.job_id, app) != digest_before:
                 self._log(f"P1 {app}: new stakeholder answers recorded — re-running affected nodes")
+                continue
+            if awaiting_input:
+                pstate["status"] = "AWAITING_INPUT"
+                self._update(status="AWAITING_INPUT")
+                self._wait_for_input(phase, app, awaiting_input)
+                self._log(f"P{phase} {app}: stakeholder answer recorded — re-running "
+                          f"{', '.join(awaiting_input)}")
+                pstate["status"] = "RUNNING"
+                self._update(status="RUNNING")
                 continue
             if not awaiting:
                 break
@@ -505,6 +549,15 @@ class PipelineJob:
             time.sleep(1.5)
         raise Cancelled()
 
+    def _wait_for_input(self, phase: int, app: str, nodes: list[str]) -> None:
+        while not self._cancel.is_set():
+            open_q = [q for q in self.db.list_questions(self.job_id, app, status="OPEN")
+                      if q.get("phase") == phase and q.get("node") in nodes and q.get("blocking")]
+            if not open_q:
+                return
+            time.sleep(1.5)
+        raise Cancelled()
+
     def _register_questions(self, app: str, ctx: Any) -> None:
         a8 = ctx.inputs_by_node.get("A8")
         if not a8 or a8.get("status") == "FAILED":
@@ -515,7 +568,7 @@ class PipelineJob:
             qs = []
         for q in qs:
             if isinstance(q, str) and q.strip():
-                self.db.add_question(self.job_id, app, q.strip(), source="seed")
+                self.db.add_question(self.job_id, app, q.strip(), source="seed", phase=1, node="A8")
         # one elicitation round: drafts from later A8 re-runs stay in the artifact but do not
         # reopen the questionnaire, otherwise every answer would spawn new questions forever
         if any(q["source"] == "llm-drafted" for q in self.db.list_questions(self.job_id, app)):
@@ -523,7 +576,8 @@ class PipelineJob:
         for d in p.get("questions_drafted", []) or []:
             if isinstance(d, dict) and d.get("question"):
                 self.db.add_question(self.job_id, app, d["question"].strip(), why=d.get("why", ""),
-                                     target_role=d.get("target_role", ""), source="llm-drafted")
+                                     target_role=d.get("target_role", ""), source="llm-drafted",
+                                     phase=1, node="A8")
 
     # -- the pipeline ----------------------------------------------------------------------------
 

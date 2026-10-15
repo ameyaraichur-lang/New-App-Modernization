@@ -48,6 +48,7 @@ class ToolEnv:
     repo_roots: dict[str, Path] = field(default_factory=dict)  # app -> repo (portfolio phases)
     index: Any = None                     # retrieval index (lazy)
     retrieval_budget_chars: int = 0       # 0 = unlimited; counts tool text returned to the model
+    stakeholder: Any = None               # StakeholderBridge (optional)
 
 
 @dataclass
@@ -140,10 +141,14 @@ class ToolSession:
         try:
             result = tool.fn(self.env, args)
             status = "OK"
-        except (PermissionError, FileNotFoundError, ValueError, KeyError) as exc:
-            result, status = {"error": f"{type(exc).__name__}: {exc}"}, "ERROR"
-        except Exception as exc:   # tool bugs must not kill the agent loop
-            result, status = {"error": f"{type(exc).__name__}: {str(exc)[:300]}"}, "ERROR"
+        except Exception as exc:
+            from appmod.tools.stakeholder import AwaitingStakeholderInput
+            if isinstance(exc, AwaitingStakeholderInput):
+                raise
+            if isinstance(exc, (PermissionError, FileNotFoundError, ValueError, KeyError)):
+                result, status = {"error": f"{type(exc).__name__}: {exc}"}, "ERROR"
+            else:   # tool bugs must not kill the agent loop
+                result, status = {"error": f"{type(exc).__name__}: {str(exc)[:300]}"}, "ERROR"
         text = result if isinstance(result, str) else json.dumps(result, default=str, ensure_ascii=False)
         text = redact(text)
         full_len = len(text)

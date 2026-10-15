@@ -20,11 +20,12 @@ interface RunRow { job_id: string; repo: string; status: string; started_at: str
 
 const STATUS_COLOR: Record<string, string> = {
   PUBLISHED: 'green', COMPLETE: 'green', COMPLETED: 'green', PARTIAL: 'amber', RUNNING: 'blue',
-  AWAITING_REVIEW: 'amber', PENDING: '', FAILED: 'red', BLOCKED: 'red', CANCELLED: 'red',
+  AWAITING_REVIEW: 'amber', AWAITING_INPUT: 'amber', PENDING: '', FAILED: 'red', BLOCKED: 'red',
+  CANCELLED: 'red',
   INTERRUPTED: 'amber', NOT_ADMITTED: '', FAILED_RETRY_EXHAUSTED: 'red', SKIPPED_APPROVED: '',
   'N/A': '', SKIPPED: '', RETRY_SCHEDULED: 'amber',
 };
-const ACTIVE = ['PENDING', 'QUEUED', 'RUNNING', 'AWAITING_REVIEW'];
+const ACTIVE = ['PENDING', 'QUEUED', 'RUNNING', 'AWAITING_REVIEW', 'AWAITING_INPUT'];
 const phaseName = (p: number) =>
   ({ 1: 'Discovery', 2: 'Portfolio decision', 3: 'Target architecture',
      4: 'Planning', 5: 'Code modernization', 6: 'Data modernization' } as Record<number, string>)[p] ?? `P${p}`;

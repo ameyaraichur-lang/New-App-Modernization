@@ -2,8 +2,9 @@
 before envelope assembly (the model never decides its own evidence class).
 
   E1  model claims OBSERVED/DOCUMENTED without a valid citation -> INFERRED
-  E2  model claims HUMAN_CONFIRMED -> HYPOTHETICAL (only recorded human
-      answers confirm; they enter through the questions store, not the model)
+  E2  model claims HUMAN_CONFIRMED without a recorded human: citation -> HYPOTHETICAL
+      (a valid human:<question_id> citation keeps the class; the model cannot
+      confirm itself)
   E3  citations to ids not in the run's evidence ledger are stripped
   E4  COMPLETE with an open NOT_ASSESSED gap -> PARTIAL
   E5  configured secrets anywhere in the outcome are redacted
@@ -36,7 +37,7 @@ def _fix_item(obj: dict[str, Any], known: set[str] | None, where: str,
         if "evidence_refs" in obj:
             obj["evidence_refs"] = valid
     cls = obj["evidence_class"]
-    if cls == "HUMAN_CONFIRMED":
+    if cls == "HUMAN_CONFIRMED" and not any(i.startswith("human:") for i in ids):
         obj["evidence_class"] = "HYPOTHETICAL"
         events.append({"rule": "E2", "where": where, "from": cls, "to": "HYPOTHETICAL"})
     elif cls in CITED_CLASSES and not ids:
