@@ -14,9 +14,13 @@ import asyncio
 import json
 import logging
 import threading
+import time
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Literal
+from urllib.parse import urlparse
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse, Response, StreamingResponse
@@ -129,6 +133,57 @@ def health_tools(_: Principal = Depends(require("viewer"))):
                    "description": t.description[:160]} for t in gw.tools.values()],
         "mcp": mcp_client.status(),
     }
+
+
+PROBE_TIERS = ("reasoning", "coding", "fast", "fallback")
+
+
+def _probe_chat(client: Any, deployment: str, tiers: list[str]) -> dict[str, Any]:
+    out: dict[str, Any] = {"kind": "responses", "deployment": deployment, "tiers": tiers}
+    t0 = time.monotonic()
+    try:
+        r = client.create(deployment, instructions="Connectivity probe. Answer with one word.",
+                          input_items=[{"role": "user", "content": "Reply with OK."}],
+                          reasoning_effort="low", max_output_tokens=256)
+        out.update(ok=True, model=r.model, status=r.status, reply=(r.text or "").strip()[:40],
+                   input_tokens=r.usage.input_tokens, output_tokens=r.usage.output_tokens,
+                   reasoning_tokens=r.usage.reasoning_tokens)
+    except Exception as exc:
+        out.update(ok=False, error=f"{type(exc).__name__}: {str(exc)[:240]}")
+    out["latency_ms"] = int((time.monotonic() - t0) * 1000)
+    return out
+
+
+def _probe_embed(client: Any, deployment: str) -> dict[str, Any]:
+    out: dict[str, Any] = {"kind": "embeddings", "deployment": deployment, "tiers": ["embedding"]}
+    t0 = time.monotonic()
+    try:
+        vec = client.embed(["connectivity probe"], deployment)[0]
+        out.update(ok=True, dimensions=len(vec))
+    except Exception as exc:
+        out.update(ok=False, error=f"{type(exc).__name__}: {str(exc)[:240]}")
+    out["latency_ms"] = int((time.monotonic() - t0) * 1000)
+    return out
+
+
+@app.post("/api/health/llm/probe")
+def llm_probe(_: Principal = Depends(require("operator"))):
+    """One live round trip per configured Astra deployment, bypassing the response cache."""
+    from appmod.llm.astra import AstraClient
+    s = get_settings()
+    base = {"configured": s.astra_configured, "endpoint_host": urlparse(s.astra_endpoint).hostname,
+            "api_version": s.astra_api_version, "probed_at": datetime.now(timezone.utc).isoformat()}
+    if not s.astra_configured:
+        return base | {"results": []}
+    client = AstraClient(s, max_attempts=1)
+    deployments: dict[str, list[str]] = {}
+    for tier in PROBE_TIERS:
+        deployments.setdefault(s.deployment_for(tier), []).append(tier)
+    with ThreadPoolExecutor(max_workers=len(deployments) + 1) as pool:
+        futures = [pool.submit(_probe_chat, client, d, t) for d, t in deployments.items()]
+        futures.append(pool.submit(_probe_embed, client, s.deployment_for("embedding")))
+        results = [f.result() for f in futures]
+    return base | {"results": results}
 
 
 @app.get("/api/me")
