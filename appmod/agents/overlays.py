@@ -369,6 +369,8 @@ P1 = {
         guidance=(
             "Synthesize the sealed discovery: read the upstream artifacts (get_artifact for A1–A9) "
             "and write a domain-by-domain summary. Preserve contradictions — do not resolve them. "
+            "Each contradiction names target as the agent id that should be re-run (for example A3) "
+            "and between as the artifact ids involved. "
             "Every summary sentence must trace to an artifact id."),
         fields={
             "domain_summaries": (A(item(domain=S(), summary=S(), sources=A(S()))), "append"),
@@ -493,10 +495,11 @@ P2 = {
         tier="reasoning", tools=ARTIFACT_TOOLS,
         guidance=(
             "Consolidate the portfolio: check that decisions, costs, readiness and sequencing are "
-            "consistent; record disagreements and portfolio-level risks. You recommend; G2 authorizes."),
+            "consistent; record disagreements and portfolio-level risks. You recommend; G2 authorizes. "
+            "Each disagreement sets target to the agent id that should be re-run."),
         fields={
             "portfolio_risks": (A(item(risk=S(), applications=A(S()), mitigation=S())), "append"),
-            "disagreements": (A(item(between=A(S()), issue=S())), "append"),
+            "disagreements": (A(item(between=A(S()), issue=S(), target=S())), "append"),
         }),
 }
 
@@ -592,10 +595,12 @@ P3 = {
         guidance=(
             "Cross-check A1–A7 for consistency (stack vs. components, data design vs. contracts, "
             "threats vs. controls). Report each inconsistency as a traceability gap. You cannot "
-            "rewrite upstream artifacts or approve the package."),
+            "rewrite upstream artifacts or approve the package. Each consistency issue sets target "
+            "to the agent id that should be re-run."),
         fields={
             "traceability": (A(item(requirement=S(), maps_to=S())), "append"),
-            "consistency_issues": (A(item(issue=S(), artifacts=A(S()), severity=SEV)), "append"),
+            "consistency_issues": (A(item(issue=S(), artifacts=A(S()), severity=SEV, target=S())),
+                                   "append"),
         }),
 }
 
@@ -656,7 +661,8 @@ P4 = {
         tier="reasoning", tools=ARTIFACT_TOOLS,
         guidance=(
             "Validate the plan set: every task has an owner, a tool binding, a test and a recovery "
-            "route; context hashes agree. Report conflicts precisely; never repair producers."),
+            "route; context hashes agree. Report conflicts precisely; never repair producers. "
+            "Set owner to the planner agent id that should be re-run, such as A3."),
         fields={"conflicts": (A(item(conflict=S(), owner=S())), "append"),
                 "revision_requests": (A(item(finding=S(), owner=S())), "append")}),
 }

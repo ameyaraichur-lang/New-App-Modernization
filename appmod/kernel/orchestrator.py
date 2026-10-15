@@ -26,6 +26,7 @@ from appmod.contracts.schemas import (
     ContractValidator, canonical_json, content_hash, normalize_payload,
 )
 from appmod.kernel.audit import AuditJournal
+from appmod.kernel.critique import MAX_ROUNDS, critique_requests
 from appmod.kernel.evidence import enforce as enforce_evidence
 from appmod.kernel.gates import GateContext, gate_impl_for
 from appmod.kernel.policy import PolicyService
@@ -49,6 +50,7 @@ class RunContext:
     published: dict[str, str] = field(default_factory=dict)   # node -> artifact_id
     finished: bool = False
     outcome_log: list[dict[str, Any]] = field(default_factory=list)
+    critiques: list[dict[str, Any]] = field(default_factory=list)
 
 
 class PhaseOrchestrator:
@@ -65,6 +67,7 @@ class PhaseOrchestrator:
         external_digest: Any = None,
         force_nodes: set[str] | None = None,
         cancel_event: threading.Event | None = None,
+        escalate: Callable[[str, str, str], bool] | None = None,
     ):
         """reuse: adopt the latest stored artifact of a node when its input
         hash (upstream versions + policy + run inputs + runner fingerprint +
@@ -86,6 +89,7 @@ class PhaseOrchestrator:
         self.validator = ContractValidator(phase_reg)
         self.gate_overrides = gate_overrides or {}
         self.event_listener: Callable[[dict[str, Any]], None] | None = None   # live traces (SSE)
+        self.escalate = escalate
         self.max_parallel = max(1, int(max_parallel))
         self._lock = threading.RLock()
         # Policy version is pinned at construction; a run started without a
@@ -209,6 +213,10 @@ class PhaseOrchestrator:
             ext = self.external_digest(node)
             if ext:
                 manifest["_external"] = ext
+        open_critiques = [c for c in ctx.critiques if c["target"] == node and c["state"] == "open"]
+        if open_critiques:
+            manifest["_critique"] = [{"statement": c["statement"], "round": c["rounds"]}
+                                     for c in open_critiques]
         digest = hashlib.sha256(canonical_json(manifest).encode()).hexdigest()
         return manifest, digest, parent_refs
 
@@ -283,7 +291,9 @@ class PhaseOrchestrator:
         return {"run_id": run_id, "phase": phase, "application_id": ctx.application_id,
                 "node": node, "attempt": ctx.state.nodes[node].attempts,
                 "published": published, "store": self.store,
-                "run_inputs": ctx.run_inputs, "emit": emit}
+                "run_inputs": ctx.run_inputs, "emit": emit,
+                "critiques": [c for c in ctx.critiques
+                              if c["target"] == node and c["state"] == "open"]}
 
     def _reusable(self, ctx: RunContext, node: str, input_hash: str) -> dict[str, Any] | None:
         if not self.reuse or node in self.force_nodes:
@@ -319,6 +329,67 @@ class PhaseOrchestrator:
             ev["gate_outcome"] = outcome
             ev["reasons"] = []
         return ev
+
+    def _dependents(self, origin: str) -> set[str]:
+        outgoing: dict[str, list[str]] = {}
+        for edge in self.scheduler.edges:
+            outgoing.setdefault(edge["from"], []).append(edge["to"])
+        seen: set[str] = set()
+        stack = [origin]
+        while stack:
+            current = stack.pop()
+            for nxt in outgoing.get(current, []):
+                if nxt not in seen:
+                    seen.add(nxt)
+                    stack.append(nxt)
+        return seen
+
+    def _reopen(self, ctx: RunContext, nodes: set[str]) -> None:
+        for name in nodes:
+            ns = ctx.state.nodes.get(name)
+            if ns is None or ns.status in ("RUNNING", "AWAITING_REVIEW", "AWAITING_INPUT"):
+                continue
+            ns.status = "PENDING"
+            ns.outcome = None
+            ctx.inputs_by_node.pop(name, None)
+            ctx.published.pop(name, None)
+
+    def _apply_critiques(self, ctx: RunContext, node: str, payload: dict[str, Any]) -> None:
+        nodes = set(ctx.state.nodes)
+        found = critique_requests(self.phase, node, payload, nodes)
+        found_keys = {(item["target"], item["statement"]) for item in found}
+        for open_item in ctx.critiques:
+            if (open_item["source"] == node and open_item["state"] == "open"
+                    and (open_item["target"], open_item["statement"]) not in found_keys):
+                open_item["state"] = "resolved"
+                self.audit.emit("CRITIQUE_RESOLVED", run_id=ctx.run_id, node=node,
+                                target=open_item["target"], statement=open_item["statement"],
+                                rounds=open_item["rounds"])
+        for item in found:
+            prior = next((c for c in ctx.critiques
+                          if c["target"] == item["target"] and c["statement"] == item["statement"]),
+                         None)
+            if prior is not None and prior["rounds"] >= MAX_ROUNDS:
+                if prior["state"] != "escalated":
+                    prior["state"] = "escalated"
+                    self.audit.emit("CRITIQUE_ESCALATED", run_id=ctx.run_id, node=node,
+                                    target=item["target"], statement=item["statement"],
+                                    rounds=prior["rounds"])
+                    if self.escalate is not None and self.escalate(
+                            node, item["target"], item["statement"]):
+                        target_state = ctx.state.nodes.get(item["target"])
+                        if target_state is not None:
+                            target_state.status = "AWAITING_INPUT"
+                continue
+            rounds = (prior["rounds"] if prior else 0) + 1
+            if prior is None:
+                ctx.critiques.append({**item, "rounds": rounds, "state": "open"})
+            else:
+                prior["rounds"] = rounds
+                prior["state"] = "open"
+            self.audit.emit("CRITIQUE_RERUN", run_id=ctx.run_id, node=node,
+                            target=item["target"], statement=item["statement"], round=rounds)
+            self._reopen(ctx, {item["target"], *self._dependents(item["target"])})
 
     @staticmethod
     def _secrets() -> list[str]:
@@ -472,4 +543,5 @@ class PhaseOrchestrator:
                            art["status"], art["content_hash"], validator_ok=True)
         ctx.outcome_log.append({"node": node, "status": art["status"],
                                 "artifact_id": art["artifact_id"]})
+        self._apply_critiques(ctx, node, art.get("payload") or {})
         return {"node": node, "status": art["status"], "artifact_id": art["artifact_id"]}
