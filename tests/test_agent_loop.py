@@ -47,9 +47,10 @@ def minimal(schema):
 class FakeRouter:
     """Turn 1: call read_file. Turn 2+: submit (optionally citing a bogus id first)."""
 
-    def __init__(self, bogus_first=False, fail=None):
+    def __init__(self, bogus_first=False, fail=None, verdict="ENTAILED"):
         self.bogus_first = bogus_first
         self.fail = fail
+        self.verdict = verdict
         self.turns = 0
         self.submissions = 0
 
@@ -57,8 +58,15 @@ class FakeRouter:
                  max_output_tokens, on_call=None, context=None):
         if self.fail:
             raise self.fail
-        self.turns += 1
         names = {t.name for t in tools}
+        if names == {"submit_verdicts"}:
+            n = len(re.findall(r"^- c\d+:", input_items[0]["content"], re.M))
+            args = {"verdicts": [{"claim": f"c{i}", "verdict": self.verdict, "reason": "scripted"}
+                                 for i in range(1, n + 1)]}
+            return ModelResponse("v", "fake-verifier", "fake", [{
+                "type": "function_call", "call_id": "v1", "name": "submit_verdicts",
+                "arguments": json.dumps(args)}], usage=Usage())
+        self.turns += 1
         assert "submit_outcome" in names
         if self.turns == 1:
             item = {"type": "function_call", "call_id": "c1", "name": "read_file",
@@ -114,6 +122,20 @@ def test_agent_loop_enriches_with_cited_evidence(tmp_path):
     llm_f = [f for f in out.findings if f.get("origin") == "llm"]
     assert llm_f and llm_f[0]["evidence_ids"] and llm_f[0]["evidence_ids"][0].startswith("ev-")
     assert {"TOOL_CALL", "MODEL_CALL"} <= set(events)
+
+
+@needs_corpus
+def test_unsupported_cited_claim_is_published_as_inferred(tmp_path):
+    runner, reg = _runner(FakeRouter(verdict="NOT_ENTAILED"), tmp_path)
+    events = []
+    out = runner.run(_spec(reg, "A1"), {}, PolicyService(),
+                     context={"emit": lambda k, **f: events.append(k), "published": {}})
+    enforce(out)
+    f = next(f for f in out.findings if f.get("origin") == "llm")
+    assert f["evidence_class"] == "INFERRED" and f["evidence_ids"]
+    assert f["support"]["verdict"] == "NOT_ENTAILED" and f["support"]["downgraded_from"] == "OBSERVED"
+    assert out.execution_metadata["llm"]["verifier"]["downgraded"] == 1
+    assert "VERIFIER" in events
 
 
 @needs_corpus
@@ -192,7 +214,9 @@ def test_429_storm_fails_over_once_and_envelope_records_it(tmp_path):
     meta = out.execution_metadata["llm"]
     assert meta["enriched"] is True
     assert meta["model_id"] == fallback == "gpt-5.4" and meta["model_failover"] is True
-    assert client.calls.count(primary) == client.calls.count(fallback) >= 2
+    verifier_calls = 1 if meta["verifier"]["claims"] else 0
+    assert meta["verifier"]["deployments"] == ([fallback] if verifier_calls else [])
+    assert client.calls.count(primary) == client.calls.count(fallback) - verifier_calls >= 2
 
 
 @needs_corpus

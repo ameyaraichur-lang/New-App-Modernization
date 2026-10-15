@@ -35,6 +35,8 @@ LANG_BY_EXT = {
     ".tsx": "typescript", ".java": "java", ".rb": "ruby", ".go": "go",
     ".php": "php", ".cs": "csharp", ".cshtml": "csharp", ".razor": "csharp",
     ".vb": "vb", ".sql": "sql", ".sh": "shell", ".ps1": "powershell",
+    ".cbl": "cobol", ".cob": "cobol", ".cpy": "cobol",
+    ".pl": "perl", ".pm": "perl",
     ".html": "html", ".htm": "html", ".css": "css", ".scss": "css",
     ".xml": "xml", ".json": "json", ".yaml": "yaml", ".yml": "yaml",
     ".toml": "toml", ".cfg": "ini", ".ini": "ini", ".rst": "doc", ".md": "doc",
@@ -43,7 +45,7 @@ LANG_BY_EXT = {
 
 CODE_LANGUAGES = {
     "python", "javascript", "typescript", "java", "ruby", "go", "php", "csharp",
-    "vb", "kotlin", "scala", "shell", "powershell", "sql",
+    "vb", "kotlin", "scala", "shell", "powershell", "sql", "cobol", "perl",
 }
 
 MANIFEST_FILES = [
