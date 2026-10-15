@@ -1,0 +1,4871 @@
+{
+ "job": "job-1792041165-85e6b2",
+ "schema_valid_after_repair": {
+  "pct": 100.0,
+  "valid": 219,
+  "total": 219
+ },
+ "evidence_resolvability": {
+  "pct": 100.0,
+  "resolved": 12647,
+  "cited": 12647,
+  "unresolved_sample": []
+ },
+ "hallucinated_paths": {
+  "count": 0,
+  "checked": 2120,
+  "items": []
+ },
+ "hallucinated_symbols": {
+  "count": 0,
+  "checked": 414,
+  "items": []
+ },
+ "golden_agreement": {
+  "primary_language": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "csharp",
+     "got": "csharp",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "java",
+     "got": "java",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "cargotracker",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "typescript",
+     "got": "typescript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "saleor",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "python",
+     "got": "python",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "djangoproject",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "python",
+     "got": "python",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "opencart",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "php",
+     "got": "php",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "human-essentials",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "ruby",
+     "got": "ruby",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "gitea",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "go",
+     "got": "go",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    }
+   ]
+  },
+  "framework": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "framework",
+     "key": "aspnetcore",
+     "expected": "microsoft.aspnetcore",
+     "got": "microsoft.aspnetcore",
+     "ok": true,
+     "review": null,
+     "source": "eShopLegacyMVCSolution/eShopPorted/eShopPorted.csproj:7"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "framework",
+     "key": "aspnet-mvc",
+     "expected": "microsoft.aspnet.mvc",
+     "got": "microsoft.aspnet.mvc",
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedMVCSolution/src/eShopModernizedMVC/packages.config:22"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "framework",
+     "key": "entity-framework",
+     "expected": "entityframework",
+     "got": "entityframework",
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:9"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "framework",
+     "key": "spring-mvc",
+     "expected": "org.springframework:spring-webmvc",
+     "got": "org.springframework:spring-webmvc",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:179"
+    },
+    {
+     "app": "cargotracker",
+     "type": "framework",
+     "key": "jakarta-ee",
+     "expected": "jakarta.platform:jakarta.jakartaee-api",
+     "got": "jakarta.platform:jakarta.jakartaee-api",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:69"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "framework",
+     "key": "spring-boot",
+     "expected": "org.springframework.boot:spring-boot-configuration-processor",
+     "got": "org.springframework.boot:spring-boot-configuration-processor",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:95"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "framework",
+     "key": "angular",
+     "expected": "@angular/core",
+     "got": "@angular/core",
+     "ok": true,
+     "review": null,
+     "source": "package.json:89"
+    },
+    {
+     "app": "saleor",
+     "type": "framework",
+     "key": "django",
+     "expected": "django",
+     "got": "django",
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:25"
+    },
+    {
+     "app": "djangoproject",
+     "type": "framework",
+     "key": "django",
+     "expected": "django",
+     "got": "django",
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:2"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "framework",
+     "key": "angular",
+     "expected": "angular",
+     "got": "angular",
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "human-essentials",
+     "type": "framework",
+     "key": "rails",
+     "expected": "rails",
+     "got": "rails",
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:17"
+    },
+    {
+     "app": "gitea",
+     "type": "framework",
+     "key": "vue",
+     "expected": "vue",
+     "got": "vue",
+     "ok": true,
+     "review": null,
+     "source": "package.json:32"
+    },
+    {
+     "app": "gitea",
+     "type": "framework",
+     "key": "chi",
+     "expected": "github.com/go-chi/chi/v5",
+     "got": "github.com/go-chi/chi/v5",
+     "ok": true,
+     "review": null,
+     "source": "go.mod:38"
+    }
+   ]
+  },
+  "build_manifest": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "build_manifest",
+     "key": "*.csproj",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/eShopModernizedWebForms.csproj"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "cargotracker",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "saleor",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "saleor",
+     "type": "build_manifest",
+     "key": "pyproject.toml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml"
+    },
+    {
+     "app": "djangoproject",
+     "type": "build_manifest",
+     "key": "pyproject.toml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "opencart",
+     "type": "build_manifest",
+     "key": "composer.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json"
+    },
+    {
+     "app": "opencart",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "upload/assets/curlytag/package.json"
+    },
+    {
+     "app": "human-essentials",
+     "type": "build_manifest",
+     "key": "gemfile",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile"
+    },
+    {
+     "app": "gitea",
+     "type": "build_manifest",
+     "key": "go.mod",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod"
+    },
+    {
+     "app": "gitea",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "gitea",
+     "type": "build_manifest",
+     "key": "pyproject.toml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml"
+    }
+   ]
+  },
+  "has_tests": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no test code found"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/test/java/org/springframework/samples/petclinic/web/CrashControllerTests.java"
+    },
+    {
+     "app": "cargotracker",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/test/java/org/eclipse/cargotracker/interfaces/booking/facade/internal/assembler/LocationDtoAssemblerTest.java"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/test/javascript/cypress/support/account.ts"
+    },
+    {
+     "app": "saleor",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/webhook/transport/tests/__init__.py"
+    },
+    {
+     "app": "djangoproject",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "members/test_admin.py"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/phone-list/phone-list.component.spec.js"
+    },
+    {
+     "app": "opencart",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "upload/extension/opencart/catalog/model/module/latest.php"
+    },
+    {
+     "app": "human-essentials",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "spec/inventory.rb"
+    },
+    {
+     "app": "gitea",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "web_src/js/external-render-helper.test.ts"
+    }
+   ]
+  },
+  "datastore": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "datastore",
+     "key": "sqlserver",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:30"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Web.config:73"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "datastore",
+     "key": "h2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:53"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:575"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:69"
+    },
+    {
+     "app": "cargotracker",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:4"
+    },
+    {
+     "app": "cargotracker",
+     "type": "datastore",
+     "key": "h2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:161"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "datastore",
+     "key": "h2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/resources/config/application-dev.yml:27"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/resources/config/application-prod.yml:36"
+    },
+    {
+     "app": "saleor",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".env.example:1"
+    },
+    {
+     "app": "saleor",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/settings.py:139"
+    },
+    {
+     "app": "djangoproject",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:19"
+    },
+    {
+     "app": "opencart",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:148"
+    },
+    {
+     "app": "opencart",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:82"
+    },
+    {
+     "app": "opencart",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:175"
+    },
+    {
+     "app": "human-essentials",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "config/database.yml:2"
+    },
+    {
+     "app": "gitea",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:44"
+    },
+    {
+     "app": "gitea",
+     "type": "datastore",
+     "key": "sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:63"
+    },
+    {
+     "app": "gitea",
+     "type": "datastore",
+     "key": "sqlserver",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:67"
+    },
+    {
+     "app": "gitea",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:76"
+    }
+   ]
+  },
+  "has_data_layer": {
+   "pct": 90.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Models/CatalogDBContext.cs:14"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/model/Owner.java:43"
+    },
+    {
+     "app": "cargotracker",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/domain/model/voyage/CarrierMovement.java:18"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/domain/Authority.java:16"
+    },
+    {
+     "app": "saleor",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/webhook/models.py:18"
+    },
+    {
+     "app": "djangoproject",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tracdb/models.py:79"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no entities, .sql, migrations or datastore"
+    },
+    {
+     "app": "opencart",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:148"
+    },
+    {
+     "app": "human-essentials",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "db/migrate/20180607144046_initialize_items.rb:4"
+    },
+    {
+     "app": "gitea",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:44"
+    }
+   ]
+  },
+  "entity": {
+   "pct": 60.24,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "entity",
+     "key": "CatalogBrand",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Models/CatalogDBContext.cs:16"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "entity",
+     "key": "CatalogItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Models/CatalogDBContext.cs:14"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "entity",
+     "key": "CatalogItemsStock",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedNTier/src/eShopWCFService/EntityModel.cs:20"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "entity",
+     "key": "CatalogType",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Models/CatalogDBContext.cs:18"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "entity",
+     "key": "DiscountItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedNTier/src/eShopWCFService/EntityModel.cs:22"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "entity",
+     "key": "Owner",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/model/Owner.java:43"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "entity",
+     "key": "Pet",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/model/Pet.java:44"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "entity",
+     "key": "PetType",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/model/PetType.java:25"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "entity",
+     "key": "Specialty",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/model/Specialty.java:26"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "entity",
+     "key": "Vet",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/model/Vet.java:42"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "entity",
+     "key": "Visit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/model/Visit.java:33"
+    },
+    {
+     "app": "cargotracker",
+     "type": "entity",
+     "key": "ApplicationSettings",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/application/util/ApplicationSettings.java:11"
+    },
+    {
+     "app": "cargotracker",
+     "type": "entity",
+     "key": "Cargo",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/domain/model/cargo/Cargo.java:52"
+    },
+    {
+     "app": "cargotracker",
+     "type": "entity",
+     "key": "CarrierMovement",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/domain/model/voyage/CarrierMovement.java:18"
+    },
+    {
+     "app": "cargotracker",
+     "type": "entity",
+     "key": "HandlingEvent",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/domain/model/handling/HandlingEvent.java:38"
+    },
+    {
+     "app": "cargotracker",
+     "type": "entity",
+     "key": "Leg",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/domain/model/cargo/Leg.java:17"
+    },
+    {
+     "app": "cargotracker",
+     "type": "entity",
+     "key": "Location",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/domain/model/location/Location.java:19"
+    },
+    {
+     "app": "cargotracker",
+     "type": "entity",
+     "key": "Voyage",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/domain/model/voyage/Voyage.java:16"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "entity",
+     "key": "Authority",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/domain/Authority.java:16"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "entity",
+     "key": "BankAccount",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/domain/BankAccount.java:17"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "entity",
+     "key": "Label",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/domain/Label.java:16"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "entity",
+     "key": "Operation",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/domain/Operation.java:18"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "entity",
+     "key": "User",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/domain/User.java:24"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Allocation",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/warehouse/models.py:573"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Checkout",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/checkout/models.py:110"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "CheckoutDelivery",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/checkout/models.py:38"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "CustomSchedule",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/schedulers/models.py:16"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "CustomerEvent",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/account/models.py:392"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "GiftCardTag",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/giftcard/models.py:19"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Group",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/account/models.py:443"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "InvoiceEvent",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/invoice/models.py:62"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Job",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/core/models.py:147"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "OrderGrantedRefund",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/order/models.py:940"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Permission",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/permission/models.py:42"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "PreorderReservation",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/warehouse/models.py:638"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "PublishableModel",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/core/models.py:69"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Reservation",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/warehouse/models.py:668"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "StaffNotificationRecipient",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/account/models.py:416"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "TaxConfigurationPerCountry",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/tax/models.py:72"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Thumbnail",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/thumbnail/models.py:18"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Transaction",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/payment/models.py:479"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "VariantChannelListingPromotionRule",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/product/models.py:556"
+    },
+    {
+     "app": "saleor",
+     "type": "entity",
+     "key": "Webhook",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/webhook/models.py:18"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "ActionItem",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "foundation/models.py:307"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "ApprovedGrant",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "foundation/models.py:126"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "DocumentRelease",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docs/models.py:98"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Entry",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "blog/models.py:177"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "FeedItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "aggregator/models.py:123"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "IndividualMember",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "members/models.py:43"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "LocalDjangoCommunity",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "aggregator/models.py:214"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Meeting",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "foundation/models.py:74"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "NonBoardAttendee",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "foundation/models.py:57"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Office",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "foundation/models.py:17"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "ReleaseChecklist",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "checklists/models.py:122"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Releaser",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "checklists/models.py:106"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Revision",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "tracdb/models.py:242"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "SecurityIssue",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "checklists/models.py:479"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Team",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "members/models.py:69"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Term",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "foundation/models.py:29"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Testimonial",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "fundraising/models.py:140"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "TicketChange",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "tracdb/models.py:150"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Version",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "tracdb/models.py:188"
+    },
+    {
+     "app": "djangoproject",
+     "type": "entity",
+     "key": "Wiki",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "tracdb/models.py:262"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Adjustment",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models/adjustment.rb:13"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "AnnualReport",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models/annual_report.rb:12"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "BaseItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models/base_item.rb:16"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "CanonicalItem",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "db/migrate/20180607144046_initialize_items.rb:4"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "County",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models/county.rb:12"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Distribution",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models/distribution.rb:20"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Donation",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models/donation.rb:19"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "LineItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models/line_item.rb:13"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Manufacturer",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/models/manufacturer.rb:11"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Organization",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "db/migrate/20250926084615_rename_executive_director_to_contacts_in_partner_form_fields.rb:2"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Partner",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "db/migrate/20190329201346_move_partner_status_to_an_interger_type.rb:2"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "PartnerGroup",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/models/partner_group.rb:15"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "ProductDrive",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/models/product_drive.rb:14"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Purchase",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models/purchase.rb:20"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Question",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/models/question.rb:10"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Request",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "db/migrate/20190422130439_change_status_to_enum_in_requests.rb:2"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "ServedArea",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/models/partners/served_area.rb:13"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "StorageLocation",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/models/storage_location.rb:18"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "Tagging",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/models/tagging.rb:12"
+    },
+    {
+     "app": "human-essentials",
+     "type": "entity",
+     "key": "UsersRole",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/models/users_role.rb:9"
+    }
+   ]
+  },
+  "route": {
+   "pct": 52.87,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "route",
+     "key": "/api",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "eShopLegacyMVCSolution/src/eShopLegacyMVC/Controllers/Api/CatalogController.cs:5"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "route",
+     "key": "/api/[controller]",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "eShopLegacyMVCSolution/eShopPorted/Controllers/Api/BrandsController.cs:8"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "route",
+     "key": "/items/*/pic",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "eShopLegacyMVCSolution/src/eShopLegacyMVC/Controllers/PicController.cs:24"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "route",
+     "key": "/uploadimage",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedMVCSolution/src/eShopModernizedMVC/Controllers/PicController.cs:26"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/oups",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/CrashController.java:32"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/owners",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:76"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/owners/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:125"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/owners/*/edit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:101"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/owners/*/pets/*/visits",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/VisitController.java:85"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/owners/*/pets/*/visits/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/VisitController.java:69"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/owners/find",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:70"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/owners/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/OwnerController.java:53"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/pets/*/edit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/PetController.java:92"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/pets/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/PetController.java:69"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/vets",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/VetController.java:42"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/vets.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/VetController.java:51"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "route",
+     "key": "/vets.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/web/VetController.java:58"
+    },
+    {
+     "app": "cargotracker",
+     "type": "route",
+     "key": "/cargo",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/interfaces/booking/sse/RealtimeCargoTrackingService.java:25"
+    },
+    {
+     "app": "cargotracker",
+     "type": "route",
+     "key": "/graph-traversal",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/pathfinder/api/GraphTraversalService.java:21"
+    },
+    {
+     "app": "cargotracker",
+     "type": "route",
+     "key": "/handling",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/interfaces/handling/rest/HandlingReportService.java:25"
+    },
+    {
+     "app": "cargotracker",
+     "type": "route",
+     "key": "/reports",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/cargotracker/interfaces/handling/rest/HandlingReportService.java:31"
+    },
+    {
+     "app": "cargotracker",
+     "type": "route",
+     "key": "/shortest-path",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/eclipse/pathfinder/api/GraphTraversalService.java:34"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/account",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:103"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/account/change-password",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:148"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/account/reset-password/finish",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:182"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/account/reset-password/init",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:162"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/activate",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:88"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:29"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/api/admin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/UserResource.java:59"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/api/authorities",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AuthorityResource.java:25"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/api/bank-accounts",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/BankAccountResource.java:27"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/api/labels",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/LabelResource.java:27"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/api/operations",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/OperationResource.java:32"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/authenticate",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AuthenticateController.java:56"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/register",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:71"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/users",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/PublicUserResource.java:46"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "route",
+     "key": "/users/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/io/github/jhipster/sample/web/rest/UserResource.java:186"
+    },
+    {
+     "app": "saleor",
+     "type": "route",
+     "key": "/graphql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/urls.py:18"
+    },
+    {
+     "app": "saleor",
+     "type": "route",
+     "key": "/plugins",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/urls.py:34"
+    },
+    {
+     "app": "saleor",
+     "type": "route",
+     "key": "/plugins/channel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/urls.py:23"
+    },
+    {
+     "app": "saleor",
+     "type": "route",
+     "key": "/plugins/global",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "saleor/urls.py:29"
+    },
+    {
+     "app": "saleor",
+     "type": "route",
+     "key": "/static",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "saleor/urls.py:61"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/.well-known/security.txt",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "djangoproject/tests.py:250"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/403",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "legacy/tests.py:17"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/bouncing",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "tracdb/urls.py:6"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/comments",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "legacy/tests.py:9"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/developer-members",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "members/urls.py:15"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/donation-session",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "fundraising/urls.py:8"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/fundraising",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "foundation/tests.py:143"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/local",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "aggregator/urls.py:13"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/metric",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "dashboard/urls.py:7"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/metric/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "dashboard/urls.py:8"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/security/issue/*",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "checklists/urls.py:14"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/sent",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "contact/urls.py:8"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/sponsor/plans/fellow",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "contact/tests.py:224"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/teams",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "members/urls.py:48"
+    },
+    {
+     "app": "djangoproject",
+     "type": "route",
+     "key": "/update-card",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "fundraising/urls.py:15"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/adjustments",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:102"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/attachments",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:268"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/authorized_family_members",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:49"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/base_items",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:62"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/broadcast_announcements",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:78"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/distributions",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "config/routes.rb:50"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/events",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:100"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/item_categories",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:210"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/organization",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:90"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/organizations",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:63"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/partners",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "config/routes.rb:64"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/privacypolicy",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:274"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/profile",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:42"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/requests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "config/routes.rb:32"
+    },
+    {
+     "app": "human-essentials",
+     "type": "route",
+     "key": "/storage_locations",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "config/routes.rb:132"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/actions_unit",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/web/web.go:1255"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/assignees/*",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/api/v1/api.go:1358"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/branch/*",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/web/web.go:1289"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/cargo",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/web/web.go:708"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/connect",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/web/web.go:580"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/diffpatch",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/api/v1/api.go:1566"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/files/*/*/*/*/*",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/api/packages/api.go:231"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/force-cancel",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/api/v1/api.go:1418"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/issue_templates",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/api/v1/api.go:1597"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/public_access",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/web/web.go:1182"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/refs",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/api/v1/api.go:1559"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/regenerate-token",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/web/web.go:1236"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/repo-action-view/artifacts/*/raw/*",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/web/web.go:1797"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/security",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/web/web.go:652"
+    },
+    {
+     "app": "gitea",
+     "type": "route",
+     "key": "/transfer",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "routers/api/v1/api.go:1307"
+    }
+   ]
+  },
+  "dependency": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "microsoft.aspnet.webapi.client",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedNTier/src/eShopWinForms/eShopWinForms.csproj:23"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "microsoft.extensions.primitives",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:51"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "microsoft.identitymodel.protocol.extensions",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:55"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "microsoft.owin.security.cookies",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:64"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "microsoft.web.redissessionstateprovider",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:69"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "microsoft.windowsazure.configurationmanager",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:71"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.collections.concurrent",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:83"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.diagnostics.performancecounter",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:92"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.io",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:99"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.linq.queryable",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:107"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.runtime",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:119"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.runtime.numerics",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:125"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.security.cryptography.primitives",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:128"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.threading.channels",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:137"
+    },
+    {
+     "app": "eshop-modernizing",
+     "type": "dependency",
+     "key": "system.threading.timer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/packages.config:142"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "com.github.ben-manes.caffeine:caffeine",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:54"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "com.jayway.jsonpath:json-path",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:62"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "jakarta.activation:jakarta.activation-api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:313"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.apache.tomcat:tomcat-jasper-el",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:121"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.glassfish.jaxb:jaxb-runtime",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:41"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.glassfish.web:jakarta.servlet.jsp.jstl",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:127"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.hibernate.orm:hibernate-core",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:238"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.hibernate.orm:hibernate-jcache",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:248"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.hsqldb:hsqldb",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:52"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.junit.jupiter:junit-jupiter-engine",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:279"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.postgresql:postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:69"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.springframework:spring-context-support",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:185"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "org.springframework:spring-jdbc",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:169"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "tools.jackson.core:jackson-core",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:141"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "dependency",
+     "key": "tools.jackson:jackson-bom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:97"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "com.h2database:h2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:161"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "fish.payara.arquillian:payara-client-ee9",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:192"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "fish.payara.extras:payara-micro",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:178"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "io.openliberty.arquillian:arquillian-liberty-managed-jakarta-junit5",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:440"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.assertj:assertj-core",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:95"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.glassfish.jersey.core:jersey-server",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:83"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.glassfish.jersey.inject:jersey-hk2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:251"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.glassfish.jersey.media:jersey-media-multipart",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:257"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.hsqldb:hsqldb",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:427"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.jboss.arquillian.container:arquillian-glassfish-managed-6",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:243"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.jboss.arquillian.jakarta:arquillian-jakarta-bom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:45"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.jboss.arquillian.junit5:arquillian-junit5-container",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:102"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.jboss.arquillian:arquillian-bom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:38"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.junit:junit-bom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:59"
+    },
+    {
+     "app": "cargotracker",
+     "type": "dependency",
+     "key": "org.primefaces:primefaces",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:75"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "@angular/cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:107"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "@angular/compiler-cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:108"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "@ng-bootstrap/ng-bootstrap",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:96"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "com.puppycrawl.tools:checkstyle",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:40"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "cypress-terminal-report",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:120"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "globals",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:128"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "jsdom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:131"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "lighthouse",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:132"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "org.hibernate.orm:hibernate-jcache",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:259"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "org.mapstruct:mapstruct-processor",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:439"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:14"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "org.springframework.security:spring-security-data",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:185"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "org.testcontainers:testcontainers-jdbc",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:287"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "rxjs",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:101"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "dependency",
+     "key": "tools.jackson.datatype:jackson-datatype-hibernate7",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:297"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "authlib",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:15"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "azure-storage-common",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:18"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "django",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:25"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "django-phonenumber-field",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:32"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "graphql-core",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:39"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "lxml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:41"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "micawber",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:43"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "opentelemetry-distro",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:71"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "opentelemetry-sdk",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:69"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "pydantic",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:66"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "python-magic-bin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:76"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "requests-hardened",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:57"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "semantic-version",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:59"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "sentry-sdk",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:60"
+    },
+    {
+     "app": "saleor",
+     "type": "dependency",
+     "key": "stripe",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:61"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "django",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:2"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "django-hosts",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:16"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "django-money",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:17"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "django-read-only",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:19"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "django-recaptcha",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:20"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "django-registration-redux",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:21"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "docutils",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:22"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "jinja2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:24"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "pygments",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:28"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "pykismet3",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:29"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "pymdown-extensions",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:30"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "requests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:32"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "sorl-thumbnail",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:33"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "stripe",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:35"
+    },
+    {
+     "app": "djangoproject",
+     "type": "dependency",
+     "key": "time-machine",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:36"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "angular",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "angular-animate",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:10"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "angular-mocks",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:17"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "angular-resource",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:11"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "angular-route",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:12"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "bootstrap",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:13"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "cpx",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:18"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "http-server",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:19"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "jasmine-core",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:20"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "jquery",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:14"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "karma",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:21"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "karma-chrome-launcher",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:22"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "karma-firefox-launcher",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:23"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "karma-jasmine",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:24"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "dependency",
+     "key": "protractor",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:25"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "@stylistic/eslint-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "upload/assets/curlytag/package.json:48"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "@swissquote/crafty",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/package.json:8"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "aws/aws-sdk-php",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:29"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "guzzlehttp/guzzle",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/composer.json:22"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "katex",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/package.json:12"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "league/commonmark",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/composer.json:23"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "phpspec/prophecy-phpunit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/composer.json:46"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "preact",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/package.json:15"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "remixicon",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "upload/assets/curlytag/package.json:57"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "scrivo/highlight.php",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/composer.json:25"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "scssphp/scssphp",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:26"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "symfony/console",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/composer.json:26"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "testcafe",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/package.json:17"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "vite-plus",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "upload/assets/curlytag/package.json:59"
+    },
+    {
+     "app": "opencart",
+     "type": "dependency",
+     "key": "webpack",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/package.json:18"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "binding_of_caller",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:176"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "dotenv-rails",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:90"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "fx",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:37"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "ice_cube",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:100"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "knapsack_pro",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:144"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "letter_opener",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:184"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "listen",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:186"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "omniauth-rails_csrf_protection",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:71"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "prawn-rails",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:75"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "pry-nav",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:152"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "rack-mini-profiler",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:192"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "rails-controller-testing",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:209"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "rubocop",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:158"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "sprockets",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:115"
+    },
+    {
+     "app": "human-essentials",
+     "type": "dependency",
+     "key": "tzinfo-data",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:220"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "@codemirror/commands",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:10"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/andybalholm/cascadia",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:116"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/blevesearch/bleve_index_api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:120"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/blevesearch/zapx/v13",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:133"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/blevesearch/zapx/v14",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:134"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/clipperhouse/uax29/v2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:147"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/davecgh/go-spew",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:150"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/fatih/color",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:153"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/miekg/dns",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:185"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/olekukonko/errors",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:200"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/redis/go-redis/v9",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:76"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/ssor/bom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:219"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/tinylib/msgp",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:221"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "github.com/yohcop/openid-go",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:87"
+    },
+    {
+     "app": "gitea",
+     "type": "dependency",
+     "key": "globals",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:92"
+    }
+   ]
+  },
+  "containerized": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/Dockerfile"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "cargotracker",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".devcontainer/Dockerfile"
+    },
+    {
+     "app": "saleor",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "djangoproject",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "opencart",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "upload/assets/curlytag/.devcontainer/Dockerfile"
+    },
+    {
+     "app": "human-essentials",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".devcontainer/Dockerfile"
+    },
+    {
+     "app": "gitea",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    }
+   ]
+  },
+  "ci": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/maven-build-main.yml"
+    },
+    {
+     "app": "cargotracker",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/main.yml"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/github-actions.yml"
+    },
+    {
+     "app": "saleor",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/bump-dependencies.yml"
+    },
+    {
+     "app": "djangoproject",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/django-main.yml"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".travis.yml"
+    },
+    {
+     "app": "opencart",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "upload/assets/curlytag/.github/workflows/ci.yml"
+    },
+    {
+     "app": "human-essentials",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/add-help-wanted-labels.yml"
+    },
+    {
+     "app": "gitea",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/cache-prune.yml"
+    }
+   ]
+  },
+  "runtime_version": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "net4.7.2",
+     "got": "net4.7.2",
+     "ok": true,
+     "review": null,
+     "source": "eShopModernizedWebFormsSolution/src/eShopModernizedWebForms/eShopModernizedWebForms.csproj"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "java 17",
+     "got": "java 17",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "cargotracker",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "java 11",
+     "got": "java 11",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "node 24",
+     "got": "node 24",
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "saleor",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "node 20",
+     "got": "node 20",
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "djangoproject",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "python 3.12",
+     "got": "python 3.12",
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml"
+    },
+    {
+     "app": "opencart",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "php 8.0",
+     "got": "php 8.0",
+     "ok": true,
+     "review": null,
+     "source": "composer.json"
+    },
+    {
+     "app": "human-essentials",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "ruby 3.4",
+     "got": "ruby 3.4",
+     "ok": true,
+     "review": null,
+     "source": ".ruby-version"
+    },
+    {
+     "app": "gitea",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "go 1.27",
+     "got": "go 1.27",
+     "ok": true,
+     "review": null,
+     "source": "go.mod"
+    }
+   ]
+  },
+  "license": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "license",
+     "key": "license",
+     "expected": "apache",
+     "got": "apache",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "cargotracker",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.md"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "license",
+     "key": "license",
+     "expected": "apache",
+     "got": "apache",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "saleor",
+     "type": "license",
+     "key": "license",
+     "expected": "bsd",
+     "got": "bsd",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "djangoproject",
+     "type": "license",
+     "key": "license",
+     "expected": "bsd",
+     "got": "bsd",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "opencart",
+     "type": "license",
+     "key": "license",
+     "expected": "gpl",
+     "got": "gpl",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.md"
+    },
+    {
+     "app": "human-essentials",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "gitea",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    }
+   ]
+  },
+  "capability_route": {
+   "pct": 80.0,
+   "rows": [
+    {
+     "app": "eshop-modernizing",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "spring-framework-petclinic",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "API_ONLY",
+     "ok": false,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "cargotracker",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "HEADLESS_BATCH",
+     "ok": false,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "saleor",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "djangoproject",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "opencart",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "human-essentials",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "gitea",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    }
+   ]
+  },
+  "test_framework": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-framework-petclinic",
+     "type": "test_framework",
+     "key": "org.junit.jupiter:junit-jupiter-engine",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:279"
+    },
+    {
+     "app": "cargotracker",
+     "type": "test_framework",
+     "key": "io.openliberty.arquillian:arquillian-liberty-managed-jakarta-junit5",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:440"
+    },
+    {
+     "app": "jhipster-sample-app",
+     "type": "test_framework",
+     "key": "com.tngtech.archunit:archunit-junit5-api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:199"
+    },
+    {
+     "app": "angular-phonecat",
+     "type": "test_framework",
+     "key": "jasmine-core",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:20"
+    },
+    {
+     "app": "opencart",
+     "type": "test_framework",
+     "key": "phpspec/prophecy-phpunit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/daux.io/composer.json:46"
+    },
+    {
+     "app": "human-essentials",
+     "type": "test_framework",
+     "key": "rspec-rails",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:156"
+    }
+   ]
+  }
+ },
+ "calibration": {
+  "facts": {
+   "n": 149,
+   "ece": 0.0219,
+   "ece_upper95": 0.0246,
+   "reliability": [
+    {
+     "bin": "0.9-1.0",
+     "n": 149,
+     "mean_confidence": 0.978,
+     "accuracy": 1.0
+    }
+   ],
+   "by_type": {
+    "capability_route": {
+     "n": 9,
+     "accuracy": 1.0,
+     "mean_confidence": 0.922
+    },
+    "datastore": {
+     "n": 20,
+     "accuracy": 1.0,
+     "mean_confidence": 0.982
+    },
+    "entity": {
+     "n": 47,
+     "accuracy": 1.0,
+     "mean_confidence": 0.989
+    },
+    "framework": {
+     "n": 13,
+     "accuracy": 1.0,
+     "mean_confidence": 0.976
+    },
+    "license": {
+     "n": 6,
+     "accuracy": 1.0,
+     "mean_confidence": 0.99
+    },
+    "route": {
+     "n": 46,
+     "accuracy": 1.0,
+     "mean_confidence": 0.978
+    },
+    "runtime_version": {
+     "n": 8,
+     "accuracy": 1.0,
+     "mean_confidence": 0.963
+    }
+   }
+  },
+  "decisions": {
+   "P1 A5 capability route review": {
+    "n": 9,
+    "without_confidence": 0,
+    "mean": 0.922,
+    "min": 0.9,
+    "max": 0.95
+   },
+   "P1 A11 risk scores": {
+    "n": 30,
+    "without_confidence": 0,
+    "mean": 0.94,
+    "min": 0.85,
+    "max": 0.99
+   },
+   "P2 A6 dispositions": {
+    "n": 10,
+    "without_confidence": 0,
+    "mean": 0.756,
+    "min": 0.68,
+    "max": 0.84
+   },
+   "P3 A2 boundaries": {
+    "n": 52,
+    "without_confidence": 0,
+    "mean": 0.95,
+    "min": 0.85,
+    "max": 0.99
+   },
+   "P4 A3 task estimates": {
+    "n": 51,
+    "without_confidence": 0,
+    "mean": 0.853,
+    "min": 0.77,
+    "max": 0.95
+   }
+  }
+ },
+ "variation": {
+  "p2_dispositions": {
+   "Replatform": 2,
+   "Retain": 3,
+   "Refactor": 4,
+   "Retire": 1
+  },
+  "p3_distinct_boundary_sets": 6,
+  "p3_apps": 6
+ },
+ "pass": true,
+ "confidence": {
+  "confidence_score": 0.0,
+  "weakest": "C3",
+  "assessed": [
+   "C1",
+   "C2",
+   "C6"
+  ],
+  "not_assessed": [
+   "C3",
+   "C4",
+   "C5",
+   "C7",
+   "C8",
+   "C9"
+  ],
+  "weakest_assessed": "C2",
+  "components": [
+   {
+    "id": "C1",
+    "name": "Integrity",
+    "assessed": true,
+    "lower_bound": 98.28,
+    "reason": "",
+    "basis": "",
+    "measures": [
+     {
+      "name": "schema valid after repair",
+      "k": 219,
+      "n": 219,
+      "lower_bound": 98.28
+     },
+     {
+      "name": "evidence ids resolve",
+      "k": 12647,
+      "n": 12647,
+      "lower_bound": 99.97
+     },
+     {
+      "name": "cited paths exist",
+      "k": 2120,
+      "n": 2120,
+      "lower_bound": 99.82
+     },
+     {
+      "name": "A9 function names exist",
+      "k": 414,
+      "n": 414,
+      "lower_bound": 99.08
+     }
+    ]
+   },
+   {
+    "id": "C2",
+    "name": "Factual accuracy",
+    "assessed": true,
+    "lower_bound": 79.27,
+    "reason": "",
+    "basis": "",
+    "measures": [
+     {
+      "name": "golden facts agree",
+      "k": 376,
+      "n": 453,
+      "lower_bound": 79.27
+     }
+    ]
+   },
+   {
+    "id": "C3",
+    "name": "Claim support",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "claim-support verifier not built (stack PR 6)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C4",
+    "name": "Decision correctness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no expert decision labels (decision 2: skipped)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C5",
+    "name": "Stability",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no stability report given (scripts/stability_run.py)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C6",
+    "name": "Calibration",
+    "assessed": true,
+    "lower_bound": 97.54,
+    "reason": "",
+    "basis": "1 - ECE at bootstrap 95%: 149 fact confidences, ECE 0.0219, 95th percentile 0.0246",
+    "measures": []
+   },
+   {
+    "id": "C7",
+    "name": "Execution proof",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "P5 runtime differential NOT_RUN; sandbox deferred (decision 1)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C8",
+    "name": "Robustness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "adversarial suite not built (stack PR 8)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C9",
+    "name": "Human acceptance",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "all reviews were by scripted actors",
+    "basis": "",
+    "measures": [
+     {
+      "name": "human reviews approved",
+      "k": 0,
+      "n": 0,
+      "lower_bound": null
+     }
+    ]
+   }
+  ]
+ }
+}
