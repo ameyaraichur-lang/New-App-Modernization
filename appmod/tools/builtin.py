@@ -91,6 +91,8 @@ def read_file(env: ToolEnv, a: dict[str, Any]) -> str:
         raise FileNotFoundError(a["path"])
     if p.stat().st_size > 2_000_000:
         raise ValueError("file larger than 2MB; use grep")
+    if b"\x00" in p.read_bytes()[:8192]:
+        raise ValueError("binary file; not readable as text")
     lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
     start = max(1, int(a.get("start_line") or 1))
     end = min(len(lines), int(a.get("end_line") or start + 299), start + 399)
@@ -112,8 +114,8 @@ def grep(env: ToolEnv, a: dict[str, Any]) -> dict[str, Any]:
         if not fnmatch.fnmatch(f["path"], glob) and not fnmatch.fnmatch(Path(f["path"]).name, glob):
             continue
         try:
-            text = (root / f["path"]).read_text(encoding="utf-8", errors="ignore")
-        except OSError:
+            text = safe_path(root, f["path"]).read_text(encoding="utf-8", errors="ignore")
+        except (OSError, PermissionError):
             continue
         for i, line in enumerate(text.splitlines(), 1):
             if rx.search(line):
