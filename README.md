@@ -163,6 +163,16 @@ and boundaries are the next step for judging decision quality.
   table, and a browsable artifact store (every envelope is one click away).
 - **Findings & freeze status** — blueprint open findings (AH01–AH06) and the
   freeze recommendation per phase.
+- **Live agents** — for testing the agentic loop. It explains the five steps
+  (seed → investigate → submit → kernel checks → merge & gate) with live counts and has four tabs:
+  - *Live operation*: which agents are mid-loop right now, plus a filterable event feed streamed over SSE.
+  - *Agent loop*: a turn-by-turn replay of any agent's model calls, tool calls, evidence ids and repairs.
+  - *LLM analysis*: p50/p95 latency per deployment, tokens by phase, tool usage and why submissions bounced.
+  - *Connectivity*: the tier→deployment map, the analyzer versions, MCP and a live probe that sends one
+    tiny request per deployment (`POST /api/health/llm/probe`, operator only).
+
+![Live agents — agents mid-loop and the streamed event feed](docs/screenshots/07-live-agents.png)
+![LLM analysis — latency per deployment, tokens by phase, tool usage](docs/screenshots/08-llm-analysis.png)
 
 ![Completed run — gate chain and downloadable outcome](docs/screenshots/05-runner-outcome.png)
 
@@ -287,6 +297,7 @@ directory of checkouts, or just run any repo through the UI.
 | `GET /api/runs/{id}/artifacts[/{artifact_id}]` | artifact pointers / one full envelope |
 | `GET /api/runs/{id}/outcome[?format=md\|json]` | downloadable outcome bundle / report / state |
 | `GET /api/health` · `/api/health/tools` · `/api/me` | liveness · Astra/analyzers/tools/MCP · identity |
+| `POST /api/health/llm/probe` | one uncached "Reply with OK." per deployment + embedding; latency, model, tokens (operator; never returns the key) |
 | `GET /registry/{name}` | compiled registry JSONs |
 
 ## License

@@ -6,12 +6,14 @@ import { PhaseView } from './views/PhaseView';
 import { AgentAnatomy } from './views/AgentAnatomy';
 import { Findings } from './views/Findings';
 import { RunnerView } from './views/RunnerView';
+import { LiveAgents } from './views/LiveAgents';
 
 type View =
   | { kind: 'master' }
   | { kind: 'phase'; phase: number }
   | { kind: 'findings' }
-  | { kind: 'runner' };
+  | { kind: 'runner' }
+  | { kind: 'live' };
 
 export default function App() {
   const [master, setMaster] = useState<MasterRegistry | null>(null);
@@ -99,6 +101,13 @@ export default function App() {
             Run pipeline on repos
             <span className="meta">Astra agents P1–P4 · approvals · trace</span>
           </button>
+          <button
+            className={`nav-btn ${view.kind === 'live' ? 'active' : ''}`}
+            onClick={() => setView({ kind: 'live' })}
+          >
+            Live agents
+            <span className="meta">agent loop · LLM analysis · connectivity</span>
+          </button>
         </div>
 
         <div className="nav-section">
@@ -126,6 +135,8 @@ export default function App() {
               <Findings master={master} phaseReqs={phaseReqs} />
             ) : view.kind === 'runner' ? (
               <RunnerView />
+            ) : view.kind === 'live' ? (
+              <LiveAgents />
             ) : (
               <PhaseView
                 reg={phaseReqs[view.phase]}
@@ -162,6 +173,7 @@ function crumb(
 ): string {
   if (view.kind === 'master') return 'Master pipeline — 17 typed links, 78 roles, Phase 7 skipped';
   if (view.kind === 'findings') return 'Open findings (AH01–AH06) · freeze recommendations';
+  if (view.kind === 'live') return 'Live agents — how each agent investigates, submits and is checked; model usage and connectivity';
   if (view.kind === 'runner') return 'Pipeline runner — one or many repositories, live agents, human release gates';
   const reg = phaseReqs[view.phase];
   return reg ? `P${reg.phase} · ${reg.name} · ${reg.schema_version} · ${reg.freeze_recommendation}` : `Phase ${view.phase}`;
