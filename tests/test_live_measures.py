@@ -70,6 +70,10 @@ def test_ofbiz_must_finish_p1_p3_p4_inside_the_token_cap():
     assert ofbiz_completed(agents(False, 1000))["pass"] is False
     assert ofbiz_completed(agents(True, 99_313))["pass"] is False
     assert ofbiz_completed({"agents": []})["pass"] is False
+    report = agents(True, 1000)
+    report["agents"].append({"phase": 1, "app": "another-repo", "agent": "A1", "success": True,
+                             "tokens": {"input": 99_313}})
+    assert ofbiz_completed(report)["pass"] is True
 
 
 def test_route_agreement_uses_the_point_estimate():

@@ -86,7 +86,7 @@ def ofbiz_completed(e2e: dict[str, Any]) -> dict[str, Any]:
     for phase in (1, 3, 4):
         rows = [a for a in agents if a.get("phase") == phase]
         phases[phase] = {"n": len(rows), "succeeded": sum(1 for a in rows if a.get("success") is True)}
-    problems = over_budget(e2e, AGENT_INPUT_TOKEN_CAP)
+    problems = over_budget({"agents": agents}, AGENT_INPUT_TOKEN_CAP)
     complete = all(p["n"] and p["succeeded"] == p["n"] for p in phases.values())
     return {"phases": phases, "over_budget": problems, "cap": AGENT_INPUT_TOKEN_CAP,
             "pass": complete and not problems}
