@@ -13,9 +13,12 @@ FILE_EXTS = ("java|kt|groovy|gradle|xml|properties|ya?ml|json|toml|ini|cfg|conf|
              "js|jsx|ts|tsx|mjs|cjs|vue|cs|csproj|sln|props|targets|cshtml|razor|html?|css|scss|less|sql|"
              "sqlite|db|md|txt|rst|lock|sh|ps1|cmd|bat|tf|jsp|twig|erb|slim|map|log")
 PATH_RE = re.compile(rf"(?<![\w/.:-])((?:[\w@.-]+/)+[\w.-]+\.(?:{FILE_EXTS}))(?![\w/])", re.I)
+_EXT_SUFFIX = re.compile(rf"\.(?:{FILE_EXTS})$", re.I)
 SYMBOL_RE = re.compile(r"^[A-Za-z_$][\w$]*$")
 TEXT_SKIP = {".git", "node_modules", "bower_components", "vendor", "dist", "obj", "bin"}
 GROUNDED_CLASSES = ("OBSERVED", "DOCUMENTED")
+# Prose often lists ``Dockerfile`` and a script as ``Dockerfile/boot.sh``.
+STANDALONE_PATH_SEGMENTS = frozenset({"Dockerfile", "Containerfile", "Makefile", "Jenkinsfile"})
 
 
 class RepoIndex:
@@ -53,7 +56,12 @@ class RepoIndex:
         t = re.sub(rf"^(\./|{re.escape(self.root.name)}/)", "", token)
         if any(f == t or f.endswith("/" + t) for f in self.files):
             return True
+        tl = t.lower()
+        if any(f.lower() == tl or f.lower().endswith("/" + tl) for f in self.files):
+            return True
         if any(d == t or d.endswith("/" + t) for d in self.dirs):
+            return True
+        if any(d.lower() == tl or d.lower().endswith("/" + tl) for d in self.dirs):
             return True
         if t in self.text:
             return True
@@ -90,12 +98,30 @@ def walk(obj: Any) -> Iterable[dict[str, Any]]:
             yield from walk(v)
 
 
+def split_compound_path(token: str) -> list[str]:
+    """Split prose that lists files back-to-back (``auth.py/blog.py``) into separate paths."""
+    if "/" not in token:
+        return [token]
+    parts = token.split("/")
+    out: list[str] = []
+    cur: list[str] = []
+    for part in parts:
+        cur.append(part)
+        if _EXT_SUFFIX.search(part) or part in STANDALONE_PATH_SEGMENTS:
+            out.append("/".join(cur))
+            cur = []
+    if cur:
+        out.append("/".join(cur))
+    return out or [token]
+
+
 def path_tokens(obj: Any) -> list[str]:
     seen: list[str] = []
     for s in strings(obj):
         for tok in PATH_RE.findall(s):
-            if tok not in seen and not (tok.startswith(("http", "www.")) or re.match(r"^\d", tok)):
-                seen.append(tok)
+            for piece in split_compound_path(tok):
+                if piece not in seen and not (piece.startswith(("http", "www.")) or re.match(r"^\d", piece)):
+                    seen.append(piece)
     return seen
 
 
