@@ -1,0 +1,6510 @@
+{
+ "job": "job-1792167951-b73879",
+ "schema_valid_after_repair": {
+  "pct": 100.0,
+  "valid": 397,
+  "total": 397
+ },
+ "evidence_resolvability": {
+  "pct": 100.0,
+  "resolved": 22152,
+  "cited": 22152,
+  "unresolved_sample": []
+ },
+ "hallucinated_paths": {
+  "count": 0,
+  "checked": 2759,
+  "items": []
+ },
+ "hallucinated_symbols": {
+  "count": 0,
+  "checked": 635,
+  "items": []
+ },
+ "golden_agreement": {
+  "primary_language": {
+   "pct": 90.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "java",
+     "got": "java",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "python",
+     "got": "python",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "python",
+     "got": "python",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "microblog",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "python",
+     "got": "python",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "typescript",
+     "got": "typescript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "musicstore",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "csharp",
+     "got": "csharp",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "laravel58",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "php",
+     "got": "php",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "sinatra",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "ruby",
+     "got": "ruby",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "golang-example",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "go",
+     "got": "go",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "todomvc",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "csharp",
+     "got": "csharp",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "orchard",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "csharp",
+     "got": "csharp",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "struts-examples",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "java",
+     "got": "java",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "ofbiz",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "java",
+     "got": "java",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "webgoat",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "javascript",
+     "got": "javascript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "carddemo",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "cobol",
+     "got": "shell",
+     "ok": false,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "mantisbt",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "php",
+     "got": "php",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "bugzilla",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "perl",
+     "got": "javascript",
+     "ok": false,
+     "review": null,
+     "source": "scc"
+    },
+    {
+     "app": "juice-shop",
+     "type": "primary_language",
+     "key": "primary_language",
+     "expected": "typescript",
+     "got": "typescript",
+     "ok": true,
+     "review": null,
+     "source": "scc"
+    }
+   ]
+  },
+  "framework": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "framework",
+     "key": "spring-boot",
+     "expected": "org.springframework.boot:spring-boot-starter-cache",
+     "got": "org.springframework.boot:spring-boot-starter-cache",
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:34"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "framework",
+     "key": "flask",
+     "expected": "flask",
+     "got": "flask",
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:2"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "framework",
+     "key": "django",
+     "expected": "django",
+     "got": "django",
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:1"
+    },
+    {
+     "app": "microblog",
+     "type": "framework",
+     "key": "flask",
+     "expected": "flask",
+     "got": "flask",
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:15"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "framework",
+     "key": "express",
+     "expected": "express",
+     "got": "express",
+     "ok": true,
+     "review": null,
+     "source": "package.json:22"
+    },
+    {
+     "app": "musicstore",
+     "type": "framework",
+     "key": "aspnetcore",
+     "expected": "microsoft.aspnetcore.authentication.core",
+     "got": "microsoft.aspnetcore.authentication.core",
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/MusicStore.Test.csproj:12"
+    },
+    {
+     "app": "musicstore",
+     "type": "framework",
+     "key": "entity-framework",
+     "expected": "microsoft.entityframeworkcore.inmemory",
+     "got": "microsoft.entityframeworkcore.inmemory",
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:40"
+    },
+    {
+     "app": "laravel58",
+     "type": "framework",
+     "key": "vue",
+     "expected": "vue",
+     "got": "vue",
+     "ok": true,
+     "review": null,
+     "source": "package.json:23"
+    },
+    {
+     "app": "laravel58",
+     "type": "framework",
+     "key": "laravel",
+     "expected": "laravel/framework",
+     "got": "laravel/framework",
+     "ok": true,
+     "review": null,
+     "source": "composer.json:13"
+    },
+    {
+     "app": "sinatra",
+     "type": "framework",
+     "key": "sinatra",
+     "expected": "sinatra",
+     "got": "sinatra",
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:5"
+    },
+    {
+     "app": "golang-example",
+     "type": "framework",
+     "key": "gin",
+     "expected": "github.com/gin-gonic/gin",
+     "got": "github.com/gin-gonic/gin",
+     "ok": true,
+     "review": null,
+     "source": "go.mod:6"
+    },
+    {
+     "app": "todomvc",
+     "type": "framework",
+     "key": "express",
+     "expected": "express",
+     "got": "express",
+     "ok": true,
+     "review": null,
+     "source": "package.json:26"
+    },
+    {
+     "app": "todomvc",
+     "type": "framework",
+     "key": "react",
+     "expected": "react",
+     "got": "react",
+     "ok": true,
+     "review": null,
+     "source": "examples/typescript-react/package.json:9"
+    },
+    {
+     "app": "todomvc",
+     "type": "framework",
+     "key": "angular",
+     "expected": "angular",
+     "got": "angular",
+     "ok": true,
+     "review": null,
+     "source": "examples/typescript-angular/package.json:7"
+    },
+    {
+     "app": "todomvc",
+     "type": "framework",
+     "key": "vue",
+     "expected": "vue",
+     "got": "vue",
+     "ok": true,
+     "review": null,
+     "source": "examples/vue/package.json:2"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "framework",
+     "key": "react",
+     "expected": "react",
+     "got": "react",
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "framework",
+     "key": "aspnetcore",
+     "expected": "microsoft.aspnetcore.mvc.testing",
+     "got": "microsoft.aspnetcore.mvc.testing",
+     "ok": true,
+     "review": null,
+     "source": "tests/PublicApiIntegrationTests/PublicApiIntegrationTests.csproj:22"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "framework",
+     "key": "entity-framework",
+     "expected": "microsoft.entityframeworkcore.inmemory",
+     "got": "microsoft.entityframeworkcore.inmemory",
+     "ok": true,
+     "review": null,
+     "source": "tests/IntegrationTests/IntegrationTests.csproj:9"
+    },
+    {
+     "app": "orchard",
+     "type": "framework",
+     "key": "aspnet-mvc",
+     "expected": "microsoft.aspnet.mvc",
+     "got": "microsoft.aspnet.mvc",
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/packages.config:8"
+    },
+    {
+     "app": "struts-examples",
+     "type": "framework",
+     "key": "struts2",
+     "expected": "org.apache.struts:struts2-core",
+     "got": "org.apache.struts:struts2-core",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:165"
+    },
+    {
+     "app": "webgoat",
+     "type": "framework",
+     "key": "spring-boot",
+     "expected": "org.springframework.boot:spring-boot-starter-validation",
+     "got": "org.springframework.boot:spring-boot-starter-validation",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:245"
+    },
+    {
+     "app": "juice-shop",
+     "type": "framework",
+     "key": "express",
+     "expected": "express",
+     "got": "express",
+     "ok": true,
+     "review": null,
+     "source": "package.json:110"
+    },
+    {
+     "app": "juice-shop",
+     "type": "framework",
+     "key": "angular",
+     "expected": "@angular/core",
+     "got": "@angular/core",
+     "ok": true,
+     "review": null,
+     "source": "frontend/package.json:28"
+    }
+   ]
+  },
+  "test_framework": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "test_framework",
+     "key": "org.testcontainers:testcontainers-junit-jupiter",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:55"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "test_framework",
+     "key": "jest",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:32"
+    },
+    {
+     "app": "laravel58",
+     "type": "test_framework",
+     "key": "phpunit/phpunit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:22"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "test_framework",
+     "key": "mstest.testadapter",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/PublicApiIntegrationTests/PublicApiIntegrationTests.csproj:24"
+    },
+    {
+     "app": "orchard",
+     "type": "test_framework",
+     "key": "nunit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Tools/Orchard.Tests/packages.config:5"
+    },
+    {
+     "app": "struts-examples",
+     "type": "test_framework",
+     "key": "junit:junit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "unknown-handler/pom.xml:42"
+    },
+    {
+     "app": "mantisbt",
+     "type": "test_framework",
+     "key": "phpunit/phpunit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:21"
+    }
+   ]
+  },
+  "build_manifest": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "build_manifest",
+     "key": "build.gradle",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "build_manifest",
+     "key": "pyproject.toml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "build_manifest",
+     "key": "requirements.txt",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt"
+    },
+    {
+     "app": "microblog",
+     "type": "build_manifest",
+     "key": "requirements.txt",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "musicstore",
+     "type": "build_manifest",
+     "key": "*.csproj",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/MusicStore.Test.csproj"
+    },
+    {
+     "app": "laravel58",
+     "type": "build_manifest",
+     "key": "composer.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json"
+    },
+    {
+     "app": "laravel58",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "sinatra",
+     "type": "build_manifest",
+     "key": "gemfile",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile"
+    },
+    {
+     "app": "golang-example",
+     "type": "build_manifest",
+     "key": "go.mod",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod"
+    },
+    {
+     "app": "todomvc",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "todomvc",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/duel/pom.xml"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "build_manifest",
+     "key": "*.csproj",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/UnitTests/UnitTests.csproj"
+    },
+    {
+     "app": "orchard",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Package.json"
+    },
+    {
+     "app": "orchard",
+     "type": "build_manifest",
+     "key": "*.csproj",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Tools/Orchard.Tests/Orchard.Tests.csproj"
+    },
+    {
+     "app": "struts-examples",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "ofbiz",
+     "type": "build_manifest",
+     "key": "build.gradle",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle"
+    },
+    {
+     "app": "ofbiz",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json"
+    },
+    {
+     "app": "webgoat",
+     "type": "build_manifest",
+     "key": "pom.xml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "mantisbt",
+     "type": "build_manifest",
+     "key": "composer.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json"
+    },
+    {
+     "app": "mantisbt",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "bugzilla",
+     "type": "build_manifest",
+     "key": "build.pl",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Build.PL"
+    },
+    {
+     "app": "juice-shop",
+     "type": "build_manifest",
+     "key": "package.json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    }
+   ]
+  },
+  "has_tests": {
+   "pct": 90.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/test/java/org/springframework/samples/petclinic/MySqlIntegrationTests.java"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/conftest.py"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no test code found"
+    },
+    {
+     "app": "microblog",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no test code found"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/tests/prisma-mock.ts"
+    },
+    {
+     "app": "musicstore",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/CartSummaryComponentTest.cs"
+    },
+    {
+     "app": "laravel58",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/CreatesApplication.php"
+    },
+    {
+     "app": "sinatra",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no test code found"
+    },
+    {
+     "app": "golang-example",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/unit_test.go"
+    },
+    {
+     "app": "todomvc",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/cya.js"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no test code found"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/UnitTests/Web/Extensions/CacheHelpersTests/GenerateBrandsCacheKey.cs"
+    },
+    {
+     "app": "orchard",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Tools/Orchard.Tests/CommandLineParserTests.cs"
+    },
+    {
+     "app": "struts-examples",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "unit-testing/src/test/java/org/apache/struts/register/action/RegisterTest.java"
+    },
+    {
+     "app": "ofbiz",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "framework/widget/src/test/java/org/apache/ofbiz/widget/WidgetWorkerTest.java"
+    },
+    {
+     "app": "webgoat",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/test/java/org/owasp/webgoat/WithWebGoatUser.java"
+    },
+    {
+     "app": "carddemo",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no test code found"
+    },
+    {
+     "app": "mantisbt",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "login_cookie_test.php"
+    },
+    {
+     "app": "bugzilla",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "xt/search.t"
+    },
+    {
+     "app": "juice-shop",
+     "type": "has_tests",
+     "key": "has_tests",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/server/accuracy.unit.test.ts"
+    }
+   ]
+  },
+  "datastore": {
+   "pct": 95.83,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:14"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:2"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "datastore",
+     "key": "h2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/resources/application.properties:2"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "datastore",
+     "key": "sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/settings.py:88"
+    },
+    {
+     "app": "microblog",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:37"
+    },
+    {
+     "app": "microblog",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:43"
+    },
+    {
+     "app": "musicstore",
+     "type": "datastore",
+     "key": "sqlserver",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:33"
+    },
+    {
+     "app": "laravel58",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".env.example:9"
+    },
+    {
+     "app": "laravel58",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".env.example:22"
+    },
+    {
+     "app": "laravel58",
+     "type": "datastore",
+     "key": "sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "config/database.php:38"
+    },
+    {
+     "app": "golang-example",
+     "type": "datastore",
+     "key": "sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".env.example:5"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "datastore",
+     "key": "sqlserver",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:10"
+    },
+    {
+     "app": "orchard",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/packages.config:15"
+    },
+    {
+     "app": "orchard",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/packages.config:17"
+    },
+    {
+     "app": "orchard",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/Modules/Orchard.Redis/packages.config:9"
+    },
+    {
+     "app": "ofbiz",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker/examples/postgres-demo/docker-compose.yml:22"
+    },
+    {
+     "app": "carddemo",
+     "type": "datastore",
+     "key": "db2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/proc/BLDCIDB2.prc:2"
+    },
+    {
+     "app": "carddemo",
+     "type": "datastore",
+     "key": "vsam",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/jcl/REPRTEST.jcl:27"
+    },
+    {
+     "app": "carddemo",
+     "type": "datastore",
+     "key": "postgresql",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "app/app-authorization-ims-db2-mq/cbl/COPAUS0C.cbl:120"
+    },
+    {
+     "app": "mantisbt",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "javascript_config.php:4"
+    },
+    {
+     "app": "bugzilla",
+     "type": "datastore",
+     "key": "mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:34"
+    },
+    {
+     "app": "juice-shop",
+     "type": "datastore",
+     "key": "sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "infrastructure/docker-compose.yml:35"
+    },
+    {
+     "app": "juice-shop",
+     "type": "datastore",
+     "key": "mongodb",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "infrastructure/docker-compose.yml:32"
+    },
+    {
+     "app": "juice-shop",
+     "type": "datastore",
+     "key": "redis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "infrastructure/docker-compose.yml:28"
+    }
+   ]
+  },
+  "has_data_layer": {
+   "pct": 80.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/Specialty.java:28"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/data.sql"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/core/models.py:4"
+    },
+    {
+     "app": "microblog",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models.py:303"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:11"
+    },
+    {
+     "app": "musicstore",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:18"
+    },
+    {
+     "app": "laravel58",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/User.php:9"
+    },
+    {
+     "app": "sinatra",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no entities, .sql, migrations or datastore"
+    },
+    {
+     "app": "golang-example",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/models.go:36"
+    },
+    {
+     "app": "todomvc",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no entities, .sql, migrations or datastore"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no entities, .sql, migrations or datastore"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Data/CatalogContext.cs:14"
+    },
+    {
+     "app": "orchard",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/packages.config:15"
+    },
+    {
+     "app": "struts-examples",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": false,
+     "got": true,
+     "ok": false,
+     "review": null,
+     "source": "no entities, .sql, migrations or datastore"
+    },
+    {
+     "app": "ofbiz",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker/examples/postgres-demo/docker-compose.yml:22"
+    },
+    {
+     "app": "webgoat",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/webwolf/user/WebWolfUser.java:19"
+    },
+    {
+     "app": "carddemo",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/proc/BLDCIDB2.prc:2"
+    },
+    {
+     "app": "mantisbt",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "javascript_config.php:4"
+    },
+    {
+     "app": "bugzilla",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docker-compose.yml:34"
+    },
+    {
+     "app": "juice-shop",
+     "type": "has_data_layer",
+     "key": "has_data_layer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "infrastructure/docker-compose.yml:35"
+    }
+   ]
+  },
+  "entity": {
+   "pct": 95.12,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Owner",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/Owner.java:48"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Pet",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/Pet.java:44"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "PetType",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/PetType.java:26"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Specialty",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/Specialty.java:28"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Vet",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/Vet.java:43"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "entity",
+     "key": "Visit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/Visit.java:35"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "entity",
+     "key": "TimestampedModel",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "conduit/apps/core/models.py:4"
+    },
+    {
+     "app": "microblog",
+     "type": "entity",
+     "key": "Message",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models.py:303"
+    },
+    {
+     "app": "microblog",
+     "type": "entity",
+     "key": "Notification",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models.py:324"
+    },
+    {
+     "app": "microblog",
+     "type": "entity",
+     "key": "Task",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/models.py:338"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "entity",
+     "key": "Article",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:11"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "entity",
+     "key": "Comment",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:26"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "entity",
+     "key": "Tag",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:37"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "entity",
+     "key": "User",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/prisma/schema.prisma:43"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "Album",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:18"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "Artist",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:19"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "CartItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:22"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "Genre",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:21"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "Order",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:20"
+    },
+    {
+     "app": "musicstore",
+     "type": "entity",
+     "key": "OrderDetail",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/Models/MusicStoreContext.cs:23"
+    },
+    {
+     "app": "laravel58",
+     "type": "entity",
+     "key": "User",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/User.php:9"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "ArticleModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:11"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "ArticleUserModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:23"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "CommentModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:45"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "FavoriteModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:31"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "FollowModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/models.go:36"
+    },
+    {
+     "app": "golang-example",
+     "type": "entity",
+     "key": "TagModel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/models.go:39"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "entity",
+     "key": "Basket",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Data/CatalogContext.cs:14"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "entity",
+     "key": "BasketItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Data/CatalogContext.cs:20"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "entity",
+     "key": "CatalogBrand",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Data/CatalogContext.cs:16"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "entity",
+     "key": "CatalogItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Data/CatalogContext.cs:15"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "entity",
+     "key": "CatalogType",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Data/CatalogContext.cs:17"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "entity",
+     "key": "Order",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Data/CatalogContext.cs:18"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "entity",
+     "key": "OrderItem",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Data/CatalogContext.cs:19"
+    },
+    {
+     "app": "webgoat",
+     "type": "entity",
+     "key": "Assignment",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/container/lessons/Assignment.java:19"
+    },
+    {
+     "app": "webgoat",
+     "type": "entity",
+     "key": "AssignmentProgress",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/container/users/AssignmentProgress.java:18"
+    },
+    {
+     "app": "webgoat",
+     "type": "entity",
+     "key": "Email",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/container/mailbox/Email.java:24"
+    },
+    {
+     "app": "webgoat",
+     "type": "entity",
+     "key": "LessonProgress",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/container/users/LessonProgress.java:24"
+    },
+    {
+     "app": "webgoat",
+     "type": "entity",
+     "key": "UserProgress",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/container/users/UserProgress.java:23"
+    },
+    {
+     "app": "webgoat",
+     "type": "entity",
+     "key": "WebGoatUser",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/container/users/WebGoatUser.java:19"
+    },
+    {
+     "app": "webgoat",
+     "type": "entity",
+     "key": "WebWolfUser",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/webwolf/user/WebWolfUser.java:19"
+    }
+   ]
+  },
+  "route": {
+   "pct": 79.09,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/oups",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/system/CrashController.java:31"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:94"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:178"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/*/edit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:148"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/*/pets/*/visits/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/VisitController.java:90"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/find",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:89"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/owners/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java:72"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/pets/*/edit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java:139"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/pets/new",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/owner/PetController.java:100"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/vets",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java:72"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "route",
+     "key": "/vets.html",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/springframework/samples/petclinic/vet/VetController.java:45"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/*/delete",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/blog.py:113"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/*/update",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/blog.py:86"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/create",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/blog.py:60"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/hello",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/__init__.py:26"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/auth.py:84"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/logout",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/auth.py:112"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "route",
+     "key": "/register",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "flaskr/auth.py:46"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/admin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/urls.py:20"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/urls.py:22"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/articles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/articles/urls.py:18"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/articles/feed",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/articles/urls.py:16"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/profiles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/profiles/urls.py:6"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/tags",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/articles/urls.py:27"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/user",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/authentication/urls.py:8"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/users",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/authentication/urls.py:9"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "route",
+     "key": "/users/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "conduit/apps/authentication/urls.py:10"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/edit_profile",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/main/routes.py:97"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/index",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/main/routes.py:26"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/auth/routes.py:14"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/messages",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/main/routes.py:199"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/notifications",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/main/routes.py:230"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/register",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/auth/routes.py:39"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/reset_password/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/auth/routes.py:72"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/reset_password_request",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/auth/routes.py:55"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/send_message/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/main/routes.py:181"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/tokens",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/api/tokens.py:6"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/translate",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/main/routes.py:156"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/unfollow/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/main/routes.py:135"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/user/*/popup",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/main/routes.py:89"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/users/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/api/users.py:10"
+    },
+    {
+     "app": "microblog",
+     "type": "route",
+     "key": "/users/*/following",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app/api/users.py:35"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:30"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:87"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/*/comments",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:149"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/*/comments/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:190"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/*/favorite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:210"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/articles/feed",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/article/article.controller.ts:45"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/profiles/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/profile/profile.controller.ts:14"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/profiles/*/follow",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/profile/profile.controller.ts:34"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/tags",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/tag/tag.controller.ts:13"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/user",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/auth/auth.controller.ts:45"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/users",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/auth/auth.controller.ts:14"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "route",
+     "key": "/users/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/app/routes/auth/auth.controller.ts:30"
+    },
+    {
+     "app": "sinatra",
+     "type": "route",
+     "key": "/activity",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app.rb:141"
+    },
+    {
+     "app": "sinatra",
+     "type": "route",
+     "key": "/p/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app.rb:123"
+    },
+    {
+     "app": "sinatra",
+     "type": "route",
+     "key": "/p/*/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app.rb:133"
+    },
+    {
+     "app": "sinatra",
+     "type": "route",
+     "key": "/style.css",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "app.rb:152"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/*/comments",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/routers.go:22"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/*/comments/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/routers.go:23"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/*/favorite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/routers.go:20"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/*/follow",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/routers.go:28"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:41"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/api/ping",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:54"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/articles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:44"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/feed",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "articles/routers.go:14"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/login",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "users/routers.go:13"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/profiles",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:46"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/tags",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:45"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/user",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:49"
+    },
+    {
+     "app": "golang-example",
+     "type": "route",
+     "key": "/users",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "hello.go:42"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "route",
+     "key": "/[controller]",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/Web/Controllers/UserController.cs:15"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "route",
+     "key": "/[controller]/[action]",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/Web/Controllers/ManageController.cs:17"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "route",
+     "key": "/api/[controller]/[action]",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/Web/Controllers/Api/BaseApiController.cs:6"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "route",
+     "key": "/api/authenticate",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/PublicApi/AuthEndpoints/AuthenticateEndpoint.cs:29"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "route",
+     "key": "/logout",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Web/Controllers/UserController.cs:41"
+    },
+    {
+     "app": "ofbiz",
+     "type": "route",
+     "key": "/*/openapi.*",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "framework/rest-api/src/main/java/org/apache/ofbiz/ws/rs/resources/OpenApiResource.java:57"
+    },
+    {
+     "app": "ofbiz",
+     "type": "route",
+     "key": "/*/token",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "framework/rest-api/src/main/java/org/apache/ofbiz/ws/rs/resources/AuthenticationResource.java:100"
+    },
+    {
+     "app": "ofbiz",
+     "type": "route",
+     "key": "/auth",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "framework/rest-api/src/main/java/org/apache/ofbiz/ws/rs/resources/AuthenticationResource.java:59"
+    },
+    {
+     "app": "ofbiz",
+     "type": "route",
+     "key": "/refresh-token",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "framework/rest-api/src/main/java/org/apache/ofbiz/ws/rs/resources/AuthenticationResource.java:156"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/challenge/7",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/challenges/challenge7/Assignment7.java:74"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/commandinjection/safety/status",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/commandinjection/CommandInjectionSafetyGate.java:39"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/crosssitescripting/attack6a",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/xss/CrossSiteScriptingLesson6a.java:34"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/crypto/secure/defaults",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/cryptography/SecureDefaultsAssignment.java:27"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/crypto/timing/tag",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/cryptography/timing/TimingAttackTagAssignment.java:32"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/file-server-location",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/webwolf/FileServer.java:63"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/insecurelogin/login",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/insecurelogin/InsecureLoginTask.java:27"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/jwt/encode",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/webwolf/jwt/JWTController.java:36"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/jwt/refresh/checkout",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/jwt/JWTRefreshEndpoint.java:83"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/jwt/votings/login",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/jwt/JWTVotesEndpoint.java:109"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/passwordreset/simple-mail",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/passwordreset/SimpleMailAssignment.java:37"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/passwordstorage/stage1",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/passwordstorage/Stage1HashAssignment.java:21"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/pathtraversal/profile-upload-remove-user-input",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/pathtraversal/ProfileUploadRemoveUserInput.java:33"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/server-directory",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/container/service/EnvironmentService.java:18"
+    },
+    {
+     "app": "webgoat",
+     "type": "route",
+     "key": "/webgoat/mail",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "src/main/java/org/owasp/webgoat/lessons/webgoatintroduction/MailAssignment.java:67"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/api/basketitems/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:454"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/api/cards",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:466"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/api/challenges",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:401"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/api/quantitys/*",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:457"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/api/securityquestions",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:420"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/file-upload",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:337"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/profile",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:694"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/profile/image/file",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:338"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/rest/2fa/setup",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "server.ts:493"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/rest/continue-code/apply/*",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "server.ts:642"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/rest/country-mapping",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "server.ts:646"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/rest/deluxe-membership",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "server.ts:656"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/rest/order-history/*/delivery-status",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:653"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/rest/products/*/reviews",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "server.ts:660"
+    },
+    {
+     "app": "juice-shop",
+     "type": "route",
+     "key": "/rest/wallet/balance",
+     "expected": true,
+     "got": false,
+     "ok": false,
+     "review": null,
+     "source": "server.ts:654"
+    }
+   ]
+  },
+  "dependency": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "com.github.ben-manes.caffeine:caffeine",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:45"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "com.puppycrawl.tools:checkstyle",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:30"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.postgresql:postgresql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:48"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-devtools",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:117"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-docker-compose",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:54"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-cache",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:34"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-cache-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:168"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-data-jpa-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:50"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-restclient-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:51"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-thymeleaf",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:36"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-validation",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:38"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-validation-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:143"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-testcontainers",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:53"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.testcontainers:testcontainers-mysql",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:56"
+    },
+    {
+     "app": "spring-petclinic",
+     "type": "dependency",
+     "key": "org.webjars.npm:bootstrap",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "build.gradle:43"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "dependency",
+     "key": "flask",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pyproject.toml:2"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "django",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:1"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "django-cors-middleware",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:2"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "django-extensions",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:3"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "djangorestframework",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:4"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "pyjwt",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:5"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "dependency",
+     "key": "six",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:6"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "attrs",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:4"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "certifi",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:7"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "defusedxml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:10"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "flask-mail",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:19"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "gunicorn",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:25"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "langdetect",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:30"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "markupsafe",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:33"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "multidict",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:35"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "psycopg2-binary",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:37"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "pygments",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:38"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "requests-toolbelt",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:45"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "sqlalchemy",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:22"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "typing_extensions",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:51"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "urllib3",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:52"
+    },
+    {
+     "app": "microblog",
+     "type": "dependency",
+     "key": "wtforms",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "requirements.txt:54"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@nx/eslint-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:31"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@nx/node",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:34"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@nx/workspace",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:35"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@types/bcryptjs",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:38"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@types/cors",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:39"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "@types/express",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:40"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "bcryptjs",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:19"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "body-parser",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:20"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "cors",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:21"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "esbuild",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:29"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "jest",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:32"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "jest-environment-node",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:49"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "jest-mock-extended",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:50"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "slugify",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:25"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "dependency",
+     "key": "ts-jest",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:54"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:17"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.aspnetcoremodule",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:17"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.aspnetcoremodulev2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:18"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.google",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:29"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.microsoftaccount",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:30"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.openidconnect",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:20"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.twitter",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:32"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.mvc",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:35"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.server.iis",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:37"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.entityframeworkcore.inmemory",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:40"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.entityframeworkcore.sqlserver",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "samples/MusicStore/MusicStore.csproj:41"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.extensions.configuration.binder",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:26"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.extensions.configuration.usersecrets",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:29"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.extensions.logging",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.E2ETests/MusicStore.E2ETests.csproj:30"
+    },
+    {
+     "app": "musicstore",
+     "type": "dependency",
+     "key": "microsoft.extensions.logging.testing",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/MusicStore.Test.csproj:13"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "beyondcode/laravel-dump-server",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:17"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "bootstrap",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:14"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "cross-env",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:5"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "fideloper/proxy",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:12"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "filp/whoops",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:18"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "fzaninotto/faker",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:19"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "jquery",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:16"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "laravel-mix",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:5"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "laravel/tinker",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:14"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "lodash",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:18"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "nunomaduro/collision",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:21"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "popper.js",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:19"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "sass",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:21"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "sass-loader",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:22"
+    },
+    {
+     "app": "laravel58",
+     "type": "dependency",
+     "key": "vue",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:23"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "faraday",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:14"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "faraday-http-cache",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:15"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "glorify",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:10"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "json",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:13"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "newrelic_rpm",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:12"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "rack-cache",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:7"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "rdoc",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:11"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "sass",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:6"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "sinatra",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:5"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "slim",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:9"
+    },
+    {
+     "app": "sinatra",
+     "type": "dependency",
+     "key": "unicorn",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Gemfile:8"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/bytedance/sonic/loader",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:18"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/cloudwego/base64x",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:19"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/cloudwego/iasm",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:20"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/davecgh/go-spew",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:21"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/gabriel-vasile/mimetype",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:22"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/gin-gonic/gin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:6"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/go-playground/locales",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:24"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/go-playground/validator/v10",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:7"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/gosimple/slug",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:9"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/jinzhu/now",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:29"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/mattn/go-sqlite3",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:34"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "github.com/modern-go/reflect2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:36"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "golang.org/x/text",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:44"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "gopkg.in/yaml.v3",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:46"
+    },
+    {
+     "app": "golang-example",
+     "type": "dependency",
+     "key": "gorm.io/driver/sqlite",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "go.mod:12"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@angular/cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/angular/package.json:26"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@angular/compiler-cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/angular/package.json:27"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@rollup/plugin-babel",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/preact/package.json:20"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@tsconfig/ember",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:46"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "@vitejs/plugin-vue",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/vue/package.json:18"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "broccoli-asset-rev",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:51"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ember-cli-htmlbars",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:57"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ember-load-initializers",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:61"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ember-modifier",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:62"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ember-qunit-nice-errors",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/emberjs/todomvc/package.json:98"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "grunt-template-jasmine-requirejs",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/angularjs_require/test/package.json:6"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "html-webpack-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/react-redux/package.json:23"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "ractive",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/ractive/package.json:5"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "react-router-dom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/react-redux/package.json:38"
+    },
+    {
+     "app": "todomvc",
+     "type": "dependency",
+     "key": "webpack",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "examples/react-redux/package.json:11"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "cross-env",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:6"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "history",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:10"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "marked",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:11"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-dom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:14"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-redux",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-router",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:16"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-router-dom",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:17"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-router-redux",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:18"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "react-scripts",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:7"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "redux",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:2"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "redux-devtools-extension",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:20"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "redux-logger",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:21"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "superagent",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:22"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "dependency",
+     "key": "superagent-promise",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:23"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "ardalis.apiendpoints",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/PublicApi/PublicApi.csproj:12"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "ardalis.guardclauses",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/ApplicationCore/ApplicationCore.csproj:9"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "ardalis.specification.entityframeworkcore",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Infrastructure/Infrastructure.csproj:9"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "automapper.extensions.microsoft.dependencyinjection",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Web/Web.csproj:18"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "azure.identity",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Web/Web.csproj:20"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "coverlet.collector",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/PublicApiIntegrationTests/PublicApiIntegrationTests.csproj:26"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "fluentvalidation",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/BlazorShared/BlazorShared.csproj:10"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "microsoft.aspnetcore.authentication.jwtbearer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Web/Web.csproj:31"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "microsoft.entityframeworkcore.inmemory",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/IntegrationTests/IntegrationTests.csproj:9"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "microsoft.net.test.sdk",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/UnitTests/UnitTests.csproj:12"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "microsoft.visualstudio.azure.containers.tools.targets",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/PublicApi/PublicApi.csproj:28"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "mstest.testadapter",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/PublicApiIntegrationTests/PublicApiIntegrationTests.csproj:24"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "swashbuckle.aspnetcore",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/PublicApi/PublicApi.csproj:15"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "system.identitymodel.tokens.jwt",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Web/Web.csproj:36"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "dependency",
+     "key": "xunit.runner.console",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tests/UnitTests/UnitTests.csproj:20"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "documentformat.openxml.framework",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/Modules/Orchard.DynamicForms/packages.config:4"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "glimpse.mvc5",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/packages.config:6"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "gulp-newer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Package.json:10"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "gulp-postcss",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Package.json:14"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "gulp-uglify",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Package.json:20"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "microsoft.aspnet.webapi.client",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/Modules/Upgrade/packages.config:7"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "microsoft.identitymodel.protocol.extensions",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/Modules/Orchard.OpenId/packages.config:17"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "microsoft.identitymodel.tokens.saml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/Modules/Orchard.OpenId/packages.config:22"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "microsoft.owin.security.cookies",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/Modules/Orchard.OpenId/packages.config:28"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "microsoft.rest.clientruntime.azure",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/Modules/Orchard.Azure/packages.config:14"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "microsoft.windowsazure.configurationmanager",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/Modules/Orchard.Azure/packages.config:16"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "moq",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Tools/Orchard.Tests/packages.config:4"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "nunit.runners",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Tests/packages.config:22"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "orchard.nuget.core",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Web/packages.config:18"
+    },
+    {
+     "app": "orchard",
+     "type": "dependency",
+     "key": "specflow.tools.msbuild.generation",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Orchard.Specs/packages.config:21"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "com.fasterxml.jackson.core:jackson-annotations",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "rest-angular/pom.xml:85"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "com.jayway.jsonpath:json-path",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "rest-angular/pom.xml:105"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "io.quarkus:quarkus-undertow",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "quarkus/pom.xml:35"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "jakarta.servlet.jsp:jakarta.servlet.jsp-api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:140"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "junit:junit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "unknown-handler/pom.xml:42"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "net.sf.flexjson:flexjson",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "json-customize/pom.xml:35"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "org.apache.logging.log4j:log4j-api",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:183"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "org.apache.struts:struts2-bean-validation-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "rest-angular/pom.xml:58"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "org.apache.struts:struts2-json-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "json-customize/pom.xml:30"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "org.apache.struts:struts2-junit-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "unit-testing/pom.xml:20"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "org.apache.struts:struts2-rest-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "rest-angular/pom.xml:31"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "org.apache.struts:struts2-spring-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "spring-struts/pom.xml:20"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "org.apache.struts:struts2-tiles-plugin",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "unknown-handler/pom.xml:31"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "org.glassfish:jakarta.el",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:159"
+    },
+    {
+     "app": "struts-examples",
+     "type": "dependency",
+     "key": "xalan:serializer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "jasperreports/pom.xml:73"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "daterangepicker",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:9"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "dompurify",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:10"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "featherlight",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:11"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "inputmask",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:13"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "jgrowl",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:14"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "jquery",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:7"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "jquery-migrate",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:17"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "jquery-ui-dist",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:18"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "jquery.browser",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:20"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "js-cookie",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:21"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "jstree",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:22"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "readmore-js",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:25"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "redoc",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "framework/rest-api/package.json:8"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "swagger-ui-dist",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "framework/rest-api/package.json:7"
+    },
+    {
+     "app": "ofbiz",
+     "type": "dependency",
+     "key": "trumbowyg",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "themes/common-theme/webapp/common-theme/js/package.json:27"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "com.github.terma:javaniotcpproxy",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:401"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "com.google.guava:guava",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:76"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "com.microsoft.playwright:playwright",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:232"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "com.sun.xml.bind:jaxb-impl",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:396"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "commons-io:commons-io",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:73"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.asciidoctor:asciidoctorj",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:65"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.hsqldb:hsqldb",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:287"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.jruby:jruby",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:227"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.jsoup:jsoup",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:83"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.projectlombok:lombok",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:248"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-properties-migrator",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:450"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-data-jpa-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:419"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-thymeleaf",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:307"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.springframework.boot:spring-boot-starter-validation",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:245"
+    },
+    {
+     "app": "webgoat",
+     "type": "dependency",
+     "key": "org.springframework.security:spring-security-test",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "pom.xml:430"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "@redocly/cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:11"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "@scalar/api-reference",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/scalar/package.json:4"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "@usebruno/cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "tools/bruno/package.json:4"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "adodb/adodb-php",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:13"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "dapphp/securimage",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:17"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "ezyang/htmlpurifier",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:16"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "guzzlehttp/guzzle",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:11"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "openapi-to-postmanv2",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:12"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "parsedown/parsedown",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:15"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "phpmailer/phpmailer",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:14"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "phpunit/phpunit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:21"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "slim/slim",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:10"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "vboctor/disposable_email_checker",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "composer.json:12"
+    },
+    {
+     "app": "mantisbt",
+     "type": "dependency",
+     "key": "yaml",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:4"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "@angular/cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "frontend/package.json:24"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "@angular/compiler-cli",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "frontend/package.json:27"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "@types/download",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:170"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "@types/pdfkit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:187"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "check-dependencies",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:99"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "clarinet",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:100"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "express-rate-limit",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:113"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "express-security.txt",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:115"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "globals",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:202"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "jwt-decode",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "frontend/package.json:52"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "median",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:133"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "ngy-cookie",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "frontend/package.json:58"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "pug",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:143"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "snarkdown",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "frontend/package.json:61"
+    },
+    {
+     "app": "juice-shop",
+     "type": "dependency",
+     "key": "swagger-ui-express",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "package.json:153"
+    }
+   ]
+  },
+  "containerized": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".devcontainer/Dockerfile"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "microblog",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "musicstore",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "laravel58",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "sinatra",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "golang-example",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "todomvc",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "src/Web/Dockerfile"
+    },
+    {
+     "app": "orchard",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "struts-examples",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "ofbiz",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "webgoat",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "carddemo",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no Dockerfile"
+    },
+    {
+     "app": "mantisbt",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "docbook/Dockerfile"
+    },
+    {
+     "app": "bugzilla",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    },
+    {
+     "app": "juice-shop",
+     "type": "containerized",
+     "key": "containerized",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": "Dockerfile"
+    }
+   ]
+  },
+  "ci": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/deploy-and-test-cluster.yml"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "microblog",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "musicstore",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".travis.yml"
+    },
+    {
+     "app": "laravel58",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "sinatra",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "golang-example",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/ci.yml"
+    },
+    {
+     "app": "todomvc",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".travis.yml"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/dotnetcore.yml"
+    },
+    {
+     "app": "orchard",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/build-crowdin-translation-packages.yml"
+    },
+    {
+     "app": "struts-examples",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/maven.yml"
+    },
+    {
+     "app": "ofbiz",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/asf-allowlist-check.yml"
+    },
+    {
+     "app": "webgoat",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/build.yml"
+    },
+    {
+     "app": "carddemo",
+     "type": "ci",
+     "key": "ci",
+     "expected": false,
+     "got": false,
+     "ok": true,
+     "review": null,
+     "source": "no CI config"
+    },
+    {
+     "app": "mantisbt",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/documentation.yml"
+    },
+    {
+     "app": "bugzilla",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/release.yml"
+    },
+    {
+     "app": "juice-shop",
+     "type": "ci",
+     "key": "ci",
+     "expected": true,
+     "got": true,
+     "ok": true,
+     "review": null,
+     "source": ".github/workflows/ci.yml"
+    }
+   ]
+  },
+  "runtime_version": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "java 17",
+     "got": "java 17",
+     "ok": true,
+     "review": null,
+     "source": "build.gradle"
+    },
+    {
+     "app": "musicstore",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "netcoreapp3.0",
+     "got": "netcoreapp3.0",
+     "ok": true,
+     "review": null,
+     "source": "test/MusicStore.Test/MusicStore.Test.csproj"
+    },
+    {
+     "app": "laravel58",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "php 7.1",
+     "got": "php 7.1",
+     "ok": true,
+     "review": null,
+     "source": "composer.json"
+    },
+    {
+     "app": "golang-example",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "go 1.21",
+     "got": "go 1.21",
+     "ok": true,
+     "review": null,
+     "source": "go.mod"
+    },
+    {
+     "app": "todomvc",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "node 20",
+     "got": "node 20",
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    },
+    {
+     "app": "orchard",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "net4.8",
+     "got": "net4.8",
+     "ok": true,
+     "review": null,
+     "source": "src/Tools/Orchard.Tests/Orchard.Tests.csproj"
+    },
+    {
+     "app": "struts-examples",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "java 17",
+     "got": "java 17",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "ofbiz",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "java 17",
+     "got": "java 17",
+     "ok": true,
+     "review": null,
+     "source": "build.gradle"
+    },
+    {
+     "app": "webgoat",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "java 25",
+     "got": "java 25",
+     "ok": true,
+     "review": null,
+     "source": "pom.xml"
+    },
+    {
+     "app": "mantisbt",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "php 8.1",
+     "got": "php 8.1",
+     "ok": true,
+     "review": null,
+     "source": "composer.json"
+    },
+    {
+     "app": "juice-shop",
+     "type": "runtime_version",
+     "key": "runtime",
+     "expected": "node 22",
+     "got": "node 22",
+     "ok": true,
+     "review": null,
+     "source": "package.json"
+    }
+   ]
+  },
+  "license": {
+   "pct": 100.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "license",
+     "key": "license",
+     "expected": "apache",
+     "got": "apache",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "license",
+     "key": "license",
+     "expected": "bsd",
+     "got": "bsd",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "microblog",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "musicstore",
+     "type": "license",
+     "key": "license",
+     "expected": "apache",
+     "got": "apache",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "golang-example",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "todomvc",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "license.md"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.md"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "orchard",
+     "type": "license",
+     "key": "license",
+     "expected": "bsd",
+     "got": "bsd",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "ofbiz",
+     "type": "license",
+     "key": "license",
+     "expected": "apache",
+     "got": "apache",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "webgoat",
+     "type": "license",
+     "key": "license",
+     "expected": "gpl",
+     "got": "gpl",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE.txt"
+    },
+    {
+     "app": "carddemo",
+     "type": "license",
+     "key": "license",
+     "expected": "apache",
+     "got": "apache",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "bugzilla",
+     "type": "license",
+     "key": "license",
+     "expected": "mpl",
+     "got": "mpl",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    },
+    {
+     "app": "juice-shop",
+     "type": "license",
+     "key": "license",
+     "expected": "mit",
+     "got": "mit",
+     "ok": true,
+     "review": null,
+     "source": "LICENSE"
+    }
+   ]
+  },
+  "capability_route": {
+   "pct": 80.0,
+   "rows": [
+    {
+     "app": "spring-petclinic",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "flask-tutorial",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "django-realworld-example-app",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "API_ONLY",
+     "got": "API_ONLY",
+     "ok": true,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "microblog",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "node-express-realworld-example-app",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "API_ONLY",
+     "got": "API_ONLY",
+     "ok": true,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "musicstore",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "laravel58",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "sinatra",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "API_ONLY",
+     "got": "API_ONLY",
+     "ok": true,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "golang-example",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "API_ONLY",
+     "got": "API_ONLY",
+     "ok": true,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "todomvc",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "react-redux-realworld",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "eshop-on-web",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "orchard",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "struts-examples",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "API_ONLY",
+     "ok": false,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "ofbiz",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "webgoat",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "carddemo",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "HEADLESS",
+     "got": "HEADLESS_BATCH",
+     "ok": false,
+     "review": null,
+     "source": "routes without templates"
+    },
+    {
+     "app": "mantisbt",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "API_ONLY",
+     "ok": false,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "bugzilla",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "API_ONLY",
+     "ok": false,
+     "review": null,
+     "source": "templates/views"
+    },
+    {
+     "app": "juice-shop",
+     "type": "capability_route",
+     "key": "capability_route",
+     "expected": "UI",
+     "got": "UI",
+     "ok": true,
+     "review": null,
+     "source": "templates/views"
+    }
+   ]
+  }
+ },
+ "calibration": {
+  "facts": {
+   "n": 208,
+   "ece": 0.0071,
+   "ece_upper95": 0.0192,
+   "reliability": [
+    {
+     "bin": "0.9-1.0",
+     "n": 208,
+     "mean_confidence": 0.978,
+     "accuracy": 0.986
+    }
+   ],
+   "by_type": {
+    "capability_route": {
+     "n": 19,
+     "accuracy": 0.842,
+     "mean_confidence": 0.939
+    },
+    "datastore": {
+     "n": 23,
+     "accuracy": 1.0,
+     "mean_confidence": 0.98
+    },
+    "entity": {
+     "n": 39,
+     "accuracy": 1.0,
+     "mean_confidence": 0.99
+    },
+    "framework": {
+     "n": 23,
+     "accuracy": 1.0,
+     "mean_confidence": 0.977
+    },
+    "license": {
+     "n": 11,
+     "accuracy": 1.0,
+     "mean_confidence": 0.988
+    },
+    "route": {
+     "n": 83,
+     "accuracy": 1.0,
+     "mean_confidence": 0.981
+    },
+    "runtime_version": {
+     "n": 10,
+     "accuracy": 1.0,
+     "mean_confidence": 0.976
+    }
+   }
+  },
+  "decisions": {
+   "P1 A5 capability route review": {
+    "n": 19,
+    "without_confidence": 0,
+    "mean": 0.939,
+    "min": 0.9,
+    "max": 1.0
+   },
+   "P1 A11 risk scores": {
+    "n": 60,
+    "without_confidence": 0,
+    "mean": 0.937,
+    "min": 0.65,
+    "max": 0.99
+   },
+   "P2 A6 dispositions": {
+    "n": 20,
+    "without_confidence": 0,
+    "mean": 0.798,
+    "min": 0.67,
+    "max": 0.9
+   },
+   "P3 A2 boundaries": {
+    "n": 62,
+    "without_confidence": 0,
+    "mean": 0.957,
+    "min": 0.91,
+    "max": 0.99
+   },
+   "P4 A3 task estimates": {
+    "n": 69,
+    "without_confidence": 0,
+    "mean": 0.829,
+    "min": 0.43,
+    "max": 0.91
+   }
+  }
+ },
+ "variation": {
+  "p2_dispositions": {
+   "Refactor": 3,
+   "Retain": 10,
+   "Replatform": 7
+  },
+  "p3_distinct_boundary_sets": 10,
+  "p3_apps": 10
+ },
+ "pass": true,
+ "confidence": {
+  "confidence_score": 0.0,
+  "weakest": "C3",
+  "assessed": [
+   "C1",
+   "C2",
+   "C6"
+  ],
+  "not_assessed": [
+   "C3",
+   "C4",
+   "C5",
+   "C7",
+   "C8",
+   "C9"
+  ],
+  "weakest_assessed": "C2",
+  "components": [
+   {
+    "id": "C1",
+    "name": "Integrity",
+    "assessed": true,
+    "lower_bound": 99.04,
+    "reason": "",
+    "basis": "",
+    "measures": [
+     {
+      "name": "schema valid after repair",
+      "k": 397,
+      "n": 397,
+      "lower_bound": 99.04
+     },
+     {
+      "name": "evidence ids resolve",
+      "k": 22152,
+      "n": 22152,
+      "lower_bound": 99.98
+     },
+     {
+      "name": "cited paths exist",
+      "k": 2759,
+      "n": 2759,
+      "lower_bound": 99.86
+     },
+     {
+      "name": "A9 function names exist",
+      "k": 635,
+      "n": 635,
+      "lower_bound": 99.4
+     }
+    ]
+   },
+   {
+    "id": "C2",
+    "name": "Factual accuracy",
+    "assessed": true,
+    "lower_bound": 91.66,
+    "reason": "",
+    "basis": "",
+    "measures": [
+     {
+      "name": "golden facts agree",
+      "k": 579,
+      "n": 617,
+      "lower_bound": 91.66
+     }
+    ]
+   },
+   {
+    "id": "C3",
+    "name": "Claim support",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "claim-support verifier not built (stack PR 6)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C4",
+    "name": "Decision correctness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no expert decision labels (decision 2: skipped)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C5",
+    "name": "Stability",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "no stability report given (scripts/stability_run.py)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C6",
+    "name": "Calibration",
+    "assessed": true,
+    "lower_bound": 98.08,
+    "reason": "",
+    "basis": "1 - ECE at bootstrap 95%: 208 fact confidences, ECE 0.0071, 95th percentile 0.0192",
+    "measures": []
+   },
+   {
+    "id": "C7",
+    "name": "Execution proof",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "P5 runtime differential NOT_RUN; sandbox deferred (decision 1)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C8",
+    "name": "Robustness",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "adversarial suite not built (stack PR 8)",
+    "basis": "",
+    "measures": []
+   },
+   {
+    "id": "C9",
+    "name": "Human acceptance",
+    "assessed": false,
+    "lower_bound": 0.0,
+    "reason": "all reviews were by scripted actors",
+    "basis": "",
+    "measures": [
+     {
+      "name": "human reviews approved",
+      "k": 0,
+      "n": 0,
+      "lower_bound": null
+     }
+    ]
+   }
+  ]
+ }
+}
