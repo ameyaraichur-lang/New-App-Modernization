@@ -136,8 +136,10 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
             pairs.setdefault(SPLITS.get(app, "unlisted"), []).append((p["confidence"], p["correct"]))
             pair_rows.append({"app": app, **p})
 
-    dispositions = Counter(d.get("proposed_disposition")
-                           for d in store.get("P2/PF1/A6")["payload"].get("decisions", []))
+    dispositions: Counter[str] = Counter()
+    if store.versions("P2/PF1/A6"):
+        dispositions = Counter(d.get("proposed_disposition")
+                               for d in store.get("P2/PF1/A6")["payload"].get("decisions", []))
     boundaries = {a: tuple(sorted(str(b.get("boundary")) for b in
                                   store.get(f"P3/{a}/A2")["payload"].get("boundaries", [])))
                   for a in apps if store.versions(f"P3/{a}/A2")}
