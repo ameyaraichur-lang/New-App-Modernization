@@ -1,0 +1,383 @@
+{
+ "repo": "gitea",
+ "commit": "8c7b8d085c9b0f1f18b1364096161ec0f766b485",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "go",
+   "source": "scc",
+   "snippet": "scc: go 387516, typescript 20652",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "vue",
+   "expected": "vue",
+   "source": "package.json:32",
+   "snippet": "vue",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "chi",
+   "expected": "github.com/go-chi/chi/v5",
+   "source": "go.mod:38",
+   "snippet": "github.com/go-chi/chi/v5",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "go.mod",
+   "expected": true,
+   "source": "go.mod",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pyproject.toml",
+   "expected": true,
+   "source": "pyproject.toml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "web_src/js/external-render-helper.test.ts",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "mysql",
+   "expected": true,
+   "source": "go.mod:44",
+   "snippet": "github.com/go-sql-driver/mysql",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlite",
+   "expected": true,
+   "source": "go.mod:63",
+   "snippet": "github.com/mattn/go-sqlite3",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "sqlserver",
+   "expected": true,
+   "source": "go.mod:67",
+   "snippet": "github.com/microsoft/go-mssqldb",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "redis",
+   "expected": true,
+   "source": "go.mod:76",
+   "snippet": "github.com/redis/go-redis/v9",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "go.mod:44",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/actions_unit",
+   "expected": true,
+   "source": "routers/web/web.go:1255",
+   "snippet": ".Post(\"/actions_unit\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/assignees/*",
+   "expected": true,
+   "source": "routers/api/v1/api.go:1358",
+   "snippet": ".Get(\"/assignees/{assignee}\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/branch/*",
+   "expected": true,
+   "source": "routers/web/web.go:1289",
+   "snippet": ".Get(\"/branch/*\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/cargo",
+   "expected": true,
+   "source": "routers/web/web.go:708",
+   "snippet": ".Group(\"/cargo\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/connect",
+   "expected": true,
+   "source": "routers/web/web.go:580",
+   "snippet": ".Combo(\"/connect\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/diffpatch",
+   "expected": true,
+   "source": "routers/api/v1/api.go:1566",
+   "snippet": ".Post(\"/diffpatch\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/files/*/*/*/*/*",
+   "expected": true,
+   "source": "routers/api/packages/api.go:231",
+   "snippet": ".Group(\"/files/{name}/{version}/{user}/{channel}/{recipe_revision}\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/force-cancel",
+   "expected": true,
+   "source": "routers/api/v1/api.go:1418",
+   "snippet": ".Post(\"/force-cancel\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/issue_templates",
+   "expected": true,
+   "source": "routers/api/v1/api.go:1597",
+   "snippet": ".Get(\"/issue_templates\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/public_access",
+   "expected": true,
+   "source": "routers/web/web.go:1182",
+   "snippet": ".Combo(\"/public_access\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/refs",
+   "expected": true,
+   "source": "routers/api/v1/api.go:1559",
+   "snippet": ".Get(\"/refs\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/regenerate-token",
+   "expected": true,
+   "source": "routers/web/web.go:1236",
+   "snippet": ".Post(\"/regenerate-token\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/repo-action-view/artifacts/*/raw/*",
+   "expected": true,
+   "source": "routers/web/web.go:1797",
+   "snippet": ".Get(\"/repo-action-view/artifacts/{artifact_name}/raw/*\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/security",
+   "expected": true,
+   "source": "routers/web/web.go:652",
+   "snippet": ".Group(\"/security\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/transfer",
+   "expected": true,
+   "source": "routers/api/v1/api.go:1307",
+   "snippet": ".Group(\"/transfer\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@codemirror/commands",
+   "expected": true,
+   "source": "package.json:10",
+   "snippet": "@codemirror/commands",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/andybalholm/cascadia",
+   "expected": true,
+   "source": "go.mod:116",
+   "snippet": "github.com/andybalholm/cascadia",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/blevesearch/bleve_index_api",
+   "expected": true,
+   "source": "go.mod:120",
+   "snippet": "github.com/blevesearch/bleve_index_api",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/blevesearch/zapx/v13",
+   "expected": true,
+   "source": "go.mod:133",
+   "snippet": "github.com/blevesearch/zapx/v13",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/blevesearch/zapx/v14",
+   "expected": true,
+   "source": "go.mod:134",
+   "snippet": "github.com/blevesearch/zapx/v14",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/clipperhouse/uax29/v2",
+   "expected": true,
+   "source": "go.mod:147",
+   "snippet": "github.com/clipperhouse/uax29/v2",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/davecgh/go-spew",
+   "expected": true,
+   "source": "go.mod:150",
+   "snippet": "github.com/davecgh/go-spew",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/fatih/color",
+   "expected": true,
+   "source": "go.mod:153",
+   "snippet": "github.com/fatih/color",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/miekg/dns",
+   "expected": true,
+   "source": "go.mod:185",
+   "snippet": "github.com/miekg/dns",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/olekukonko/errors",
+   "expected": true,
+   "source": "go.mod:200",
+   "snippet": "github.com/olekukonko/errors",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/redis/go-redis/v9",
+   "expected": true,
+   "source": "go.mod:76",
+   "snippet": "github.com/redis/go-redis/v9",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/ssor/bom",
+   "expected": true,
+   "source": "go.mod:219",
+   "snippet": "github.com/ssor/bom",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/tinylib/msgp",
+   "expected": true,
+   "source": "go.mod:221",
+   "snippet": "github.com/tinylib/msgp",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "github.com/yohcop/openid-go",
+   "expected": true,
+   "source": "go.mod:87",
+   "snippet": "github.com/yohcop/openid-go",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "globals",
+   "expected": true,
+   "source": "package.json:92",
+   "snippet": "globals",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/cache-prune.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "go 1.27",
+   "source": "go.mod",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE",
+   "snippet": "copyright (c) 2016 the gitea authors\ncopyright (c) 2015 the gogs authors\n\npermission is hereby granted, free of charge,",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

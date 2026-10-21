@@ -1,0 +1,247 @@
+{
+ "repo": "ofbiz",
+ "commit": "45506b377c855e455942b238dbd55e33fce79d4f",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "java",
+   "source": "scc",
+   "snippet": "scc: java 262383, groovy 56248, javascript 7909",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "build.gradle",
+   "expected": true,
+   "source": "build.gradle",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "framework/widget/src/test/java/org/apache/ofbiz/widget/WidgetWorkerTest.java",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "docker/examples/postgres-demo/docker-compose.yml:22",
+   "snippet": "###########\n\nservices:\n  db:\n    image: postgres:13\n    mem_limit: 300m\n    memswap_limi",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "docker/examples/postgres-demo/docker-compose.yml:22",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/*/openapi.*",
+   "expected": true,
+   "source": "framework/rest-api/src/main/java/org/apache/ofbiz/ws/rs/resources/OpenApiResource.java:57",
+   "snippet": "@Path(\"/{apiGroupPath}/openapi.{type:json|yaml}\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/*/token",
+   "expected": true,
+   "source": "framework/rest-api/src/main/java/org/apache/ofbiz/ws/rs/resources/AuthenticationResource.java:100",
+   "snippet": "@Path(\"/{apiGroupPath}/token\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/auth",
+   "expected": true,
+   "source": "framework/rest-api/src/main/java/org/apache/ofbiz/ws/rs/resources/AuthenticationResource.java:59",
+   "snippet": "@Path(\"/auth\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/refresh-token",
+   "expected": true,
+   "source": "framework/rest-api/src/main/java/org/apache/ofbiz/ws/rs/resources/AuthenticationResource.java:156",
+   "snippet": "@Path(\"/refresh-token\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "daterangepicker",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:9",
+   "snippet": "daterangepicker",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "dompurify",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:10",
+   "snippet": "dompurify",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "featherlight",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:11",
+   "snippet": "featherlight",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "inputmask",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:13",
+   "snippet": "inputmask",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jgrowl",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:14",
+   "snippet": "jgrowl",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jquery",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:7",
+   "snippet": "jquery",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jquery-migrate",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:17",
+   "snippet": "jquery-migrate",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jquery-ui-dist",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:18",
+   "snippet": "jquery-ui-dist",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jquery.browser",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:20",
+   "snippet": "jquery.browser",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "js-cookie",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:21",
+   "snippet": "js-cookie",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jstree",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:22",
+   "snippet": "jstree",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "readmore-js",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:25",
+   "snippet": "readmore-js",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "redoc",
+   "expected": true,
+   "source": "framework/rest-api/package.json:8",
+   "snippet": "redoc",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "swagger-ui-dist",
+   "expected": true,
+   "source": "framework/rest-api/package.json:7",
+   "snippet": "swagger-ui-dist",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "trumbowyg",
+   "expected": true,
+   "source": "themes/common-theme/webapp/common-theme/js/package.json:27",
+   "snippet": "trumbowyg",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/asf-allowlist-check.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "java 17",
+   "source": "build.gradle",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "apache",
+   "source": "LICENSE",
+   "snippet": "apache license\n                           version 2.0, january 2004",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

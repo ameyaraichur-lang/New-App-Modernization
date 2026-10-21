@@ -1,0 +1,87 @@
+{
+ "repo": "carddemo",
+ "commit": "59cc6c2fd7ebd7ef7925cad552a01a4b8b6e4d5e",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "cobol",
+   "source": "scc",
+   "snippet": "scc: cobol 33876",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": false,
+   "source": "no test code found",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "db2",
+   "expected": true,
+   "source": "samples/proc/BLDCIDB2.prc:2",
+   "snippet": "/*  this proc is used to compile cics + db2 programs\n//****************************",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "vsam",
+   "expected": true,
+   "source": "samples/jcl/REPRTEST.jcl:27",
+   "snippet": "//        dsn=aws.m2.carddemo.transact.vsam.ksds                                \n//",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "app/app-authorization-ims-db2-mq/cbl/COPAUS0C.cbl:120",
+   "snippet": "10 cdemo-cpvs-paukey-prev-pg  pic x(08) occurs 20 times.",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "samples/proc/BLDCIDB2.prc:2",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "apache",
+   "source": "LICENSE",
+   "snippet": "apache license\n                           version 2.0, january 2004",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "HEADLESS",
+   "source": "routes without templates",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

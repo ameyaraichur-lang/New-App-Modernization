@@ -1,0 +1,503 @@
+{
+ "repo": "human-essentials",
+ "commit": "6b5bc26be9f6d31818959bb77e16a573e18e920e",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "ruby",
+   "source": "scc",
+   "snippet": "scc: ruby 52369, javascript 4002",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "rails",
+   "expected": "rails",
+   "source": "Gemfile:17",
+   "snippet": "rails",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "rspec-rails",
+   "expected": true,
+   "source": "Gemfile:156",
+   "snippet": "rspec-rails",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "gemfile",
+   "expected": true,
+   "source": "Gemfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "spec/inventory.rb",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "config/database.yml:2",
+   "snippet": "default: &default\n  adapter: postgresql\n  encoding: unicode\n  host: <%= env.f",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "db/migrate/20180607144046_initialize_items.rb:4",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Adjustment",
+   "expected": true,
+   "source": "app/models/adjustment.rb:13",
+   "snippet": "\nclass Adjustment < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "AnnualReport",
+   "expected": true,
+   "source": "app/models/annual_report.rb:12",
+   "snippet": "class AnnualReport < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "BaseItem",
+   "expected": true,
+   "source": "app/models/base_item.rb:16",
+   "snippet": "\nclass BaseItem < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "CanonicalItem",
+   "expected": true,
+   "source": "db/migrate/20180607144046_initialize_items.rb:4",
+   "snippet": "class CanonicalItem < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "County",
+   "expected": true,
+   "source": "app/models/county.rb:12",
+   "snippet": "class County < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Distribution",
+   "expected": true,
+   "source": "app/models/distribution.rb:20",
+   "snippet": "\nclass Distribution < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Donation",
+   "expected": true,
+   "source": "app/models/donation.rb:19",
+   "snippet": "\nclass Donation < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "LineItem",
+   "expected": true,
+   "source": "app/models/line_item.rb:13",
+   "snippet": "\nclass LineItem < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Manufacturer",
+   "expected": true,
+   "source": "app/models/manufacturer.rb:11",
+   "snippet": "\nclass Manufacturer < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Organization",
+   "expected": true,
+   "source": "db/migrate/20250926084615_rename_executive_director_to_contacts_in_partner_form_fields.rb:2",
+   "snippet": "  class Organization < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Partner",
+   "expected": true,
+   "source": "db/migrate/20190329201346_move_partner_status_to_an_interger_type.rb:2",
+   "snippet": "class Partner < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "PartnerGroup",
+   "expected": true,
+   "source": "app/models/partner_group.rb:15",
+   "snippet": "class PartnerGroup < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "ProductDrive",
+   "expected": true,
+   "source": "app/models/product_drive.rb:14",
+   "snippet": "\nclass ProductDrive < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Purchase",
+   "expected": true,
+   "source": "app/models/purchase.rb:20",
+   "snippet": "\nclass Purchase < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Question",
+   "expected": true,
+   "source": "app/models/question.rb:10",
+   "snippet": "class Question < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Request",
+   "expected": true,
+   "source": "db/migrate/20190422130439_change_status_to_enum_in_requests.rb:2",
+   "snippet": "class Request < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "ServedArea",
+   "expected": true,
+   "source": "app/models/partners/served_area.rb:13",
+   "snippet": "  class ServedArea < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "StorageLocation",
+   "expected": true,
+   "source": "app/models/storage_location.rb:18",
+   "snippet": "class StorageLocation < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Tagging",
+   "expected": true,
+   "source": "app/models/tagging.rb:12",
+   "snippet": "class Tagging < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "UsersRole",
+   "expected": true,
+   "source": "app/models/users_role.rb:9",
+   "snippet": "class UsersRole < ApplicationRecord",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/adjustments",
+   "expected": true,
+   "source": "config/routes.rb:102",
+   "snippet": "\n  resources :adjustments",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/attachments",
+   "expected": true,
+   "source": "config/routes.rb:268",
+   "snippet": "\n  resources :attachments",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/authorized_family_members",
+   "expected": true,
+   "source": "config/routes.rb:49",
+   "snippet": "    resources :authorized_family_members",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/base_items",
+   "expected": true,
+   "source": "config/routes.rb:62",
+   "snippet": "    resources :base_items",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/broadcast_announcements",
+   "expected": true,
+   "source": "config/routes.rb:78",
+   "snippet": "    resources :broadcast_announcements",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/distributions",
+   "expected": true,
+   "source": "config/routes.rb:50",
+   "snippet": "    resources :distributions",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/events",
+   "expected": true,
+   "source": "config/routes.rb:100",
+   "snippet": "\n  resources :events",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/item_categories",
+   "expected": true,
+   "source": "config/routes.rb:210",
+   "snippet": "\n  resources :item_categories",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/organization",
+   "expected": true,
+   "source": "config/routes.rb:90",
+   "snippet": "  resource :organization",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/organizations",
+   "expected": true,
+   "source": "config/routes.rb:63",
+   "snippet": "    resources :organizations",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/partners",
+   "expected": true,
+   "source": "config/routes.rb:64",
+   "snippet": "    resources :partners",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/privacypolicy",
+   "expected": true,
+   "source": "config/routes.rb:274",
+   "snippet": "  get \"/privacypolicy\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/profile",
+   "expected": true,
+   "source": "config/routes.rb:42",
+   "snippet": "    resource :profile",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/requests",
+   "expected": true,
+   "source": "config/routes.rb:32",
+   "snippet": "    resources :requests",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/storage_locations",
+   "expected": true,
+   "source": "config/routes.rb:132",
+   "snippet": "\n  resources :storage_locations",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "binding_of_caller",
+   "expected": true,
+   "source": "Gemfile:176",
+   "snippet": "binding_of_caller",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "dotenv-rails",
+   "expected": true,
+   "source": "Gemfile:90",
+   "snippet": "dotenv-rails",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "fx",
+   "expected": true,
+   "source": "Gemfile:37",
+   "snippet": "fx",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ice_cube",
+   "expected": true,
+   "source": "Gemfile:100",
+   "snippet": "ice_cube",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "knapsack_pro",
+   "expected": true,
+   "source": "Gemfile:144",
+   "snippet": "knapsack_pro",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "letter_opener",
+   "expected": true,
+   "source": "Gemfile:184",
+   "snippet": "letter_opener",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "listen",
+   "expected": true,
+   "source": "Gemfile:186",
+   "snippet": "listen",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "omniauth-rails_csrf_protection",
+   "expected": true,
+   "source": "Gemfile:71",
+   "snippet": "omniauth-rails_csrf_protection",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "prawn-rails",
+   "expected": true,
+   "source": "Gemfile:75",
+   "snippet": "prawn-rails",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "pry-nav",
+   "expected": true,
+   "source": "Gemfile:152",
+   "snippet": "pry-nav",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "rack-mini-profiler",
+   "expected": true,
+   "source": "Gemfile:192",
+   "snippet": "rack-mini-profiler",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "rails-controller-testing",
+   "expected": true,
+   "source": "Gemfile:209",
+   "snippet": "rails-controller-testing",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "rubocop",
+   "expected": true,
+   "source": "Gemfile:158",
+   "snippet": "rubocop",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "sprockets",
+   "expected": true,
+   "source": "Gemfile:115",
+   "snippet": "sprockets",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "tzinfo-data",
+   "expected": true,
+   "source": "Gemfile:220",
+   "snippet": "tzinfo-data",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": ".devcontainer/Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/add-help-wanted-labels.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "ruby 3.4",
+   "source": ".ruby-version",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE",
+   "snippet": "the mit license (mit)\n\ncopyright (c) 2016 ruby for good\n\npermission is hereby granted, free of charge, to any person obt",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

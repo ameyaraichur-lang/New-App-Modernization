@@ -1,0 +1,79 @@
+{
+ "repo": "bugzilla",
+ "commit": "852cd06ef751cb5a5f87e100466e71e46e3cfc0e",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "perl",
+   "source": "scc",
+   "snippet": "scc: perl 68162, javascript 2853, python 791",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "build.pl",
+   "expected": true,
+   "source": "Build.PL",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "xt/search.t",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "mysql",
+   "expected": true,
+   "source": "docker-compose.yml:34",
+   "snippet": "llow_unsafe_utf8_conversion:-0}\n      - mariadb_root_host=%\n      - mariadb_root_passwo",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "docker-compose.yml:34",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/release.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mpl",
+   "source": "LICENSE",
+   "snippet": "mozilla public license version 2.0\n==================================\n\n1. definitions\n--------------\n\n1.1. \"contributor\"",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

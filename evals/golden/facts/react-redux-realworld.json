@@ -1,0 +1,199 @@
+{
+ "repo": "react-redux-realworld",
+ "commit": "ee72eba4056392c95a27bc48d385d3f54ba38a18",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "javascript",
+   "source": "scc",
+   "snippet": "scc: javascript 2050",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "react",
+   "expected": "react",
+   "source": "package.json:2",
+   "snippet": "react",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": false,
+   "source": "no test code found",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": false,
+   "source": "no entities, .sql, migrations or datastore",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "cross-env",
+   "expected": true,
+   "source": "package.json:6",
+   "snippet": "cross-env",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "history",
+   "expected": true,
+   "source": "package.json:10",
+   "snippet": "history",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "marked",
+   "expected": true,
+   "source": "package.json:11",
+   "snippet": "marked",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "react",
+   "expected": true,
+   "source": "package.json:2",
+   "snippet": "react",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "react-dom",
+   "expected": true,
+   "source": "package.json:14",
+   "snippet": "react-dom",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "react-redux",
+   "expected": true,
+   "source": "package.json:2",
+   "snippet": "react-redux",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "react-router",
+   "expected": true,
+   "source": "package.json:16",
+   "snippet": "react-router",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "react-router-dom",
+   "expected": true,
+   "source": "package.json:17",
+   "snippet": "react-router-dom",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "react-router-redux",
+   "expected": true,
+   "source": "package.json:18",
+   "snippet": "react-router-redux",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "react-scripts",
+   "expected": true,
+   "source": "package.json:7",
+   "snippet": "react-scripts",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "redux",
+   "expected": true,
+   "source": "package.json:2",
+   "snippet": "redux",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "redux-devtools-extension",
+   "expected": true,
+   "source": "package.json:20",
+   "snippet": "redux-devtools-extension",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "redux-logger",
+   "expected": true,
+   "source": "package.json:21",
+   "snippet": "redux-logger",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "superagent",
+   "expected": true,
+   "source": "package.json:22",
+   "snippet": "superagent",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "superagent-promise",
+   "expected": true,
+   "source": "package.json:23",
+   "snippet": "superagent-promise",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": false,
+   "source": "no Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "mit",
+   "source": "LICENSE.md",
+   "snippet": "mit license\n\ncopyright (c) 2020 gothinkster\n\npermission is hereby granted, free of charge, to any person obtaining a cop",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

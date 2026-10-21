@@ -1,0 +1,327 @@
+{
+ "repo": "node-express-realworld-example-app",
+ "commit": "30b68e1e881462b2f4164ea09ab4c4f5699c7b0b",
+ "split": "tune",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "typescript",
+   "source": "scc",
+   "snippet": "scc: typescript 1852, javascript 2",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "express",
+   "expected": "express",
+   "source": "package.json:22",
+   "snippet": "express",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "jest",
+   "expected": true,
+   "source": "package.json:32",
+   "snippet": "jest",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "src/tests/prisma-mock.ts",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "src/prisma/schema.prisma:11",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Article",
+   "expected": true,
+   "source": "src/prisma/schema.prisma:11",
+   "snippet": "model Article {",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Comment",
+   "expected": true,
+   "source": "src/prisma/schema.prisma:26",
+   "snippet": "model Comment {",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Tag",
+   "expected": true,
+   "source": "src/prisma/schema.prisma:37",
+   "snippet": "model Tag {",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "User",
+   "expected": true,
+   "source": "src/prisma/schema.prisma:43",
+   "snippet": "model User {",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles",
+   "expected": true,
+   "source": "src/app/routes/article/article.controller.ts:30",
+   "snippet": "router.get('/articles",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles/*",
+   "expected": true,
+   "source": "src/app/routes/article/article.controller.ts:87",
+   "snippet": "router.get(\n  '/articles/:slug",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles/*/comments",
+   "expected": true,
+   "source": "src/app/routes/article/article.controller.ts:149",
+   "snippet": "router.get(\n  '/articles/:slug/comments",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles/*/comments/*",
+   "expected": true,
+   "source": "src/app/routes/article/article.controller.ts:190",
+   "snippet": "router.delete(\n  '/articles/:slug/comments/:id",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles/*/favorite",
+   "expected": true,
+   "source": "src/app/routes/article/article.controller.ts:210",
+   "snippet": "router.post(\n  '/articles/:slug/favorite",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/articles/feed",
+   "expected": true,
+   "source": "src/app/routes/article/article.controller.ts:45",
+   "snippet": "router.get(\n  '/articles/feed",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/profiles/*",
+   "expected": true,
+   "source": "src/app/routes/profile/profile.controller.ts:14",
+   "snippet": "router.get(\n  '/profiles/:username",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/profiles/*/follow",
+   "expected": true,
+   "source": "src/app/routes/profile/profile.controller.ts:34",
+   "snippet": "router.post(\n  '/profiles/:username/follow",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/tags",
+   "expected": true,
+   "source": "src/app/routes/tag/tag.controller.ts:13",
+   "snippet": "router.get('/tags",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/user",
+   "expected": true,
+   "source": "src/app/routes/auth/auth.controller.ts:45",
+   "snippet": "router.get('/user",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users",
+   "expected": true,
+   "source": "src/app/routes/auth/auth.controller.ts:14",
+   "snippet": "router.post('/users",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users/login",
+   "expected": true,
+   "source": "src/app/routes/auth/auth.controller.ts:30",
+   "snippet": "router.post('/users/login",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@nx/eslint-plugin",
+   "expected": true,
+   "source": "package.json:31",
+   "snippet": "@nx/eslint-plugin",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@nx/node",
+   "expected": true,
+   "source": "package.json:34",
+   "snippet": "@nx/node",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@nx/workspace",
+   "expected": true,
+   "source": "package.json:35",
+   "snippet": "@nx/workspace",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@types/bcryptjs",
+   "expected": true,
+   "source": "package.json:38",
+   "snippet": "@types/bcryptjs",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@types/cors",
+   "expected": true,
+   "source": "package.json:39",
+   "snippet": "@types/cors",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@types/express",
+   "expected": true,
+   "source": "package.json:40",
+   "snippet": "@types/express",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "bcryptjs",
+   "expected": true,
+   "source": "package.json:19",
+   "snippet": "bcryptjs",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "body-parser",
+   "expected": true,
+   "source": "package.json:20",
+   "snippet": "body-parser",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "cors",
+   "expected": true,
+   "source": "package.json:21",
+   "snippet": "cors",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "esbuild",
+   "expected": true,
+   "source": "package.json:29",
+   "snippet": "esbuild",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jest",
+   "expected": true,
+   "source": "package.json:32",
+   "snippet": "jest",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jest-environment-node",
+   "expected": true,
+   "source": "package.json:49",
+   "snippet": "jest-environment-node",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jest-mock-extended",
+   "expected": true,
+   "source": "package.json:50",
+   "snippet": "jest-mock-extended",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "slugify",
+   "expected": true,
+   "source": "package.json:25",
+   "snippet": "slugify",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "ts-jest",
+   "expected": true,
+   "source": "package.json:54",
+   "snippet": "ts-jest",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": "Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": false,
+   "source": "no CI config",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "API_ONLY",
+   "source": "routes without templates",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

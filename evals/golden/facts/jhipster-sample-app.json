@@ -1,0 +1,407 @@
+{
+ "repo": "jhipster-sample-app",
+ "commit": "6b000b5d23a36c45e01472471b84a44fa2464044",
+ "split": "holdout",
+ "facts": [
+  {
+   "type": "primary_language",
+   "key": "primary_language",
+   "expected": "typescript",
+   "source": "scc",
+   "snippet": "scc: typescript 13652, java 8922, javascript 11",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "spring-boot",
+   "expected": "org.springframework.boot:spring-boot-configuration-processor",
+   "source": "pom.xml:95",
+   "snippet": "org.springframework.boot:spring-boot-configuration-processor",
+   "review": null
+  },
+  {
+   "type": "framework",
+   "key": "angular",
+   "expected": "@angular/core",
+   "source": "package.json:89",
+   "snippet": "@angular/core",
+   "review": null
+  },
+  {
+   "type": "test_framework",
+   "key": "com.tngtech.archunit:archunit-junit5-api",
+   "expected": true,
+   "source": "pom.xml:199",
+   "snippet": "com.tngtech.archunit:archunit-junit5-api",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "package.json",
+   "expected": true,
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "build_manifest",
+   "key": "pom.xml",
+   "expected": true,
+   "source": "pom.xml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "has_tests",
+   "key": "has_tests",
+   "expected": true,
+   "source": "src/test/javascript/cypress/support/account.ts",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "h2",
+   "expected": true,
+   "source": "src/main/resources/config/application-dev.yml:27",
+   "snippet": "ue\n      additional-exclude: static/**,.h2.server.properties\n    livereload:",
+   "review": null
+  },
+  {
+   "type": "datastore",
+   "key": "postgresql",
+   "expected": true,
+   "source": "src/main/resources/config/application-prod.yml:36",
+   "snippet": "r.hikari.hikaridatasource\n    url: jdbc:postgresql://localhost:5432/jhipstersampleapplic",
+   "review": null
+  },
+  {
+   "type": "has_data_layer",
+   "key": "has_data_layer",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/domain/Authority.java:16",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Authority",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/domain/Authority.java:16",
+   "snippet": "\n@JsonIgnoreProperties(value = { \"new\", \"id\" })\n@SuppressWarnings(\"common-java:DuplicatedBlocks\")\npublic class Authority",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "BankAccount",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/domain/BankAccount.java:17",
+   "snippet": "(usage = CacheConcurrencyStrategy.READ_WRITE)\n@SuppressWarnings(\"common-java:DuplicatedBlocks\")\npublic class BankAccount",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Label",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/domain/Label.java:16",
+   "snippet": "@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)\n@SuppressWarnings(\"common-java:DuplicatedBlocks\")\npublic class Label",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "Operation",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/domain/Operation.java:18",
+   "snippet": "he(usage = CacheConcurrencyStrategy.READ_WRITE)\n@SuppressWarnings(\"common-java:DuplicatedBlocks\")\npublic class Operation",
+   "review": null
+  },
+  {
+   "type": "entity",
+   "key": "User",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/domain/User.java:24",
+   "snippet": "@Entity\n@Table(name = \"jhi_user\")\n@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)\npublic class User",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/account",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:103",
+   "snippet": "@GetMapping(\"/account\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/account/change-password",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:148",
+   "snippet": "@PostMapping(path = \"/account/change-password\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/account/reset-password/finish",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:182",
+   "snippet": "@PostMapping(path = \"/account/reset-password/finish\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/account/reset-password/init",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:162",
+   "snippet": "@PostMapping(path = \"/account/reset-password/init\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/activate",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:88",
+   "snippet": "@GetMapping(\"/activate\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:29",
+   "snippet": "@RequestMapping(\"/api\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/admin",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/UserResource.java:59",
+   "snippet": "@RequestMapping(\"/api/admin\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/authorities",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AuthorityResource.java:25",
+   "snippet": "@RequestMapping(\"/api/authorities\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/bank-accounts",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/BankAccountResource.java:27",
+   "snippet": "@RequestMapping(\"/api/bank-accounts\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/labels",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/LabelResource.java:27",
+   "snippet": "@RequestMapping(\"/api/labels\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/api/operations",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/OperationResource.java:32",
+   "snippet": "@RequestMapping(\"/api/operations\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/authenticate",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AuthenticateController.java:56",
+   "snippet": "@PostMapping(\"/authenticate\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/register",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/AccountResource.java:71",
+   "snippet": "@PostMapping(\"/register\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/PublicUserResource.java:46",
+   "snippet": "@GetMapping(\"/users\"",
+   "review": null
+  },
+  {
+   "type": "route",
+   "key": "/users/*",
+   "expected": true,
+   "source": "src/main/java/io/github/jhipster/sample/web/rest/UserResource.java:186",
+   "snippet": "@GetMapping(\"/users/{login}\"",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@angular/cli",
+   "expected": true,
+   "source": "package.json:107",
+   "snippet": "@angular/cli",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@angular/compiler-cli",
+   "expected": true,
+   "source": "package.json:108",
+   "snippet": "@angular/compiler-cli",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "@ng-bootstrap/ng-bootstrap",
+   "expected": true,
+   "source": "package.json:96",
+   "snippet": "@ng-bootstrap/ng-bootstrap",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "com.puppycrawl.tools:checkstyle",
+   "expected": true,
+   "source": "pom.xml:40",
+   "snippet": "com.puppycrawl.tools:checkstyle",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "cypress-terminal-report",
+   "expected": true,
+   "source": "package.json:120",
+   "snippet": "cypress-terminal-report",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "globals",
+   "expected": true,
+   "source": "package.json:128",
+   "snippet": "globals",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "jsdom",
+   "expected": true,
+   "source": "package.json:131",
+   "snippet": "jsdom",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "lighthouse",
+   "expected": true,
+   "source": "package.json:132",
+   "snippet": "lighthouse",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.hibernate.orm:hibernate-jcache",
+   "expected": true,
+   "source": "pom.xml:259",
+   "snippet": "org.hibernate.orm:hibernate-jcache",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.mapstruct:mapstruct-processor",
+   "expected": true,
+   "source": "pom.xml:439",
+   "snippet": "org.mapstruct:mapstruct-processor",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.boot:spring-boot-starter",
+   "expected": true,
+   "source": "pom.xml:14",
+   "snippet": "org.springframework.boot:spring-boot-starter",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.springframework.security:spring-security-data",
+   "expected": true,
+   "source": "pom.xml:185",
+   "snippet": "org.springframework.security:spring-security-data",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "org.testcontainers:testcontainers-jdbc",
+   "expected": true,
+   "source": "pom.xml:287",
+   "snippet": "org.testcontainers:testcontainers-jdbc",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "rxjs",
+   "expected": true,
+   "source": "package.json:101",
+   "snippet": "rxjs",
+   "review": null
+  },
+  {
+   "type": "dependency",
+   "key": "tools.jackson.datatype:jackson-datatype-hibernate7",
+   "expected": true,
+   "source": "pom.xml:297",
+   "snippet": "tools.jackson.datatype:jackson-datatype-hibernate7",
+   "review": null
+  },
+  {
+   "type": "containerized",
+   "key": "containerized",
+   "expected": true,
+   "source": ".devcontainer/Dockerfile",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "ci",
+   "key": "ci",
+   "expected": true,
+   "source": ".github/workflows/github-actions.yml",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "runtime_version",
+   "key": "runtime",
+   "expected": "node 24",
+   "source": "package.json",
+   "snippet": "",
+   "review": null
+  },
+  {
+   "type": "license",
+   "key": "license",
+   "expected": "apache",
+   "source": "LICENSE.txt",
+   "snippet": "copyright 2015-2023 the original author or authors from the jhipster project\n\n                                 apac",
+   "review": null
+  },
+  {
+   "type": "capability_route",
+   "key": "capability_route",
+   "expected": "UI",
+   "source": "templates/views",
+   "snippet": "",
+   "review": null
+  }
+ ]
+}

@@ -6,7 +6,7 @@ Step 33 gate (unchanged):
                                       (TOOL_CALL event), an existing artifact version, or a seed finding
   hallucinated_paths/symbols == 0     file paths in P1 output and in OBSERVED/DOCUMENTED claims exist
                                       in the repo; A9 `function` names exist in the source
-Also reported: golden agreement per fact, variation across apps, and the confidence score
+Also reported: golden-fact agreement per fact type (appmod.evals.golden), variation across apps, and the confidence score
 (appmod.evals.confidence) with every component at its 95 % lower bound.
 """
 
@@ -24,11 +24,12 @@ from appmod.agents.grounding import (RepoIndex, check_function_names, grounded_c
                                      path_tokens, walk)
 from appmod.contracts.schemas import ContractValidator
 from appmod.evals.confidence import Component, Measure, score
+from appmod.evals.golden import load as load_facts
+from appmod.evals.golden import score_app
 from appmod.registry.compiler import resolve_registry
 from appmod.store.artifact_store import ArtifactStore
 
 ROOT = Path(__file__).resolve().parents[2]
-GOLDEN = ROOT / "evals" / "golden" / "corpus.json"
 THRESHOLDS = {"schema_valid_after_repair": 95.0, "evidence_resolvability": 90.0}
 SCRIPTED_ACTORS = ("scripted-",)
 
@@ -102,28 +103,20 @@ def evaluate(runs_dir: Path, job: str) -> dict[str, Any]:
                                            for i in walk(payload) if "function" in i)
                     bad_symbols += [{"artifact": aid, "problem": p} for p in check_function_names(payload, repo)]
 
-    golden = json.loads(GOLDEN.read_text())["repos"]
     facts: dict[str, list[dict[str, Any]]] = {}
     for app in apps:
-        g = golden.get(app)
-        if not g:
+        golden = load_facts(app)
+        if not golden:
             continue
-        a1 = store.get(f"P1/{app}/A1")["payload"]
-        r0 = a1["repositories"][0]
-        deps = " ".join(d.get("name", "") for d in a1.get("dependencies", [])).lower()
-        dims = {d["dimension"]: d["score"] for d in store.get(f"P1/{app}/A11")["payload"]["risk_dimensions"]}
-        pred = {"primary_language": r0.get("primary_language"),
-                "framework": g["framework"] if g["framework"] and g["framework"].lower() in deps else None,
-                "has_tests": (r0.get("test_files") or 0) > 0,
-                "has_data_layer": (dims.get("data") or 1) > 1}
-        for k, want in g.items():
-            if k == "framework" and want is None:
-                continue
-            facts.setdefault(k, []).append({"app": app, "expected": want, "got": pred[k],
-                                            "ok": pred[k] == want})
+        payloads = {f"A{i}": store.get(f"P1/{app}/A{i}")["payload"]
+                    for i in range(1, 12) if store.versions(f"P1/{app}/A{i}")}
+        for row in score_app(golden, payloads):
+            facts.setdefault(row["type"], []).append({"app": app, **row})
 
-    dispositions = Counter(d.get("proposed_disposition")
-                           for d in store.get("P2/PF1/A6")["payload"].get("decisions", []))
+    dispositions: Counter[str] = Counter()
+    if store.versions("P2/PF1/A6"):
+        dispositions = Counter(d.get("proposed_disposition")
+                               for d in store.get("P2/PF1/A6")["payload"].get("decisions", []))
     boundaries = {a: tuple(sorted(str(b.get("boundary")) for b in
                                   store.get(f"P3/{a}/A2")["payload"].get("boundaries", [])))
                   for a in apps if store.versions(f"P3/{a}/A2")}
@@ -194,11 +187,16 @@ def to_md(r: dict[str, Any], label: str) -> str:
             lines.append(f"| {c['id']} {c['name']} | {c['lower_bound']}% | {basis} |")
         else:
             lines.append(f"| {c['id']} {c['name']} | not assessed | {c['reason']} |")
-    lines += ["", "## Agreement with golden labels (`evals/golden/corpus.json`)", "",
-              "| fact | agreement | misses |", "|---|---|---|"]
-    for k, v in r["golden_agreement"].items():
-        miss = ", ".join(f"{x['app']} (got {x['got']}, want {x['expected']})" for x in v["rows"] if not x["ok"])
-        lines.append(f"| {k} | {v['pct']}% | {miss or '—'} |")
+    rows = [x for v in r["golden_agreement"].values() for x in v["rows"]]
+    reviewed = sum(1 for x in rows if x.get("review"))
+    lines += ["", "## Agreement with golden facts (`evals/golden/facts/`)", "",
+              f"{len(rows)} tool-derived facts over {len({x['app'] for x in rows})} repos; "
+              f"{reviewed} human-reviewed.", "",
+              "| fact type | agreement | n | misses (first 5) |", "|---|---|---|---|"]
+    for k, v in sorted(r["golden_agreement"].items()):
+        misses = [x for x in v["rows"] if not x["ok"]]
+        miss = ", ".join(f"{x['app']} {x['key']} (got {x['got']}, want {x['expected']})" for x in misses[:5])
+        lines.append(f"| {k} | {v['pct']}% | {len(v['rows'])} | {miss or '—'} |")
     var = r["variation"]
     lines += ["", "## Variation with evidence", "",
               f"- P2 dispositions: {var['p2_dispositions']}",
