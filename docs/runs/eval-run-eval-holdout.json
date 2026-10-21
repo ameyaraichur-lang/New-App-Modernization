@@ -12,14 +12,9 @@
   "unresolved_sample": []
  },
  "hallucinated_paths": {
-  "count": 1,
-  "checked": 2292,
-  "items": [
-   {
-    "artifact": "P3/human-essentials/A1",
-    "path": "Gemfile/Gemfile.lock"
-   }
-  ]
+  "count": 0,
+  "checked": 2293,
+  "items": []
  },
  "hallucinated_symbols": {
   "count": 0,
@@ -6730,7 +6725,7 @@
   "p3_distinct_boundary_sets": 6,
   "p3_apps": 6
  },
- "pass": false,
+ "pass": true,
  "confidence": {
   "confidence_score": 0.0,
   "weakest": "C4",
@@ -6771,9 +6766,9 @@
      },
      {
       "name": "cited paths exist",
-      "k": 2291,
-      "n": 2292,
-      "lower_bound": 99.75
+      "k": 2293,
+      "n": 2293,
+      "lower_bound": 99.83
      },
      {
       "name": "A9 function names exist",
