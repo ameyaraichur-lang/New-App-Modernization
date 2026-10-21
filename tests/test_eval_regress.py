@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from appmod.agents.llm_runner import DEGRADE_RULES, operating_rules
-from appmod.evals.regress import regressions
+from appmod.evals.regress import regressions, route_flips
 
 
 def _report(k: int, n: int, *, assessed: bool = True) -> dict:
@@ -13,6 +13,13 @@ def _report(k: int, n: int, *, assessed: bool = True) -> dict:
             {"name": "schema valid after repair", "k": k, "n": n}]},
         {"id": "C2", "assessed": False, "lower_bound": 0, "measures": []},
     ]}}
+
+
+def test_route_flips_are_listed_and_do_not_invent_a_change():
+    previous = {"app_facts": {"a": {"disposition": "Refactor"}, "b": {"disposition": "Retain"}}}
+    current = {"app_facts": {"a": {"disposition": "Rebuild"}, "b": {"disposition": "Retain"},
+                             "c": {"disposition": "Retire"}}}
+    assert route_flips(previous, current) == ["a: Refactor -> Rebuild"]
 
 
 def test_degraded_component_fails_the_gate():
