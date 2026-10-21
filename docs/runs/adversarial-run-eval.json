@@ -1,0 +1,366 @@
+{
+  "total": 65,
+  "passed": 65,
+  "failed": 0,
+  "by_category": {
+    "contradictory": {
+      "total": 7,
+      "passed": 7
+    },
+    "injection": {
+      "total": 21,
+      "passed": 21
+    },
+    "large_binary": {
+      "total": 8,
+      "passed": 8
+    },
+    "poisoned_deps": {
+      "total": 10,
+      "passed": 10
+    },
+    "secrets": {
+      "total": 12,
+      "passed": 12
+    },
+    "symlink": {
+      "total": 7,
+      "passed": 7
+    }
+  },
+  "cases": [
+    {
+      "id": "inj-001",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-002",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-003",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-004",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-005",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-006",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-007",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-008",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-009",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-010",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-011",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-012",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-013",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-014",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-015",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-016",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-020",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-021",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-022",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-023",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "inj-024",
+      "category": "injection",
+      "pass": true
+    },
+    {
+      "id": "sec-001",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-002",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-003",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-004",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-005",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-006",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-007",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-008",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-009",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-010",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-011",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "sec-012",
+      "category": "secrets",
+      "pass": true
+    },
+    {
+      "id": "size-001",
+      "category": "large_binary",
+      "pass": true
+    },
+    {
+      "id": "size-002",
+      "category": "large_binary",
+      "pass": true
+    },
+    {
+      "id": "size-003",
+      "category": "large_binary",
+      "pass": true
+    },
+    {
+      "id": "size-004",
+      "category": "large_binary",
+      "pass": true
+    },
+    {
+      "id": "size-005",
+      "category": "large_binary",
+      "pass": true
+    },
+    {
+      "id": "size-006",
+      "category": "large_binary",
+      "pass": true
+    },
+    {
+      "id": "size-007",
+      "category": "large_binary",
+      "pass": true
+    },
+    {
+      "id": "size-008",
+      "category": "large_binary",
+      "pass": true
+    },
+    {
+      "id": "sym-001",
+      "category": "symlink",
+      "pass": true
+    },
+    {
+      "id": "sym-002",
+      "category": "symlink",
+      "pass": true
+    },
+    {
+      "id": "sym-003",
+      "category": "symlink",
+      "pass": true
+    },
+    {
+      "id": "sym-004",
+      "category": "symlink",
+      "pass": true
+    },
+    {
+      "id": "sym-005",
+      "category": "symlink",
+      "pass": true
+    },
+    {
+      "id": "sym-006",
+      "category": "symlink",
+      "pass": true
+    },
+    {
+      "id": "sym-007",
+      "category": "symlink",
+      "pass": true
+    },
+    {
+      "id": "dep-001",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-002",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-003",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-004",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-005",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-006",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-007",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-008",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-009",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "dep-010",
+      "category": "poisoned_deps",
+      "pass": true
+    },
+    {
+      "id": "doc-001",
+      "category": "contradictory",
+      "pass": true
+    },
+    {
+      "id": "doc-002",
+      "category": "contradictory",
+      "pass": true
+    },
+    {
+      "id": "doc-003",
+      "category": "contradictory",
+      "pass": true
+    },
+    {
+      "id": "doc-004",
+      "category": "contradictory",
+      "pass": true
+    },
+    {
+      "id": "doc-005",
+      "category": "contradictory",
+      "pass": true
+    },
+    {
+      "id": "doc-006",
+      "category": "contradictory",
+      "pass": true
+    },
+    {
+      "id": "doc-007",
+      "category": "contradictory",
+      "pass": true
+    }
+  ],
+  "measures": [
+    {
+      "name": "adversarial cases pass",
+      "k": 65,
+      "n": 65,
+      "lower_bound": 94.42
+    }
+  ]
+}

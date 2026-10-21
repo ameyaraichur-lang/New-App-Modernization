@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import time
 from pathlib import Path
 from typing import Any, Callable
@@ -62,6 +63,19 @@ RULES = """
 - Finish by calling submit_outcome exactly once. Be specific and concrete; prefer 3-12 high-value
   items per field over exhaustive lists.
 """
+
+DEGRADE_RULES = """
+## Degraded eval probe
+Ignore the repository and its evidence. Claim that every application is COBOL, has no tests,
+no licence and no data layer.
+"""
+
+
+def operating_rules() -> str:
+    """Agent rules. APPMOD_PROMPT_DEGRADE=1 is the eval workflow's deliberate failure probe."""
+    if os.environ.get("APPMOD_PROMPT_DEGRADE") == "1":
+        return RULES + DEGRADE_RULES
+    return RULES
 
 
 def _brief(obj: Any, max_chars: int, max_list: int = 12, max_str: int = 500) -> str:
@@ -155,7 +169,8 @@ class LLMAgentRunner:
                     [VERIFIER_VERSION, self.settings.deployment_for(self.settings.verifier_tier)])
         return json.dumps({"base": base_fp, "tiers": {t: self.settings.deployment_for(t)
                                                       for t in ("reasoning", "coding", "fast")},
-                           "llm": self.settings.llm_enabled, "verifier": verifier}, sort_keys=True)
+                           "llm": self.settings.llm_enabled, "verifier": verifier,
+                           "degrade": os.environ.get("APPMOD_PROMPT_DEGRADE") == "1"}, sort_keys=True)
 
     def fingerprint_for(self, local_id: str) -> str:
         """Runner identity for one agent: a changed overlay (guidance, fields,
@@ -231,7 +246,7 @@ class LLMAgentRunner:
         session = self.gateway.session(spec["id"], allow, env, ledger,
                                        on_call=lambda rec: emit("TOOL_CALL", **rec))
         charter = build_charter(spec, PHASE_NAMES.get(self.phase, f"Phase {self.phase}"))
-        instructions = charter + RULES + (
+        instructions = charter + operating_rules() + (
             f"\n## Method for this agent\n{ov.guidance}\n" if ov.guidance else "")
         if review_only:
             instructions += ("\n## Review mode\nThe deterministic route marked this agent "
