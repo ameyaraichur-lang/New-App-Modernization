@@ -328,11 +328,16 @@ def score(snap, trace, reviews, questions, health, elapsed, args) -> dict:
     skipped = [r for r in rows if r["success"] is None]
     rows_all, rows = rows, [r for r in rows if r["success"] is not None]
     ok = sum(r["success"] for r in rows)
+    assurance = {(rv["phase"], rv["app"]): (rv.get("proposal") or {}).get("assurance")
+                 for rv in sorted(reviews, key=lambda rv: rv.get("created_at") or "")
+                 if rv.get("decision") == "approve"}
     gates = []
     for p in snap["phases"]:
         if p["phase"] <= 4:
+            a = assurance.get((p["phase"], p["app"])) or {}
             gates.append({"phase": p["phase"], "app": p["app"], "status": p["status"],
-                          "decision": p["decision"], "note": p.get("note", "")})
+                          "decision": p["decision"], "note": p.get("note", ""),
+                          "assurance": a.get("counts"), "confirmed": a.get("unverified_count", 0)})
     tok = Counter()
     for r in rows:
         for k, v in (r.get("tokens") or {}).items():
@@ -397,10 +402,15 @@ def render(rep: dict) -> str:
     tok = s["tokens"]
     L += ["", f"- Tool calls: {s['tool_calls']}; evidence ids cited: {s['evidence_cited']}; "
               f"LLM findings: {s['llm_findings']}; repair rounds: {s['repairs']}; failovers: {s['failovers']}",
-          f"- Tokens: {tok}", "", "## Release gates", "", "| phase | app | phase status | decision |",
-          "|---|---|---|---|"]
+          f"- Tokens: {tok}", "", "## Release gates", "",
+          "Assurance is per released item: model items that were neither entailed by the claim-support "
+          "verifier nor tool-measured were confirmed by the approving reviewer (scripted here).", "",
+          "| phase | app | phase status | decision | assurance (before review) | confirmed by review |",
+          "|---|---|---|---|---|---|"]
     for g in rep["gates"]:
-        L.append(f"| P{g['phase']} | {g['app']} | {g['status']} | {g['decision'] or '—'} |")
+        a = " · ".join(f"{k} {v}" for k, v in (g.get("assurance") or {}).items()) or "—"
+        L.append(f"| P{g['phase']} | {g['app']} | {g['status']} | {g['decision'] or '—'} | {a} | "
+                 f"{g.get('confirmed') or 0} |")
     L += ["", f"Reviews: {len(rep['reviews'])} (decided by `scripted-reviewer`); stakeholder questions: "
               f"{len(rep['questions'])} ({sum(q['status'] == 'ANSWERED' for q in rep['questions'])} answered).",
           "", "## Per-agent results", "",

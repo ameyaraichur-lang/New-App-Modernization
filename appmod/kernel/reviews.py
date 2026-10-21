@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from typing import Any, Callable, Protocol
 
+from appmod.kernel.assurance import confirm
 from appmod.kernel.gates import GateContext, GateResult
 
 
@@ -52,9 +53,10 @@ def with_human_review(impl: Callable[[GateContext], GateResult], backend: Review
         if audit is not None:
             audit.review(ctx.run_id, gate, decision["reviewer"], False, decision["decision"], cand)
         if decision["decision"] == "approve":
-            approved = dict(record, authorized_by=decision["reviewer"], simulated=False,
-                            authorized_at=decision["decided_at"], review_id=decision["review_id"],
-                            review_comment=decision.get("comment") or "")
+            approved = confirm(dict(record, authorized_by=decision["reviewer"], simulated=False,
+                                    authorized_at=decision["decided_at"], review_id=decision["review_id"],
+                                    review_comment=decision.get("comment") or ""),
+                               decision["reviewer"], decision["decided_at"])
             return GateResult(res.outcome, res.status, {**res.payload, "decision_record": approved},
                               res.reasons)
         reason = f"rejected by {decision['reviewer']}: {decision.get('comment') or 'no reason given'}"

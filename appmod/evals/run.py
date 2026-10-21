@@ -24,6 +24,7 @@ from typing import Any
 from appmod.agents.grounding import (RepoIndex, check_function_names, grounded_claims,
                                      path_tokens, walk)
 from appmod.agents.verifier import CHECKED_CLASSES, VERDICTS, claim_text
+from appmod.kernel.assurance import CLASSES
 from appmod.contracts.schemas import ContractValidator
 from appmod.evals.calibration import summarize
 from appmod.evals.confidence import Component, Measure, score
@@ -136,6 +137,20 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
             pairs.setdefault(SPLITS.get(app, "unlisted"), []).append((p["confidence"], p["correct"]))
             pair_rows.append({"app": app, **p})
 
+    assurance: Counter[str] = Counter()
+    gates = gates_without = 0
+    for phase in (1, 2, 3, 4):
+        for app in (["PF1"] if phase == 2 else apps):
+            gid = f"P{phase}/{app}/G2"
+            if not store.versions(gid):
+                continue
+            gates += 1
+            a = (store.get(gid)["payload"].get("decision_record") or {}).get("assurance")
+            if isinstance(a, dict):
+                assurance.update(a.get("counts") or {})
+            else:
+                gates_without += 1
+
     dispositions = Counter(d.get("proposed_disposition")
                            for d in store.get("P2/PF1/A6")["payload"].get("decisions", []))
     boundaries = {a: tuple(sorted(str(b.get("boundary")) for b in
@@ -151,6 +166,7 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
         "hallucinated_paths": {"count": len(bad_paths), "checked": checked_paths, "items": bad_paths},
         "hallucinated_symbols": {"count": len(bad_symbols), "checked": checked_symbols, "items": bad_symbols},
         "claim_support": {"counts": dict(support), "audit_sample": audit},
+        "assurance": _assurance(assurance, gates, gates_without),
         "golden_agreement": {k: {"pct": _pct(sum(r["ok"] for r in v), len(v)), "rows": v}
                              for k, v in facts.items()},
         "calibration": {"facts": summarize(pairs) | {"by_type": _by_type(pair_rows)},
@@ -232,6 +248,18 @@ def components(r: dict[str, Any], reviews: list[tuple[str, str]],
     ]
 
 
+def _assurance(counts: Counter[str], gates: int, gates_without: int) -> dict[str, Any]:
+    """Released items by assurance class (from each released G2's decision record).
+    ``independent_pct`` leaves out scripted confirmations: the share that needs no automation
+    standing in for a human."""
+    total = sum(counts.values())
+    independent = total - counts["unverified"] - counts["scripted-confirmed"]
+    return {"released_items": total, "counts": {c: counts[c] for c in CLASSES if counts[c]},
+            "coverage_pct": _pct(total - counts["unverified"], total),
+            "independent_pct": _pct(independent, total),
+            "gates": gates, "gates_without_assurance": gates_without}
+
+
 def _c3(counts: dict[str, int]) -> Component:
     """Unchecked claims (no checkable text, verifier error, run without the verifier) count as
     not entailed: support that was not shown is not assumed."""
@@ -284,6 +312,7 @@ def to_md(r: dict[str, Any], label: str) -> str:
         misses = [x for x in v["rows"] if not x["ok"]]
         miss = ", ".join(f"{x['app']} {x['key']} (got {x['got']}, want {x['expected']})" for x in misses[:5])
         lines.append(f"| {k} | {v['pct']}% | {len(v['rows'])} | {miss or '—'} |")
+    lines += _assurance_md(r.get("assurance", {}))
     lines += _claim_support_md(r.get("claim_support", {}))
     lines += _calibration_md(r.get("calibration", {}))
     var = r["variation"]
@@ -298,6 +327,21 @@ def to_md(r: dict[str, Any], label: str) -> str:
         if items:
             lines += ["", f"## {name}", ""] + [f"- `{json.dumps(i)}`" for i in items[:40]]
     return "\n".join(lines) + "\n"
+
+
+def _assurance_md(a: dict[str, Any]) -> list[str]:
+    lines = ["", "## Assurance of released items (`appmod/kernel/assurance.py`)", ""]
+    if not a.get("released_items"):
+        return lines + [f"No assurance records on the {a.get('gates', 0)} released G2 gates "
+                        "(run predates the assurance gate)."]
+    lines += [f"{a['released_items']} items released through {a['gates']} G2 gates: coverage "
+              f"{a['coverage_pct']}%, of which {a['independent_pct']}% without scripted confirmation "
+              f"(tool-measured, entailed or human-confirmed).", "",
+              "| class | items | share |", "|---|---|---|"]
+    lines += [f"| {k} | {v} | {_pct(v, a['released_items'])}% |" for k, v in a["counts"].items()]
+    if a.get("gates_without_assurance"):
+        lines.append(f"\n{a['gates_without_assurance']} released gates carry no assurance record.")
+    return lines
 
 
 def _claim_support_md(cs: dict[str, Any]) -> list[str]:

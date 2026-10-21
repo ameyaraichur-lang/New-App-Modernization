@@ -46,6 +46,8 @@ def test_human_review_flow(tmp_path):
                                              for c in a8["confirmed_responses"])
     g2 = job.store.get("P1/microblog/G2")["payload"]["decision_record"]
     assert g2["authorized_by"] == "scripted-reviewer" and g2["simulated"] is False
+    assert g2["assurance"]["unverified_count"] == 0 and g2["assurance"]["counts"]["tool-measured"] > 0
+    assert g2["assurance"]["confirmed"]["class"] == "scripted-confirmed"
     assert db.list_reviews(job.job_id, "PENDING") == []
 
 
