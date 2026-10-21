@@ -6,7 +6,7 @@
 |---|---|---|
 | schema-valid after repair | 100.0% (516/516) | ≥ 95% |
 | evidence resolvability | 100.0% (27149/27149) | ≥ 90% |
-| hallucinated paths | 3 of 3051 checked | = 0 |
+| hallucinated paths | 1 of 3059 checked | = 0 |
 | hallucinated symbols (A9 functions) | 0 of 632 checked | = 0 |
 
 ## Confidence score
@@ -15,7 +15,7 @@
 
 | component | lower bound | basis |
 |---|---|---|
-| C1 Integrity | 99.26% | schema valid after repair 516/516 (LB 99.26%); evidence ids resolve 27149/27149 (LB 99.99%); cited paths exist 3048/3051 (LB 99.71%); A9 function names exist 632/632 (LB 99.4%) |
+| C1 Integrity | 99.26% | schema valid after repair 516/516 (LB 99.26%); evidence ids resolve 27149/27149 (LB 99.99%); cited paths exist 3058/3059 (LB 99.82%); A9 function names exist 632/632 (LB 99.4%) |
 | C2 Factual accuracy | 91.84% | golden facts agree 580/617 (LB 91.84%) |
 | C3 Claim support | 56.73% | cited claims entailed by their evidence 2976/5123 (LB 56.73%) |
 | C4 Decision correctness | not assessed | no expert decision labels (decision 2: skipped) |
@@ -94,6 +94,4 @@ Decision confidence (uncalibrated: no labels exist for these decisions):
 
 ## Hallucinated paths
 
-- `{"artifact": "P1/flask-tutorial/A1", "path": "auth.py/blog.py/db.py"}`
 - `{"artifact": "P1/microblog/A3", "path": "migrations/script.py"}`
-- `{"artifact": "P3/laravel58/A1", "path": "package.json/composer.json"}`

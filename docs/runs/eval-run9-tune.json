@@ -12,20 +12,12 @@
   "unresolved_sample": []
  },
  "hallucinated_paths": {
-  "count": 3,
-  "checked": 3051,
+  "count": 1,
+  "checked": 3059,
   "items": [
-   {
-    "artifact": "P1/flask-tutorial/A1",
-    "path": "auth.py/blog.py/db.py"
-   },
    {
     "artifact": "P1/microblog/A3",
     "path": "migrations/script.py"
-   },
-   {
-    "artifact": "P3/laravel58/A1",
-    "path": "package.json/composer.json"
    }
   ]
  },
@@ -9915,9 +9907,9 @@
      },
      {
       "name": "cited paths exist",
-      "k": 3048,
-      "n": 3051,
-      "lower_bound": 99.71
+      "k": 3058,
+      "n": 3059,
+      "lower_bound": 99.82
      },
      {
       "name": "A9 function names exist",

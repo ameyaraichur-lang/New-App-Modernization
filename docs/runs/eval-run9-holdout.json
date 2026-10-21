@@ -13,7 +13,7 @@
  },
  "hallucinated_paths": {
   "count": 1,
-  "checked": 2248,
+  "checked": 2251,
   "items": [
    {
     "artifact": "P1/cargotracker/A6",
@@ -6428,8 +6428,8 @@
      },
      {
       "name": "cited paths exist",
-      "k": 2247,
-      "n": 2248,
+      "k": 2250,
+      "n": 2251,
       "lower_bound": 99.75
      },
      {
