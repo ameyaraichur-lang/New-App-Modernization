@@ -2,6 +2,7 @@
 
     python scripts/eval_run.py --runs-dir runs/e2e-run4-root --job job-… [--label run4]
         [--stability docs/runs/stability-<label>.json]   # scores C5
+        [--adversarial docs/runs/adversarial-<label>.json]   # scores C8
 
 Writes docs/runs/eval-<label>.{json,md}, and verifier-audit-<label>.jsonl (the claim-support
 audit sample, with an empty human_verdict per row). Metrics and thresholds: appmod/evals/run.py.
@@ -26,8 +27,11 @@ def main() -> int:
     ap.add_argument("--job", required=True)
     ap.add_argument("--label", default="eval")
     ap.add_argument("--stability", type=Path, help="report from scripts/stability_run.py")
+    ap.add_argument("--adversarial", type=Path, help="report from scripts/adversarial_run.py")
     args = ap.parse_args()
-    r = evaluate(args.runs_dir, args.job, json.loads(args.stability.read_text()) if args.stability else None)
+    r = evaluate(args.runs_dir, args.job,
+                 json.loads(args.stability.read_text()) if args.stability else None,
+                 json.loads(args.adversarial.read_text()) if args.adversarial else None)
     out = ROOT / "docs" / "runs"
     (out / f"eval-{args.label}.json").write_text(json.dumps(r, indent=1))
     (out / f"eval-{args.label}.md").write_text(to_md(r, args.label))

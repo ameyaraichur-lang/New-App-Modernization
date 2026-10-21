@@ -7,7 +7,8 @@ Step 33 gate (unchanged):
   hallucinated_paths/symbols == 0     file paths in P1 output and in OBSERVED/DOCUMENTED claims exist
                                       in the repo; A9 `function` names exist in the source
 Also reported: golden-fact agreement per fact type (appmod.evals.golden), variation across apps, stability
-(appmod.evals.stability, when a report is given), and the confidence score
+(appmod.evals.stability, when a report is given), adversarial robustness
+(appmod.evals.adversarial, when a report is given), and the confidence score
 (appmod.evals.confidence) with every component at its 95 % lower bound.
 """
 
@@ -43,7 +44,8 @@ def _pct(n: int, d: int) -> float:
     return round(100.0 * n / d, 2) if d else 100.0
 
 
-def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) -> dict[str, Any]:
+def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None,
+             adversarial: dict[str, Any] | None = None) -> dict[str, Any]:
     db = sqlite3.connect(runs_dir / "appmod.db")
     state = json.loads(db.execute("SELECT state FROM jobs WHERE job_id=?", (job,)).fetchone()[0])
     store = ArtifactStore(Path(state["facts"]["store_path"]))
@@ -179,7 +181,7 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
     out["pass"] = (out["schema_valid_after_repair"]["pct"] >= THRESHOLDS["schema_valid_after_repair"]
                    and out["evidence_resolvability"]["pct"] >= THRESHOLDS["evidence_resolvability"]
                    and not bad_paths and not bad_symbols)
-    out["confidence"] = score(components(out, reviews, stability))
+    out["confidence"] = score(components(out, reviews, stability, adversarial))
     return out
 
 
@@ -226,7 +228,8 @@ def decision_confidence(store: ArtifactStore, apps: list[str]) -> dict[str, dict
 
 
 def components(r: dict[str, Any], reviews: list[tuple[str, str]],
-               stability: dict[str, Any] | None = None) -> list[Component]:
+               stability: dict[str, Any] | None = None,
+               adversarial: dict[str, Any] | None = None) -> list[Component]:
     """Map eval results onto C1–C9. Components without data stay unassessed and score 0."""
     sv, ev = r["schema_valid_after_repair"], r["evidence_resolvability"]
     hp, hs = r["hallucinated_paths"], r["hallucinated_symbols"]
@@ -244,7 +247,8 @@ def components(r: dict[str, Any], reviews: list[tuple[str, str]],
                   reason="" if stability else "no stability report given (scripts/stability_run.py)"),
         _c6(r.get("calibration", {}).get("facts", {})),
         Component("C7", reason="P5 runtime differential NOT_RUN; sandbox deferred (decision 1)"),
-        Component("C8", reason="adversarial suite not built (stack PR 8)"),
+        Component("C8", [Measure(m["name"], m["k"], m["n"]) for m in (adversarial or {}).get("measures", [])],
+                  reason="" if adversarial else "no adversarial report given (scripts/adversarial_run.py)"),
         Component("C9", [Measure("human reviews approved", sum(d == "approve" for d in human), len(human))],
                   reason="" if human else "all reviews were by scripted actors"),
     ]

@@ -184,12 +184,22 @@ class ToolSession:
                 pass
 
 
+def path_under_root(root: Path, path: Path) -> bool:
+    """True when ``path`` resolves to ``root`` or a path beneath it."""
+    root = Path(root).resolve()
+    try:
+        p = Path(path).resolve()
+    except OSError:
+        return False
+    return p == root or root in p.parents
+
+
 def safe_path(root: Path, rel: str) -> Path:
     """Resolve ``rel`` inside ``root``; reject traversal and symlink escapes."""
     root = Path(root).resolve()
     rel = (rel or ".").lstrip("/")
     p = (root / rel).resolve()
-    if p != root and root not in p.parents:
+    if not path_under_root(root, p):
         raise PermissionError(f"path '{rel}' escapes the repository root")
     parts = set(p.relative_to(root).parts) if p != root else set()
     if ".git" in parts:

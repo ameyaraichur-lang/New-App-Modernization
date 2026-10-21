@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 from functools import lru_cache
 from pathlib import Path
 
@@ -99,10 +100,21 @@ def get_settings() -> Settings:
     return s
 
 
+_SENSITIVE_RES = (
+    re.compile(r"AKIA[0-9A-Z]{16}"),
+    re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----[\s\S]*?"
+               r"-----END (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+    re.compile(r"""(?i)(password|passwd|pwd)\s*[:=]\s*['"][^'"]{6,}['"]"""),
+    re.compile(r"""(?i)(api[_-]?key|secret[_-]?key)\s*[:=]\s*['"][^'"]{8,}['"]"""),
+)
+
+
 def redact(text: str, settings: Settings | None = None) -> str:
     s = settings or get_settings()
     for v in s.secret_values():
         text = text.replace(v, "[REDACTED]")
+    for rx in _SENSITIVE_RES:
+        text = rx.sub("[REDACTED]", text)
     return text
 
 
