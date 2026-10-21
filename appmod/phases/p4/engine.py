@@ -41,8 +41,9 @@ class P4AgentRunner:
         return fn(agent_spec, inputs, policy)
 
     def fingerprint(self) -> str:
-        import hashlib
-        return "P4:" + hashlib.sha256(json.dumps(self.brief, sort_keys=True, default=str).encode()).hexdigest()[:16]
+        # Scope facts are not in this identity. A change reopens only the planners
+        # that declare the fact (see appmod.kernel.invalidation).
+        return "P4:" + str(self.brief.get("app_id", ""))
 
     def _tasks(self) -> list[dict[str, Any]]:
         app = self.brief.get("app_id", "app")
@@ -71,7 +72,11 @@ class P4AgentRunner:
                 "budget_refs": ["P2 cost scenarios (pilot rate card)"],
                 "environment_timeline": [{"env": "local pilot", "status": "pre-provisioned"}],
                 "infeasibilities": [],
-                "replan_triggers": ["material estimate change", "procurement lead-time slip"],
+                "replan_triggers": [
+                    {"trigger": "p3_scope", "response": "reopen planners that read components"},
+                    {"trigger": "wave", "response": "reopen planners that read the wave"},
+                    {"trigger": "estimate", "response": "reopen the resource estimate for the failed lane"},
+                ],
             },
             findings=[_f("A1-F1", "DOCUMENTED",
                          "Initial feasibility provisional until A5/A6 detail reconciles (finalization rule)")],

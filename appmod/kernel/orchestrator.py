@@ -217,6 +217,15 @@ class PhaseOrchestrator:
         if open_critiques:
             manifest["_critique"] = [{"statement": c["statement"], "round": c["rounds"]}
                                      for c in open_critiques]
+        if self.phase == 4:
+            from appmod.kernel.invalidation import scope_token
+            admission = {k: v for k, v in ctx.run_inputs.items()
+                         if k not in ("scope", "replan_events")}
+            manifest["_run_inputs_hash"] = hashlib.sha256(
+                canonical_json(admission).encode()).hexdigest()
+            token = scope_token(node, ctx.run_inputs)
+            if token:
+                manifest["_scope"] = token
         digest = hashlib.sha256(canonical_json(manifest).encode()).hexdigest()
         return manifest, digest, parent_refs
 
