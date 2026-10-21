@@ -19,6 +19,7 @@ def test_compound_path_tokens_split_on_extension_boundaries():
     toks = path_tokens({"note": "see auth.py/blog.py and users/articles/doc.go/hello.go"})
     assert toks == ["auth.py", "blog.py", "users/articles/doc.go", "hello.go"]
     assert path_tokens({"note": "Dockerfile/boot.sh"}) == ["Dockerfile", "boot.sh"]
+    assert path_tokens({"note": "Gemfile/Gemfile.lock"}) == ["Gemfile", "Gemfile.lock"]
 
 
 def test_has_path_is_case_insensitive_for_repo_files(tmp_path):
