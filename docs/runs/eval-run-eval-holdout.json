@@ -12,13 +12,9 @@
   "unresolved_sample": []
  },
  "hallucinated_paths": {
-  "count": 2,
-  "checked": 2290,
+  "count": 1,
+  "checked": 2292,
   "items": [
-   {
-    "artifact": "P1/jhipster-sample-app/A1",
-    "path": "main.ts/bootstrap.ts"
-   },
    {
     "artifact": "P3/human-essentials/A1",
     "path": "Gemfile/Gemfile.lock"
@@ -6775,9 +6771,9 @@
      },
      {
       "name": "cited paths exist",
-      "k": 2288,
-      "n": 2290,
-      "lower_bound": 99.68
+      "k": 2291,
+      "n": 2292,
+      "lower_bound": 99.75
      },
      {
       "name": "A9 function names exist",

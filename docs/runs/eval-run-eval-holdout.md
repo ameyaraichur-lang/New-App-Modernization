@@ -6,7 +6,7 @@
 |---|---|---|
 | schema-valid after repair | 100.0% (219/219) | ≥ 95% |
 | evidence resolvability | 100.0% (11805/11805) | ≥ 90% |
-| hallucinated paths | 2 of 2290 checked | = 0 |
+| hallucinated paths | 1 of 2292 checked | = 0 |
 | hallucinated symbols (A9 functions) | 0 of 382 checked | = 0 |
 
 ## Confidence score
@@ -15,7 +15,7 @@
 
 | component | lower bound | basis |
 |---|---|---|
-| C1 Integrity | 98.28% | schema valid after repair 219/219 (LB 98.28%); evidence ids resolve 11805/11805 (LB 99.97%); cited paths exist 2288/2290 (LB 99.68%); A9 function names exist 382/382 (LB 99.0%) |
+| C1 Integrity | 98.28% | schema valid after repair 219/219 (LB 98.28%); evidence ids resolve 11805/11805 (LB 99.97%); cited paths exist 2291/2292 (LB 99.75%); A9 function names exist 382/382 (LB 99.0%) |
 | C2 Factual accuracy | 78.32% | golden facts agree 372/453 (LB 78.32%) |
 | C3 Claim support | 54.83% | cited claims entailed by their evidence 1361/2395 (LB 54.83%) |
 | C4 Decision correctness | not assessed | no expert decision labels (decision 2: skipped) |
@@ -106,5 +106,4 @@ Decision confidence (uncalibrated: no labels exist for these decisions):
 
 ## Hallucinated paths
 
-- `{"artifact": "P1/jhipster-sample-app/A1", "path": "main.ts/bootstrap.ts"}`
 - `{"artifact": "P3/human-essentials/A1", "path": "Gemfile/Gemfile.lock"}`

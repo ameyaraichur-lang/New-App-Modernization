@@ -12,28 +12,16 @@
   "unresolved_sample": []
  },
  "hallucinated_paths": {
-  "count": 5,
-  "checked": 3020,
+  "count": 2,
+  "checked": 3027,
   "items": [
-   {
-    "artifact": "P1/flask-tutorial/A3",
-    "path": "auth.py/blog.py"
-   },
-   {
-    "artifact": "P1/microblog/A1",
-    "path": "Dockerfile/boot.sh"
-   },
    {
     "artifact": "P1/node-express-realworld-example-app/A1",
     "path": "listing/package.json"
    },
    {
-    "artifact": "P3/laravel58/A1",
-    "path": "App/User.php"
-   },
-   {
     "artifact": "P4/golang-example/A3",
-    "path": "users/articles/common/scripts/api/doc.go/hello.go"
+    "path": "users/articles/common/scripts/api/doc.go"
    }
   ]
  },
@@ -9613,9 +9601,9 @@
      },
      {
       "name": "cited paths exist",
-      "k": 3015,
-      "n": 3020,
-      "lower_bound": 99.61
+      "k": 3025,
+      "n": 3027,
+      "lower_bound": 99.76
      },
      {
       "name": "A9 function names exist",

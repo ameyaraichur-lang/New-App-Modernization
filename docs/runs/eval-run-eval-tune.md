@@ -6,7 +6,7 @@
 |---|---|---|
 | schema-valid after repair | 100.0% (499/499) | ≥ 95% |
 | evidence resolvability | 100.0% (26352/26352) | ≥ 90% |
-| hallucinated paths | 5 of 3020 checked | = 0 |
+| hallucinated paths | 2 of 3027 checked | = 0 |
 | hallucinated symbols (A9 functions) | 0 of 606 checked | = 0 |
 
 ## Confidence score
@@ -15,7 +15,7 @@
 
 | component | lower bound | basis |
 |---|---|---|
-| C1 Integrity | 99.24% | schema valid after repair 499/499 (LB 99.24%); evidence ids resolve 26352/26352 (LB 99.99%); cited paths exist 3015/3020 (LB 99.61%); A9 function names exist 606/606 (LB 99.37%) |
+| C1 Integrity | 99.24% | schema valid after repair 499/499 (LB 99.24%); evidence ids resolve 26352/26352 (LB 99.99%); cited paths exist 3025/3027 (LB 99.76%); A9 function names exist 606/606 (LB 99.37%) |
 | C2 Factual accuracy | 91.84% | golden facts agree 580/617 (LB 91.84%) |
 | C3 Claim support | 55.44% | cited claims entailed by their evidence 2789/4908 (LB 55.44%) |
 | C4 Decision correctness | not assessed | no expert decision labels (decision 2: skipped) |
@@ -105,8 +105,5 @@ Decision confidence (uncalibrated: no labels exist for these decisions):
 
 ## Hallucinated paths
 
-- `{"artifact": "P1/flask-tutorial/A3", "path": "auth.py/blog.py"}`
-- `{"artifact": "P1/microblog/A1", "path": "Dockerfile/boot.sh"}`
 - `{"artifact": "P1/node-express-realworld-example-app/A1", "path": "listing/package.json"}`
-- `{"artifact": "P3/laravel58/A1", "path": "App/User.php"}`
-- `{"artifact": "P4/golang-example/A3", "path": "users/articles/common/scripts/api/doc.go/hello.go"}`
+- `{"artifact": "P4/golang-example/A3", "path": "users/articles/common/scripts/api/doc.go"}`
