@@ -133,9 +133,12 @@ class P1AgentRunner:
             gaps.append({"requirement": "SBOM generation", "impact": "package inventory from manifests only",
                          "state": "NOT_ASSESSED", "reason": syft.get("detail", syft.get("status"))})
         lic_type = (s.license or {}).get("type")
-        if lic_type and lic_type != "UNKNOWN":
-            findings.append(_finding(
-                "A1-F2", "DOCUMENTED", f"License: {lic_type} ({s.license['file']})"))
+        lic_text = f"{lic_type} License ({s.license['file']})" if lic_type and lic_type != "UNKNOWN" else None
+        runtimes = [f"{r['runtime']} ({r['file']})" for r in s.runtime_versions[:5]]
+        if runtimes:
+            findings.append(_finding("A1-F7", "DOCUMENTED", f"Declared runtime: {', '.join(runtimes)}"))
+        if lic_text:
+            findings.append(_finding("A1-F2", "DOCUMENTED", f"License: {lic_text}"))
         elif lic_type == "UNKNOWN":
             findings.append(_finding("A1-F2", "UNKNOWN",
                                      f"License file present but unrecognized ({s.license['file']})"))
@@ -155,6 +158,8 @@ class P1AgentRunner:
                     "languages": dict(sorted(s.languages.items(), key=lambda kv: -kv[1])),
                     "test_files": len(s.tests),
                     "commit": s.commit,
+                    "license": lic_text,
+                    "runtime_versions": runtimes,
                 }],
                 "components": components,
                 "dependencies": deps,

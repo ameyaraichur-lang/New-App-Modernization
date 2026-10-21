@@ -106,3 +106,51 @@ def test_data_layer_needs_server_persistence(tmp_path):
     (tmp_path / "api").mkdir()
     (tmp_path / "api" / "models.go").write_text('package api\nimport "gorm.io/gorm"\ntype A struct{ gorm.Model }\n')
     assert scan_repo(tmp_path).has_data_layer()
+
+
+def test_gin_routes_ci_files_and_runtime_versions(tmp_path):
+    (tmp_path / "go.mod").write_text("module example.com/app\n\ngo 1.21\n")
+    (tmp_path / "main.go").write_text(
+        'package main\nfunc main() {\n\tv1 := router.Group("/api/v1")\n\tv1.GET("/albums", list)\n'
+        '\tv1.POST("/albums", create)\n}\n')
+    (tmp_path / "notes.py").write_text('client.GET("/not-a-route")\n')
+    (tmp_path / ".travis.yml").write_text("language: go\n")
+    (tmp_path / ".circleci").mkdir()
+    (tmp_path / ".circleci" / "config.yml").write_text("version: 2\n")
+    (tmp_path / "LICENSE").write_text("MIT License\n\nPermission is hereby granted, free of charge\n")
+    s = scan_repo(tmp_path)
+    assert {r["route"] for r in s.routes} >= {"/api/v1", "/albums"}
+    assert all(r["file"] == "main.go" for r in s.routes)
+    assert {".travis.yml", ".circleci/config.yml"} <= set(s.infra_files)
+    assert s.runtime_versions == [{"runtime": "go 1.21", "file": "go.mod"}]
+
+    from appmod.phases.p1.engine import P1AgentRunner
+    r = P1AgentRunner()
+    r.bind_repo(tmp_path)
+    out = r.run({"local_id": "A1"}, {}, None)
+    repo0 = out.payload["repositories"][0]
+    assert repo0["license"] == "MIT License (LICENSE)"
+    assert repo0["runtime_versions"] == ["go 1.21 (go.mod)"]
+
+
+@pytest.mark.parametrize("name,text,want", [
+    ("pom.xml", "<properties><java.version>17</java.version></properties>", "java 17"),
+    ("build.gradle", "java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }", "java 21"),
+    ("package.json", '{"engines": {"node": ">=18.0.0"}}', "node 18"),
+    ("composer.json", '{"require": {"php": "^8.1"}}', "php 8.1"),
+    ("pyproject.toml", 'requires-python = ">=3.10"\n', "python 3.10"),
+    ("Web.csproj", "<TargetFramework>net8.0</TargetFramework>", "net8.0"),
+])
+def test_runtime_version_manifests(tmp_path, name, text, want):
+    (tmp_path / name).write_text(text)
+    assert [r["runtime"] for r in scan_repo(tmp_path).runtime_versions] == [want]
+
+
+def test_project_licence_is_the_root_file_not_vendored_ones(tmp_path):
+    (tmp_path / "LICENSE").write_text("Apache License\nVersion 2.0, January 2004\n")
+    (tmp_path / "NOTICE").write_text("This product includes software developed elsewhere.\n")
+    (tmp_path / "vendor" / "fontawesome").mkdir(parents=True)
+    (tmp_path / "vendor" / "fontawesome" / "LICENSE.txt").write_text("MIT License\n")
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "tests" / "licenses.test.ts").write_text("test('licenses', () => {});\n")
+    assert scan_repo(tmp_path).license == {"file": "LICENSE", "type": "Apache-2.0", "evidence": "DOCUMENTED"}
