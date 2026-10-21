@@ -380,6 +380,9 @@ class LLMAgentRunner:
             "summary": submitted.get("summary", "")[:1500],
             "confidence": submitted.get("confidence"), "llm_status": submitted.get("status"),
         }
+        authored = getattr(self, "_author_ctx", {}).get("first_pass_valid")
+        if authored is not None:
+            out.execution_metadata["llm"]["first_pass_valid"] = bool(authored) and repairs == 0
         self._stamp_respondents(out, env)
         if self.settings.verifier != "off":
             out.execution_metadata["llm"]["verifier"] = ClaimVerifier(
@@ -523,11 +526,13 @@ class LLMAgentRunner:
     def _merge_payload(self, seed_payload: dict[str, Any], llm: dict[str, Any],
                        ov: Overlay) -> dict[str, Any]:
         out = copy.deepcopy(seed_payload)
+        self._author_ctx = {}
         tagged = {k: ([_tag(x) if isinstance(x, dict) else x for x in v]
                       if isinstance(v, list) else (_tag(v) if isinstance(v, dict) else v))
                   for k, v in llm.items()}
         if ov.postprocess:     # the hook owns the whole merge for its agent
-            return ov.postprocess(out, tagged, {"phase": self.phase})
+            self._author_ctx = {"phase": self.phase}
+            return ov.postprocess(out, tagged, self._author_ctx)
         for name, (_, mode) in ov.fields.items():
             if name not in tagged:
                 continue
