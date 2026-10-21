@@ -24,13 +24,15 @@ from typing import Any
 from appmod.agents.grounding import (RepoIndex, check_function_names, grounded_claims,
                                      path_tokens, walk)
 from appmod.contracts.schemas import ContractValidator
+from appmod.evals.calibration import summarize
 from appmod.evals.confidence import Component, Measure, score
+from appmod.evals.golden import confidence_pairs, score_app
 from appmod.evals.golden import load as load_facts
-from appmod.evals.golden import score_app
 from appmod.registry.compiler import resolve_registry
 from appmod.store.artifact_store import ArtifactStore
 
 ROOT = Path(__file__).resolve().parents[2]
+SPLITS = {r["name"]: r["split"] for r in json.loads((ROOT / "evals" / "corpus.json").read_text())["repos"]}
 THRESHOLDS = {"schema_valid_after_repair": 95.0, "evidence_resolvability": 90.0}
 SCRIPTED_ACTORS = ("scripted-",)
 
@@ -105,14 +107,21 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
                     bad_symbols += [{"artifact": aid, "problem": p} for p in check_function_names(payload, repo)]
 
     facts: dict[str, list[dict[str, Any]]] = {}
+    pairs: dict[str, list[tuple[float, bool]]] = {}
+    pair_rows: list[dict[str, Any]] = []
     for app in apps:
         golden = load_facts(app)
         if not golden:
             continue
-        payloads = {f"A{i}": store.get(f"P1/{app}/A{i}")["payload"]
-                    for i in range(1, 12) if store.versions(f"P1/{app}/A{i}")}
+        arts = {f"A{i}": store.get(f"P1/{app}/A{i}") for i in range(1, 12) if store.versions(f"P1/{app}/A{i}")}
+        payloads = {k: a["payload"] for k, a in arts.items()}
         for row in score_app(golden, payloads):
             facts.setdefault(row["type"], []).append({"app": app, **row})
+        items = [i for i in walk([[a.get("findings", []), a["payload"]] for a in arts.values()])
+                 if i.get("origin") == "llm"]
+        for p in confidence_pairs(golden, payloads, items):
+            pairs.setdefault(SPLITS.get(app, "unlisted"), []).append((p["confidence"], p["correct"]))
+            pair_rows.append({"app": app, **p})
 
     dispositions: Counter[str] = Counter()
     if store.versions("P2/PF1/A6"):
@@ -132,6 +141,8 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
         "hallucinated_symbols": {"count": len(bad_symbols), "checked": checked_symbols, "items": bad_symbols},
         "golden_agreement": {k: {"pct": _pct(sum(r["ok"] for r in v), len(v)), "rows": v}
                              for k, v in facts.items()},
+        "calibration": {"facts": summarize(pairs) | {"by_type": _by_type(pair_rows)},
+                        "decisions": decision_confidence(store, apps)},
         "variation": {"p2_dispositions": dict(dispositions),
                       "p3_distinct_boundary_sets": len(set(boundaries.values())), "p3_apps": len(boundaries)},
     }
@@ -139,6 +150,48 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
                    and out["evidence_resolvability"]["pct"] >= THRESHOLDS["evidence_resolvability"]
                    and not bad_paths and not bad_symbols)
     out["confidence"] = score(components(out, reviews, stability))
+    return out
+
+
+def _by_type(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    out: dict[str, dict[str, Any]] = {}
+    for r in rows:
+        t = out.setdefault(r["type"], {"n": 0, "correct": 0, "confidence_sum": 0.0})
+        t["n"] += 1
+        t["correct"] += r["correct"]
+        t["confidence_sum"] += r["confidence"]
+    return {k: {"n": v["n"], "accuracy": round(v["correct"] / v["n"], 3),
+                "mean_confidence": round(v["confidence_sum"] / v["n"], 3)} for k, v in sorted(out.items())}
+
+
+DECISIONS = (("P1 A5 capability route review", "P1/{app}/A5", "route_review"),
+             ("P1 A11 risk scores", "P1/{app}/A11", "risk_dimensions"),
+             ("P2 A6 dispositions", "P2/PF1/A6", "decisions"),
+             ("P3 A2 boundaries", "P3/{app}/A2", "boundaries"),
+             ("P4 A3 task estimates", "P4/{app}/A3", "tasks"))
+
+
+def decision_confidence(store: ArtifactStore, apps: list[str]) -> dict[str, dict[str, Any]]:
+    """Stated confidence on model-authored decisions. No labels exist for these, so it is uncalibrated."""
+    out = {}
+    for label, pattern, fld in DECISIONS:
+        ids = {pattern.format(app=a) for a in apps}
+        stated, missing = [], 0
+        for aid in sorted(ids):
+            if not store.versions(aid):
+                continue
+            val = store.get(aid)["payload"].get(fld)
+            for it in (val if isinstance(val, list) else [val] if isinstance(val, dict) else []):
+                if not isinstance(it, dict) or it.get("origin") != "llm":
+                    continue
+                c = it.get("confidence")
+                if isinstance(c, int | float) and not isinstance(c, bool):
+                    stated.append(float(c))
+                else:
+                    missing += 1
+        out[label] = {"n": len(stated), "without_confidence": missing,
+                      "mean": round(sum(stated) / len(stated), 3) if stated else None,
+                      "min": min(stated, default=None), "max": max(stated, default=None)}
     return out
 
 
@@ -159,12 +212,20 @@ def components(r: dict[str, Any], reviews: list[tuple[str, str]],
         Component("C4", reason="no expert decision labels (decision 2: skipped)"),
         Component("C5", [Measure(m["name"], m["k"], m["n"]) for m in (stability or {}).get("measures", [])],
                   reason="" if stability else "no stability report given (scripts/stability_run.py)"),
-        Component("C6", reason="no confidence field on decisions (stack PR 5)"),
+        _c6(r.get("calibration", {}).get("facts", {})),
         Component("C7", reason="P5 runtime differential NOT_RUN; sandbox deferred (decision 1)"),
         Component("C8", reason="adversarial suite not built (stack PR 8)"),
         Component("C9", [Measure("human reviews approved", sum(d == "approve" for d in human), len(human))],
                   reason="" if human else "all reviews were by scripted actors"),
     ]
+
+
+def _c6(cal: dict[str, Any]) -> Component:
+    if not cal.get("n"):
+        return Component("C6", reason="no model confidence on facts that golden facts can check")
+    return Component("C6", value=max(0.0, 1 - cal["ece_upper95"]),
+                     basis=f"1 - ECE at bootstrap 95%: {cal['n']} fact confidences, ECE {cal['ece']}, "
+                           f"95th percentile {cal['ece_upper95']}")
 
 
 def to_md(r: dict[str, Any], label: str) -> str:
@@ -184,7 +245,9 @@ def to_md(r: dict[str, Any], label: str) -> str:
              "Every value is a 95% Wilson lower bound.", "",
              "| component | lower bound | basis |", "|---|---|---|"]
     for c in cs["components"]:
-        if c["assessed"]:
+        if c["assessed"] and c.get("basis"):
+            lines.append(f"| {c['id']} {c['name']} | {c['lower_bound']}% | {c['basis']} |")
+        elif c["assessed"]:
             basis = "; ".join(f"{m['name']} {m['k']}/{m['n']} (LB {m['lower_bound']}%)"
                               for m in c["measures"] if m["n"])
             lines.append(f"| {c['id']} {c['name']} | {c['lower_bound']}% | {basis} |")
@@ -200,6 +263,7 @@ def to_md(r: dict[str, Any], label: str) -> str:
         misses = [x for x in v["rows"] if not x["ok"]]
         miss = ", ".join(f"{x['app']} {x['key']} (got {x['got']}, want {x['expected']})" for x in misses[:5])
         lines.append(f"| {k} | {v['pct']}% | {len(v['rows'])} | {miss or '—'} |")
+    lines += _calibration_md(r.get("calibration", {}))
     var = r["variation"]
     lines += ["", "## Variation with evidence", "",
               f"- P2 dispositions: {var['p2_dispositions']}",
@@ -212,3 +276,27 @@ def to_md(r: dict[str, Any], label: str) -> str:
         if items:
             lines += ["", f"## {name}", ""] + [f"- `{json.dumps(i)}`" for i in items[:40]]
     return "\n".join(lines) + "\n"
+
+
+def _calibration_md(cal: dict[str, Any]) -> list[str]:
+    facts, decisions = cal.get("facts", {}), cal.get("decisions", {})
+    lines = ["", "## Calibration of model confidence", ""]
+    if facts.get("n"):
+        lines += [f"{facts['n']} fact confidences checked against golden facts: ECE {facts['ece']} "
+                  f"(bootstrap 95th percentile {facts['ece_upper95']}). Only facts a model item states are "
+                  "checkable, so wrong items that contradict a tool fact are not counted yet.", "",
+                  "| confidence | n | mean confidence | accuracy |", "|---|---|---|---|"]
+        lines += [f"| {b['bin']} | {b['n']} | {b['mean_confidence']} | {b['accuracy']} |" for b in facts["reliability"]]
+        lines += ["", "| fact type | n | mean confidence | accuracy |", "|---|---|---|---|"]
+        lines += [f"| {t} | {v['n']} | {v['mean_confidence']} | {v['accuracy']} |" for t, v in facts["by_type"].items()]
+        if "holdout" in facts:
+            h = facts["holdout"]
+            lines += ["", f"Map fitted on tune repos, applied to {h['n']} held-out confidences: "
+                          f"ECE {h['ece_raw']} raw, {h['ece_mapped']} mapped."]
+    else:
+        lines.append("No model confidences on checkable facts in this run.")
+    lines += ["", "Decision confidence (uncalibrated: no labels exist for these decisions):", "",
+              "| decision | n | mean | min | max | items without confidence |", "|---|---|---|---|---|---|"]
+    lines += [f"| {k} | {v['n']} | {v['mean']} | {v['min']} | {v['max']} | {v['without_confidence']} |"
+              for k, v in decisions.items()]
+    return lines
