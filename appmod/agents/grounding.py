@@ -120,8 +120,11 @@ def path_tokens(obj: Any) -> list[str]:
     for s in strings(obj):
         for tok in PATH_RE.findall(s):
             for piece in split_compound_path(tok):
-                if piece not in seen and not (piece.startswith(("http", "www.")) or re.match(r"^\d", piece)):
-                    seen.append(piece)
+                if piece in seen or piece.startswith(("http", "www.")) or re.match(r"^\d", piece):
+                    continue
+                if "..." in piece:
+                    continue
+                seen.append(piece)
     return seen
 
 
