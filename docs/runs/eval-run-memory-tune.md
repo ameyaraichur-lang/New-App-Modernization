@@ -1,12 +1,12 @@
 # Step 33 eval — `run-memory-tune` (`job-1792340613-81baff`)
 
-**Release gate: FAIL**
+**Release gate: PASS**
 
 | metric | value | threshold |
 |---|---|---|
 | schema-valid after repair | 100.0% (295/295) | ≥ 95% |
 | evidence resolvability | 100.0% (15468/15468) | ≥ 90% |
-| hallucinated paths | 2 of 3065 checked | = 0 |
+| hallucinated paths | 0 of 3071 checked | = 0 |
 | hallucinated symbols (A9 functions) | 0 of 625 checked | = 0 |
 
 ## Confidence score
@@ -15,7 +15,7 @@
 
 | component | lower bound | basis |
 |---|---|---|
-| C1 Integrity | 98.71% | schema valid after repair 295/295 (LB 98.71%); evidence ids resolve 15468/15468 (LB 99.98%); cited paths exist 3063/3065 (LB 99.76%); A9 function names exist 625/625 (LB 99.39%) |
+| C1 Integrity | 98.71% | schema valid after repair 295/295 (LB 98.71%); evidence ids resolve 15468/15468 (LB 99.98%); cited paths exist 3071/3071 (LB 99.88%); A9 function names exist 625/625 (LB 99.39%) |
 | C2 Factual accuracy | 92.21% | golden facts agree 582/617 (LB 92.21%) |
 | C3 Claim support | 64.97% | cited claims entailed by their evidence 2499/3758 (LB 64.97%) |
 | C4 Decision correctness | not assessed | no expert decision labels (decision 2: skipped) |
@@ -112,8 +112,3 @@ Decision confidence (uncalibrated: no labels exist for these decisions):
 
 - P2 dispositions: {'Retain': 15, 'Replatform': 3, 'Retire': 1, 'Refactor': 1}
 - P3 decomposition: 4 distinct boundary sets across 4 apps
-
-## Hallucinated paths
-
-- `{"artifact": "P1/flask-tutorial/A3", "path": "auth.py/blog.py"}`
-- `{"artifact": "P1/microblog/A1", "path": "Dockerfile/boot.sh"}`

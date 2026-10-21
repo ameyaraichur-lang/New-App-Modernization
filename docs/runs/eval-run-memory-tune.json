@@ -34,18 +34,9 @@
   "unresolved_sample": []
  },
  "hallucinated_paths": {
-  "count": 2,
-  "checked": 3065,
-  "items": [
-   {
-    "artifact": "P1/flask-tutorial/A3",
-    "path": "auth.py/blog.py"
-   },
-   {
-    "artifact": "P1/microblog/A1",
-    "path": "Dockerfile/boot.sh"
-   }
-  ]
+  "count": 0,
+  "checked": 3071,
+  "items": []
  },
  "hallucinated_symbols": {
   "count": 0,
@@ -9510,7 +9501,7 @@
   "p3_distinct_boundary_sets": 4,
   "p3_apps": 4
  },
- "pass": false,
+ "pass": true,
  "confidence": {
   "confidence_score": 0.0,
   "weakest": "C4",
@@ -9551,9 +9542,9 @@
      },
      {
       "name": "cited paths exist",
-      "k": 3063,
-      "n": 3065,
-      "lower_bound": 99.76
+      "k": 3071,
+      "n": 3071,
+      "lower_bound": 99.88
      },
      {
       "name": "A9 function names exist",

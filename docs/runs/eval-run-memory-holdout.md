@@ -6,7 +6,7 @@
 |---|---|---|
 | schema-valid after repair | 100.0% (219/219) | ≥ 95% |
 | evidence resolvability | 100.0% (11721/11721) | ≥ 90% |
-| hallucinated paths | 0 of 2300 checked | = 0 |
+| hallucinated paths | 0 of 2303 checked | = 0 |
 | hallucinated symbols (A9 functions) | 0 of 428 checked | = 0 |
 
 ## Confidence score
@@ -15,7 +15,7 @@
 
 | component | lower bound | basis |
 |---|---|---|
-| C1 Integrity | 98.28% | schema valid after repair 219/219 (LB 98.28%); evidence ids resolve 11721/11721 (LB 99.97%); cited paths exist 2300/2300 (LB 99.83%); A9 function names exist 428/428 (LB 99.11%) |
+| C1 Integrity | 98.28% | schema valid after repair 219/219 (LB 98.28%); evidence ids resolve 11721/11721 (LB 99.97%); cited paths exist 2303/2303 (LB 99.83%); A9 function names exist 428/428 (LB 99.11%) |
 | C2 Factual accuracy | 79.27% | golden facts agree 376/453 (LB 79.27%) |
 | C3 Claim support | 58.49% | cited claims entailed by their evidence 1472/2435 (LB 58.49%) |
 | C4 Decision correctness | not assessed | no expert decision labels (decision 2: skipped) |
