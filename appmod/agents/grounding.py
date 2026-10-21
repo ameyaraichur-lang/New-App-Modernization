@@ -18,7 +18,7 @@ SYMBOL_RE = re.compile(r"^[A-Za-z_$][\w$]*$")
 TEXT_SKIP = {".git", "node_modules", "bower_components", "vendor", "dist", "obj", "bin"}
 GROUNDED_CLASSES = ("OBSERVED", "DOCUMENTED")
 # Prose often lists ``Dockerfile`` and a script as ``Dockerfile/boot.sh``.
-STANDALONE_PATH_SEGMENTS = frozenset({"Dockerfile", "Containerfile", "Makefile", "Jenkinsfile"})
+STANDALONE_PATH_SEGMENTS = frozenset({"Dockerfile", "Containerfile", "Makefile", "Jenkinsfile", "Gemfile"})
 
 
 class RepoIndex:
