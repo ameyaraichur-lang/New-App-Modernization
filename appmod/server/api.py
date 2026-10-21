@@ -27,6 +27,8 @@ from fastapi.responses import JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+import httpx  # noqa: F401 — preload before worker threads import it concurrently
+
 from appmod.config import get_settings, install_log_redaction
 from appmod.server.auth import Principal, require, tokens
 from appmod.server.jobs import PipelineJob, validate_repo_input
