@@ -267,7 +267,7 @@ class LLMAgentRunner:
         prompt_version = ov.prompt_version(instructions)
         tools = session.specs() + [submit_tool(ov, review_only)]
         items: list[dict[str, Any]] = [{"role": "user", "content": self._context_message(
-            spec, seed, inputs, env, ledger, review_only)}]
+            spec, seed, inputs, env, ledger, review_only, context.get("critiques") or [])}]
 
         usage = Usage()
         deployments: set[str] = set()
@@ -429,7 +429,8 @@ class LLMAgentRunner:
                 item["respondent"] = respondent
 
     def _context_message(self, spec, seed: AgentOutcome, inputs, env: ToolEnv,
-                         ledger: EvidenceLedger, review_only: bool) -> str:
+                         ledger: EvidenceLedger, review_only: bool,
+                         critiques: list[dict[str, Any]] | None = None) -> str:
         parts = [f"# Assignment\nAgent {spec['id']} — {spec['name']}. Application: "
                  f"{env.application_id}. Phase {self.phase} ({PHASE_NAMES.get(self.phase, '')})."]
         if env.portfolio_apps:
@@ -466,6 +467,9 @@ class LLMAgentRunner:
                 for q in answered:
                     parts.append(f"- human:{q['question_id']}: Q={q['question']!r} "
                                  f"A={q['answer']!r} (by {q['respondent']})")
+        if critiques:
+            lines = [f"- round {c.get('rounds')}: {c.get('statement')}" for c in critiques]
+            parts.append("\n# Critique to resolve before submitting\n" + "\n".join(lines))
         parts.append("\nInvestigate with tools, then call submit_outcome."
                      + (" (review mode: payload must be {})" if review_only else ""))
         return "\n".join(parts)
