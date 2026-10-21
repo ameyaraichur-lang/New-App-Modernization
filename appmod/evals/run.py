@@ -23,6 +23,7 @@ from typing import Any
 
 from appmod.agents.grounding import (RepoIndex, check_function_names, grounded_claims,
                                      path_tokens, walk)
+from appmod.agents.verifier import CHECKED_CLASSES, VERDICTS, claim_text
 from appmod.contracts.schemas import ContractValidator
 from appmod.evals.calibration import summarize
 from appmod.evals.confidence import Component, Measure, score
@@ -62,6 +63,8 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
     bad_paths: list[dict[str, str]] = []
     bad_symbols: list[dict[str, str]] = []
     checked_paths = checked_symbols = 0
+    support: Counter[str] = Counter()
+    audit: list[dict[str, Any]] = []
     for phase in (1, 2, 3, 4):
         for app in (["PF1"] if phase == 2 else apps):
             for agent in reg[phase]["agents"]:
@@ -77,6 +80,16 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
                 for item in walk([art.get("findings", []), art.get("payload", {})]):
                     if item.get("origin") != "llm":
                         continue
+                    sup = item.get("support")
+                    if isinstance(sup, dict):
+                        support[str(sup.get("verdict"))] += 1
+                        if sup.get("audit"):
+                            audit.append({"artifact": aid, "claim": claim_text(item),
+                                          "evidence_ids": item.get("evidence_ids") or [],
+                                          "verdict": sup.get("verdict"), "reason": sup.get("reason"),
+                                          "evidence_excerpts": sup.get("evidence_excerpts") or {}})
+                    elif item.get("evidence_class") in CHECKED_CLASSES and item.get("evidence_ids"):
+                        support["NO_RECORD"] += 1
                     for eid in item.get("evidence_ids") or []:
                         cited += 1
                         if eid.startswith("ev-"):
@@ -139,6 +152,7 @@ def evaluate(runs_dir: Path, job: str, stability: dict[str, Any] | None = None) 
                                    "unresolved_sample": unresolved},
         "hallucinated_paths": {"count": len(bad_paths), "checked": checked_paths, "items": bad_paths},
         "hallucinated_symbols": {"count": len(bad_symbols), "checked": checked_symbols, "items": bad_symbols},
+        "claim_support": {"counts": dict(support), "audit_sample": audit},
         "golden_agreement": {k: {"pct": _pct(sum(r["ok"] for r in v), len(v)), "rows": v}
                              for k, v in facts.items()},
         "calibration": {"facts": summarize(pairs) | {"by_type": _by_type(pair_rows)},
@@ -208,7 +222,7 @@ def components(r: dict[str, Any], reviews: list[tuple[str, str]],
                          Measure("cited paths exist", hp["checked"] - hp["count"], hp["checked"]),
                          Measure("A9 function names exist", hs["checked"] - hs["count"], hs["checked"])]),
         Component("C2", [Measure("golden facts agree", sum(x["ok"] for x in rows), len(rows))]),
-        Component("C3", reason="claim-support verifier not built (stack PR 6)"),
+        _c3(r.get("claim_support", {}).get("counts", {})),
         Component("C4", reason="no expert decision labels (decision 2: skipped)"),
         Component("C5", [Measure(m["name"], m["k"], m["n"]) for m in (stability or {}).get("measures", [])],
                   reason="" if stability else "no stability report given (scripts/stability_run.py)"),
@@ -218,6 +232,15 @@ def components(r: dict[str, Any], reviews: list[tuple[str, str]],
         Component("C9", [Measure("human reviews approved", sum(d == "approve" for d in human), len(human))],
                   reason="" if human else "all reviews were by scripted actors"),
     ]
+
+
+def _c3(counts: dict[str, int]) -> Component:
+    """Unchecked claims (no checkable text, verifier error, run without the verifier) count as
+    not entailed: support that was not shown is not assumed."""
+    if not any(counts.get(v) for v in VERDICTS):
+        return Component("C3", reason="no claim-support verdicts in this run")
+    return Component("C3", [Measure("cited claims entailed by their evidence", counts.get("ENTAILED", 0),
+                                    sum(counts.values()))])
 
 
 def _c6(cal: dict[str, Any]) -> Component:
@@ -263,6 +286,7 @@ def to_md(r: dict[str, Any], label: str) -> str:
         misses = [x for x in v["rows"] if not x["ok"]]
         miss = ", ".join(f"{x['app']} {x['key']} (got {x['got']}, want {x['expected']})" for x in misses[:5])
         lines.append(f"| {k} | {v['pct']}% | {len(v['rows'])} | {miss or '—'} |")
+    lines += _claim_support_md(r.get("claim_support", {}))
     lines += _calibration_md(r.get("calibration", {}))
     var = r["variation"]
     lines += ["", "## Variation with evidence", "",
@@ -276,6 +300,22 @@ def to_md(r: dict[str, Any], label: str) -> str:
         if items:
             lines += ["", f"## {name}", ""] + [f"- `{json.dumps(i)}`" for i in items[:40]]
     return "\n".join(lines) + "\n"
+
+
+def _claim_support_md(cs: dict[str, Any]) -> list[str]:
+    counts = cs.get("counts") or {}
+    lines = ["", "## Claim support (`appmod/agents/verifier.py`)", ""]
+    if not counts:
+        return lines + ["No OBSERVED/DOCUMENTED model claims with citations in this run."]
+    total = sum(counts.values())
+    lines += [f"{total} cited OBSERVED/DOCUMENTED model claims. NOT_ENTAILED and INSUFFICIENT were "
+              "published as INFERRED. UNCHECKED: no checkable text behind the ids or no verdict; "
+              "NO_RECORD: published without a verifier verdict.", "",
+              "| verdict | claims | share |", "|---|---|---|"]
+    lines += [f"| {k} | {v} | {_pct(v, total)}% |" for k, v in sorted(counts.items(), key=lambda kv: -kv[1])]
+    sample = cs.get("audit_sample") or []
+    lines += ["", f"Human audit sample: {len(sample)} claims (`verifier-audit-<label>.jsonl`)."]
+    return lines
 
 
 def _calibration_md(cal: dict[str, Any]) -> list[str]:

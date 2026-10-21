@@ -3,7 +3,8 @@
     python scripts/eval_run.py --runs-dir runs/e2e-run4-root --job job-… [--label run4]
         [--stability docs/runs/stability-<label>.json]   # scores C5
 
-Writes docs/runs/eval-<label>.{json,md}. Metrics and thresholds: appmod/evals/run.py.
+Writes docs/runs/eval-<label>.{json,md}, and verifier-audit-<label>.jsonl (the claim-support
+audit sample, with an empty human_verdict per row). Metrics and thresholds: appmod/evals/run.py.
 """
 
 from __future__ import annotations
@@ -30,6 +31,10 @@ def main() -> int:
     out = ROOT / "docs" / "runs"
     (out / f"eval-{args.label}.json").write_text(json.dumps(r, indent=1))
     (out / f"eval-{args.label}.md").write_text(to_md(r, args.label))
+    sample = r["claim_support"]["audit_sample"]
+    if sample:
+        (out / f"verifier-audit-{args.label}.jsonl").write_text(
+            "".join(json.dumps(dict(s, human_verdict=None)) + "\n" for s in sample))
     print(to_md(r, args.label))
     return 0 if r["pass"] else 1
 
