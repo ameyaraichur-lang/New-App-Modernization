@@ -36,6 +36,7 @@ class AgentOutcome:
     notes: str = ""
     execution_metadata: dict[str, Any] = field(default_factory=dict)
     known_evidence: set[str] | None = None       # citable ids (LLM runs); None = no ledger
+    awaiting_input: dict[str, Any] | None = None  # blocking stakeholder question (no publication)
 
 
 class AgentRunner(Protocol):

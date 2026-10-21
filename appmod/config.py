@@ -52,6 +52,8 @@ class Settings(BaseSettings):
     http_tools: str = "on"            # on | off (policy-gated outbound HTTP tools, e.g. eol_lookup)
     http_hosts: str = "endoflife.date"   # comma-separated outbound host allowlist
     review_mode: str = "simulated"    # simulated | human (gate approvals via the approvals API)
+    stakeholder_max_open_blocking: int = 3   # per app per run (blocking, OPEN)
+    stakeholder_max_questions: int = 30      # per app per run (all sources)
 
     # API
     auth_mode: str = "token"          # token | none

@@ -11,6 +11,7 @@ interface Review {
 interface Question {
   question_id: string; app: string; question: string; why: string; target_role: string;
   source: string; status: string; answer: string | null; respondent: string | null; answered_at: string | null;
+  phase?: number | null; node?: string | null; blocking?: number | boolean | null;
 }
 
 interface TraceCall { seq: number; ts: string; [k: string]: unknown }
@@ -171,8 +172,8 @@ export function Questions({ jobId, me, tick }: { jobId: string; me: Me | null; t
     <div className="card">
       <h3>Stakeholder questionnaire <span className="chip">{rows.filter((q) => q.status === 'OPEN').length} open</span></h3>
       <div className="kv">
-        Recorded answers are the only source of HUMAN_CONFIRMED evidence (P1.A8). Answering re-runs the
-        affected discovery nodes and supersedes any pending P1 approval.
+        Recorded answers are the only source of HUMAN_CONFIRMED evidence. Answering re-runs the
+        affected agent node (P1.A8 or any agent that used ask_stakeholder) and may supersede pending approvals.
       </div>
       {!can(me, 'stakeholder') && <div className="kv">Your token lacks the <b>stakeholder</b> role — read-only.</div>}
       {err && <div style={{ color: 'var(--red)', fontSize: 12 }}>{err}</div>}
@@ -180,7 +181,12 @@ export function Questions({ jobId, me, tick }: { jobId: string; me: Me | null; t
         <div key={q.question_id} style={{ borderTop: '1px solid var(--border)', padding: '8px 0' }}>
           <div>
             <span className={`chip ${q.status === 'ANSWERED' ? 'green' : 'amber'}`}>{q.status}</span>{' '}
-            <span className="chip">{q.app}</span> <span className="chip">{q.source}</span>{' '}
+            <span className="chip">{q.app}</span>
+            {q.phase != null && q.node ? (
+              <span className="chip">P{q.phase}.{q.node}</span>
+            ) : null}{' '}
+            <span className="chip">{q.source}</span>{' '}
+            {q.blocking ? <span className="chip amber">blocking</span> : null}{' '}
             <b>{q.question}</b>
           </div>
           {q.why && <div className="kv">why: {q.why}{q.target_role ? ` · ask: ${q.target_role}` : ''}</div>}

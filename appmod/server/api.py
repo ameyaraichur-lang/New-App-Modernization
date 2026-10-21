@@ -37,7 +37,7 @@ from appmod.server.rundb import RunDB, StaleReview
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY_DIR = ROOT / "data" / "registry"
 UI_DIST = ROOT / "ui" / "dist"
-ACTIVE = {"PENDING", "QUEUED", "RUNNING", "AWAITING_REVIEW"}
+ACTIVE = {"PENDING", "QUEUED", "RUNNING", "AWAITING_REVIEW", "AWAITING_INPUT"}
 log = logging.getLogger("appmod.server")
 
 _jobs: dict[str, PipelineJob] = {}

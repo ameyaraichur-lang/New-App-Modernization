@@ -16,6 +16,7 @@ from typing import Any
 
 from appmod.tools import analyzers
 from appmod.tools.gateway import ToolDef, ToolEnv, ToolGateway, safe_path
+from appmod.tools.stakeholder import ask_stakeholder
 from appmod.tools.repo_intel import parse_dependencies, scan_repo
 from appmod.tools import structure
 
@@ -323,6 +324,20 @@ def build_gateway() -> ToolGateway:
                         "matching cycle and whether it is end-of-life.",
                         P({"product": {"type": "string"}, "version": {"type": ["string", "null"]}}),
                         eol_lookup))
+    gw.register(ToolDef(
+        "ask_stakeholder",
+        "Ask a human stakeholder a question. Use blocking=true only when you cannot proceed "
+        "without an answer; it pauses this agent until answered (human review mode). "
+        "Non-blocking questions are recorded and you continue.",
+        _obj({
+            "question": {"type": "string", "description": "The question for the stakeholder."},
+            "why": {"type": "string", "description": "What decision or output this unblocks."},
+            "target_role": {"type": "string", "description": "Who should answer (e.g. product owner)."},
+            "blocking": {"type": "boolean",
+                         "description": "If true, pause this agent until answered (human mode)."},
+        }),
+        ask_stakeholder,
+    ))
     gw.register(ToolDef("get_artifact", "Read a published pipeline artifact. artifact_id is a node "
                         "of the current phase (e.g. 'A1', 'G1') or a full id like 'P1/<app>/A3'. "
                         "field is an optional dotted payload path.",
