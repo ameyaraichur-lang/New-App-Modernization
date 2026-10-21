@@ -39,6 +39,7 @@ from appmod.config import Settings, get_settings
 from appmod.contracts.schemas import normalize_payload, payload_schema
 from appmod.llm.errors import LLMError, TransientLLMError
 from appmod.llm.types import ToolSpec, Usage
+from appmod.retrieval.memory import AGENT_INPUT_TOKEN_CAP
 from appmod.tools.gateway import EvidenceLedger, ToolEnv, ToolGateway
 
 STRICTNESS = {"COMPLETE": 0, "PARTIAL": 1, "NOT_ASSESSED": 2, "SKIPPED_APPROVED": 0, "FAILED": 3}
@@ -170,7 +171,8 @@ class LLMAgentRunner:
         return json.dumps({"base": base_fp, "tiers": {t: self.settings.deployment_for(t)
                                                       for t in ("reasoning", "coding", "fast")},
                            "llm": self.settings.llm_enabled, "verifier": verifier,
-                           "degrade": os.environ.get("APPMOD_PROMPT_DEGRADE") == "1"}, sort_keys=True)
+                           "degrade": os.environ.get("APPMOD_PROMPT_DEGRADE") == "1",
+                           "memory": "repo-memory/1"}, sort_keys=True)
 
     def fingerprint_for(self, local_id: str) -> str:
         """Runner identity for one agent: a changed overlay (guidance, fields,
@@ -267,10 +269,14 @@ class LLMAgentRunner:
         merged: dict[str, Any] | None = None
         fallback: tuple[dict[str, Any], dict[str, Any]] | None = None
         max_turns = min(ov.max_turns, 7) if ov.tier == "fast" else ov.max_turns
+        budget_mode = bool(env.retrieval_budget_chars)
+        if budget_mode:
+            max_turns = min(max_turns, 6)
         turn = 0
+        force_submit = False
         while turn < max_turns + self.max_repairs:
             turn += 1
-            final = turn >= max_turns
+            final = force_submit or turn >= max_turns
             choice: Any = {"type": "function", "name": "submit_outcome"} if final else "required"
             resp = self.router.complete(
                 ov.tier, instructions=instructions, input_items=items, tools=tools,
@@ -311,16 +317,28 @@ class LLMAgentRunner:
                     items.append({"type": "function_call_output", "call_id": call.call_id,
                                   "output": json.dumps(reply)})
                 else:
-                    try:
-                        cargs = call.parsed()
-                    except ValueError as exc:
-                        text = json.dumps({"error": str(exc)})
+                    if budget_mode and usage.input_tokens >= AGENT_INPUT_TOKEN_CAP:
+                        text = json.dumps({"error": "agent input token cap reached; "
+                                          "call submit_outcome with your current findings"})
                     else:
-                        text, _ = session.call(call.name, cargs)
+                        try:
+                            cargs = call.parsed()
+                        except ValueError as exc:
+                            text = json.dumps({"error": str(exc)})
+                        else:
+                            text, _ = session.call(call.name, cargs)
                     items.append({"type": "function_call_output", "call_id": call.call_id,
                                   "output": text})
             if submitted is not None:
                 break
+            if budget_mode and usage.input_tokens >= AGENT_INPUT_TOKEN_CAP:
+                if fallback is not None:
+                    submitted, merged = fallback
+                    break
+                force_submit = True
+                items.append({"role": "user", "content": "Large-repo input token cap reached. "
+                              "Call submit_outcome now with your best-supported findings."})
+                continue
             left = max_turns - turn
             if 0 < left <= 2:
                 items.append({"role": "user", "content": f"Turn budget: {left} turn(s) left before "
@@ -366,16 +384,25 @@ class LLMAgentRunner:
                  f"{env.application_id}. Phase {self.phase} ({PHASE_NAMES.get(self.phase, '')})."]
         if env.portfolio_apps:
             parts.append("Portfolio applications: " + ", ".join(env.portfolio_apps))
+        from appmod.retrieval.memory import MAP_BUDGET_CHARS, map_text
+        roots = dict(env.repo_roots) if env.repo_roots else (
+            {env.application_id: env.repo_root} if env.repo_root else {})
+        if roots:
+            share = max(800, MAP_BUDGET_CHARS // len(roots))
+            maps = [f"## {app}\n{map_text(path, share)}" for app, path in sorted(roots.items())]
+            parts.append("\n# Repository map (open a module with repo_map; do not read the whole tree)\n"
+                         + "\n".join(maps))
+        seed_cap, art_cap = (4500, 2000) if env.retrieval_budget_chars else (9000, 3500)
         parts.append("\n# Deterministic seed (computed by tools; verify and deepen)\n"
                      f"status: {seed.status}\n"
-                     f"payload: {_brief(seed.payload, 9000)}\n"
-                     f"findings: {_brief([{'id': 'seed:' + f['id'], 'class': f['evidence_class'], 'statement': f['statement']} for f in seed.findings], 3000)}\n"
+                     f"payload: {_brief(seed.payload, seed_cap)}\n"
+                     f"findings: {_brief([{'id': 'seed:' + f['id'], 'class': f['evidence_class'], 'statement': f['statement']} for f in seed.findings], min(3000, seed_cap))}\n"
                      f"gaps: {_brief(seed.gaps, 1500)}")
         if inputs:
             parts.append("\n# Upstream artifacts (hard-edge inputs)")
             for node, art in sorted(inputs.items()):
                 parts.append(f"## art:{art['artifact_id']}@v{art['artifact_version']} "
-                             f"[{art['status']}]\n{_brief(art.get('payload', {}), 3500, max_list=8, max_str=300)}")
+                             f"[{art['status']}]\n{_brief(art.get('payload', {}), art_cap, max_list=8, max_str=300)}")
         others = sorted(set(env.published) - set(inputs))
         if others:
             parts.append("\n# Other artifacts available via get_artifact: " + ", ".join(

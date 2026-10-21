@@ -45,6 +45,7 @@ class Settings(BaseSettings):
     verifier: str = "on"              # on | off (claim-support check of cited model claims)
     verifier_tier: str = "fallback"   # a different deployment from the agents' tiers
     verifier_audit_rate: float = 0.05
+    retrieval_budget_chars: int = 180_000  # tool text per agent; 0 disables the cap
     max_parallel_agents: int = 6
     max_parallel_apps: int = 4
     analyzers: str = "on"             # on | off (external analyzer CLIs in deterministic seeds)

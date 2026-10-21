@@ -368,7 +368,8 @@ class PipelineJob:
                            repo_root=None if portfolio else self.repo_paths.get(app),
                            store=self.store, published=context.get("published", {}),
                            portfolio_apps=list(self.repo_paths) if portfolio else [],
-                           repo_roots=dict(self.repo_paths) if portfolio else {})
+                           repo_roots=dict(self.repo_paths) if portfolio else {},
+                           retrieval_budget_chars=self.settings.retrieval_budget_chars)
         return make
 
     def _trace(self, phase: int, app: str, ev: dict[str, Any]) -> None:
