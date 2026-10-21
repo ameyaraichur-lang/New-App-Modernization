@@ -34,22 +34,9 @@
   "unresolved_sample": []
  },
  "hallucinated_paths": {
-  "count": 3,
-  "checked": 3050,
-  "items": [
-   {
-    "artifact": "P1/spring-petclinic/A2",
-    "path": "pom.xml/build.gradle"
-   },
-   {
-    "artifact": "P1/microblog/A2",
-    "path": "search.py/translate.py/email.py"
-   },
-   {
-    "artifact": "P1/struts-examples/A2",
-    "path": "data/order...json"
-   }
-  ]
+  "count": 0,
+  "checked": 3059,
+  "items": []
  },
  "hallucinated_symbols": {
   "count": 0,
@@ -9414,7 +9401,7 @@
   "p3_distinct_boundary_sets": 11,
   "p3_apps": 11
  },
- "pass": false,
+ "pass": true,
  "confidence": {
   "confidence_score": 0.0,
   "weakest": "C4",
@@ -9455,9 +9442,9 @@
      },
      {
       "name": "cited paths exist",
-      "k": 3047,
-      "n": 3050,
-      "lower_bound": 99.71
+      "k": 3059,
+      "n": 3059,
+      "lower_bound": 99.87
      },
      {
       "name": "A9 function names exist",

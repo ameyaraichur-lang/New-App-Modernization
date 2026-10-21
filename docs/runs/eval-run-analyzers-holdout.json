@@ -35,7 +35,7 @@
  },
  "hallucinated_paths": {
   "count": 4,
-  "checked": 2349,
+  "checked": 2351,
   "items": [
    {
     "artifact": "P1/gitea/A6",
@@ -6502,8 +6502,8 @@
      },
      {
       "name": "cited paths exist",
-      "k": 2345,
-      "n": 2349,
+      "k": 2347,
+      "n": 2351,
       "lower_bound": 99.56
      },
      {

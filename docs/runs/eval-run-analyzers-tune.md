@@ -1,12 +1,12 @@
 # Step 33 eval — `run-analyzers-tune` (`job-1792312730-11eca1`)
 
-**Release gate: FAIL**
+**Release gate: PASS**
 
 | metric | value | threshold |
 |---|---|---|
 | schema-valid after repair | 100.0% (414/414) | ≥ 95% |
 | evidence resolvability | 100.0% (21838/21838) | ≥ 90% |
-| hallucinated paths | 3 of 3050 checked | = 0 |
+| hallucinated paths | 0 of 3059 checked | = 0 |
 | hallucinated symbols (A9 functions) | 0 of 663 checked | = 0 |
 
 ## Confidence score
@@ -15,7 +15,7 @@
 
 | component | lower bound | basis |
 |---|---|---|
-| C1 Integrity | 99.08% | schema valid after repair 414/414 (LB 99.08%); evidence ids resolve 21838/21838 (LB 99.98%); cited paths exist 3047/3050 (LB 99.71%); A9 function names exist 663/663 (LB 99.42%) |
+| C1 Integrity | 99.08% | schema valid after repair 414/414 (LB 99.08%); evidence ids resolve 21838/21838 (LB 99.98%); cited paths exist 3059/3059 (LB 99.87%); A9 function names exist 663/663 (LB 99.42%) |
 | C2 Factual accuracy | 91.29% | golden facts agree 577/617 (LB 91.29%) |
 | C3 Claim support | 59.44% | cited claims entailed by their evidence 2754/4524 (LB 59.44%) |
 | C4 Decision correctness | not assessed | no expert decision labels (decision 2: skipped) |
@@ -110,9 +110,3 @@ Decision confidence (uncalibrated: no labels exist for these decisions):
 
 - P2 dispositions: {'Retain': 8, 'Replatform': 7, 'Refactor': 3, 'Retire': 1, 'Replace': 1}
 - P3 decomposition: 11 distinct boundary sets across 11 apps
-
-## Hallucinated paths
-
-- `{"artifact": "P1/spring-petclinic/A2", "path": "pom.xml/build.gradle"}`
-- `{"artifact": "P1/microblog/A2", "path": "search.py/translate.py/email.py"}`
-- `{"artifact": "P1/struts-examples/A2", "path": "data/order...json"}`
