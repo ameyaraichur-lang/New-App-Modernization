@@ -13,7 +13,7 @@
  },
  "hallucinated_paths": {
   "count": 0,
-  "checked": 2759,
+  "checked": 2762,
   "items": []
  },
  "hallucinated_symbols": {
@@ -6407,8 +6407,8 @@
      },
      {
       "name": "cited paths exist",
-      "k": 2759,
-      "n": 2759,
+      "k": 2762,
+      "n": 2762,
       "lower_bound": 99.86
      },
      {
