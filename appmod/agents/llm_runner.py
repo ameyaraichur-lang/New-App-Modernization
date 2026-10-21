@@ -267,7 +267,8 @@ class LLMAgentRunner:
         prompt_version = ov.prompt_version(instructions)
         tools = session.specs() + [submit_tool(ov, review_only)]
         items: list[dict[str, Any]] = [{"role": "user", "content": self._context_message(
-            spec, seed, inputs, env, ledger, review_only, context.get("critiques") or [])}]
+            spec, seed, inputs, env, ledger, review_only, context.get("critiques") or [],
+            context.get("lineage") or [])}]
 
         usage = Usage()
         deployments: set[str] = set()
@@ -433,7 +434,8 @@ class LLMAgentRunner:
 
     def _context_message(self, spec, seed: AgentOutcome, inputs, env: ToolEnv,
                          ledger: EvidenceLedger, review_only: bool,
-                         critiques: list[dict[str, Any]] | None = None) -> str:
+                         critiques: list[dict[str, Any]] | None = None,
+                         lineage: list[dict[str, Any]] | None = None) -> str:
         parts = [f"# Assignment\nAgent {spec['id']} — {spec['name']}. Application: "
                  f"{env.application_id}. Phase {self.phase} ({PHASE_NAMES.get(self.phase, '')})."]
         if env.portfolio_apps:
@@ -473,6 +475,11 @@ class LLMAgentRunner:
         if critiques:
             lines = [f"- round {c.get('rounds')}: {c.get('statement')}" for c in critiques]
             parts.append("\n# Critique to resolve before submitting\n" + "\n".join(lines))
+        if lineage:
+            lines = [f"- {item.get('producer')} {item.get('field')} consumed_by "
+                     f"{item.get('consumed_by')}: {_brief(item.get('value'), 400)}"
+                     for item in lineage]
+            parts.append("\n# Upstream fields declared for this agent\n" + "\n".join(lines))
         parts.append("\nInvestigate with tools, then call submit_outcome."
                      + (" (review mode: payload must be {})" if review_only else ""))
         return "\n".join(parts)

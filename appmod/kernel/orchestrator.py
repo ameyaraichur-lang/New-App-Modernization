@@ -302,7 +302,9 @@ class PhaseOrchestrator:
                 "published": published, "store": self.store,
                 "run_inputs": ctx.run_inputs, "emit": emit,
                 "critiques": [c for c in ctx.critiques
-                              if c["target"] == node and c["state"] == "open"]}
+                              if c["target"] == node and c["state"] == "open"],
+                "lineage": [item for item in (ctx.run_inputs.get("lineage") or [])
+                            if item.get("consumer") == node]}
 
     def _reusable(self, ctx: RunContext, node: str, input_hash: str) -> dict[str, Any] | None:
         if not self.reuse or node in self.force_nodes:
